@@ -1,0 +1,16 @@
+<svg width="350" height="350" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG Editor - http://github.com/mzalive/SVG Editor/ -->
+
+ <g>
+  <title>background</title>
+  <rect height="352" width="352" y="-1" x="-1" fill="none" id="canvas_background"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path fill="#fff" stroke="#000" stroke-width="1.5" opacity="0.5" id="svg_1"/>
+  <path fill="#fff" stroke="#000" stroke-width="1.5" opacity="0.5" id="svg_3"/>
+  <path fill="#000000" stroke="#000" stroke-width="1.5" opacity="0.5" id="svg_5"/>
+  <path fill="#000000" stroke="#000" stroke-width="1.5" opacity="0.5" id="svg_6"/>
+  <path stroke="#000" id="svg_2" d="m7.499985,118.21415l110.714154,0l0,-110.714165l113.571706,0l0,110.714165l110.714165,0l0,113.571717l-110.714165,0l0,110.714154l-113.571706,0l0,-110.714154l-110.714154,0l0,-113.571717z" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000"/>
+ </g>
+</svg>

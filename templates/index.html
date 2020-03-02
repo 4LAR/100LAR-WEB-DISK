@@ -1,0 +1,354 @@
+<!-- А ПОЧЕМУ БЫ И НЕТ -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>[ FILE MANAGER ]</title>
+    <link rel="stylesheet" href = "{{url_for('static', filename='main.css')}}"/>
+    <style>
+        .back {
+			position: fixed;
+			left: 60px;
+			top: 40px;
+		}
+
+        .upload {
+			position: fixed;
+			right: 120px;
+			top: 40px;
+		}
+
+        .menu {
+      position: fixed;
+      left: 120px;
+      top: 40px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: "#D3D3D3"
+
+    }
+
+    .modal-content {
+      position: fixed;
+      border-color: #707070;
+      background: #C0C0C0;
+      table-layout: fixed;
+      border-style: solid;
+      border-radius: 5px;
+      margin: auto;
+      padding: 10px;
+      border-width: 3px;
+      width: 70%;
+    }
+
+    table#upload {
+          border-color: #707070;
+          background: #C0C0C0;
+          table-layout: fixed;
+          border-style: solid;
+          border-radius: 5px;
+          width: 30%;
+          border-width: 3px;
+          //border-collapse: collapse;
+
+        }
+
+    </style>
+  </head>
+  <body style="margin-left: 15%; margin-right: 15%" bgcolor = "#D3D3D3">
+    <!--<p><img width="60" height="60"s src = "{{url_for('static', filename='files/test.png')}}"></p>-->
+    <div class="back"><p><a href="javascript:backdir()" ><img width="60" height="60"s src = "{{url_for('static', filename='back.svg')}}"></a></p>
+    <p><a href="javascript:readFiles(dir)" ><img width="60" height="60" src = "{{url_for('static', filename='update.svg')}}"></a></p></div>
+    <br><br><br><br><br>
+
+    <div id="menu">
+      <div class="modal-content">
+        <h1 align="center">New folder name</h1>
+        <p align="center"><input id="folder_name" autocomplete="off" placeholder="Folder name" /></p>
+        <p align="center"><a href="javascript:addDir()"  ><img style="margin-right: .5%;"width="60" height="60"s src = "{{url_for('static', filename='yes.svg')}}"></a><a href="javascript:closeMenu()" ><img width="60" height="60"s src = "{{url_for('static', filename='no.svg')}}"></a></p>
+      </div>
+    </div>
+
+    <div id="menu_file">
+      <div class="modal-content">
+        <h1 id="file_name" align="center">nill</h1>
+        <p align="center" id="href_s"></p>
+        <table id="pages"><tr><th align="left">
+            <p id="del">nill</p>
+        </th><th align="right">
+            <p><a href="javascript:closeFileMenu()" ><img width="60" height="60"s src = "{{url_for('static', filename='no.svg')}}"></a></p>
+        </th></tr></table>
+      </div>
+    </div>
+
+    <table id="pages">
+      <tr>
+        <th align="top" valign="top">
+          <p id="warn"></p>
+        </th>
+      </tr>
+    </table>
+    <table id="pages">
+      <tr>
+        <th align="top" valign="top">
+          <ul id="stolb_1"></ul>
+        </th>
+        <th align="top" valign="top">
+          <ul id="stolb_2"></ul>
+        </th>
+        <th align="top" valign="top">
+          <ul id="stolb_3"></ul>
+        </th>
+        <th align="top" valign="top">
+          <ul id="stolb_4"></ul>
+        </th>
+      </tr>
+    </table>
+
+    <table class="upload" id="upload">
+        <tr>
+            <th>
+                <!--<form action="" method=post enctype=multipart/form-data>
+                  <p><input type=input value="test" name=dir>
+                     <input type=file name=file>
+                     <input type=submit value=Upload></p>-->
+                     <input type=file id="file">
+                     <!--<input type=button value=Upload>-->
+                     <a href="javascript:uploadFile()" >UPLOAD</a>
+
+                </form>
+            </th>
+        </tr>
+    </table>
+
+    <script>
+
+
+        closeModal("menu");
+        closeModal("menu_file");
+
+        function closeModal(modalId) {
+          var modal = document.getElementById(modalId);
+          modal.style.display = "none";
+        }
+
+        function openModal(modalId) {
+          var modal = document.getElementById(modalId);
+          modal.style.display = "block";
+        }
+
+        var dir = ''
+
+        var stolb = 1;
+        readFiles(dir);
+
+        function chdir(d){
+            dir += '/'+d;
+            readFiles(dir);
+        }
+
+        function uploadFile(){
+            var g = document.getElementById("file");
+            //alert(g.value.split('\\')[g.value.split('\\').length-1]);
+            //alert(g.files[0]);
+            if (g.value.length > 0){
+              form=new FormData();
+              var xhr = new XMLHttpRequest();
+                  //form.append("dir",dir);
+                  //form.append("file_name",g.value.split('\\')[g.value.split('\\').length-1]);
+                  form.append("file",g.files[0]);
+                  xhr.open('post', 'upload_file?dir='+dir+'&file_name='+g.value.split('\\')[g.value.split('\\').length-1], true);
+
+                xhr.send(form);
+                document.getElementById("file").value = '';
+                readFiles(dir);
+              }
+        }
+
+        function addDir(){
+            var g = document.getElementById("folder_name");
+            if (folder_name.value.length > 0){
+              //alert(g.value.split('\\')[g.value.split('\\').length-1]);
+              //alert(g.files[0]);
+              //form=new FormData();
+              var xhr = new XMLHttpRequest();
+                  //form.append("dir",dir);
+                  //form.append("file_name",g.value.split('\\')[g.value.split('\\').length-1]);
+                  //form.append("file",g.files[0]);
+                  xhr.open('post', 'add_dir?dir='+dir+'&file_name='+g.value, true);
+
+                xhr.send();
+                closeMenu();
+                document.getElementById("folder_name").value = '';
+                readFiles(dir);
+            }
+
+        }
+
+        function delFile(file){
+              //alert(g.value.split('\\')[g.value.split('\\').length-1]);
+              //alert(g.files[0]);
+              //form=new FormData();
+              var xhr = new XMLHttpRequest();
+                  //form.append("dir",dir);
+                  //form.append("file_name",g.value.split('\\')[g.value.split('\\').length-1]);
+                  //form.append("file",g.files[0]);
+                  xhr.open('post', 'del_file?dir='+dir+'&file_name='+file, true);
+
+                xhr.send();
+                closeFileMenu();
+                readFiles(dir);
+
+
+        }
+
+        function delDir(folder){
+              var xhr = new XMLHttpRequest();
+                  xhr.open('post', 'del_folder?dir='+folder, true);
+
+                xhr.send();
+                backdir();
+
+
+        }
+
+        function backdir(){
+            var new_dir = '';
+            //alert(dir.split('/'));
+            if (dir.length > 0){
+                if (dir.split('/').length > 1){
+                    for (let i = 1; i <= dir.split('/').length-2; i++){
+                        new_dir += '/' + dir.split('/')[i];
+                    }
+                }
+                dir = new_dir;
+                //alert(dir);
+                readFiles(dir);
+
+            }
+        }
+
+
+
+        function appendToFiles(message) {
+
+
+                var ul = document.getElementById("stolb_"+stolb);
+                stolb += 1;
+                if (stolb > 4){
+                    stolb = 1;
+                }
+
+                var li = document.createElement("li");
+                if (message.split(':')[1] == 'dir'){
+                    li.innerHTML = '<a href="javascript:chdir(\''+message.split(':')[0]+'\')"><img width="100" height="100"s src = "{{url_for('static', filename='dir.svg')}}"><p>'+message.split(':')[0]+'</p></a>';
+                } else {
+                    var file = "'"+message.split(':')[0]+"'"
+                    if (message.split(':')[0].split('.')[1] == 'txt'){
+                        li.innerHTML = '<a href="javascript:selectFileMenu('+file+')"><img width="100" height="100"s src = "{{url_for('static', filename='file_text.svg')}}"><p>'+message.split(':')[0]+'</p></a>';
+                    } else if ((message.split(':')[0].split('.')[1] == 'png') ||
+                        (message.split(':')[0].split('.')[1] == 'jpg') ||
+                        (message.split(':')[0].split('.')[1] == 'gif') ||
+                        (message.split(':')[0].split('.')[1] == 'jpeg') ||
+                        (message.split(':')[0].split('.')[1] == 'svg') ||
+                        (message.split(':')[0].split('.')[1] == 'bmp'))
+                        {
+                        li.innerHTML = '<a href="javascript:selectFileMenu('+file+')"><img width="100" height="100"s src = "{{url_for('static', filename='image.svg')}}"><p>'+message.split(':')[0]+'</p></a>';
+                    } else if ((message.split(':')[0].split('.')[1] == 'rar') ||
+                        (message.split(':')[0].split('.')[1] == 'zip'))
+                        {
+                        //li.innerHTML = '<a href="static/files'+dir+'/'+message.split(':')[0]+'" download><img width="100" height="100"s src = "{{url_for('static', filename='archive.svg')}}"><p>'+message.split(':')[0]+'</p></a>';
+                        li.innerHTML = '<a href="javascript:selectFileMenu('+file+')" ><img width="100" height="100"s src = "{{url_for('static', filename='archive.svg')}}"><p>'+message.split(':')[0]+'</p></a>';
+                    } else if (message.split(':')[1] == 'add')
+                        {
+                        li.innerHTML = '<a href="javascript:openMenu()"><img width="100" height="100"s src = "{{url_for('static', filename='add.svg')}}"></a>';
+
+                    } else {
+                        li.innerHTML = '<a href="javascript:selectFileMenu('+file+')"><img width="100" height="100"s src = "{{url_for('static', filename='file.svg')}}"><p>'+message.split(':')[0]+'</p></a>';
+                    }
+                }
+                li.setAttribute("id", "element4");
+                ul.appendChild(li);
+
+            }
+
+        function openMenu() {
+          openModal('menu');
+        }
+        function closeMenu() {
+          closeModal('menu');
+        }
+        function selectFileMenu(file) {
+          openModal('menu_file');
+          //document.getElementById("href_s").innerHTML = '<a href="static/files' + dir + '/' + file + '" download><img style="margin-right: .5%;"width="60" height="60"s src = "{{url_for('static', filename='download.svg')}}"></a><a href="" ><a href=""  ><img width="60" height="60"s src = "{{url_for('static', filename='read.svg')}}"></a>';
+          document.getElementById("href_s").innerHTML = '<a href="static/files' + dir + '/' + file + '" download><img style="margin-right: .5%;"width="60" height="60"s src = "{{url_for('static', filename='download.svg')}}"></a>';
+          var g = "'" + file + "'"
+          document.getElementById("del").innerHTML = '<a href="javascript:delFile('+g+')" ><img width="60" height="60"s src = "{{url_for('static', filename='delete.svg')}}"></a>';
+          document.getElementById("file_name").innerHTML = file;
+
+
+        }
+        function closeFileMenu() {
+          closeModal('menu_file');
+        }
+
+        function readFiles(d) {
+
+            stolb = 1;
+
+              document.getElementById("stolb_1").innerHTML = '';
+              document.getElementById("stolb_2").innerHTML = '';
+              document.getElementById("stolb_3").innerHTML = '';
+              document.getElementById("stolb_4").innerHTML = '';
+              document.getElementById("warn").innerHTML = '';
+              //document.getElementById("chat_list_2").innerHTML = '';
+
+
+
+              var xhr = new XMLHttpRequest();
+                //alert(location);
+                xhr.open('GET', 'files?dir='+d, true);
+                //alert(location + 'files?dir='+d);
+                xhr.onload = function () {
+                  if (xhr.status === 200) {
+                    //alert(xhr.responseText);
+                    if (xhr.responseText != 'ERROR'){
+                      if (xhr.responseText != 'EMPTY'){
+                      var files = xhr.responseText.toString().replace(/\n$/, "").split(/\n/);
+                      //alert(files);
+                      for (let i = 0; i < files.length; i++) { // выведет 0, затем 1, затем 2
+                        appendToFiles(files[i]);
+                      }
+                      appendToFiles('add:add');
+                      //alert(files);
+                      } else {
+                        //document.getElementById("warn").innerHTML = 'Empty directory';
+                        var dd = "'" + d + "'"
+                        if (dir.length > 0){
+                          document.getElementById("warn").innerHTML = '<p>Empty directory(<a href="javascript:delDir('+dd+')">delete this derictory</a>)</p>';
+                        } else {
+                          document.getElementById("warn").innerHTML = '<p>Empty directory</p>';
+                        }
+                        appendToFiles('add:add');
+                      }
+                    }
+                  }
+                };
+              xhr.send();
+            }
+        function draw_menu(){
+
+        }
+
+    </script>
+  </body>
+</html>

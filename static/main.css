@@ -1,0 +1,141 @@
+
+body {
+      font: 13px Helvetica, Arial;
+      //margin: 120px;
+    }
+p {
+			text-indent: 8px;
+			padding: 5px;
+          }
+		.topNubex {
+
+			position: fixed;
+			right: 40px;
+			bottom: 45px;
+		}
+
+    .message {
+			position: fixed;
+			right: 0px;
+			top: 80px;
+		}
+
+		.backNubex {
+
+			position: fixed;
+			left: 40px;
+			bottom: 45px;
+		}
+
+		  #head {
+            background: #C0C0C0;
+            border-style: solid;
+            text-align: center
+        }
+		  table#pages {
+            table-layout: fixed;
+            width: 100%;
+
+            //border-collapse: collapse;
+
+          }
+      table#hrefs {
+            table-layout: fixed;
+            width: 100%;
+
+            //border-collapse: collapse;
+
+          }
+
+      table#message {
+            table-layout: fixed;
+            width: 35%;
+            border-color: #000000;
+            border-style: solid;
+            border-radius: 5px;
+          }
+      table#message_m {
+            table-layout: fixed;
+            width: 60%;
+            border-color: #000000;
+            border-style: solid;
+            border-radius: 5px;
+          }
+
+		  table#page {
+      		border-color: #808080;
+            table-layout: fixed;
+			      border-style: solid;
+            border-radius: 5px;
+            border-width: 3px;
+            width: 100%;
+            height: 100%;
+            //border-collapse: collapse;
+
+          }
+
+      table#page_n {
+            border-color: #707070;
+            background: #C0C0C0;
+            table-layout: fixed;
+            border-style: solid;
+            border-radius: 5px;
+            width: 100%;
+            height: 100%;
+            border-width: 3px;
+            //border-collapse: collapse;
+
+          }
+      table#page_m {
+      			border-color: #808080;
+            table-layout: fixed;
+			      border-style: solid;
+            width: 100%;
+            height: 10%;
+            border-width: 3px;
+            //border-collapse: collapse;
+          }
+      #down_head {
+             background: #C0C0C0;
+             border-style: solid;
+             text-align: left;
+             //text-valign: top;
+             //width: 5%;
+             //height: 70%;
+          }
+          td, th {
+            width: 2%;
+          }
+
+        li {
+              list-style-type: none;
+             }
+        ul {
+            margin-left: 0;
+            padding-left: 0;
+         }
+
+          input #test {
+           border: 0;
+           padding: 10px;
+           width: 84%;
+           //width: 79%;
+           margin-right: .5%;
+         }
+         
+         table#apps_m {
+            table-layout: fixed;
+            width: 200px;
+            //border-color: #000000;
+            //border-style: solid;
+            //border-radius: 5px;
+            background: #eee;
+            
+          }
+         
+         .apps {
+			position: fixed;
+			left: 90px;
+			//top: 450px;
+		}
+         

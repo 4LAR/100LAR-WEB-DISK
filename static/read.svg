@@ -1,0 +1,16 @@
+<svg width="350" height="350" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG Editor - http://github.com/mzalive/SVG Editor/ -->
+
+ <g>
+  <title>background</title>
+  <rect height="352" width="352" y="-1" x="-1" fill="none" id="canvas_background"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path fill="#fff" stroke="#000" stroke-width="1.5" opacity="0.5" id="svg_1"/>
+  <path fill="#fff" stroke="#000" stroke-width="1.5" opacity="0.5" id="svg_3"/>
+  <path fill="#000000" stroke="#000" stroke-width="1.5" opacity="0.5" id="svg_5"/>
+  <path fill="#000000" stroke="#000" stroke-width="1.5" opacity="0.5" id="svg_6"/>
+  <path id="svg_4" d="m175.00001,78.711605c-94.185265,0 -168.50001,96.282154 -168.50001,96.282154s74.314745,96.294636 168.50001,96.294636c72.030634,0 168.50001,-96.294636 168.50001,-96.294636s-96.469376,-96.282154 -168.50001,-96.282154zm0,156.280639c-33.063446,0 -59.998485,-26.922557 -59.998485,-59.998485s26.935039,-59.998485 59.998485,-59.998485s59.998485,26.935039 59.998485,59.998485s-26.935039,59.998485 -59.998485,59.998485zm0,-95.021524c-19.333816,0 -35.023039,15.676742 -35.023039,35.023039c0,19.346297 15.676742,35.023039 35.023039,35.023039c19.346297,0 35.023039,-15.676742 35.023039,-35.023039c0,-19.333816 -15.676742,-35.023039 -35.023039,-35.023039z" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000"/>
+ </g>
+</svg>
