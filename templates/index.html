@@ -1,0 +1,25 @@
+<!-- А ВЫ ЗНАЕТИ ПРО МАСКИ ВКАНТАКТИ?  -->
+<html>
+  <head>
+	<meta charset="utf-8">
+	<title>[ 100LAR WEB ]</title>
+    <script type="text/javascript" src="{{url_for('static', filename='current-device.min.js')}}"></script>
+
+  </head>
+
+  <div id = "upBar"></div>
+
+
+  <body style="margin: 120px" bgcolor = "#222226">
+
+    <script>
+      //console.log("device.mobile() === %s", device.mobile());
+      //alert(device.mobile());
+      if (device.mobile() == true){
+        location.replace("m-main");
+      }else{
+        location.replace("main");
+      }
+    </script>
+  </body>
+</html>

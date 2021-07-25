@@ -1,0 +1,121 @@
+<html id="html" style="overflow-x: hidden;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <title>[ 100LAR WEB ]</title>
+    <link rel="shortcut icon" href="static/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href = "static/main.1.1.css"/>
+    <link rel="stylesheet" href = "static/m_main.1.1.css"/>
+
+  </head>
+
+  <body style="font: 13px Helvetica, Arial; margin:0 auto; overflow-x: hidden;" bgcolor = "#222226">
+    <div style="position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: #222226"></div>
+    <div id="page_login">
+      <div class="m_login_container">
+        <input id="login_input" class="m_login_input_container" placeholder="Login" autocomplete="off">
+        <input id="password_input" type="password" class="m_password_input_container" placeholder="Password" autocomplete="off">
+        <h3 id="alert_login" style="position: absolute; left: 20px; top: 90px; display: None">• Incorrect login or password</h3>
+        <div class="m_login_button_container" onclick="login()">
+          <h2 align="center" style="margin: 0 -10px">Login</h2>
+        </div>
+      </div>
+    </div>
+
+    <div id="page_files">
+      <div style="position: absolute; left: 0px; top: 0px; width: 100%; overflow: scroll;"> <!--top: 60px - with no info-->
+        <div id="empty_dir_alert" class="empty_dir_alert"><h2 align="center">This folder is empty (<a id="empty_dir_a" href="">delete folder</a>)</h2></div>
+        <ul id="file_list_ul"></ul>
+        <div id="show_bottom_block" style="height: 90px"></div>
+        <div style="height: 60px"></div>
+      </div>
+
+      <div id="right_bar" class="m_right_bar" style="display: block">
+        <div class='m_settings_create_directory' onclick="create_dir_alert()">
+          <img class="icon" src="static/img/add.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
+          <h2 style="position: absolute; top: 5px; left: 60px;">Create new directory</h2>
+        </div>
+        <div class='m_settings_theme' onclick="switch_theme()">
+          <img class="icon" src="static/img/switch_theme.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
+          <h2 style="position: absolute; top: 5px; left: 60px;">Switch thame</h2>
+        </div>
+        <div class='m_logout_button_container' onclick="logout()">
+          <img class="icon" src="static/img/logout.svg" style="position: absolute; top: 10px; left: 20px;" width="40" height="40">
+        </div>
+        <label for="fileElem"><div class='m_upload_button'>
+          <img class="icon" src="static/img/upload.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
+          <h2 style="position: absolute; top: 5px; left: 60px;">Upload File</h2>
+        </div></label>
+        <!--<div class='settings_create_file'>
+          <img class="icon" src="static/img/add.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
+          <h2 style="position: absolute; top: 5px; left: 60px;">Create new file</h2>
+        </div>-->
+
+        <div class="m_settings_size_container">
+          <h2 style="position: absolute; left:10px">
+            <select name="files_list_type" id="files_list_type" class="settings_select_container" disabled>
+              <option value="grid">grid</option>
+              <option selected value="list">list</option>
+            </select>
+            <div style="display: none; margin: -35px 100px;">
+              width:
+              <input class="input_size_container">
+              elements
+            </div>
+          </h2>
+
+        </div>
+        <h3 style="position: absolute; bottom: 60px; left: 10px" id="memory_text"></h3>
+        <progress id="memory_bar" class="m_memory_bar" value="23" max="100"></progress>
+
+
+      </div>
+
+      <div class="m_top_bar_container">
+        <progress id="upload_bar" class="memory_bar" value="0" max="100" style="bottom: 55px; display: none"></progress>
+        <img onclick="back_dir(); close_menu()" class="icon" style="position: fixed; left: 6px; bottom: 8px; cursor: pointer;" src="static/img/back.svg" alt="back" width="40" height="40">
+        <img onclick="console.log('forward'); close_menu()" class="icon_no" style="position: fixed; left: 55px; bottom: 8px; cursor: pointer;" src="static/img/forward.svg" alt="back" width="40" height="40">
+        <img onclick="reload_files(); close_menu()" class="icon" style="position: fixed; left: 104px; bottom: 8px; cursor: pointer;" src="static/img/reload.svg" alt="back" width="40" height="40">
+        <img onclick="home_dir(); close_menu()" class="icon" style="position: fixed; left: 153px; bottom: 8px; cursor: pointer;" src="static/img/home.svg" alt="back" width="40" height="40">
+        <img onclick="show_menu()" class="icon" style="position: fixed; right: 6px; bottom: 5px; cursor: pointer;" src="static/img/menu.svg" alt="back" width="45" height="45">
+        <input id="files_input" class="addr_input_container" onkeydown="" type=text placeholder="" value="HOME:\\" disabled style="display: none">
+        <div class="logout_button_container" onclick="logout()" style="display: none">
+          <h2 style="position: absolute; margin: -2px 4px" align="center">Logout</h2>
+        </div>
+        <div style="display: none">
+          <input id="search_input" class="search_input_container" onkeydown="" type=text placeholder="Search">
+          <img onclick="" class="icon" style="position: fixed; right: 10px; top: 8px; cursor: pointer;" src="static/img/search.svg" alt="back" width="35" height="35">
+        </div>
+      </div>
+
+      <div id="create_dir_alert" class="m_create_dir_alert" style="display: none">
+        <input id="folder_name" class="m_input_file_name_container" placeholder="Folder name">
+        <div class="m_button_file_name_create" onclick="create_dir()"><h2 align="center">Create</h2></div>
+        <div style="margin: -11.8% 30%" class="m_button_file_name_abort" onclick="create_dir_alert_close()"><h2 align="center">Abort</h2></div>
+
+      </div>
+
+      <div id="bottom_bar" class="m_bottom_bar_container">
+        <img id="image_file" class="icon" src="static/img/files/file.svg" style="position: absolute; top: 8px; left: 8px;" width="50" height="50">
+        <h2 id="name_file" style="position: absolute; top: 8px; left: 80px; display: inline-block;">test2.txt</h2>
+        <h2 id="desctyption_file" style="position: absolute; left: 10px; top: 50px; display: inline-block;">FILE</h2>
+        <a id="download_file" href="" download><img class="icon" src="static/img/download.svg" style="position: absolute; top: 50px; right: 20%;" width="30" height="30"></a>
+        <img onclick="close_bottom_bar()" class="icon" src="static/img/cross.svg" style="position: absolute; top: 8px; right: 8px;" width="30" height="30">
+        <a id="delete_file" href=""><img class="icon" src="static/img/trash.svg" style="position: absolute; top: 50px; right: 40%;" width="30" height="30"></a>
+        <!--<div class="vl_chats"></div>-->
+      </div>
+
+    </div>
+
+
+    <input name="fileElem" type="file" id="fileElem" class="fileElem" multiple onchange="handleFiles(this.files)">
+  </body>
+
+  <div id="loading_background" class="loading_background">
+    <p><h1>Loading...</h1></p>
+  </div>
+
+  <script type="text/javascript">
+    var mobile = true;
+  </script>
+  <script type="text/javascript" src="static/main.1.3.js"></script>
+</html>

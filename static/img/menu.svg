@@ -1,0 +1,17 @@
+<svg width="350" height="350" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG Editor - http://github.com/mzalive/SVG Editor/ -->
+
+ <g>
+  <title>background</title>
+  <rect id="canvas_background" fill="none" x="-1" y="-1" width="352" height="352"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_2" fill="none" stroke="#000" stroke-width="11" x="28" y="23" width="300" height="300" rx="17"/>
+  <rect stroke="#000" id="svg_3" fill="#000000" stroke-width="11" x="64.11122" y="57.72233" width="77.082658" height="77.082658" rx="17"/>
+  <rect stroke="#000" id="svg_4" fill="#000000" stroke-width="11" x="50" y="45" width="115.277222" height="115.277222" rx="17"/>
+  <rect stroke="#000" id="svg_6" fill="#000000" stroke-width="11" x="190" y="45" width="115.277222" height="115.277222" rx="17"/>
+  <rect stroke="#000" id="svg_7" fill="#000000" stroke-width="11" x="50" y="186.992481" width="115.277222" height="115.277222" rx="17"/>
+  <rect stroke="#000" id="svg_8" fill="#000000" stroke-width="11" x="190" y="186.992481" width="115.277222" height="115.277222" rx="17"/>
+ </g>
+</svg>

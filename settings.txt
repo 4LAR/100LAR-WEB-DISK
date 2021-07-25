@@ -1,0 +1,6 @@
+[Server]
+secret_key = 100LAR
+port = 80
+debug = True
+ip = 0.0.0.0
+

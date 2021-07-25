@@ -1,0 +1,175 @@
+<html id="html">
+  <head>
+    <meta charset="utf-8">
+    <title>[ 100LAR WEB ]</title>
+    <link rel="shortcut icon" href="static/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href = "static/main.1.1.css"/>
+
+  </head>
+
+  <body style="font: 13px Helvetica, Arial; width: 1900px; margin:0 auto;" bgcolor = "#222226">
+    <div style="position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: #222226"></div>
+
+    <div id="page_login">
+      <div class="login_container">
+        <input id="login_input" class="login_input_container" placeholder="Login" autocomplete="off">
+        <input type="password" id="password_input" class="password_input_container" placeholder="Password" autocomplete="off">
+        <h3 id="alert_login" style="position: absolute; left: 20px; top: 90px; display: None">• Incorrect login or password</h3>
+        <div class="login_button_container" onclick="login()">
+          <h2 align="center" style="margin: 0 -10px">Login</h2>
+        </div>
+      </div>
+    </div>
+    <div id="page_files">
+
+      <div style="position: absolute; left: 0px; top: 76px; width: 1500px"> <!--top: 60px - with no info-->
+        <div id="empty_dir_alert" class="empty_dir_alert"><h2 align="center">This folder is empty (<a id="empty_dir_a" href="">delete folder</a>)</h2></div>
+        <!--
+        <table id="even">
+          <tr>
+            <th>
+              <img class="icon" src="static/img/files/dir.svg" width="100" height="100">
+              <h2 style="margin: 0">test</h2>
+            </th>
+            <th>
+              <img class="icon" src="static/img/files/dir.svg" width="100" height="100">
+              <h2 style="margin: 0">test2</h2>
+            </th>
+            <th>
+              <img class="icon" src="static/img/files/file_text.svg" width="100" height="100">
+              <h2 style="margin: 0">test.py</h2>
+            </th>
+            <th>
+              <img class="icon" src="static/img/files/archive.svg" width="100" height="100">
+              <h2 style="margin: 0">test.rar</h2>
+            </th>
+            <th>
+              <img class="icon" src="static/img/files/image.svg" width="100" height="100">
+              <h2 style="margin: 0">test.png</h2>
+            </th>
+            <th>
+              <img class="icon" src="static/img/files/music_file.svg" width="100" height="100">
+              <h2 style="margin: 0">test.mp3</h2>
+            </th>
+
+
+          </tr>
+          <tr>
+            <th>
+              <img class="icon" src="static/img/files/file.svg" width="100" height="100">
+              <h2 style="margin: 0">test</h2>
+            </th>
+            <th>
+              <img class="icon" src="static/img/files/file.svg" width="100" height="100">
+              <h2 style="margin: 0">test2</h2>
+            </th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+
+          </tr>
+        </table>
+      -->
+        <ul id="file_list_ul"></ul>
+        <div id="show_bottom_block" style="height: 90px"></div>
+
+      </div>
+
+      <div class="right_bar">
+        <div class='settings_create_directory' onclick="create_dir_alert()">
+          <img class="icon" src="static/img/add.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
+          <h2 style="position: absolute; top: 5px; left: 60px;">Create new directory</h2>
+        </div>
+        <div class='settings_theme' onclick="switch_theme()">
+          <img class="icon" src="static/img/switch_theme.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
+          <h2 style="position: absolute; top: 5px; left: 60px;">Switch thame</h2>
+        </div>
+        <!--<div class='settings_create_file'>
+          <img class="icon" src="static/img/add.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
+          <h2 style="position: absolute; top: 5px; left: 60px;">Create new file</h2>
+        </div>-->
+
+        <div class="settings_size_container">
+          <h2 style="position: absolute; left:10px">
+            <select name="files_list_type" id="files_list_type" class="settings_select_container" disabled>
+              <option value="grid">grid</option>
+              <option selected value="list">list</option>
+            </select>
+            <div style="display: none; margin: -35px 100px;">
+              width:
+              <input class="input_size_container">
+              elements
+            </div>
+          </h2>
+
+        </div>
+        <h3 style="position: absolute; bottom: 10px; left: 10px" id="memory_text"></h3>
+        <progress id="memory_bar" class="memory_bar" value="23" max="100"></progress>
+      </div>
+
+      <div class="top_bar_container">
+        <img onclick="back_dir()" class="icon" style="position: fixed; left: 6px; top: 8px; cursor: pointer;" src="static/img/back.svg" alt="back" width="40" height="40">
+        <img onclick="console.log('forward')" class="icon_no" style="position: fixed; left: 55px; top: 8px; cursor: pointer;" src="static/img/forward.svg" alt="back" width="40" height="40">
+        <img onclick="reload_files()" class="icon" style="position: fixed; left: 104px; top: 8px; cursor: pointer;" src="static/img/reload.svg" alt="back" width="40" height="40">
+        <img onclick="home_dir()" class="icon" style="position: fixed; left: 153px; top: 8px; cursor: pointer;" src="static/img/home.svg" alt="back" width="40" height="40">
+        <input id="files_input" class="addr_input_container" onkeydown="" type=text placeholder="" value="HOME:\\" disabled>
+        <div class="logout_button_container" onclick="logout()">
+          <h2 style="position: absolute; margin: -2px 4px" align="center">Logout</h2>
+        </div>
+        <input id="search_input" class="search_input_container" onkeydown="" type=text placeholder="Search">
+        <img onclick="" class="icon" style="position: fixed; right: 10px; top: 8px; cursor: pointer;" src="static/img/search.svg" alt="back" width="35" height="35">
+
+      </div>
+
+      <div class="top_bar_info_list_container">
+        <div class="vl" style="left: 5%"></div>
+        <h3 style="margin: 3px 20%">File name</h3>
+        <div class="vl" style="left: 60%"></div>
+        <h3 style="margin: -20px 69%">Type</h3>
+        <div class="vl" style="left: 81%"></div>
+        <h3 style="position: absolute; margin: 3px 90%">Size</h3>
+      </div>
+
+      <div id="bottom_bar" class="bottom_bar_container">
+        <img id="image_file" class="icon" src="static/img/files/file.svg" style="position: absolute; top: 8px; left: 8px;" width="50" height="50">
+        <h2 id="name_file" style="position: absolute; top: 8px; left: 80px; display: inline-block;">test2.txt</h2>
+        <h2 id="desctyption_file" style="position: absolute; left: 10px; top: 50px; display: inline-block;">FILE</h2>
+        <h2 id="size_file" style="position: absolute; left: 10px; top: 75px; display: inline-block;">8 KB</h2>
+        <a id="download_file" href="" download><img class="icon" src="static/img/download.svg" style="position: absolute; top: 50px; left: 400px;" width="30" height="30"></a>
+        <img onclick="close_bottom_bar()" class="icon" src="static/img/cross.svg" style="position: absolute; top: 8px; right: 8px;" width="30" height="30">
+        <a id="delete_file" href=""><img class="icon" src="static/img/trash.svg" style="position: absolute; top: 50px; right: 60px;" width="30" height="30"></a>
+        <!--<div class="vl_chats"></div>-->
+      </div>
+
+      <div id="bottom_bar_upload" class="bottom_bar_upload_container">
+        <h2 align="center">Uploading files...</h2>
+        <h2 id="upload_file_name" align="center">test<h2>
+        <progress id="upload_bar" class="memory_bar" value="0" max="100"></progress>
+      </div>
+
+    </div>
+
+
+
+    <input type="file" id="fileElem" class="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+  </body>
+
+  <div id="loading_background" class="loading_background">
+    <p><h1>Loading...</h1></p>
+  </div>
+
+  <script type="text/javascript">
+    var mobile = false;
+  </script>
+  <script type="text/javascript" src="static/main.1.3.js"></script>
+
+</html>

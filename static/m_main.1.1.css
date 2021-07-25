@@ -1,0 +1,250 @@
+html,
+body {
+    overscroll-behavior-y: contain;
+}
+
+.m_login_container {
+  position: fixed;
+  top: 10%;
+  left: 0px;
+
+  background-color: #333336;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 94.8%;
+  height: 160px;
+  transition:0.2s all;
+}
+
+.m_login_input_container {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  font-size: 1.2em;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 95%;
+  height: 40px
+}
+
+.m_password_input_container {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  font-size: 1.2em;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 95%;
+  height: 40px
+}
+
+.m_login_button_container {
+  cursor: pointer;
+  position: absolute;
+  top: 120px;
+  left: 10px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 200px;
+  height: 20px;
+  transition:0.2s all
+}
+
+.m_login_button_container:hover {
+  background-color: #505051;
+}
+
+.m_top_bar_container {
+  background-color: #39393C;
+  position: fixed;
+  left: 0px;
+  width: 100%;
+  height: 55px;
+  bottom: 0px;
+}
+
+.m_file_list_container {
+  background-color: #333336;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 94.6%;
+  transition:0.2s all;
+  cursor: pointer;
+}
+
+.m_file_list_container:hover {
+  background-color: #39393C;
+}
+
+.m_file_list_container_edit {
+  background-color: #333336;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  transition:0.2s all;
+  cursor: default;
+}
+
+.m_right_bar {
+  background-color: #39393C;
+  position: fixed;
+  right: -100%;
+  width: 80%;
+  height: 100%;
+  top: 0px;
+  transition:0.4s all;
+}
+
+.m_settings_size_container {
+  position: absolute;
+  right: 0px;
+  bottom: 55px;
+  height: 120px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 100%;
+  transition:0.5s all;
+}
+
+.m_memory_bar {
+  position: absolute;
+  bottom: 55;
+}
+
+.m_settings_create_directory {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  bottom: 185px;
+  height: 60px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 100%;
+  transition:0.2s all;
+}
+
+.m_settings_create_directory:hover {
+  background-color: #505051;
+}
+
+.m_settings_theme {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  bottom: 325px;
+  height: 60px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 70%;
+  transition:0.2s all;
+}
+
+.m_settings_theme:hover {
+  background-color: #505051;
+}
+
+.m_input_file_name_container {
+  right: 0px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  padding: 5px 5px;
+  margin: 0;
+  border-radius: 5px;
+  width: 98%;
+}
+
+.m_button_file_name_create {
+  width: 100px;
+  height: 25px;
+  background-color: #444446;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:0.2s all;
+}
+
+.m_button_file_name_create:hover {
+  background-color: #505051;
+}
+
+.m_button_file_name_abort {
+  width: 100px;
+  height: 25px;
+  background-color: #444446;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:0.2s all;
+}
+
+.m_button_file_name_abort:hover {
+  background-color: #505051;
+}
+
+.m_create_dir_alert {
+  position: fixed;
+  top: 10%;
+  left: 0px;
+
+  background-color: #39393C;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 94.8%;
+  height: 80px;
+  transition:0.2s all;
+}
+
+.m_bottom_bar_container {
+  position: absolute;
+  left: 0px;
+  bottom: 60px;
+  height: 100px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 100%;
+  position: fixed;
+  transition:0.5s all;
+}
+
+.m_upload_button {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  bottom: 255px;
+  height: 60px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 100%;
+  transition:0.2s all;
+}
+
+.m_logout_button_container {
+  cursor: pointer;
+  position: absolute;
+  left: 0px;
+  bottom: 325px;
+  height: 60px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 25%;
+  transition:0.2s all;
+}
+
+.m_logout_button_container:hover {
+  background-color: #505051;
+}

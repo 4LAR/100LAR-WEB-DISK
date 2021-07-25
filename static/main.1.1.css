@@ -1,0 +1,462 @@
+.light {
+  filter: invert(100%) hue-rotate(180deg);
+  transition:1s all;
+}
+.light img:not(.icon, .icon_no) {
+  filter: invert(100%) hue-rotate(180deg);
+  --transition:1s all;
+}
+
+.light body {
+  transition:1s all;
+}
+
+.dark {
+  transition:1s all;
+}
+
+
+p {
+  color: #808080; /* Цвет текста */
+}
+
+h1 {
+  color: #808080; /* Цвет текста */
+}
+
+h2 {
+  color: #808080; /* Цвет текста */
+}
+
+h3 {
+  color: #808080; /* Цвет текста */
+}
+
+a {
+  color: #808080; /* Цвет ссылок */
+}
+
+li {
+  list-style-type: none;
+ }
+ul {
+  margin-left: 0;
+  padding-left: 0;
+ }
+
+input {outline:none;}
+
+.vl {
+  border-left: 3px solid #808080;
+  height: 100%;
+  position: absolute;
+  margin-left: -3px;
+  top: 0;
+}
+
+table#even {
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 7px 11px;
+}
+
+.loading_background {
+  position: fixed;
+  background-color:  #333336;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition:1s all;
+}
+
+.icon {
+  filter: invert(40%);
+  transition:0.2s all;
+  --animation: spin 2s linear 0s infinite;
+}
+
+.icon:hover {
+  filter: invert(50%);
+}
+
+.icon_no {
+  filter: invert(30%);
+  transition:0.2s all;
+  --animation: spin 2s linear 0s infinite;
+}
+
+.right_bar {
+  background-color: #39393C;
+  position: fixed;
+  right: 0px;
+  width: 400px;
+  height: 100%;
+  top: 0px;
+}
+
+.memory_bar {
+  position: absolute;
+  bottom: 0;
+}
+
+progress {
+  border-radius: 0px;
+  width: 100%;
+  height: 10px;
+}
+progress::-webkit-progress-bar {
+  background-color: #222226;
+  border-radius: 0px;
+}
+progress::-webkit-progress-value {
+  background-color: #808080;
+  border-radius: 0px;
+}
+progress::-moz-progress-bar {
+ /* style rules */
+}
+
+hr {
+  border: none;
+  background-color:  #808080;
+  color: #808080;
+  height: 5px;
+  border-radius: 5px;
+}
+
+.settings_create_directory {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  bottom: 130px;
+  height: 60px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 400px;
+  position: fixed;
+  transition:0.2s all;
+}
+
+.settings_create_directory:hover {
+  background-color: #505051;
+}
+
+.settings_theme {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  bottom: 200px;
+  height: 60px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 200px;
+  position: fixed;
+  transition:0.2s all;
+}
+
+.settings_theme:hover {
+  background-color: #505051;
+}
+
+.settings_create_file {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  bottom: 200px;
+  height: 60px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 400px;
+  position: fixed;
+  transition:0.2s all;
+}
+
+.settings_create_file:hover {
+  background-color: #505051;
+}
+
+
+.settings_size_container {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  height: 120px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 400px;
+  position: fixed;
+  transition:0.5s all;
+}
+
+.settings_select_container {
+  color: #808080;
+  border: 0;
+  background-color: #333336;
+  padding: 8px 8px;
+  margin: 8px 0;
+  border-radius: 10px;
+}
+
+.input_size_container {
+  right: 0px;
+  color: #808080;
+  border: 0;
+  background-color: #333336;
+  padding: 5px 5px;
+  margin: 0;
+  border-radius: 5px;
+  width: 30px;
+}
+
+.top_bar_container {
+  background-color: #39393C;
+  position: fixed;
+  left: 0px;
+  width: 100%;
+  height: 55px;
+  top: 0px;
+}
+
+.top_bar_info_list_container {
+  background-color: #444446;
+  position: fixed;
+  left: 0px;
+  width: 1520px;
+  height: 25px;
+  top: 55px;
+}
+
+.addr_input_container {
+  position: fixed;
+  top: 0px;
+  left: 200px;
+  color: #808080;
+  border: 0;
+  background-color: #333336;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 1190px;
+  --transition:0.2s all;
+}
+
+.search_input_container {
+  position: fixed;
+  top: 0px;
+  right: 50px;
+  color: #808080;
+  border: 0;
+  background-color: #333336;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 340px;
+  --transition:0.2s all;
+}
+
+.logout_button_container {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  left: 1400px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 80px;
+  height: 15px;
+  transition:0.2s all
+}
+
+.logout_button_container:hover {
+  background-color: #505051;
+}
+
+
+.file_list_container {
+  background-color: #333336;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 1500px;
+  transition:0.2s all;
+  cursor: pointer;
+}
+
+.file_list_container:hover {
+  background-color: #39393C;
+}
+
+.file_list_container_edit {
+  background-color: #333336;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 1500px;
+  transition:0.2s all;
+  cursor: default;
+}
+
+#drop-area {
+  --pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#drop-area.highlight {
+  border-color: purple;
+}
+
+.fileElem {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #222226;        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #808080;    /* color of the scroll thumb */
+}
+
+.bottom_bar_container {
+  position: absolute;
+  left: 10px;
+  bottom: 0px;
+  height: 90px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 600px;
+  position: fixed;
+  transition:0.5s all;
+}
+
+.bottom_bar_upload_container {
+  position: absolute;
+  left: 800px;
+  bottom: 0px;
+  height: 90px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 600px;
+  position: fixed;
+  transition:0.5s all;
+}
+
+.input_file_name_container {
+  right: 0px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  padding: 5px 5px;
+  margin: 0;
+  border-radius: 5px;
+  width: 490px;
+}
+
+.button_file_name_create {
+  width: 100px;
+  height: 25px;
+  background-color: #444446;
+  margin: -50px 500px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:0.2s all;
+}
+
+.button_file_name_create:hover {
+  background-color: #505051;
+}
+
+.button_file_name_abort {
+  width: 100px;
+  height: 25px;
+  background-color: #444446;
+  margin: -50px 610px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:0.2s all;
+}
+
+.button_file_name_abort:hover {
+  background-color: #505051;
+}
+
+.login_container {
+  position: fixed;
+  top: 300px;
+  left: 600px;
+
+  background-color: #333336;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 600px;
+  height: 160px;
+  transition:0.2s all;
+}
+
+.login_input_container {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  font-size: 1.2em;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 600px;
+  height: 40px
+}
+
+.password_input_container {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  font-size: 1.2em;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 600px;
+  height: 40px
+}
+
+.login_button_container {
+  cursor: pointer;
+  position: absolute;
+  top: 120px;
+  left: 10px;
+  color: #808080;
+  border: 0;
+  background-color: #444446;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  width: 200px;
+  height: 20px;
+  transition:0.2s all
+}
+
+.login_button_container:hover {
+  background-color: #505051;
+}

@@ -1,0 +1,6 @@
+[USER]
+login = true
+username = 100LAR
+password = 4040
+directory = files
+
