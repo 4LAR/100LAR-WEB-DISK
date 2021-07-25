@@ -1,3 +1,1 @@
-/settings.txt
-/123/cmd.exe
-
+/test_file.txt
