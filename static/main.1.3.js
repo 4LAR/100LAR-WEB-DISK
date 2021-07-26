@@ -354,7 +354,7 @@ function delDir(folder){
 }
 
 function readFiles(d) {
-  document.getElementById("files_input").value = 'HOME://'+ d;
+  document.getElementById("files_input").value = 'HOME:/'+ d;
   document.getElementById("file_list_ul").innerHTML = '';
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'files_disk?dir='+d, true);

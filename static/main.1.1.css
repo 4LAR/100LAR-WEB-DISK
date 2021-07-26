@@ -460,3 +460,25 @@ body::-webkit-scrollbar-thumb {
 .login_button_container:hover {
   background-color: #505051;
 }
+
+.checkbox {
+  position: absolute; 
+  width: 20px; 
+  height: 20px;
+
+  background: #808080;
+  border-radius: 10px;
+
+  transition:0.2s all;
+
+
+}
+
+.checkbox:hower {
+  background: #505051;
+}
+
+.checkbox:checked {
+  border-radius: 100%;
+    background-color: #e145a3;
+}
