@@ -6,7 +6,7 @@
 version_core = '0.1'
 
 #
-from flask import Flask, render_template, request, make_response, jsonify, abort, redirect, Response, url_for, render_template
+from flask import Flask, render_template, send_from_directory, request, make_response, jsonify, abort, redirect, Response, url_for, render_template
 from flask_cors import CORS
 import logging
 import pickle, os, configparser, socket
@@ -16,6 +16,10 @@ import threading
 import logging
 import gevent
 from gevent.pywsgi import WSGIServer
+import math
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager , login_required , UserMixin , login_user, current_user, logout_user
+
 
 #from flask_socketio import SocketIO, emit
 

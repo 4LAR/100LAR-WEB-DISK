@@ -1,10 +1,4 @@
 
-import math
-from flask import send_from_directory
-
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager , login_required , UserMixin , login_user, current_user, logout_user
-
 login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)

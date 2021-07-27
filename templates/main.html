@@ -4,6 +4,7 @@
     <title>[ 100LAR WEB ]</title>
     <link rel="shortcut icon" href="static/img/favicon.png" type="image/png">
     <link rel="stylesheet" href = "static/main.1.1.css"/>
+    <link rel="stylesheet" href = "static/slider.css"/>
 
   </head>
 
@@ -89,6 +90,10 @@
           <img class="icon" src="static/img/add.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
           <h2 style="position: absolute; top: 5px; left: 60px;">Create new directory</h2>
         </div>
+        <div class='settings_logout_button_container' onclick="logout()">
+          <img class="icon" src="static/img/logout.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
+          <h2 style="position: absolute; top: 5px; left: 60px;">Logout</h2>
+        </div>
         <div class='settings_theme' onclick="switch_theme()">
           <img class="icon" src="static/img/switch_theme.svg" style="position: absolute; top: 10px; left: 5px;" width="40" height="40">
           <h2 style="position: absolute; top: 5px; left: 60px;">Switch theme</h2>
@@ -122,9 +127,9 @@
         <img onclick="reload_files()" class="icon" style="position: fixed; left: 104px; top: 8px; cursor: pointer;" src="static/img/reload.svg" alt="back" width="40" height="40">
         <img onclick="home_dir()" class="icon" style="position: fixed; left: 153px; top: 8px; cursor: pointer;" src="static/img/home.svg" alt="back" width="40" height="40">
         <input id="files_input" class="addr_input_container" onkeydown="" type=text placeholder="" value="HOME:\\" disabled>
-        <div class="logout_button_container" onclick="logout()">
+        <!--<div class="logout_button_container" onclick="logout()">
           <h2 style="position: absolute; margin: -2px 4px" align="center">Logout</h2>
-        </div>
+        </div>-->
         <input id="search_input" class="search_input_container" onkeydown="" type=text placeholder="Search">
         <img onclick="" class="icon" style="position: fixed; right: 10px; top: 8px; cursor: pointer;" src="static/img/search.svg" alt="back" width="35" height="35">
 
@@ -140,14 +145,32 @@
       </div>
 
       <div id="bottom_bar" class="bottom_bar_container">
+
         <img id="image_file" class="icon" src="static/img/files/file.svg" style="position: absolute; top: 8px; left: 8px;" width="50" height="50">
         <h2 id="name_file" style="position: absolute; top: 8px; left: 80px; display: inline-block;">test2.txt</h2>
         <h2 id="desctyption_file" style="position: absolute; left: 10px; top: 50px; display: inline-block;">FILE</h2>
-        <h2 id="size_file" style="position: absolute; left: 10px; top: 75px; display: inline-block;">8 KB</h2>
-        <!--<input class="checkbox" style="left: 100px" type='checkbox' onclick='handleClick(this);'>-->
+        <!--<h2 id="size_file" style="position: absolute; left: 10px; top: 75px; display: inline-block;">8 KB</h2>-->
+        
         <a id="download_file" href="" download><img class="icon" src="static/img/download.svg" style="position: absolute; top: 50px; left: 400px;" width="30" height="30"></a>
         <img onclick="close_bottom_bar()" class="icon" src="static/img/cross.svg" style="position: absolute; top: 8px; right: 8px;" width="30" height="30">
         <a id="delete_file" href=""><img class="icon" src="static/img/trash.svg" style="position: absolute; top: 50px; right: 60px;" width="30" height="30"></a>
+        <!--<a id="share_file" href=""><img class="icon" src="static/img/share.svg" style="position: absolute; top: 50px; left: 280px;" width="30" height="30"></a>-->
+        <!--
+        <div class="share_button_container">
+          <img class="icon" src="static/img/share.svg" style="position: absolute; bottom: 6px; left: 0px;" width="30" height="30">
+          <h2 style="margin: -5px 10px">Share off</h2>
+        </div>-->
+        <!--
+        <img class="icon" src="static/img/share.svg" style="position: absolute; bottom: 16px; left: 8px;" width="30" height="30">
+        <div style="position: absolute; left: 50px; bottom: 12px;">
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input class="share_input_container" disabled>
+        <img class="icon" src="static/img/copy.svg" style="position: absolute; bottom: 16px; right: 8px;" width="30" height="30">
+      -->
         <!--<div class="vl_chats"></div>-->
       </div>
 

@@ -143,6 +143,22 @@ hr {
   background-color: #505051;
 }
 
+.settings_logout_button_container {
+  cursor: pointer;
+  position: absolute;
+  left: 0px;
+  bottom: 200px;
+  height: 60px;
+  background-color: #444446;
+  border-radius: 5px;
+  width: 150px;
+  transition:0.2s all;
+}
+
+.settings_logout_button_container:hover {
+  background-color: #505051;
+}
+
 .settings_theme {
   cursor: pointer;
   position: absolute;
@@ -238,7 +254,7 @@ hr {
   padding: 12px 20px;
   margin: 8px 0;
   border-radius: 10px;
-  width: 1190px;
+  width: 1310px;
   --transition:0.2s all;
 }
 
@@ -339,6 +355,7 @@ body::-webkit-scrollbar-thumb {
   left: 10px;
   bottom: 0px;
   height: 90px;
+  --height: 140px;
   background-color: #444446;
   border-radius: 5px;
   width: 600px;
@@ -461,24 +478,17 @@ body::-webkit-scrollbar-thumb {
   background-color: #505051;
 }
 
-.checkbox {
-  position: absolute; 
-  width: 20px; 
-  height: 20px;
-
-  background: #808080;
+.share_input_container {
+  position: absolute;
+  bottom: 0px;
+  left: 130px;
+  color: #808080;
+  border: 0;
+  background-color: #333336;
+  font-size: 1.2em;
+  padding: 12px 20px;
+  margin: 8px 0;
   border-radius: 10px;
-
-  transition:0.2s all;
-
-
-}
-
-.checkbox:hower {
-  background: #505051;
-}
-
-.checkbox:checked {
-  border-radius: 100%;
-    background-color: #e145a3;
+  width: 420px;
+  height: 40px
 }
