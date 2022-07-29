@@ -1,6 +1,0 @@
-[USER]
-login = true
-username = admin
-password = 12345678
-directory = files
-

@@ -1,0 +1,161 @@
+p {
+  color: #D1D5C3; /* Цвет текста */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /*color: #C1C2BF; /* Цвет текста */
+  color: #D1D5C3;
+}
+
+a {
+  color: #D1D5C3; /* Цвет ссылок */
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+input {outline:none;}
+
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.icon {
+  filter: invert(60%);
+}
+
+.topBar {
+  position: fixed;
+  background-color: #1D2125;
+
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 45px;
+
+  border-bottom: 1px solid #141414;
+
+}
+
+.input_style {
+  position: relative;
+  color: #D1D5C3;
+  border: 1px solid #141414;
+  /*background-color: #0D1117;*/
+  background-color: #24292E;
+
+  font-size: 14px;
+
+  padding: 12px 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  height: 30px;
+
+}
+
+.path_buttons {
+  position: relative;
+  top: 8px;
+  cursor: pointer;
+
+  transition:0.1s all;
+}
+
+.path_buttons:hover {
+  filter: invert(50%);
+}
+
+.leftBar {
+  position: fixed;
+
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 200px;
+
+  border-right: 1px solid #141414;
+}
+
+.rightBar {
+  position: fixed;
+
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 200px;
+
+  border-left: 1px solid #141414;
+}
+
+.disk_space {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 200px;
+  height: 5px;
+  border-top: 1px solid #141414;
+  background-color: #1D2125;
+}
+
+.disk_space_progress {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 40px;
+  height: 5px;
+  background-color: #999999;
+}
+
+.disk_info {
+  position: absolute;
+  left: 0px;
+  bottom: 5px;
+  width: 200px;
+  height: 30px;
+  border-top: 1px solid #141414;
+  background-color: #24292E;
+}
+
+.user_button {
+  position: fixed;
+  background-color: #1D2125;
+
+  top: 0px;
+  left: 0px;
+  width: 200px;
+  height: 45px;
+
+  border-right: 1px solid #141414;
+
+  transition:0.1s all;
+
+  cursor: pointer;
+  
+}
+
+.user_button:hover {
+  background-color: #2F363D;
+}
+
+.user_button img {
+  position: relative;
+  top: 10px;
+}
+
+.file_list {
+  position: absolute;
+  left: 200px;
+  top: 45px;
+}
+
+#file_list h1 {
+  margin: 10px;
+}
