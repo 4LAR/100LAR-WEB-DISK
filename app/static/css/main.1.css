@@ -45,6 +45,13 @@ body {
 
 }
 
+.hr_style{
+  border: none;
+  background-color:  #141414;
+  color: #141414;
+  height: 1px;
+}
+
 .input_style {
   position: relative;
   color: #D1D5C3;
@@ -90,7 +97,9 @@ body {
   top: 0px;
   right: 0px;
   height: 100%;
-  width: 200px;
+  width: 300px;
+
+  background-color: #24292E;
 
   border-left: 1px solid #141414;
 }
@@ -153,9 +162,81 @@ body {
 .file_list {
   position: absolute;
   left: 200px;
-  top: 45px;
+  top: 30px;
 }
 
-#file_list h1 {
-  margin: 10px;
+.file {
+  border-bottom: 1px solid #141414;
+
+  height: 40px;
+  width: 1150px;
+}
+
+.file:hover {
+  background-color: #2F363D;
+  cursor: pointer;
+}
+
+.fileName_input {
+  position: absolute;
+
+  left: 60px;
+  top: 10px;
+  width: 230px;
+
+  background-color: #1D2125;
+}
+
+.fileDescription {
+  position: absolute;
+
+  left: 10px;
+  top: 120px;
+  width: 280px;
+  height: 200px;
+
+  resize: none;
+
+  background-color: #1D2125;
+
+}
+
+.file_ico_name_div {
+  position: absolute;
+  left: 0px;
+  top: 45px;
+  width: 300px;
+  height: 60px;
+  border-bottom: 1px solid #141414;
+  background-color: #24292E;
+}
+
+.file_download_button {
+  position: absolute;
+  left: 0px;
+  top: 207px;
+  width: 300px;
+  height: 35px;
+  border-bottom: 1px solid #141414;
+  background-color: #24292E;
+
+  cursor: pointer;
+}
+
+.file_download_button:hover {
+  background-color: #2F363D;
+}
+
+.file_info_div {
+  position: absolute;
+  left: 0px;
+  top: 106px;
+  width: 300px;
+  height: 100px;
+  border-bottom: 1px solid #141414;
+  background-color: #24292E;
+}
+
+.file_info_div p {
+  margin: 0px 10px;
 }

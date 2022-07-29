@@ -11,35 +11,7 @@
   <body bgcolor = "#24292E">
 
     <div class="file_list">
-      <ul id="file_list">
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        <li><h1>hello world</h1></li>
-        
-      </ul>
+      <ul id="file_list"></ul>
     </div>
     
     <div class="leftBar">
@@ -49,15 +21,33 @@
         <p style="margin: -23px 30px">25.2GB / 100GB</p>
       </div>
       <div class="disk_space">
-        <div class="disk_space_progress">
+        <div id="disk_space_progress" class="disk_space_progress">
 
         </div>
       </div>
     </div>
 
     <!--Информация о файле-->
-    <div class="rightBar" style="display: none">
-  
+    <div id="rightBar" class="rightBar" style="display: none">
+      <div class="file_ico_name_div">
+        <img class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/file.svg">
+        <input id="fileName_input" class="input_style fileName_input" style="" type=text placeholder="file name">
+      </div>
+      
+      <div class="file_info_div">
+        <p id="file_type" style="margin-top: 10px;">type: None</p>
+        <p id="file_size">size: None</p>
+        <p id="file_path">path: None</p>
+        <p id="file_date">date of change: None</p>
+        <textarea class="input_style fileDescription" style="display: none"></textarea>
+      </div>
+
+      <div class="file_download_button">
+        <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/download.svg">
+        <p style="margin: -25px 40px;">download</p>
+      </div>
+      
+
     </div>
     
     <div class="topBar">
@@ -71,10 +61,15 @@
       <img class="icon path_buttons" style="left: 210px" width="30" height="30" src="static/img/forward.svg">
       <img class="icon path_buttons" style="left: 210px" width="30" height="30" src="static/img/reload.svg">
       <img class="icon path_buttons" style="left: 210px" width="30" height="30" src="static/img/home.svg">
-      <input id="path" class="input_style" style="left: 220px; width: 60%; top: -2px;" type=text placeholder="loh">
-
+      <input id="path" class="input_style" style="left: 220px; width: 680px; top: -2px;" type=text placeholder="Path">
+      
+      <div class="search_div" style="display: none">
+        <input id="searh_input" class="input_style" style="left: 240px; width: 200px; top: -2px;" type=text placeholder="Path">
+      </div>
     </div>
 
   </body>
+
+  <script type="text/javascript" src="static/js/main.1.js"></script>
 
 </html>
