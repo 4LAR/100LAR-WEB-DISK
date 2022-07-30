@@ -19,3 +19,7 @@
   background-color: #2F363D;
   cursor: pointer;
 }
+
+.file p {
+  white-space: nowrap;
+}

@@ -29,6 +29,8 @@ function append_file(name, size, path, date) {
     <div class="file" onclick="open_fileInfo('${name}', 'text file', '${size}', '${path}', '${date}')">
       <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/file.svg">
       <p style="margin: -25px 70px">${name}</p>
+      <p style="margin: -25px 300px">${date}</p>
+      <p style="margin: 4px 500px">${size}</p>
     </div>
   `;
 
