@@ -1,3 +1,17 @@
+:root {
+  --scalex: calc(100% - 1280px);
+
+  --width-left-bar: 200px;
+
+  --top-font-color: #D1D5C3;
+  --main-font-color: #D1D5C3;
+
+  --bg-color: #24292E;
+  --top-color: #1D2125;
+
+  --hover-color: #2F363D;
+}
+
 p {
   color: #D1D5C3; /* Цвет текста */
 }
@@ -32,17 +46,25 @@ body {
   filter: invert(60%);
 }
 
-.topBar {
-  position: fixed;
-  background-color: #1D2125;
+.block_select {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
 
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 45px;
+body::-webkit-scrollbar {
+  /* ширина */
+  width: 2px;
+}
 
-  border-bottom: 1px solid #141414;
+body::-webkit-scrollbar-track {
+  /* фон */
+  background: #1D2125;
+}
 
+body::-webkit-scrollbar-thumb {
+  /* цвет ползунка */
+  background-color: #4F5357;
 }
 
 .hr_style{
@@ -68,175 +90,13 @@ body {
 
 }
 
-.path_buttons {
-  position: relative;
-  top: 8px;
-  cursor: pointer;
-
-  transition:0.1s all;
-}
-
-.path_buttons:hover {
-  filter: invert(50%);
-}
-
-.leftBar {
+.background_black {
   position: fixed;
-
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 200px;
-
-  border-right: 1px solid #141414;
-}
-
-.rightBar {
-  position: fixed;
-
-  top: 0px;
-  right: 0px;
-  height: 100%;
-  width: 300px;
-
-  background-color: #24292E;
-
-  border-left: 1px solid #141414;
-}
-
-.disk_space {
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: 200px;
-  height: 5px;
-  border-top: 1px solid #141414;
-  background-color: #1D2125;
-}
-
-.disk_space_progress {
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: 40px;
-  height: 5px;
-  background-color: #999999;
-}
-
-.disk_info {
-  position: absolute;
-  left: 0px;
-  bottom: 5px;
-  width: 200px;
-  height: 30px;
-  border-top: 1px solid #141414;
-  background-color: #24292E;
-}
-
-.user_button {
-  position: fixed;
-  background-color: #1D2125;
-
-  top: 0px;
-  left: 0px;
-  width: 200px;
-  height: 45px;
-
-  border-right: 1px solid #141414;
-
-  transition:0.1s all;
-
-  cursor: pointer;
-  
-}
-
-.user_button:hover {
-  background-color: #2F363D;
-}
-
-.user_button img {
-  position: relative;
-  top: 10px;
-}
-
-.file_list {
-  position: absolute;
-  left: 200px;
-  top: 30px;
-}
-
-.file {
-  border-bottom: 1px solid #141414;
-
-  height: 40px;
-  width: 1150px;
-}
-
-.file:hover {
-  background-color: #2F363D;
-  cursor: pointer;
-}
-
-.fileName_input {
-  position: absolute;
-
-  left: 60px;
-  top: 10px;
-  width: 230px;
-
-  background-color: #1D2125;
-}
-
-.fileDescription {
-  position: absolute;
-
-  left: 10px;
-  top: 120px;
-  width: 280px;
-  height: 200px;
-
-  resize: none;
-
-  background-color: #1D2125;
-
-}
-
-.file_ico_name_div {
-  position: absolute;
   left: 0px;
   top: 45px;
-  width: 300px;
-  height: 60px;
-  border-bottom: 1px solid #141414;
-  background-color: #24292E;
-}
+  width: 100%;
+  height: 100%;
 
-.file_download_button {
-  position: absolute;
-  left: 0px;
-  top: 207px;
-  width: 300px;
-  height: 35px;
-  border-bottom: 1px solid #141414;
-  background-color: #24292E;
-
-  cursor: pointer;
-}
-
-.file_download_button:hover {
-  background-color: #2F363D;
-}
-
-.file_info_div {
-  position: absolute;
-  left: 0px;
-  top: 106px;
-  width: 300px;
-  height: 100px;
-  border-bottom: 1px solid #141414;
-  background-color: #24292E;
-}
-
-.file_info_div p {
-  margin: 0px 10px;
+  background-color: #000;
+  opacity: .5;
 }

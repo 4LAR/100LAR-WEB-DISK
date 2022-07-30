@@ -1,5 +1,7 @@
 const space_bar_width = 200;
 
+const path_map_left = 10;
+
 // функция для скрытия эелемента
 function closeModal(modalId) { 
   try {
@@ -19,14 +21,14 @@ function openModal(modalId) {
 }
 
 //
-function append_file() {
+function append_file(name, size, path, date) {
   var ul = document.getElementById("file_list");
   var li = document.createElement("li");
 
   li.innerHTML = `
-    <div class="file" onclick="open_fileInfo('test_file.txt', 'text file', '120Kb', '/home/stolar', '29.07.2022')">
+    <div class="file" onclick="open_fileInfo('${name}', 'text file', '${size}', '${path}', '${date}')">
       <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/file.svg">
-      <p style="margin: -25px 70px">test_file.txt</p>
+      <p style="margin: -25px 70px">${name}</p>
     </div>
   `;
 
@@ -52,7 +54,7 @@ function close_fileInfo() {
 }
 
 for (let i = 0; i < 20; i++)
-  append_file();
+  append_file('test_file.txt', '120KB', '/home/stolar', '12:30 30.07.2022');
 
 //
 function set_disk_space(state=0) {
@@ -62,11 +64,52 @@ function set_disk_space(state=0) {
 
 set_disk_space(25.2);
 
+var open_close_user_bool = false;
+
 document.addEventListener('keydown', function(event){
 
   if(event.keyCode == 27){
-    close_fileInfo();
-
+    if (open_close_user_bool) {
+      open_close_user_button();
+    } else {
+      close_fileInfo();
+    }
+    
   }
 
 });
+
+//
+function add_path_map(count, name, open=false) {
+  var ul = document.getElementById("path_map_list");
+  var li = document.createElement("li");
+
+  var left = path_map_left * count;
+  var rotate = (!open)? 'path_map_img_rotate': '';
+
+  li.innerHTML = `
+  <div class="path_map_button">
+    <img class="icon ${rotate}" style="margin: 5px ${left + 5}px" width="8" height="8" src="static/img/triangle.svg">
+    <p style="margin: -17px ${left + 15}px;">${name}</p>
+  </div>
+  `;
+
+  ul.appendChild(li);
+}
+
+add_path_map(0, 'home', true);
+add_path_map(1, 'stolar', true);
+add_path_map(2, 'downloads', false);
+add_path_map(2, 'images', false);
+add_path_map(2, 'docs', false);
+add_path_map(2, 'test', true);
+
+
+//
+function open_close_user_button() {
+  open_close_user_bool = !open_close_user_bool;
+  document.getElementById("background_black").style.display = (open_close_user_bool)? "block": "none";
+  document.getElementById("leftBar_user").style.display = (open_close_user_bool)? "block": "none";
+  document.getElementById("user_button_triangle").style.transform = (open_close_user_bool)? "rotate(180deg)": "rotate(0deg)";
+
+}

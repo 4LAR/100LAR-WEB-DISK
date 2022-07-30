@@ -1,0 +1,21 @@
+ 
+.file_list {
+  position: absolute;
+  left: var(--width-left-bar);
+  top: 30px;
+
+  width: calc(1080px + var(--scalex)); 
+}
+
+.file {
+  border-bottom: 1px solid #141414;
+
+  height: 40px;
+  /*width: 1150px;*/
+  width: 100%;
+}
+
+.file:hover {
+  background-color: #2F363D;
+  cursor: pointer;
+}

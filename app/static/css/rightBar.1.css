@@ -1,0 +1,112 @@
+
+.rightBar {
+  position: fixed;
+
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 300px;
+
+  background-color: var(--top-color)/*#24292E*/;
+
+  border-left: 1px solid #141414;
+}
+
+.fileName_input {
+  position: absolute;
+
+  left: 60px;
+  top: 10px;
+  width: 230px;
+
+  background-color: #1D2125;
+}
+
+.fileDescription {
+  position: absolute;
+
+  left: 10px;
+  top: 120px;
+  width: 280px;
+  height: var(--width-left-bar);
+
+  resize: none;
+
+  background-color: #1D2125;
+
+}
+
+.file_ico_name_div {
+  position: absolute;
+  left: 0px;
+  top: 81px;
+  width: 300px;
+  height: 60px;
+  border-bottom: 1px solid #141414;
+  background-color: #24292E;
+}
+
+.file_close_button {
+  position: absolute;
+  left: 0px;
+  top: 45px;
+  width: 100px;
+  height: 35px;
+  border-bottom: 1px solid #141414;
+  border-right: 1px solid #141414;
+  background-color: #24292E;
+
+  cursor: pointer;
+}
+
+.file_close_button:hover {
+  background-color: #2F363D;
+}
+
+.file_download_button {
+  position: absolute;
+  left: 0px;
+  top: 243px;
+  width: 150px;
+  height: 35px;
+  border-bottom: 1px solid #141414;
+  border-right: 1px solid #141414;
+  background-color: #24292E;
+
+  cursor: pointer;
+}
+
+.file_download_button:hover {
+  background-color: #2F363D;
+}
+
+.file_delete_button {
+  position: absolute;
+  left: 151px;
+  top: 243px;
+  width: 149px;
+  height: 35px;
+  border-bottom: 1px solid #141414;
+  background-color: #24292E;
+
+  cursor: pointer;
+}
+
+.file_delete_button:hover {
+  background-color: #450C0F;
+}
+
+.file_info_div {
+  position: absolute;
+  left: 0px;
+  top: 142px;
+  width: 300px;
+  height: 100px;
+  border-bottom: 1px solid #141414;
+  background-color: #24292E;
+}
+
+.file_info_div p {
+  margin: 0px 10px;
+}
+

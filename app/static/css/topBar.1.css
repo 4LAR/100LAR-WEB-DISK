@@ -1,0 +1,59 @@
+ 
+.topBar {
+  position: fixed;
+  background-color: #1D2125;
+
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 45px;
+
+  border-bottom: 1px solid #141414;
+
+}
+
+.path_buttons {
+  position: relative;
+  top: 8px;
+  cursor: pointer;
+
+  transition:0.1s all;
+}
+
+.path_buttons:hover {
+  filter: invert(50%);
+}
+
+.path_input {
+  left: 220px; 
+  /*680px*/
+  width: calc(900px + var(--scalex)); 
+  top: -2px;
+}
+
+.user_button {
+  position: fixed;
+  background-color: #1D2125;
+
+  top: 0px;
+  left: 0px;
+  width: var(--width-left-bar);
+  height: 45px;
+
+  border-right: 1px solid #141414;
+  border-bottom: 1px solid #141414;
+
+  /*transition:0.1s all;*/
+
+  cursor: pointer;
+  
+}
+
+.user_button:hover {
+  background-color: #2F363D;
+}
+
+.user_button img {
+  position: relative;
+  top: 10px;
+}
