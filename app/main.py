@@ -21,9 +21,27 @@ from flask import request
 
 from gevent.pywsgi import WSGIServer
 
+# 
+from console import *
+from get_time import *
+from settings import *
+
+settings = settings()
+
+time_now = Time_now(
+    timedelta = settings.options['Logs']['timedelta']
+)
+
+console_term = console_term(
+    log_bool =  settings.options['Logs']['save_logs'],
+    path =      settings.options['Logs']['path']
+)
+
+console_term.time = time_now
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '100LAR'
-app.debug = True
+app.config['SECRET_KEY'] = settings.options['Flask']['secret_key']
+app.debug = settings.options['Flask']['debug']
 
 # Запросы
 @app.route('/')
@@ -34,11 +52,13 @@ def index():
 def main_pc():
     return render_template('main.html')
 
+console_term.create_log()
+
 # создаём WSGI сервер
 http_server = WSGIServer(
     (
-        '0.0.0.0',
-        80
+        settings.options['Flask']['IP'],
+        settings.options['Flask']['PORT']
     ),
     app
 )
