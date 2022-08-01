@@ -29,7 +29,7 @@ class settings():
                 'timedelta': 3
             },
             'Base': {
-                'path': ''
+                'path': 'users'
             }
         }
 
