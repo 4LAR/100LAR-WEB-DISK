@@ -14,13 +14,13 @@
         <img class="icon" style="margin: 7px 10px;" width="25" height="25" src="static/img/lock.svg">
         <h2 style="margin: -35px 40px;">login</h2>
       </div>-->
-      
+
       <div class="login_container">
 
         <input id="login_input" class="input_style login_input" style="top: 20px;" type=text placeholder="login">
-        <input id="password_input" class="input_style login_input" style="top: 60px;" type=password placeholder="password">
+        <input id="password_input" class="input_style login_input" style="top: 60px;" type=password placeholder="password" onkeypress="return login_enter(event)">
 
-        <div class="login_button block_select">
+        <div class="login_button block_select" onclick="login()">
           <p style="margin: 8px 50px">login</p>
         </div>
 
@@ -33,5 +33,6 @@
 
   </body>
 
+  <script type="text/javascript" src="static/js/login.1.js"></script>
 
 </head>

@@ -1,4 +1,4 @@
- 
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
     <div class="file_list">
       <ul id="file_list"></ul>
     </div>
-    
+
     <div class="leftBar">
       <div class="path_map_div" style="display: none">
         <ul id="path_map_list"></ul>
@@ -46,7 +46,7 @@
         <img class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/file.svg">
         <input id="fileName_input" class="input_style fileName_input" style="" type=text placeholder="file name">
       </div>
-      
+
       <div class="file_info_div">
         <p id="file_type" style="margin-top: 10px;">type: None</p>
         <p id="file_size">size: None</p>
@@ -64,25 +64,25 @@
         <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
         <p style="margin: -25px 40px;">delete</p>
       </div>
-      
+
 
     </div>
-    
+
     <div class="topBar">
-      
-      <img class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/back.svg">
+
+      <img class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/back.svg" onclick="back_dir()">
       <img class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/forward.svg">
-      <img class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/reload.svg">
+      <img class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/reload.svg" onclick="get_files()">
       <img class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/home.svg">
       <input id="path" class="input_style path_input" type=text placeholder="Path">
-      
+
       <div class="search_div" style="display: none">
         <input id="searh_input" class="input_style" style="left: 240px; width: 200px; top: -2px;" type=text placeholder="Path">
       </div>
     </div>
 
     <div id="background_black" class="background_black" style="display: none">
-      
+
     </div>
     <div id="leftBar_user" class="leftBar_user" style="display: none">
       <div class="small_button_style block_select" style="left: 0px; top: 45px; width: 200px">
@@ -105,5 +105,7 @@
   </body>
 
   <script type="text/javascript" src="static/js/main.1.js"></script>
+
+  <script type="text/javascript" src="static/js/file.1.js"></script>
 
 </html>

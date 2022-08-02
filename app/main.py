@@ -29,6 +29,10 @@ from flask_login import login_user
 from flask_login import current_user
 from flask_login import logout_user
 
+#
+import time
+import datetime
+
 # импортируем py файлы
 from console import *
 from get_time import *
@@ -68,8 +72,13 @@ def index():
     return render_template('login.html')
 
 @app.route('/main')
+@login_required
 def main_pc():
     return render_template('main.html')
+
+@login_manager.user_loader
+def load_user(userid):
+    return userBase.get_name_by_id(int(userid))
 
 # авторизация
 @app.route('/login' , methods=['GET' , 'POST'])
@@ -93,8 +102,55 @@ def logout():
 @app.route("/info", methods=['GET' , 'POST'])
 @login_required
 def info():
-    return userBase.get_user_info(current_user.username)
+    info_json = userBase.get_user_info(current_user.username)
+    for i in range(len(info_json['path'])):
+        if info_json['path'][i]['path'] != '/':
+            info_json['path'][i]['busy'] = get_size(info_json['path'][i]['path'])
 
+    return info_json
+
+@app.route("/files", methods=['GET' , 'POST'])
+@login_required
+def files():
+    path = request.args.get("path", "")
+    dir = request.args.get("dir", "")
+
+    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+    files = os.listdir(user_path + dir)
+
+    if len(files) > 0:
+        files_list = []
+        for i in range(len(files)):
+            try:
+                file = files[i]
+
+                files_list.append(
+                    {
+                        'name': file
+                    }
+                )
+
+                if os.path.isdir(user_path + dir + '/' + file):
+                    files_list[i]['type'] = 'dir'
+
+                else:
+                    files_list[i]['type'] = 'file'
+                    files_list[i]['size'] = convert_size(
+                        os.path.getsize(
+                            user_path + dir + '/' + file
+                        )
+                    )
+                    change_time = os.path.getmtime(user_path + dir + '/' + file)
+                    files_list[i]['time'] = datetime.datetime.fromtimestamp(change_time).strftime('%H:%M:%S %d-%m-%Y')
+
+            except:
+                pass
+
+        return {'files': files_list}
+
+    else:
+        return 'EMPTY'
 
 
 # создаём WSGI сервер

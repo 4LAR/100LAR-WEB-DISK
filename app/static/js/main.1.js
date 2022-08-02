@@ -3,7 +3,7 @@ const space_bar_width = 200;
 const path_map_left = 10;
 
 // функция для скрытия эелемента
-function closeModal(modalId) { 
+function closeModal(modalId) {
   try {
     var modal = document.getElementById(modalId);
     modal.style.display = "none";
@@ -12,51 +12,13 @@ function closeModal(modalId) {
 }
 
 // функция для показа эелемента (если элемент скрыт)
-function openModal(modalId) { 
+function openModal(modalId) {
   try {
     var modal = document.getElementById(modalId);
     modal.style.display = "block";
   } catch {
   }
 }
-
-//
-function append_file(name, size, path, date) {
-  var ul = document.getElementById("file_list");
-  var li = document.createElement("li");
-
-  li.innerHTML = `
-    <div class="file" onclick="open_fileInfo('${name}', 'text file', '${size}', '${path}', '${date}')">
-      <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/file.svg">
-      <p style="margin: -25px 70px">${name}</p>
-      <p style="margin: -25px 300px">${date}</p>
-      <p style="margin: 4px 500px">${size}</p>
-    </div>
-  `;
-
-  ul.appendChild(li);
-}
-
-//
-function open_fileInfo(name, type, size, path, date, description='') {
-
-  document.getElementById("fileName_input").value = name;
-
-  document.getElementById("file_type").innerHTML = 'type: ' + type;
-  document.getElementById("file_size").innerHTML = 'size: ' + size;
-  document.getElementById("file_path").innerHTML = 'path: ' + path;
-  document.getElementById("file_date").innerHTML = 'date of change: ' + date;
-
-  openModal('rightBar');
-
-}
-
-function close_fileInfo() {
-  closeModal('rightBar');
-}
-
-for (let i = 0; i < 20; i++)
-  append_file('test_file.txt', '120KB', '/home/stolar', '12:30 30.07.2022');
 
 //
 function set_disk_space(state=0) {
@@ -76,7 +38,7 @@ document.addEventListener('keydown', function(event){
     } else {
       close_fileInfo();
     }
-    
+
   }
 
 });

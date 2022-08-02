@@ -10,7 +10,7 @@
       },
       {
         "name": "home",
-        "path": "/disk/100LAR",
+        "path": "/disk/100LAR/",
         "size": 10737418240
       }
     ]
@@ -21,7 +21,7 @@
     "path": [
       {
         "name": "home",
-        "path": "/disk/testuser",
+        "path": "/disk/testuser/",
         "size": 10737418240
       }
     ]

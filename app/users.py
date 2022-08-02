@@ -66,6 +66,7 @@ class UserBase():
                 path = self.users_dict[user]['path'],
                 key = self.key
             )
+            i += 1
 
     def get_user(self, name):
         try:
@@ -73,6 +74,19 @@ class UserBase():
 
         except:
             return None
+
+    def get_name_by_id(self, id):
+        if id < len(self.users_dict):
+            i = 0
+            for user in self.users_dict:
+                if id == i:
+                    return self.users[user]
+
+                else:
+                    i += 1
+
+        else:
+            return False
 
     def get_user_info(self, name):
         return self.users_dict[name]
