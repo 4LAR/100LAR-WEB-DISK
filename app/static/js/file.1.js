@@ -29,7 +29,20 @@ function update_dir() {
 
 //
 function get_files() {
-  document.getElementById("file_list").innerHTML = '';
+  var ul = document.getElementById("file_list");
+  ul.innerHTML = '';
+
+  if (dir.length > 0) {
+    var li = document.createElement("li");
+    li.innerHTML = `
+      <div class="file" onclick="back_dir()">
+        <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/folder.svg">
+        <p style="margin: -25px 70px">...</p>
+      </div>
+    `;
+    ul.appendChild(li);
+  }
+
 
   var xhr = new XMLHttpRequest();
   xhr.open('POST', `/files?path=${path}&dir=${dir_str}`);

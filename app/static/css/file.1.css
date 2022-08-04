@@ -1,14 +1,14 @@
- 
+
 .file_list {
   position: absolute;
   left: var(--width-left-bar);
   top: 30px;
 
-  width: calc(1080px + var(--scalex)); 
+  width: calc(1080px + var(--scalex));
 }
 
 .file {
-  border-bottom: 1px solid #141414;
+  border-bottom: 1px solid var(--border-color);
 
   height: 40px;
   /*width: 1150px;*/
@@ -16,7 +16,7 @@
 }
 
 .file:hover {
-  background-color: #2F363D;
+  background-color: var(--hover-color);
   cursor: pointer;
 }
 

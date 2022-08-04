@@ -1,4 +1,4 @@
- 
+
 .leftBar {
   position: fixed;
 
@@ -7,7 +7,7 @@
   height: 100%;
   width: var(--width-left-bar);
 
-  border-right: 1px solid #141414;
+  border-right: 1px solid var(--border-color);
 }
 
 .leftBar_user {
@@ -18,9 +18,9 @@
   height: 100%;
   width: var(--width-left-bar);
 
-  background-color: var(--top-color)/*#24292E*/;
+  background-color: var(--top-color)/*var(--bg-color)*/;
 
-  border-right: 1px solid #141414;
+  border-right: 1px solid var(--border-color);
 }
 
 .disk_space {
@@ -29,8 +29,8 @@
   bottom: 0px;
   width: var(--width-left-bar);
   height: 5px;
-  border-top: 1px solid #141414;
-  background-color: #1D2125;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--top-color);
 }
 
 .disk_space_progress {
@@ -48,8 +48,8 @@
   bottom: 5px;
   width: var(--width-left-bar);
   height: 30px;
-  border-top: 1px solid #141414;
-  background-color: #24292E;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-color);
 }
 
 .path_map_div {
@@ -58,7 +58,7 @@
   top: 100px;
   left: 0px;
   width: var(--width-left-bar);
-  
+
 }
 
 .path_map_img_rotate {
@@ -70,36 +70,36 @@
   left: 0px;
   width: var(--width-left-bar);
   height: 20px;
-  background-color: #24292E;
+  background-color: var(--bg-color);
 
   cursor: pointer;
 }
 
 .path_map_button:hover {
-  background-color: #2F363D;
+  background-color: var(--hover-color);
 }
 
 .small_button_style {
   position: absolute;
   width: 200px;
   height: 35px;
-  border-bottom: 1px solid #141414;
-  border-right: 1px solid #141414;
-  background-color: #24292E;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  background-color: var(--bg-color);
 
   cursor: pointer;
 }
 
 .small_button_style:hover {
-  background-color: #2F363D;
+  background-color: var(--hover-color);
 }
 
 .button_exit_style {
   position: absolute;
   width: 200px;
   height: 35px;
-  border-top: 1px solid #141414;
-  background-color: #24292E;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-color);
 
   bottom: 0px;
   left: 0px;
