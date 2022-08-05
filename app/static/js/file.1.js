@@ -72,8 +72,15 @@ function append_file(type, name, size='', path='', date='') {
   var ul = document.getElementById("file_list");
   var li = document.createElement("li");
 
+  var str = `
+    <div style="position: absolute; margin: 8px 8px">
+      <input type="checkbox" class="custom-checkbox" id="${name}" name="${name}" value="yes">
+      <label for="${name}"></label>
+    </div>
+  `
+
   if (type == 'dir') {
-    li.innerHTML = `
+    str += `
       <div class="file" onclick="forward_dir('${name}')">
         <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/folder.svg">
         <p style="margin: -25px 70px">${name}</p>
@@ -81,7 +88,11 @@ function append_file(type, name, size='', path='', date='') {
     `;
 
   } else {
-    li.innerHTML = `
+     str += `
+      <div style="position: absolute; margin: 8px 8px">
+        <input type="checkbox" class="custom-checkbox" id="${name}" name="${name}" value="yes">
+        <label for="${name}"></label>
+      </div>
       <div class="file" onclick="open_fileInfo('${name}', 'text file', '${size}', '${path}', '${date}')">
         <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/file.svg">
         <p style="margin: -25px 70px">${name}</p>
@@ -91,6 +102,7 @@ function append_file(type, name, size='', path='', date='') {
     `;
   }
 
+  li.innerHTML = str;
 
   ul.appendChild(li);
 }
