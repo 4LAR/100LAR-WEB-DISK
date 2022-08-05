@@ -96,14 +96,17 @@ function append_file(type, name, size='', path='', date='') {
 }
 
 //
-function open_fileInfo(name, type, size, path, date, description='') {
+function open_fileInfo(name, type, size, file_path, date, description='') {
 
   document.getElementById("fileName_input").value = name;
 
   document.getElementById("file_type").innerHTML = 'type: ' + type;
   document.getElementById("file_size").innerHTML = 'size: ' + size;
-  document.getElementById("file_path").innerHTML = 'path: ' + path;
+  document.getElementById("file_path").innerHTML = 'path: ' + file_path;
   document.getElementById("file_date").innerHTML = 'date of change: ' + date;
+  console.log(dir_str);
+  document.getElementById("file_download_button").href = `/download?path=${path}&dir=${dir_str}&file=${name}`;
+  document.getElementById("file_download_button").downlaod = name;
 
   openModal('rightBar');
 

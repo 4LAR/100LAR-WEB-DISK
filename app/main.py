@@ -18,6 +18,7 @@ from flask import redirect
 from flask import Response
 from flask import url_for
 from flask import request
+from flask import send_from_directory
 
 from gevent.pywsgi import WSGIServer
 
@@ -154,6 +155,17 @@ def files():
 
     else:
         return 'EMPTY'
+
+@app.route("/download", methods=['GET' , 'POST'])
+@login_required
+def downlaod():
+    path = request.args.get("path", "")
+    dir = request.args.get("dir", "")
+    file = request.args.get("file", "")
+
+    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+    return send_from_directory(user_path + dir, file)
 
 
 # создаём WSGI сервер
