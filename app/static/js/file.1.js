@@ -21,7 +21,7 @@ function update_dir() {
     if (i < dir.length - 1) {
       dir_str += dir[i] + '/'
     } else {
-      dir_str += dir
+      dir_str += dir[i]
     }
 
   document.getElementById("path").value = '/' + dir_str;

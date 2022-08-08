@@ -43,10 +43,7 @@
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 
-  /*transition:0.1s all;*/
-
   cursor: pointer;
-
 }
 
 .user_button:hover {

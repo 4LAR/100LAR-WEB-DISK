@@ -135,7 +135,13 @@ def files():
                     }
                 )
 
-                if os.path.isdir(user_path + dir + '/' + file):
+                if len(dir) > 0:
+                    file_path = user_path + dir + '/' + file
+
+                else:
+                    file_path = user_path + file
+
+                if os.path.isdir(file_path):
                     files_list[i]['type'] = 'dir'
 
                 else:
@@ -145,11 +151,11 @@ def files():
                             user_path + dir + '/' + file
                         )
                     )
-                    change_time = os.path.getmtime(user_path + dir + '/' + file)
+                    change_time = os.path.getmtime(file_path)
                     files_list[i]['time'] = datetime.datetime.fromtimestamp(change_time).strftime('%H:%M:%S %d-%m-%Y')
 
-            except:
-                pass
+            except Exception as e:
+                print(e)
 
         return {'files': files_list}
 
