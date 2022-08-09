@@ -1,33 +1,80 @@
 
 var dir = [];
+var forward_dir_history = [];
+var back_dir_history = [];
 var dir_str = ''
-var path = 1;
+var path = 0;
 
+// переход в домашнюю директорию
+function go_home() {
+  back_dir_history.push(dir.slice())
+  forward_dir_history = [];
+  dir = [];
+  update_dir();
+}
+
+// переход к предыдущей директории по истории
+function go_back_dir_history() {
+  if (back_dir_history.length > 0) {
+    forward_dir_history.push(dir.slice());
+    dir = back_dir_history.pop();
+    update_dir();
+  }
+}
+
+// переход к следующей директории по истории
+function go_forward_dir_history() {
+  if (forward_dir_history.length > 0) {
+    back_dir_history.push(dir.slice());
+    dir = forward_dir_history.pop();
+    update_dir();
+  }
+}
+
+// переход в выбранную директорию
 function forward_dir(name) {
+  forward_dir_history = [];
+  back_dir_history.push(dir.slice());
   dir.push(name);
   update_dir();
-  get_files();
 }
 
+// переход к предыдущей директории
 function back_dir() {
+  forward_dir_history = [];
+  back_dir_history.push(dir.slice());
   dir.pop();
   update_dir();
-  get_files();
 }
 
+// обновление кнопок передвижения и пути
 function update_dir() {
   dir_str = '';
   for (let i = 0; i < dir.length; i++)
     if (i < dir.length - 1) {
-      dir_str += dir[i] + '/'
+      dir_str += dir[i] + '/';
     } else {
-      dir_str += dir[i]
+      dir_str += dir[i];
     }
+
+  if (back_dir_history.length <= 0) {
+    document.getElementById("go_back").style.filter = "invert(30%)";
+  } else {
+    document.getElementById("go_back").style.filter = "invert(60%)";
+  }
+
+  if (forward_dir_history.length <= 0) {
+    document.getElementById("go_forward").style.filter = "invert(30%)";
+  } else {
+    document.getElementById("go_forward").style.filter = "invert(60%)";
+  }
+
+  get_files();
 
   document.getElementById("path").value = '/' + dir_str;
 }
 
-//
+// получение всех файлов от сервера в текущей директории
 function get_files() {
   var ul = document.getElementById("file_list");
   ul.innerHTML = '';
@@ -67,7 +114,7 @@ function get_files() {
   xhr.send()
 }
 
-//
+// добавление файла в список
 function append_file(type, name, size='', path='', date='') {
   var ul = document.getElementById("file_list");
   var li = document.createElement("li");
@@ -107,7 +154,7 @@ function append_file(type, name, size='', path='', date='') {
   ul.appendChild(li);
 }
 
-//
+// открытие информации о файле
 function open_fileInfo(name, type, size, file_path, date, description='') {
 
   document.getElementById("fileName_input").value = name;
@@ -124,11 +171,9 @@ function open_fileInfo(name, type, size, file_path, date, description='') {
 
 }
 
+// закрытие страницы информации о файле
 function close_fileInfo() {
   closeModal('rightBar');
 }
 
 update_dir();
-get_files();
-//for (let i = 0; i < 20; i++)
-//  append_file('test_file.txt', '120KB', '/home/stolar', '12:30 30.07.2022');

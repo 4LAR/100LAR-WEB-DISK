@@ -4,14 +4,14 @@
     "password": "4040",
     "path": [
       {
-        "name": "root",
-        "path": "/",
-        "size": 0
-      },
-      {
         "name": "home",
         "path": "/disk/100LAR/",
         "size": 10737418240
+      },
+      {
+        "name": "root",
+        "path": "/",
+        "size": 0
       }
     ]
   },

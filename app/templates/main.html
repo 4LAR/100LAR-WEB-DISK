@@ -72,10 +72,10 @@
 
     <div class="topBar">
 
-      <img class="icon path_buttons block_select" style="left: 210px; transform: rotate(-90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="back_dir()">
-      <img class="icon path_buttons block_select" style="left: 210px; transform: rotate(90deg)" width="30" height="30" src="static/img/arrow up.svg">
-      <img class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/refresh.svg" onclick="get_files()">
-      <img class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/home.svg">
+      <img id="go_back" class="icon path_buttons block_select" style="left: 210px; transform: rotate(-90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_back_dir_history()">
+      <img id="go_forward" class="icon path_buttons block_select" style="left: 210px; transform: rotate(90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_forward_dir_history()">
+      <img id="refresh" class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/refresh.svg" onclick="get_files()">
+      <img id="go_home" class="icon path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/home.svg" onclick="go_home()">
       <input id="path" class="input_style path_input" type=text placeholder="Path">
 
       <div class="search_div" style="display: none">
@@ -91,7 +91,7 @@
         <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/settings.svg">
         <p style="margin: -25px 40px;">settings</p>
       </div>
-      <div class="button_exit_style block_select">
+      <div class="button_exit_style block_select" onclick="logout()">
         <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/logout.svg">
         <p style="margin: -25px 40px;">logout</p>
       </div>
