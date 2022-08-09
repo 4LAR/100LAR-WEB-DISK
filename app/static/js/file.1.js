@@ -180,6 +180,7 @@ function open_fileInfo(name, type, size, file_path, date, description='') {
   console.log(dir_str);
   document.getElementById("file_download_button").href = `/download?path=${path}&dir=${dir_str}&file=${name}`;
   document.getElementById("file_download_button").downlaod = name;
+  document.getElementById("file_delete_button").onclick = function(){delete_file(path, dir_str, name)};//`delete_file(${path}, ${dir_str}, ${name})`;
 
   openModal('rightBar');
 
@@ -188,6 +189,20 @@ function open_fileInfo(name, type, size, file_path, date, description='') {
 // закрытие страницы информации о файле
 function close_fileInfo() {
   closeModal('rightBar');
+}
+
+// удаление файла
+function delete_file(path, dir_str, name) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', `/delete?path=${path}&dir=${dir_str}&file=${name}`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      update_dir();
+      close_fileInfo();
+    }
+  };
+  xhr.send()
 }
 
 update_dir();

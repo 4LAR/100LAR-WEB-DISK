@@ -2,3 +2,4 @@
 *.pyc
 *.txt
 settings.ini
+users.json

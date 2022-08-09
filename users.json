@@ -9,19 +9,19 @@
         "size": 10737418240
       },
       {
-        "name": "root",
-        "path": "/",
+        "name": "users",
+        "path": "/disk/",
         "size": 0
       }
     ]
   },
-  "TESTUSER": {
+  "GUAP": {
     "status": "user",
-    "password": "123",
+    "password": "sugak",
     "path": [
       {
         "name": "home",
-        "path": "/disk/testuser/",
+        "path": "/disk/guap/",
         "size": 10737418240
       }
     ]

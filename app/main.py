@@ -173,6 +173,18 @@ def downlaod():
 
     return send_from_directory(user_path + dir, file)
 
+@app.route('/delete', methods=['POST', 'GET'])
+@login_required
+def delete():
+    path = request.args.get("path", "")
+    dir = request.args.get("dir", "")
+    file = request.args.get("file", "")
+
+    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+    os.remove(user_path + dir + '/' + file)
+
+    return 'ok'
 
 # создаём WSGI сервер
 http_server = WSGIServer(
