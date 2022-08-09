@@ -72,6 +72,7 @@ login_manager.init_app(app)
 def index():
     return render_template('login.html')
 
+#
 @app.route('/main')
 @login_required
 def main_pc():
@@ -94,12 +95,14 @@ def login():
     else:
         return 'ERROR LOGIN'
 
+#
 @app.route("/logout", methods=['GET' , 'POST'])
 @login_required
 def logout():
     logout_user()
     return 'ok'
 
+#
 @app.route("/info", methods=['GET' , 'POST'])
 @login_required
 def info():
@@ -113,6 +116,7 @@ def info():
 
     return info_json
 
+#
 @app.route("/files", methods=['GET' , 'POST'])
 @login_required
 def files():
@@ -162,6 +166,7 @@ def files():
     else:
         return 'EMPTY'
 
+# скачивание файла
 @app.route("/download", methods=['GET' , 'POST'])
 @login_required
 def downlaod():
@@ -173,6 +178,7 @@ def downlaod():
 
     return send_from_directory(user_path + dir, file)
 
+# удаление файла
 @app.route('/delete', methods=['POST', 'GET'])
 @login_required
 def delete():
@@ -185,6 +191,21 @@ def delete():
     os.remove(user_path + dir + '/' + file)
 
     return 'ok'
+
+# загрузка файла
+@app.route('/upload_file', methods=['POST', 'GET'])
+@login_required
+def upload_file_disk():
+    path = request.args.get("path", "")
+    dir = request.args.get("dir", "")
+    file = request.args.get("file", "")
+
+    f = request.files['file']
+    
+    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+    f.save(user_path + dir + '/' + file)
+
+    return 'OK'
 
 # создаём WSGI сервер
 http_server = WSGIServer(
