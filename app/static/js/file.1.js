@@ -7,10 +7,12 @@ var path = 0;
 
 // переход в домашнюю директорию
 function go_home() {
-  back_dir_history.push(dir.slice())
-  forward_dir_history = [];
-  dir = [];
-  update_dir();
+  if (dir.length > 0) {
+    back_dir_history.push(dir.slice())
+    forward_dir_history = [];
+    dir = [];
+    update_dir();
+  }
 }
 
 // переход к предыдущей директории по истории
@@ -97,6 +99,18 @@ function get_files() {
   xhr.onload = function () {
     if (xhr.status === 200) {
       files_json = JSON.parse(xhr.responseText.toString());
+
+      files_json['files'].sort(
+        function (a) {
+          console.log(a['type'])
+          if (a['type'] == 'dir') {
+            return -1;
+          } else {
+            return 0;
+          }
+
+        }
+      );
 
       for (let i = 0; i < files_json['files'].length; i++){
         file = files_json['files'][i]
