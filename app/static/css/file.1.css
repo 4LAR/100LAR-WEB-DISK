@@ -8,7 +8,7 @@
 }
 
 .file {
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--main-border-color);
 
   height: 40px;
   /*width: 1150px;*/

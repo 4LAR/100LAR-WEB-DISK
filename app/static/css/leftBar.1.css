@@ -7,7 +7,7 @@
   height: 100%;
   width: var(--width-left-bar);
 
-  border-right: 1px solid var(--border-color);
+  border-right: 1px solid var(--main-border-color);
 }
 
 .leftBar_user {
@@ -20,7 +20,7 @@
 
   background-color: var(--top-color)/*var(--bg-color)*/;
 
-  border-right: 1px solid var(--border-color);
+  border-right: 1px solid var(--top-border-color);
 }
 
 .disk_space {
@@ -29,7 +29,7 @@
   bottom: 0px;
   width: var(--width-left-bar);
   height: 5px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--main-border-color);
   background-color: var(--top-color);
 }
 
@@ -48,7 +48,7 @@
   bottom: 5px;
   width: var(--width-left-bar);
   height: 30px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 }
 
@@ -83,23 +83,23 @@
   position: absolute;
   width: 200px;
   height: 35px;
-  border-bottom: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
-  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--top-border-color);
+  border-right: 1px solid var(--top-border-color);
+  background-color: var(--top-color);
 
   cursor: pointer;
 }
 
 .small_button_style:hover {
-  background-color: var(--hover-color);
+  background-color: var(--top-hover-color);
 }
 
 .button_exit_style {
   position: absolute;
   width: 200px;
   height: 35px;
-  border-top: 1px solid var(--border-color);
-  background-color: var(--bg-color);
+  border-top: 1px solid var(--top-border-color);
+  background-color: var(--top-color);
 
   bottom: 0px;
   left: 0px;

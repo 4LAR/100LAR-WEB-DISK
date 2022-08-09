@@ -9,9 +9,41 @@
   --bg-color: #24292E;
   --top-color: #1D2125;
 
+  --top-hover-color: #2F363D;
   --hover-color: #2F363D;
 
-  --border-color: #141414;
+  --top-input-color: #24292E;
+  --main-input-color: #2F363D;
+
+  --top-icons-filter: invert(60%);
+  --main-icons-filter: invert(60%);
+
+  --top-border-color: #141414;
+  --main-border-color: #141414;
+}
+
+:light {
+  --scalex: calc(100% - 1280px);
+
+  --width-left-bar: 200px;
+
+  --top-font-color: #D1D5DA;
+  --main-font-color: #24292E;
+
+  --bg-color: #FFFFFF;
+  --top-color: #1D2125;
+
+  --top-hover-color: #2F363D;
+  --hover-color: #EBEEF1;
+
+  --top-input-color: #24292E;
+  --main-input-color: #2F363D;
+
+  --top-icons-filter: invert(70%);
+  --main-icons-filter: invert(35%);
+
+  --top-border-color: #141414;
+  --main-border-color: #E1E4E8;
 }
 
 p {
@@ -25,6 +57,10 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   color: var(--main-font-color); /* Цвет ссылок */
+}
+
+.top_bar_font_color {
+  color: var(--top-font-color);
 }
 
 li {
@@ -46,7 +82,11 @@ body {
 }
 
 .icon {
-  filter: invert(60%);
+  filter: var(--main-icons-filter);
+}
+
+.icon_topBar {
+  filter: var(--top-icons-filter);
 }
 
 .block_select {
@@ -72,15 +112,15 @@ body::-webkit-scrollbar-thumb {
 
 .hr_style{
   border: none;
-  background-color:  var(--border-color);
-  color: var(--border-color);
+  background-color:  var(--main-border-color);
+  color: var(--main-border-color);
   height: 1px;
 }
 
 .input_style {
   position: relative;
   color: var(--main-font-color);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--main-border-color);
   /*background-color: #0D1117;*/
   background-color: var(--bg-color);
 
