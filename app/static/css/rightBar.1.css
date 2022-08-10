@@ -7,7 +7,7 @@
   height: 100%;
   width: 300px;
 
-  background-color: var(--top-color)/*var(--bg-color)*/;
+  background-color: var(--right-color)/*var(--bg-color)*/;
 
   border-left: 1px solid var(--main-border-color);
 }
@@ -19,7 +19,7 @@
   top: 10px;
   width: 230px;
 
-  background-color: var(--top-color);
+  background-color: var(--main-input-color);
 }
 
 .fileDescription {
@@ -32,7 +32,7 @@
 
   resize: none;
 
-  background-color: var(--top-color);
+  background-color: var(--right-color);
 
 }
 
@@ -93,7 +93,7 @@
 }
 
 .file_delete_button:hover {
-  background-color: #450C0F;
+  background-color: var(--main-red-color);
 }
 
 .file_info_div {

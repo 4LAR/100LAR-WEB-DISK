@@ -108,5 +108,5 @@
 }
 
 .button_exit_style:hover {
-  background-color: #450C0F;
+  background-color: var(--top-red_color);
 }

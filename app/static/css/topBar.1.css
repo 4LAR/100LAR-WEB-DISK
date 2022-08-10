@@ -29,7 +29,9 @@
   /*680px*/
   width: calc(900px + var(--scalex));
   top: -2px;
-  
+
+  background-color: var(--top-input-color);
+
 }
 
 .user_button {
