@@ -85,7 +85,7 @@
           </div>
         </a>
 
-        <div id="file_list_delete_button" class="file_list_delete_button block_select">
+        <div id="file_list_delete_button" class="file_list_delete_button block_select" onclick="delete_files()">
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -25px 40px;">delete</p>
         </div>
@@ -98,7 +98,7 @@
 
       <img id="go_back" class="icon_topBar path_buttons block_select" style="left: 210px; transform: rotate(-90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_back_dir_history()">
       <img id="go_forward" class="icon_topBar path_buttons block_select" style="left: 210px; transform: rotate(90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_forward_dir_history()">
-      <img id="refresh" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/refresh.svg" onclick="get_files()">
+      <img id="refresh" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/refresh.svg" onclick="update_dir()">
       <img id="go_home" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/home.svg" onclick="go_home()">
       <input id="path" class="input_style path_input" type=text placeholder="Path" onkeypress="return parse_dir_enter(event)">
 

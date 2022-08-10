@@ -303,6 +303,9 @@ function checkBox_file(e, name, type) {
     document.getElementById("file_list_files").innerHTML = 'Files: ' + count_files;
     document.getElementById("file_list_folders").innerHTML = 'Folders: ' + count_folders;
 
+    document.getElementById("file_list_download_button").href = `/download?path=${path}&dir=${dir_str}&files=${JSON.stringify({"files": list_checked_file})}`;
+    document.getElementById("file_list_download_button").downlaod = 'files.zip';
+
   } else {
     close_rightBar();
 
@@ -326,6 +329,21 @@ function delete_file(path, dir_str, name) {
   xhr.onload = function () {
     if (xhr.status === 200) {
       update_dir();
+      close_fileInfo();
+    }
+  };
+  xhr.send();
+}
+
+// удаление выделенных файлов
+function delete_files() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', `/delete?path=${path}&dir=${dir_str}&files=${JSON.stringify({"files": list_checked_file})}`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      update_dir();
+      undo_files_checkBox();
       close_fileInfo();
     }
   };

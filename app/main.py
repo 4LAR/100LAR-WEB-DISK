@@ -3,6 +3,7 @@
 import requests
 import configparser
 import os
+import shutil
 import sys
 import datetime
 import time
@@ -33,6 +34,12 @@ from flask_login import logout_user
 #
 import time
 import datetime
+
+#
+import json
+
+#
+import zipfile
 
 # импортируем py файлы
 from console import *
@@ -189,27 +196,75 @@ def rename():
 @app.route("/download", methods=['GET' , 'POST'])
 @login_required
 def downlaod():
-    path = request.args.get("path", "")
-    dir = request.args.get("dir", "")
-    file = request.args.get("file", "")
+    try:
+        path = request.args.get("path", "")
+        dir = request.args.get("dir", "")
+        file = request.args.get("file", "")
+        files = request.args.get("files", "")
 
-    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
-    return send_from_directory(user_path + dir, file)
+        if len(file) > 0:
+            os.remove(user_path + dir + '/' + file)
+
+            return send_from_directory(user_path + dir, file)
+
+        else:
+            files_list = json.loads(files)['files']
+
+            archive_name = '%s_download.zip' % (current_user.username)
+
+            archive = zipfile.ZipFile(user_path + dir + '/' + archive_name, 'a')
+
+            for file in files_list:
+                if file[1] == 'dir':
+                    for folderName, subfolders, filenames in os.walk(user_path + dir + '/' + file[0]):
+                        for filename in filenames:
+                            filePath = os.path.join(folderName, filename)
+                            archive.write(filePath, os.path.basename(filePath))
+
+                else:
+                    archive.write(user_path + dir + '/' + file[0])
+
+            archive.close()
+
+            return send_from_directory(user_path + dir, archive_name)
+
+    except Exception as e:
+        console_term.print('/download: ' + str(e), 3)
+        return 'ERROR'
 
 # удаление файла
 @app.route('/delete', methods=['POST', 'GET'])
 @login_required
 def delete():
-    path = request.args.get("path", "")
-    dir = request.args.get("dir", "")
-    file = request.args.get("file", "")
+    try:
+        path = request.args.get("path", "")
+        dir = request.args.get("dir", "")
+        file = request.args.get("file", "")
+        files = request.args.get("files", "")
 
-    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
-    os.remove(user_path + dir + '/' + file)
+        if len(file) > 0:
+            os.remove(user_path + dir + '/' + file)
 
-    return 'ok'
+        else:
+            files_list = json.loads(files)['files']
+
+            print(files_list)
+
+            for file in files_list:
+                if file[1] == 'dir':
+                    shutil.rmtree(user_path + dir + '/' + file[0])
+                else:
+                    os.remove(user_path + dir + '/' + file[0])
+
+        return 'ok'
+
+    except Exception as e:
+        console_term.print('/delete: ' + str(e), 3)
+        return 'ERROR'
 
 # загрузка файла
 @app.route('/upload_file', methods=['POST', 'GET'])
