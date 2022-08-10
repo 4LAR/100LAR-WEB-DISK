@@ -102,6 +102,7 @@ function update_dir() {
 
   // прописываем путь
   document.getElementById("path").value = '/' + dir_str;
+  undo_files_checkBox();
 }
 
 function append_back_dir() {
@@ -126,6 +127,13 @@ function append_back_dir() {
 
 // получение всех файлов от сервера в текущей директории
 function get_files() {
+  undo_files_checkBox();
+
+  if (checkModal('file_list_block')) {
+    closeModal('rightBar');
+    closeModal('file_list_block');
+  }
+
   var ul = document.getElementById("file_list");
   ul.innerHTML = '';
 
@@ -206,7 +214,7 @@ function append_file(type, name, size='', path='', date='') {
   // checkBox
   var str = `
     <div style="position: absolute; margin: 8px 8px">
-      <input type="checkbox" class="custom-checkbox" id="${name}" name="${name}" value="yes">
+      <input type="checkbox" class="custom-checkbox" id="${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
       <label for="${name}"></label>
     </div>
   `
@@ -223,10 +231,6 @@ function append_file(type, name, size='', path='', date='') {
   } else {
     // файл
      str += `
-      <div style="position: absolute; margin: 8px 8px">
-        <input type="checkbox" class="custom-checkbox" id="${name}" name="${name}" value="yes">
-        <label for="${name}"></label>
-      </div>
       <div class="file" onclick="open_fileInfo('${name}', 'text file', '${size}', '${path}', '${date}')">
         <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/file.svg">
         <p style="margin: -25px 70px">${name}</p>
@@ -246,6 +250,7 @@ var selected_file_name = '';
 var selected_file_dir = '';
 // открытие информации о файле
 function open_fileInfo(name, type, size, file_path, date, description='') {
+  undo_files_checkBox();
 
   document.getElementById("fileName_input").value = name;
   selected_file_name = name;
@@ -261,11 +266,56 @@ function open_fileInfo(name, type, size, file_path, date, description='') {
   document.getElementById("file_delete_button").onclick = function(){delete_file(path, dir_str, name)};//`delete_file(${path}, ${dir_str}, ${name})`;
 
   openModal('rightBar');
+  openModal('file_info_block');
+  closeModal('file_list_block');
 }
 
 // закрытие страницы информации о файле
-function close_fileInfo() {
+function close_rightBar() {
+  undo_files_checkBox();
   closeModal('rightBar');
+  closeModal('file_info_block');
+  closeModal('file_list_block');
+}
+
+var list_checked_file = [];
+//
+function checkBox_file(e, name, type) {
+  openModal('rightBar');
+  closeModal('file_info_block');
+  openModal('file_list_block');
+
+  if (e.checked)
+    list_checked_file.push([name, type]);
+  else
+    list_checked_file.pop([name, type]);
+
+  if (list_checked_file.length > 0) {
+    var count_files = 0;
+    var count_folders = 0;
+
+    for (let i = 0; i < list_checked_file.length; i++)
+      if (list_checked_file[i][1] === 'dir')
+        count_folders += 1;
+      else
+        count_files += 1;
+
+    document.getElementById("file_list_files").innerHTML = 'Files: ' + count_files;
+    document.getElementById("file_list_folders").innerHTML = 'Folders: ' + count_folders;
+
+  } else {
+    close_rightBar();
+
+  }
+
+}
+
+//
+function undo_files_checkBox() {
+  for (i in list_checked_file) {
+    document.getElementById(list_checked_file[i][0]).checked = false;
+  }
+  list_checked_file = [];
 }
 
 // удаление файла

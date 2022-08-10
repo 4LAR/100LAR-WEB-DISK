@@ -37,39 +37,60 @@
 
     <!--Информация о файле-->
     <div id="rightBar" class="rightBar" style="display: none">
-      <div class="file_close_button block_select" onclick="close_fileInfo()">
+      <div class="file_close_button block_select" onclick="close_rightBar()">
         <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/cross.svg">
         <p style="margin: -25px 40px;">close</p>
       </div>
 
-      <div id="file_info_div">
-      </div>
-
-      <div class="file_ico_name_div">
-        <img class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/file.svg">
-        <input id="fileName_input" class="input_style fileName_input" style="" type=text placeholder="file name" onkeypress="return rename_file_enter(event)">
-      </div>
-
-      <div class="file_info_div">
-        <p id="file_type" style="margin-top: 10px;">type: None</p>
-        <p id="file_size">size: None</p>
-        <p id="file_path">path: None</p>
-        <p id="file_date">date of change: None</p>
-        <textarea class="input_style fileDescription" style="display: none"></textarea>
-      </div>
-
-      <a id="file_download_button" href="" download="test">
-        <div class="file_download_button block_select">
-          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/download.svg">
-          <p style="margin: -25px 40px;">download</p>
+      <div id="file_info_block" style="display: none">
+        <div class="file_ico_name_div">
+          <img class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/file.svg">
+          <input id="fileName_input" class="input_style fileName_input" style="" type=text placeholder="file name" onkeypress="return rename_file_enter(event)">
         </div>
-      </a>
 
-      <div id="file_delete_button" class="file_delete_button block_select">
-        <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
-        <p style="margin: -25px 40px;">delete</p>
+        <div class="file_info_div">
+          <p id="file_type" style="margin-top: 10px;">type: None</p>
+          <p id="file_size">size: None</p>
+          <p id="file_path">path: None</p>
+          <p id="file_date">date of change: None</p>
+          <textarea class="input_style fileDescription" style="display: none"></textarea>
+        </div>
+
+        <a id="file_download_button" href="" download="test">
+          <div class="file_download_button block_select">
+            <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/download.svg">
+            <p style="margin: -25px 40px;">download</p>
+          </div>
+        </a>
+
+        <div id="file_delete_button" class="file_delete_button block_select">
+          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
+          <p style="margin: -25px 40px;">delete</p>
+        </div>
       </div>
 
+      <div id="file_list_block" style="display: none">
+        <div class="file_list_info_div">
+          <p style="margin: 0px 0px;" align="center">Selected elements</p>
+          <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/file.svg">
+          <p id="file_list_files" style="position: absolute; left: 40px; top: 3px;">Files: None</p>
+          <img class="icon" style="position: absolute; top: 47px; left: 10px;" width="25" height="25" src="static/img/folder.svg">
+          <p id="file_list_folders" style="position: absolute; left: 40px; top: 37px;">Folders: None</p>
+        </div>
+
+        <a id="file_list_download_button" href="" download="test">
+          <div class="file_list_download_button block_select">
+            <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/download.svg">
+            <p style="margin: -25px 40px;">download</p>
+          </div>
+        </a>
+
+        <div id="file_list_delete_button" class="file_list_delete_button block_select">
+          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
+          <p style="margin: -25px 40px;">delete</p>
+        </div>
+
+      </div>
 
     </div>
 

@@ -63,6 +63,8 @@
   background-color: var(--hover-color);
 }
 
+/* file info */
+
 .file_download_button {
   position: absolute;
   left: 0px;
@@ -108,4 +110,49 @@
 
 .file_info_div p {
   margin: 0px 10px;
+}
+
+/* list files */
+
+.file_list_info_div {
+  position: absolute;
+  left: 0px;
+  top: 81px;
+  width: 300px;
+  height: 75px;
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+}
+
+.file_list_download_button {
+  position: absolute;
+  left: 0px;
+  top: 157px;
+  width: 150px;
+  height: 35px;
+  border-bottom: 1px solid var(--main-border-color);
+  border-right: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+
+  cursor: pointer;
+}
+
+.file_list_download_button:hover {
+  background-color: var(--hover-color);
+}
+
+.file_list_delete_button {
+  position: absolute;
+  left: 151px;
+  top: 157px;
+  width: 149px;
+  height: 35px;
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+
+  cursor: pointer;
+}
+
+.file_list_delete_button:hover {
+  background-color: var(--main-red-color);
 }
