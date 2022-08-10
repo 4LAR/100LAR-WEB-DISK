@@ -120,51 +120,55 @@ def info():
 @app.route("/files", methods=['GET' , 'POST'])
 @login_required
 def files():
-    path = request.args.get("path", "")
-    dir = request.args.get("dir", "")
+    try:
+        path = request.args.get("path", "")
+        dir = request.args.get("dir", "")
 
-    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
-    files = os.listdir(user_path + dir)
+        files = os.listdir(user_path + dir)
 
-    if len(files) > 0:
-        files_list = []
-        for i in range(len(files)):
-            try:
-                file = files[i]
+        if len(files) > 0:
+            files_list = []
+            for i in range(len(files)):
+                try:
+                    file = files[i]
 
-                files_list.append(
-                    {
-                        'name': file
-                    }
-                )
-
-                if len(dir) > 0:
-                    file_path = user_path + dir + '/' + file
-
-                else:
-                    file_path = user_path + file
-
-                if os.path.isdir(file_path):
-                    files_list[i]['type'] = 'dir'
-
-                else:
-                    files_list[i]['type'] = 'file'
-                    files_list[i]['size'] = convert_size(
-                        os.path.getsize(
-                            user_path + dir + '/' + file
-                        )
+                    files_list.append(
+                        {
+                            'name': file
+                        }
                     )
-                    change_time = os.path.getmtime(file_path)
-                    files_list[i]['time'] = datetime.datetime.fromtimestamp(change_time).strftime('%H:%M:%S %d-%m-%Y')
 
-            except Exception as e:
-                print(e)
+                    if len(dir) > 0:
+                        file_path = user_path + dir + '/' + file
 
-        return {'files': files_list}
+                    else:
+                        file_path = user_path + file
 
-    else:
-        return 'EMPTY'
+                    if os.path.isdir(file_path):
+                        files_list[i]['type'] = 'dir'
+
+                    else:
+                        files_list[i]['type'] = 'file'
+                        files_list[i]['size'] = convert_size(
+                            os.path.getsize(
+                                user_path + dir + '/' + file
+                            )
+                        )
+                        change_time = os.path.getmtime(file_path)
+                        files_list[i]['time'] = datetime.datetime.fromtimestamp(change_time).strftime('%H:%M:%S %d-%m-%Y')
+
+                except Exception as e:
+                    print(e)
+
+            return {'files': files_list}
+
+        else:
+            return 'EMPTY'
+
+    except:
+        return 'ERROR DIR'
 
 # переименование файла
 @app.route("/rename", methods=['GET' , 'POST'])

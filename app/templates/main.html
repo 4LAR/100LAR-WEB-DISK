@@ -76,7 +76,7 @@
       <img id="go_forward" class="icon_topBar path_buttons block_select" style="left: 210px; transform: rotate(90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_forward_dir_history()">
       <img id="refresh" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/refresh.svg" onclick="get_files()">
       <img id="go_home" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/home.svg" onclick="go_home()">
-      <input id="path" class="input_style path_input" type=text placeholder="Path">
+      <input id="path" class="input_style path_input" type=text placeholder="Path" onkeypress="return parse_dir_enter(event)">
 
       <div class="search_div" style="display: none">
         <input id="searh_input" class="input_style" style="left: 240px; width: 200px; top: -2px;" type=text placeholder="Path">

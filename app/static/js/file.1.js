@@ -49,6 +49,26 @@ function back_dir() {
   update_dir();
 }
 
+// преобразование пути
+function parse_dir() {
+  back_dir_history.push(dir.slice());
+  dir_str = document.getElementById("path").value;
+
+  dir = dir_str.split('/');
+  if (dir[0] == '')
+    dir.shift();
+
+  update_dir();
+}
+
+// преобразование пути по нажатию enter
+function parse_dir_enter(e) {
+  if (e.keyCode == 13) {
+    parse_dir();
+    return false;
+  }
+}
+
 // обновление кнопок передвижения и пути
 function update_dir() {
   dir_str = '';
@@ -84,10 +104,8 @@ function update_dir() {
   document.getElementById("path").value = '/' + dir_str;
 }
 
-// получение всех файлов от сервера в текущей директории
-function get_files() {
+function append_back_dir() {
   var ul = document.getElementById("file_list");
-  ul.innerHTML = '';
 
   // если это не корневая папка
   if (dir.length > 0) {
@@ -104,6 +122,12 @@ function get_files() {
     // добавляем кнопка в список
     ul.appendChild(li);
   }
+}
+
+// получение всех файлов от сервера в текущей директории
+function get_files() {
+  var ul = document.getElementById("file_list");
+  ul.innerHTML = '';
 
   // создаём запрос
   var xhr = new XMLHttpRequest();
@@ -115,7 +139,30 @@ function get_files() {
     // проверяем код
     if (xhr.status === 200) {
       // проверяем, не пустая ли директория
-      if (xhr.responseText.toString() != 'EMPTY') {
+      if (xhr.responseText.toString() === 'EMPTY') {
+        append_back_dir();
+        // если файлов нет, то выводим такое сообщение
+        var li = document.createElement("li");
+        li.innerHTML = `
+          <h1 align="center">EMPTY</h1>
+        `;
+
+        // добавляем его в список
+        ul.appendChild(li);
+
+      // проверяем, есть такая директория или нет
+      } else if (xhr.responseText.toString() === 'ERROR DIR') {
+        // если файлов нет, то выводим такое сообщение
+        var li = document.createElement("li");
+        li.innerHTML = `
+          <h1 align="center">NO SUCH PATH EXISTS</h1>
+        `;
+
+        // добавляем его в список
+        ul.appendChild(li);
+
+      } else {
+        append_back_dir();
 
         // получаем json
         files_json = JSON.parse(xhr.responseText.toString());
@@ -142,23 +189,13 @@ function get_files() {
             append_file(file['type'], file['name'], file['size'], dir_str + '/' + file['name'], file['time']);
           }
         }
-
-      } else {
-        // если файлов нет, то выводим такое сообщение
-        var li = document.createElement("li");
-        li.innerHTML = `
-          <h1 align="center">EMPTY</h1>
-        `;
-
-        // добавляем его в список
-        ul.appendChild(li);
       }
 
     }
   };
 
   // отправляем запрос
-  xhr.send()
+  xhr.send();
 }
 
 // добавление файла в список
@@ -242,7 +279,7 @@ function delete_file(path, dir_str, name) {
       close_fileInfo();
     }
   };
-  xhr.send()
+  xhr.send();
 }
 
 // переименование файла
@@ -259,7 +296,7 @@ function rename_file() {
         update_dir();
       }
     };
-    xhr.send()
+    xhr.send();
   }
 
 }
