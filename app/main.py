@@ -201,7 +201,7 @@ def upload_file_disk():
     file = request.args.get("file", "")
 
     f = request.files['file']
-    
+
     user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
     f.save(user_path + dir + '/' + file)
 
