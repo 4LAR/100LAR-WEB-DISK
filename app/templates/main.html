@@ -90,10 +90,15 @@
 
     </div>
     <div id="leftBar_user" class="leftBar_user" style="display: none">
-      <div class="small_button_style block_select" style="left: 0px; top: 45px; width: 200px">
+      <!--<div class="small_button_style block_select" style="left: 0px; top: 45px; width: 200px">
         <img class="icon_topBar" style="margin: 7px 10px;" width="20" height="20" src="static/img/settings.svg">
         <p class="top_bar_font_color" style="margin: -25px 40px;">settings</p>
+      </div>-->
+      <div style="position: absolute; top: 45px; left: 10px;">
+        <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
+        <label for="lightThame_chekcbox"><p class="top_bar_font_color">Light theme</p></label>
       </div>
+
       <div class="button_exit_style block_select" onclick="logout()">
         <img class="icon_topBar" style="margin: 7px 10px;" width="20" height="20" src="static/img/logout.svg">
         <p class="top_bar_font_color" style="margin: -25px 40px;">logout</p>
