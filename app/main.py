@@ -166,6 +166,21 @@ def files():
     else:
         return 'EMPTY'
 
+# переименование файла
+@app.route("/rename", methods=['GET' , 'POST'])
+@login_required
+def rename():
+    path = request.args.get("path", "")
+    dir = request.args.get("dir", "")
+    file = request.args.get("file", "")
+    new_file = request.args.get("new_file", "")
+
+    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+    os.rename(user_path + dir + '/' + file, user_path + dir + '/' + new_file)
+
+    return 'ok'
+
 # скачивание файла
 @app.route("/download", methods=['GET' , 'POST'])
 @login_required

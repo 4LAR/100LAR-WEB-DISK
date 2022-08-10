@@ -205,16 +205,20 @@ function append_file(type, name, size='', path='', date='') {
   ul.appendChild(li);
 }
 
+var selected_file_name = '';
+var selected_file_dir = '';
 // открытие информации о файле
 function open_fileInfo(name, type, size, file_path, date, description='') {
 
   document.getElementById("fileName_input").value = name;
+  selected_file_name = name;
+  selected_file_dir = dir_str;
 
   document.getElementById("file_type").innerHTML = 'type: ' + type;
   document.getElementById("file_size").innerHTML = 'size: ' + size;
   document.getElementById("file_path").innerHTML = 'path: ' + file_path;
   document.getElementById("file_date").innerHTML = 'date of change: ' + date;
-  console.log(dir_str);
+
   document.getElementById("file_download_button").href = `/download?path=${path}&dir=${dir_str}&file=${name}`;
   document.getElementById("file_download_button").downlaod = name;
   document.getElementById("file_delete_button").onclick = function(){delete_file(path, dir_str, name)};//`delete_file(${path}, ${dir_str}, ${name})`;
@@ -239,6 +243,39 @@ function delete_file(path, dir_str, name) {
     }
   };
   xhr.send()
+}
+
+// переименование файла
+function rename_file() {
+  var new_file_name = document.getElementById("fileName_input").value;
+
+  if (selected_file_name != new_file_name) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', `/rename?path=${path}&dir=${selected_file_dir}&file=${selected_file_name}&new_file=${new_file_name}`);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        selected_file_name = new_file_name;
+        update_dir();
+      }
+    };
+    xhr.send()
+  }
+
+}
+
+var file_name_input = document.getElementById("fileName_input");
+
+file_name_input.onblur = function() {
+  rename_file();
+};
+
+// переименование файла по нажатию enter
+function rename_file_enter(e) {
+  if (e.keyCode == 13) {
+    rename_file();
+    return false;
+  }
 }
 
 // выгрузка файлов
