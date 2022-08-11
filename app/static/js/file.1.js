@@ -306,6 +306,8 @@ function checkBox_file(e, name, type) {
 
   if (ok) {
     openModal('file_select_all_button');
+  } else {
+    closeModal('file_select_all_button');
   }
 
   if (e.checked) {
@@ -373,8 +375,8 @@ function all_files_checkBox() {
 
 // убрать выделение со всех файлов
 function undo_files_checkBox() {
-  for (i in list_checked_file) {
-    document.getElementById('checkbox_file_' + list_checked_file[i][0]).checked = false;
+  for (i in files_json['files']) {
+    document.getElementById('checkbox_file_' + files_json['files'][i]['name']).checked = false;
   }
   list_checked_file = [];
 }
