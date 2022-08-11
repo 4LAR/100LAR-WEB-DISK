@@ -39,9 +39,10 @@
 .file_ico_name_div {
   position: absolute;
   left: 0px;
-  top: 81px;
+  top: 80px;
   width: 300px;
   height: 60px;
+  border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 }
@@ -114,12 +115,30 @@
 
 /* list files */
 
+.file_select_all_button {
+  position: absolute;
+  right: 0px;
+  top: 45px;
+  width: 140px;
+  height: 35px;
+  border-bottom: 1px solid var(--main-border-color);
+  border-right: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+
+  cursor: pointer;
+}
+
+.file_select_all_button:hover {
+  background-color: var(--hover-color);
+}
+
 .file_list_info_div {
   position: absolute;
   left: 0px;
-  top: 81px;
+  top: 80px;
   width: 300px;
   height: 75px;
+  border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 }

@@ -4,6 +4,7 @@ var forward_dir_history = [];
 var back_dir_history = [];
 var dir_str = ''
 var path = 0;
+var files_json = {}
 
 // переход в домашнюю директорию
 function go_home() {
@@ -115,7 +116,7 @@ function append_back_dir() {
     var li = document.createElement("li");
     li.innerHTML = `
       <div class="file" onclick="back_dir()">
-        <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/folder.svg">
+        <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/files/folder.svg">
         <p style="margin: -25px 70px">...</p>
       </div>
     `;
@@ -126,96 +127,104 @@ function append_back_dir() {
 }
 
 // получение всех файлов от сервера в текущей директории
+var read_files_bool = false;
 function get_files() {
-  undo_files_checkBox();
+  if (!read_files_bool) {
+    read_files_bool = true;
+    undo_files_checkBox();
 
-  if (checkModal('file_list_block')) {
-    closeModal('rightBar');
-    closeModal('file_list_block');
-  }
+    if (checkModal('file_list_block')) {
+      closeModal('rightBar');
+      closeModal('file_list_block');
+    }
 
-  var ul = document.getElementById("file_list");
-  ul.innerHTML = '';
+    var ul = document.getElementById("file_list");
+    ul.innerHTML = '';
 
-  // создаём запрос
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/files?path=${path}&dir=${dir_str}`);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // создаём запрос
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', `/files?path=${path}&dir=${dir_str}`);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-  // когда запрос выполнится, то вызовется эта функция
-  xhr.onload = function () {
-    // проверяем код
-    if (xhr.status === 200) {
-      // проверяем, не пустая ли директория
-      if (xhr.responseText.toString() === 'EMPTY') {
-        append_back_dir();
-        // если файлов нет, то выводим такое сообщение
-        var li = document.createElement("li");
-        li.innerHTML = `
-          <h1 align="center">EMPTY</h1>
-        `;
+    // когда запрос выполнится, то вызовется эта функция
+    xhr.onload = function () {
+      read_files_bool = false;
+      // проверяем код
+      if (xhr.status === 200) {
+        // проверяем, не пустая ли директория
+        if (xhr.responseText.toString() === 'EMPTY') {
+          append_back_dir();
+          // если файлов нет, то выводим такое сообщение
+          var li = document.createElement("li");
+          li.innerHTML = `
+            <h1 align="center">EMPTY</h1>
+          `;
 
-        // добавляем его в список
-        ul.appendChild(li);
+          // добавляем его в список
+          ul.appendChild(li);
 
-      // проверяем, есть такая директория или нет
-      } else if (xhr.responseText.toString() === 'ERROR DIR') {
-        // если файлов нет, то выводим такое сообщение
-        var li = document.createElement("li");
-        li.innerHTML = `
-          <h1 align="center">NO SUCH PATH EXISTS</h1>
-        `;
+        // проверяем, есть такая директория или нет
+        } else if (xhr.responseText.toString() === 'ERROR DIR') {
+          // если файлов нет, то выводим такое сообщение
+          var li = document.createElement("li");
+          li.innerHTML = `
+            <h1 align="center">NO SUCH PATH EXISTS</h1>
+          `;
 
-        // добавляем его в список
-        ul.appendChild(li);
+          // добавляем его в список
+          ul.appendChild(li);
 
-      } else {
-        append_back_dir();
+        } else {
+          append_back_dir();
 
-        // получаем json
-        files_json = JSON.parse(xhr.responseText.toString());
+          // получаем json
+          files_json = JSON.parse(xhr.responseText.toString());
 
-        // сортировка файлов по типу
-        files_json['files'].sort(
-          function (a) {
-            console.log(a['type'])
-            if (a['type'] == 'dir') {
-              return -1;
-            } else {
-              return 0;
+          // сортировка файлов по типу
+          files_json['files'].sort(
+            function (a) {
+              console.log(a['type'])
+              if (a['type'] == 'dir') {
+                return -1;
+              } else {
+                return 0;
+              }
+
             }
+          );
 
-          }
-        );
-
-        // добавляем файлы в список
-        for (let i = 0; i < files_json['files'].length; i++){
-          file = files_json['files'][i]
-          if (file['type'] == 'dir') {
-            append_file(file['type'], file['name']);
-          } else {
-            append_file(file['type'], file['name'], file['size'], dir_str + '/' + file['name'], file['time']);
+          // добавляем файлы в список
+          for (let i = 0; i < files_json['files'].length; i++){
+            file = files_json['files'][i]
+            if (file['type'] == 'dir') {
+              append_file(file['type'], file['name']);
+            } else {
+              append_file(file['type'], file['name'], file['size'], dir_str + '/' + file['name'], file['time'], file['type_mime']);
+            }
           }
         }
+
       }
+    };
 
-    }
-  };
+    // отправляем запрос
+    xhr.send();
+  } else {
 
-  // отправляем запрос
-  xhr.send();
+  }
+
 }
 
 // добавление файла в список
-function append_file(type, name, size='', path='', date='') {
+function append_file(type, name, size='', path='', date='', mime='') {
   var ul = document.getElementById("file_list");
   var li = document.createElement("li");
 
   // checkBox
   var str = `
     <div style="position: absolute; margin: 8px 8px">
-      <input type="checkbox" class="custom-checkbox" id="${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
-      <label for="${name}"></label>
+      <input type="checkbox" class="custom-checkbox" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
+      <label for="checkbox_file_${name}"></label>
     </div>
   `
 
@@ -223,7 +232,7 @@ function append_file(type, name, size='', path='', date='') {
     // директория
     str += `
       <div class="file" onclick="forward_dir('${name}')">
-        <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/folder.svg">
+        <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/files/folder.svg">
         <p style="margin: -25px 70px">${name}</p>
       </div>
     `;
@@ -231,8 +240,8 @@ function append_file(type, name, size='', path='', date='') {
   } else {
     // файл
      str += `
-      <div class="file" onclick="open_fileInfo('${name}', 'text file', '${size}', '${path}', '${date}')">
-        <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/file.svg">
+      <div class="file" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path}', '${date}', '${mime}')">
+        <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/files/${type}.svg">
         <p style="margin: -25px 70px">${name}</p>
         <p style="margin: -25px 300px">${date}</p>
         <p style="margin: 4px 500px">${size}</p>
@@ -249,14 +258,16 @@ function append_file(type, name, size='', path='', date='') {
 var selected_file_name = '';
 var selected_file_dir = '';
 // открытие информации о файле
-function open_fileInfo(name, type, size, file_path, date, description='') {
+function open_fileInfo(name, type, size, file_path, date, mime, description='') {
   undo_files_checkBox();
 
-  document.getElementById("fileName_input").value = name;
   selected_file_name = name;
   selected_file_dir = dir_str;
 
-  document.getElementById("file_type").innerHTML = 'type: ' + type;
+  document.getElementById("file_icon").src = `static/img/files/${type}.svg`;
+  document.getElementById("fileName_input").value = name;
+
+  document.getElementById("file_type").innerHTML = 'type: ' + mime;
   document.getElementById("file_size").innerHTML = 'size: ' + size;
   document.getElementById("file_path").innerHTML = 'path: ' + file_path;
   document.getElementById("file_date").innerHTML = 'date of change: ' + date;
@@ -279,16 +290,37 @@ function close_rightBar() {
 }
 
 var list_checked_file = [];
-//
+
+// выделение файла
 function checkBox_file(e, name, type) {
   openModal('rightBar');
   closeModal('file_info_block');
   openModal('file_list_block');
 
-  if (e.checked)
-    list_checked_file.push([name, type]);
-  else
+  var ok = false;
+  for (let i = 0; i < files_json['files'].length; i++)
+    if (document.getElementById("checkbox_file_" + files_json['files'][i]['name']).checked == false) {
+      ok = true;
+      break;
+    }
+
+  if (ok) {
+    openModal('file_select_all_button');
+  }
+
+  if (e.checked) {
+    ok = true;
+    for (let i = 0; i < list_checked_file.length; i++) {
+      if (list_checked_file[i][0] === name)
+        ok = false;
+    }
+    if (ok)
+      list_checked_file.push([name, type]);
+
+  } else {
     list_checked_file.pop([name, type]);
+  }
+
 
   if (list_checked_file.length > 0) {
     var count_files = 0;
@@ -313,10 +345,36 @@ function checkBox_file(e, name, type) {
 
 }
 
-//
+// выделить все файлы
+function all_files_checkBox() {
+  var ok = false;
+  for (let i = 0; i < files_json['files'].length; i++)
+    if (document.getElementById("checkbox_file_" + files_json['files'][i]['name']).checked == false) {
+      ok = true;
+      break;
+    }
+
+  if (ok) {
+    for (let i = 0; i < files_json['files'].length; i++) {
+      document.getElementById("checkbox_file_" + files_json['files'][i]['name']).checked = true;
+      checkBox_file(
+        {'checked': true},
+        files_json['files'][i]['name'],
+        files_json['files'][i]['type']
+      );
+
+    }
+    closeModal('file_select_all_button');
+  } else {
+
+  }
+
+}
+
+// убрать выделение со всех файлов
 function undo_files_checkBox() {
   for (i in list_checked_file) {
-    document.getElementById(list_checked_file[i][0]).checked = false;
+    document.getElementById('checkbox_file_' + list_checked_file[i][0]).checked = false;
   }
   list_checked_file = [];
 }
@@ -329,7 +387,7 @@ function delete_file(path, dir_str, name) {
   xhr.onload = function () {
     if (xhr.status === 200) {
       update_dir();
-      close_fileInfo();
+      close_rightBar();
     }
   };
   xhr.send();
@@ -344,7 +402,7 @@ function delete_files() {
     if (xhr.status === 200) {
       update_dir();
       undo_files_checkBox();
-      close_fileInfo();
+      close_rightBar();
     }
   };
   xhr.send();

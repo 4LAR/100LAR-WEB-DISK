@@ -44,7 +44,7 @@
 
       <div id="file_info_block" style="display: none">
         <div class="file_ico_name_div">
-          <img class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/file.svg">
+          <img id="file_icon" class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/files/file.svg">
           <input id="fileName_input" class="input_style fileName_input" style="" type=text placeholder="file name" onkeypress="return rename_file_enter(event)">
         </div>
 
@@ -70,11 +70,16 @@
       </div>
 
       <div id="file_list_block" style="display: none">
+        <div id="file_select_all_button" class="file_select_all_button block_select" onclick="all_files_checkBox()">
+          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/select all.svg">
+          <p style="margin: -25px 40px;">select all</p>
+        </div>
+
         <div class="file_list_info_div">
           <p style="margin: 0px 0px;" align="center">Selected elements</p>
-          <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/file.svg">
+          <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/files/file.svg">
           <p id="file_list_files" style="position: absolute; left: 40px; top: 3px;">Files: None</p>
-          <img class="icon" style="position: absolute; top: 47px; left: 10px;" width="25" height="25" src="static/img/folder.svg">
+          <img class="icon" style="position: absolute; top: 47px; left: 10px;" width="25" height="25" src="static/img/files/folder.svg">
           <p id="file_list_folders" style="position: absolute; left: 40px; top: 37px;">Folders: None</p>
         </div>
 

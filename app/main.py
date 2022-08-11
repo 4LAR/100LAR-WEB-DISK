@@ -43,6 +43,9 @@ import json
 import zipfile
 import io
 
+#
+import magic
+
 # импортируем py файлы
 from console import *
 from get_time import *
@@ -135,6 +138,8 @@ def files():
 
         if (not '..' in dir):
 
+            #dir = dir.replace('/', '"/"')
+
             user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
             files = os.listdir(user_path + dir)
@@ -161,7 +166,16 @@ def files():
                             files_list[i]['type'] = 'dir'
 
                         else:
-                            files_list[i]['type'] = 'file'
+                            #magic.from_file(file_path, mime=True)
+                            mime = magic.from_buffer(open(file_path, "rb").read(2048), mime=True)
+
+                            if mime.split('/')[1] in ['zip', 'x-rar']:
+                                files_list[i]['type'] = 'archive'
+
+                            else:
+                                files_list[i]['type'] = 'file'
+
+                            files_list[i]['type_mime'] = mime
                             files_list[i]['size'] = convert_size(
                                 os.path.getsize(
                                     user_path + dir + '/' + file
