@@ -20,6 +20,7 @@ from flask import Response
 from flask import url_for
 from flask import request
 from flask import send_from_directory
+from flask import send_file
 
 from gevent.pywsgi import WSGIServer
 
@@ -40,6 +41,7 @@ import json
 
 #
 import zipfile
+import io
 
 # импортируем py файлы
 from console import *
@@ -212,23 +214,28 @@ def downlaod():
         else:
             files_list = json.loads(files)['files']
 
-            archive_name = '%s_download.zip' % (current_user.username)
+            # содаём буфер
+            zip_buffer = io.BytesIO()
 
-            archive = zipfile.ZipFile(user_path + dir + '/' + archive_name, 'a')
+            # открываем архив и хапичваем в него все нужные файлы
+            with zipfile.ZipFile(zip_buffer, 'w') as archive:
+                for file in files_list:
+                    if file[1] == 'dir':
+                        for folderName, subfolders, filenames in os.walk(user_path + dir + '/' + file[0]):
+                            for filename in filenames:
+                                filePath = os.path.join(folderName, filename)
+                                archive.write(filePath, compress_type=zipfile.ZIP_DEFLATED)
 
-            for file in files_list:
-                if file[1] == 'dir':
-                    for folderName, subfolders, filenames in os.walk(user_path + dir + '/' + file[0]):
-                        for filename in filenames:
-                            filePath = os.path.join(folderName, filename)
-                            archive.write(filePath, os.path.basename(filePath))
+                    else:
+                        archive.write(user_path + dir + '/' + file[0])
 
-                else:
-                    archive.write(user_path + dir + '/' + file[0])
+            # переходим в начало архива
+            zip_buffer.seek(0)
 
-            archive.close()
-
-            return send_from_directory(user_path + dir, archive_name)
+            # отправляем архив
+            return Response(zip_buffer.getvalue(),
+                mimetype='application/zip',
+                headers={'Content-Disposition': 'attachment;filename=%s.zip' % (current_user.username)})
 
     except Exception as e:
         console_term.print('/download: ' + str(e), 3)
