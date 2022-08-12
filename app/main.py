@@ -172,6 +172,12 @@ def files():
                             if mime.split('/')[1] in ['zip', 'x-rar']:
                                 files_list[i]['type'] = 'archive'
 
+                            elif mime.split('/')[0] in ['text']:
+                                files_list[i]['type'] = 'text file'
+
+                            elif mime.split('/')[0] in ['image']:
+                                files_list[i]['type'] = 'image'
+
                             else:
                                 files_list[i]['type'] = 'file'
 

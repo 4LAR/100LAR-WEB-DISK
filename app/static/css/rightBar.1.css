@@ -115,7 +115,7 @@
 
 /* list files */
 
-.file_select_all_button {
+.file_activity_button {
   position: absolute;
   right: 0px;
   top: 45px;
@@ -128,7 +128,7 @@
   cursor: pointer;
 }
 
-.file_select_all_button:hover {
+.file_activity_button:hover {
   background-color: var(--hover-color);
 }
 

@@ -44,6 +44,21 @@
 
       <!--информация о выбранном файле-->
       <div id="file_info_block" style="display: none">
+        <div id="file_activity_button" class="file_activity_button block_select" style="width: 80px; display: none" onclick="all_files_checkBox()">
+          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/edit.svg">
+          <p style="margin: -25px 40px;">edit</p>
+        </div>
+
+        <div id="file_activity_button" class="file_activity_button block_select" style="width: 100px; display: none" onclick="all_files_checkBox()">
+          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/unzip.svg">
+          <p style="margin: -25px 40px;">unpack</p>
+        </div>
+
+        <div id="file_activity_button" class="file_activity_button block_select" style="width: 80px; display: none" onclick="all_files_checkBox()">
+          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/see.svg">
+          <p style="margin: -25px 40px;">view</p>
+        </div>
+
         <div class="file_ico_name_div">
           <img id="file_icon" class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/files/file.svg">
           <input id="fileName_input" class="input_style fileName_input" style="" type=text placeholder="file name" onkeypress="return rename_file_enter(event)">
@@ -72,7 +87,7 @@
 
       <!--информация о выбранных файлах и каталогах-->
       <div id="file_list_block" style="display: none">
-        <div id="file_select_all_button" class="file_select_all_button block_select" onclick="all_files_checkBox()">
+        <div id="file_select_all_button" class="file_activity_button block_select" onclick="all_files_checkBox()">
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/select all.svg">
           <p style="margin: -25px 40px;">select all</p>
         </div>
@@ -101,7 +116,12 @@
 
       <!--индикация состояния загрузки файла-->
       <div id="file_upload_block" style="display: none">
-        
+
+      </div>
+
+      <!--панель с информацией и кнопками для вставки файлов-->
+      <div id="copy_or_paste_block" style="display: none">
+
       </div>
 
     </div>

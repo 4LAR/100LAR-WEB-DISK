@@ -153,6 +153,7 @@ function get_files() {
       if (xhr.status === 200) {
         // проверяем, не пустая ли директория
         if (xhr.responseText.toString() === 'EMPTY') {
+          files_json['files'] = [];
           append_back_dir();
           // если файлов нет, то выводим такое сообщение
           var li = document.createElement("li");
@@ -165,6 +166,7 @@ function get_files() {
 
         // проверяем, есть такая директория или нет
         } else if (xhr.responseText.toString() === 'ERROR DIR') {
+          files_json['files'] = [];
           // если файлов нет, то выводим такое сообщение
           var li = document.createElement("li");
           li.innerHTML = `
