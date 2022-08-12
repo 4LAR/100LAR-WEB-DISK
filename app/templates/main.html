@@ -23,20 +23,26 @@
     </div>
 
     <div class="leftBar">
+      <!--миникарта (не используется)-->
       <div class="path_map_div" style="display: none">
         <ul id="path_map_list"></ul>
       </div>
+
+      <!--информация о диске-->
       <div class="disk_info">
         <img class="icon" style="margin: 5px 5px" width="18" height="18" src="static/img/dvd-disk.svg">
         <p id="disk_converted"style="margin: -23px 30px">25.2GB / 100GB</p>
       </div>
+
+      <!--информация о диске в виде прогресс бара-->
       <div class="disk_space">
         <div id="disk_space_progress" class="disk_space_progress"></div>
       </div>
     </div>
 
-    <!--Информация о файле-->
+    <!--информационная панель-->
     <div id="rightBar" class="rightBar" style="display: none">
+      <!--закрытие панели-->
       <div class="file_close_button block_select" onclick="close_rightBar()">
         <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/cross.svg">
         <p style="margin: -25px 40px;">close</p>
@@ -44,26 +50,31 @@
 
       <!--информация о выбранном файле-->
       <div id="file_info_block" style="display: none">
+        <!--редактирование-->
         <div id="file_activity_button" class="file_activity_button block_select" style="width: 80px; display: none" onclick="all_files_checkBox()">
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/edit.svg">
           <p style="margin: -25px 40px;">edit</p>
         </div>
 
+        <!--распаковка-->
         <div id="file_activity_button" class="file_activity_button block_select" style="width: 100px; display: none" onclick="all_files_checkBox()">
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/unzip.svg">
           <p style="margin: -25px 40px;">unpack</p>
         </div>
 
+        <!--просмотр-->
         <div id="file_activity_button" class="file_activity_button block_select" style="width: 80px; display: none" onclick="all_files_checkBox()">
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/see.svg">
           <p style="margin: -25px 40px;">view</p>
         </div>
 
+        <!--иконка и имя файла-->
         <div class="file_ico_name_div">
           <img id="file_icon" class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/files/file.svg">
           <input id="fileName_input" class="input_style fileName_input" style="" type=text placeholder="file name" onkeypress="return rename_file_enter(event)">
         </div>
 
+        <!--информация о файле-->
         <div class="file_info_div">
           <p id="file_type" style="margin-top: 10px;">type: None</p>
           <p id="file_size">size: None</p>
@@ -72,6 +83,7 @@
           <textarea class="input_style fileDescription" style="display: none"></textarea>
         </div>
 
+        <!--кнопка скачивания-->
         <a id="file_download_button" href="" download="test">
           <div class="file_download_button block_select">
             <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/download.svg">
@@ -79,6 +91,7 @@
           </div>
         </a>
 
+        <!--кнопка удаления файла-->
         <div id="file_delete_button" class="file_delete_button block_select">
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -25px 40px;">delete</p>
@@ -92,6 +105,7 @@
           <p style="margin: -25px 40px;">select all</p>
         </div>
 
+        <!--количество выбранных файлов-->
         <div class="file_list_info_div">
           <p style="margin: 0px 0px;" align="center">Selected elements</p>
           <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/files/file.svg">
@@ -100,6 +114,7 @@
           <p id="file_list_folders" style="position: absolute; left: 40px; top: 37px;">Folders: None</p>
         </div>
 
+        <!--кнопка для скачивания выбранных файлов-->
         <a id="file_list_download_button" href="" download="test">
           <div class="file_list_download_button block_select">
             <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/download.svg">
@@ -107,6 +122,7 @@
           </div>
         </a>
 
+        <!--кнопка для удаления выбранных файлов-->
         <div id="file_list_delete_button" class="file_list_delete_button block_select" onclick="delete_files()">
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -25px 40px;">delete</p>
@@ -127,21 +143,22 @@
     </div>
 
     <div class="topBar">
-
+      <!--кнопки для навигации-->
       <img id="go_back" class="icon_topBar path_buttons block_select" style="left: 210px; transform: rotate(-90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_back_dir_history()">
       <img id="go_forward" class="icon_topBar path_buttons block_select" style="left: 210px; transform: rotate(90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_forward_dir_history()">
       <img id="refresh" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/refresh.svg" onclick="update_dir()">
       <img id="go_home" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/home.svg" onclick="go_home()">
       <input id="path" class="input_style path_input" type=text placeholder="Path" onkeypress="return parse_dir_enter(event)">
 
+      <!--поиска файлов (не используется)-->
       <div class="search_div" style="display: none">
         <input id="searh_input" class="input_style" style="left: 240px; width: 200px; top: -2px;" type=text placeholder="Path">
       </div>
     </div>
 
-    <div id="background_black" class="background_black" style="display: none">
+    <!--затемнённый фон (для настроек)-->
+    <div id="background_black" class="background_black" style="display: none"></div>
 
-    </div>
     <div id="leftBar_user" class="leftBar_user" style="display: none">
       <!--<div class="small_button_style block_select" style="left: 0px; top: 45px; width: 200px">
         <img class="icon_topBar" style="margin: 7px 10px;" width="20" height="20" src="static/img/settings.svg">
@@ -152,12 +169,14 @@
         <label for="lightThame_chekcbox"><p class="top_bar_font_color">Light theme</p></label>
       </div>
 
+      <!--кнопка для выхода из аккаунта-->
       <div class="button_exit_style block_select" onclick="logout()">
         <img class="icon_topBar" style="margin: 7px 10px;" width="20" height="20" src="static/img/logout.svg">
         <p class="top_bar_font_color" style="margin: -25px 40px;">logout</p>
       </div>
     </div>
 
+    <!--кнопка для открытия настроек-->
     <div id="user_button" class="user_button block_select" onclick="open_close_user_button()">
       <img class="icon_topBar" style="margin: 0px 15px" width="25" height="25" src="static/img/user.svg">
       <p class="top_bar_font_color" id="user_status" style="margin: -22px 45px; color: #959DA5">user</p>

@@ -3,7 +3,7 @@
 .login_class {
   position:absolute;
 
-  background-color: var(--top-color);
+  background-color: var(--right-color);
   border: 1px solid var(--main-border-color);
 
   right: 0px;
@@ -50,7 +50,7 @@
 
   width: 380px;
 
-  background-color: var(--top-color);
+  background-color: var(--main-input-color);
 }
 
 .login_button {
