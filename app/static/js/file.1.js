@@ -224,7 +224,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
 
   // checkBox
   var str = `
-    <div style="position: absolute; margin: 8px 8px">
+    <div style="position: absolute; margin: 10px 12px">
       <input type="checkbox" class="custom-checkbox" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
       <label for="checkbox_file_${name}"></label>
     </div>
@@ -235,7 +235,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
     str += `
       <div class="file" onclick="forward_dir('${name}')">
         <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/files/folder.svg">
-        <p style="margin: -25px 70px">${name}</p>
+        <p style="margin: -29px 70px">${name}</p>
       </div>
     `;
 
@@ -244,9 +244,9 @@ function append_file(type, name, size='', path='', date='', mime='') {
      str += `
       <div class="file" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path}', '${date}', '${mime}')">
         <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/files/${type}.svg">
-        <p style="margin: -25px 70px">${name}</p>
-        <p style="margin: -25px 300px">${date}</p>
-        <p style="margin: 4px 500px">${size}</p>
+        <p style="margin: -29px 70px">${name}</p>
+        <p style="margin: 8px 300px">${date}</p>
+        <p style="margin: -30px 500px">${size}</p>
       </div>
     `;
   }
@@ -266,12 +266,28 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   selected_file_name = name;
   selected_file_dir = dir_str;
 
+  closeModal('file_activity_unpack_button');
+  closeModal('file_activity_edit_button');
+  closeModal('file_activity_view_button');
+
+  switch (type) {
+    case 'archive':
+      openModal('file_activity_unpack_button');
+      break;
+    case 'text file':
+      openModal('file_activity_edit_button');
+      break;
+    case 'image':
+      openModal('file_activity_view_button');
+      break;
+  }
+
   document.getElementById("file_icon").src = `static/img/files/${type}.svg`;
   document.getElementById("fileName_input").value = name;
 
-  document.getElementById("file_type").innerHTML = 'type: ' + mime;
+  document.getElementById("file_type").innerHTML = 'type: ' + set_size_str_path(mime, 30);
   document.getElementById("file_size").innerHTML = 'size: ' + size;
-  document.getElementById("file_path").innerHTML = 'path: ' + file_path;
+  document.getElementById("file_path").innerHTML = 'path: ' + set_size_str_path(file_path, 30);
   document.getElementById("file_date").innerHTML = 'date of change: ' + date;
 
   document.getElementById("file_download_button").href = `/download?path=${path}&dir=${dir_str}&file=${name}`;

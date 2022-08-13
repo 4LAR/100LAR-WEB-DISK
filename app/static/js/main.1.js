@@ -53,3 +53,20 @@ document.addEventListener('keydown', function(event){
   }
 
 });
+
+function set_size_str(str, to_size) {
+  if (str.length > to_size) {
+    size = to_size / 2;
+    return str.substr(0, size) + '...' + str.substr(str.length - size, size);
+  } else {
+    return str
+  }
+}
+
+function set_size_str_path(str, to_size) {
+  if (str.length > to_size) {
+    return '...' + str.substr(str.length - to_size, to_size)
+  } else {
+    return str
+  }
+}

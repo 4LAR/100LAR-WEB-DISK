@@ -16,12 +16,12 @@
 .custom-checkbox+label::before {
   content: '';
   display: inline-block;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.0em;
+  height: 1.0em;
   flex-shrink: 0;
   flex-grow: 0;
   border: 2px solid var(--main-checkBox-color);
-  border-radius: 4px;
+  border-radius: 2px;
   margin-right: 0.5em;
   background-repeat: no-repeat;
   background-position: center center;
