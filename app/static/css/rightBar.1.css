@@ -113,6 +113,31 @@
   margin: 0px 10px;
 }
 
+.preview_image {
+  position: absolute;
+  left: 0px;
+  top: 350px;
+  width: 300px;
+
+  border-top: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+
+  cursor: pointer;
+}
+
+.preview_info {
+  position: absolute;
+  left: 0px;
+  top: 315px;
+  height: 35px;
+  width: 300px;
+
+  border-top: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+
+  background-color: var(--bg-color);
+}
+
 /* list files */
 
 .file_activity_button {

@@ -245,7 +245,7 @@ def unpack():
         return 'ok'
 
     except Exception as e:
-        print(e)
+        console_term.print('/unpack: ' + str(e), 3)
         return 'ERROR'
 
 # скачивание файла
@@ -261,8 +261,6 @@ def downlaod():
         user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
         if len(file) > 0:
-            os.remove(user_path + dir + '/' + file)
-
             return send_from_directory(user_path + dir, file)
 
         else:

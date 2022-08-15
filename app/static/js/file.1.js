@@ -6,6 +6,8 @@ var dir_str = ''
 var path = 0;
 var files_json = {}
 
+var url_file = "";
+
 // переход в домашнюю директорию
 function go_home() {
   if (dir.length > 0) {
@@ -126,6 +128,28 @@ function append_back_dir() {
   }
 }
 
+const SORT_BY_TYPE = [
+  'dir',
+  'archive',
+  'image',
+  'text file',
+  'file'
+];
+
+// функция сортирующая файлы по типу
+function sort_files(files_list) {
+  var new_files_list = [];
+
+  for (let i = 0; i < SORT_BY_TYPE.length; i++)
+    for (let j = 0; j < files_list.length; j++) {
+      if (SORT_BY_TYPE[i] == files_list[j]['type'])
+        new_files_list.push(files_list[j]);
+
+    }
+
+  return new_files_list;
+}
+
 // получение всех файлов от сервера в текущей директории
 var read_files_bool = false;
 function get_files() {
@@ -183,17 +207,7 @@ function get_files() {
           files_json = JSON.parse(xhr.responseText.toString());
 
           // сортировка файлов по типу
-          files_json['files'].sort(
-            function (a) {
-              console.log(a['type'])
-              if (a['type'] == 'dir') {
-                return -1;
-              } else {
-                return 0;
-              }
-
-            }
-          );
+          files_json['files'] = sort_files(files_json['files']);
 
           // добавляем файлы в список
           for (let i = 0; i < files_json['files'].length; i++){
@@ -257,6 +271,15 @@ function append_file(type, name, size='', path='', date='', mime='') {
   ul.appendChild(li);
 }
 
+function load_preview_image() {
+  if (document.getElementById("checkbox_preview_image").checked) {
+    openModal('preview_image_div');
+    document.getElementById("preview_image").src = url_file;
+  } else {
+    closeModal('preview_image_div');
+  }
+}
+
 var selected_file_name = '';
 var selected_file_dir = '';
 // открытие информации о файле
@@ -270,6 +293,8 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   closeModal('file_activity_edit_button');
   closeModal('file_activity_view_button');
 
+  url_file = `/download?path=${path}&dir=${dir_str}&file=${name}`;
+
   switch (type) {
     case 'archive':
       openModal('file_activity_unpack_button');
@@ -279,6 +304,9 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
       break;
     case 'image':
       openModal('file_activity_view_button');
+
+      load_preview_image();
+
       break;
   }
 
@@ -290,7 +318,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   document.getElementById("file_path").innerHTML = 'path: ' + set_size_str_path(file_path, 30);
   document.getElementById("file_date").innerHTML = 'date of change: ' + date;
 
-  document.getElementById("file_download_button").href = `/download?path=${path}&dir=${dir_str}&file=${name}`;
+  document.getElementById("file_download_button").href = url_file;
   document.getElementById("file_download_button").downlaod = name;
   document.getElementById("file_delete_button").onclick = function(){delete_file(path, dir_str, name)};//`delete_file(${path}, ${dir_str}, ${name})`;
 
@@ -451,7 +479,7 @@ function rename_file() {
 
 // распаковка
 function activity_unpack_file() {
-  
+
   var xhr = new XMLHttpRequest();
   xhr.open('POST', `/unpack?path=${path}&dir=${selected_file_dir}&file=${selected_file_name}&new_file=${selected_file_name}`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

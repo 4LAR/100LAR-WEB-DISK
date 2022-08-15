@@ -63,10 +63,10 @@
         </div>
 
         <!--просмотр-->
-        <div id="file_activity_view_button" class="file_activity_button block_select" style="width: 80px; display: none" onclick="()">
+        <!--<div id="file_activity_view_button" class="file_activity_button block_select" style="width: 80px; display: none" onclick="()">
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/see.svg">
           <p style="margin: -28px 40px;">view</p>
-        </div>
+        </div>-->
 
         <!--иконка и имя файла-->
         <div class="file_ico_name_div">
@@ -96,6 +96,21 @@
           <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -28px 40px;">delete</p>
         </div>
+
+        <!--продпросмотр фотографии-->
+        <div id="file_activity_view_button">
+          <div class="preview_info">
+            <div style="position: absolute; margin: -7px 12px">
+              <input type="checkbox" class="custom-checkbox" id="checkbox_preview_image" name="checkbox_preview_image" value="yes" onchange="load_preview_image()">
+              <label for="checkbox_preview_image"><p>show preview</p></label>
+            </div>
+          </div>
+
+          <div class="preview_image" id="preview_image_div">
+            <img id="preview_image" width="300px" src="/download?path=0&dir=&file=3.png" />
+          </div>
+        </div>
+
       </div>
 
       <!--информация о выбранных файлах и каталогах-->
