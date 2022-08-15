@@ -447,75 +447,22 @@ function rename_file() {
 
 }
 
-var file_name_input = document.getElementById("fileName_input");
+/*------------------------------активности------------------------------*/
 
-file_name_input.onblur = function() {
-  rename_file();
-};
-
-// переименование файла по нажатию enter
-function rename_file_enter(e) {
-  if (e.keyCode == 13) {
-    rename_file();
-    return false;
-  }
-}
-
-// выгрузка файлов
-let dropArea = document.getElementById('html');
-
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-  dropArea.addEventListener(eventName, preventDefaults, false)
-})
-
-function preventDefaults (e) {
-  e.preventDefault()
-  e.stopPropagation()
-};
-
-['dragenter', 'dragover'].forEach(eventName => {
-  dropArea.addEventListener(eventName, highlight, false)
-});
-
-['dragleave', 'drop'].forEach(eventName => {
-  dropArea.addEventListener(eventName, unhighlight, false)
-})
-
-function highlight(e) {
-  dropArea.classList.add('highlight')
-}
-
-function unhighlight(e) {
-  dropArea.classList.remove('highlight')
-}
-
-dropArea.addEventListener('drop', handleDrop, false)
-
-function handleDrop(e) {
-  let dt = e.dataTransfer
-  let files = dt.files
-  handleFiles(files)
-
-}
-
-function handleFiles(files) {
-  console.log('uploading files');
-  ([...files]).forEach(uploadFile);
-}
-
-function uploadFile(file) {
-  form = new FormData();
+// распаковка
+function activity_unpack_file() {
+  
   var xhr = new XMLHttpRequest();
-  form.append("file", file);
-  xhr.open('post', `upload_file?path=${path}&dir=${dir_str}&file=${file.name}`, true);
-  xhr.upload.onprogress = function(event) {
-    //document.getElementById("upload_bar").max = event.total;
-    //document.getElementById("upload_bar").value = event.loaded;
-  }
-  xhr.upload.onload = function() {
-    update_dir();
-  }
-  xhr.send(form);
+  xhr.open('POST', `/unpack?path=${path}&dir=${selected_file_dir}&file=${selected_file_name}&new_file=${selected_file_name}`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200 && xhr.responseText.toString() === 'ok') {
+      update_dir();
+    }
+  };
+
+  xhr.send();
+
 }
 
 // получаем файлы

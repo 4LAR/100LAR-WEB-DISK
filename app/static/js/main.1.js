@@ -70,3 +70,17 @@ function set_size_str_path(str, to_size) {
     return str
   }
 }
+
+var file_name_input = document.getElementById("fileName_input");
+
+file_name_input.onblur = function() {
+  rename_file();
+};
+
+// переименование файла по нажатию enter
+function rename_file_enter(e) {
+  if (e.keyCode == 13) {
+    rename_file();
+    return false;
+  }
+}

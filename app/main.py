@@ -219,6 +219,35 @@ def rename():
 
     return 'ok'
 
+# распоковка архива
+@app.route("/unpack", methods=['GET' , 'POST'])
+@login_required
+def unpack():
+    try:
+        path = request.args.get("path", "")
+        dir = request.args.get("dir", "")
+        file = request.args.get("file", "")
+
+        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+        dir_name = file.split('.')[0]
+        #os.mkdir(user_path + dir + '/' + dir_name)
+
+        # распаковка
+        with zipfile.ZipFile(user_path + dir + '/' + file, 'r') as f:
+            zipInfo = f.infolist()
+            for member in zipInfo:
+                # меняем кодировку именя файла чтобы была кириллица
+                member.filename = member.filename.encode('cp437').decode('cp866')
+                print(member)
+                f.extract(member, user_path + dir + '/' + dir_name)
+
+        return 'ok'
+
+    except Exception as e:
+        print(e)
+        return 'ERROR'
+
 # скачивание файла
 @app.route("/download", methods=['GET' , 'POST'])
 @login_required
