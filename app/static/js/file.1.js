@@ -444,8 +444,8 @@ function delete_file(path, dir_str, name) {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      update_dir();
       close_rightBar();
+      update_dir();
     }
   };
   xhr.send();

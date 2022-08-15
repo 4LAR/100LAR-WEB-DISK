@@ -6,11 +6,16 @@ function checkThame() {
   currentTheme = localStorage.getItem('theme');
   document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (currentTheme === 'dark') {
-    document.getElementById('lightThame_chekcbox').checked = false;
-  } else if (currentTheme === 'light') {
-    document.getElementById('lightThame_chekcbox').checked = true;
+  try {
+    if (currentTheme === 'dark') {
+      document.getElementById('lightThame_chekcbox').checked = false;
+    } else if (currentTheme === 'light') {
+      document.getElementById('lightThame_chekcbox').checked = true;
+    }
+  } catch {
+    
   }
+
 
 }
 

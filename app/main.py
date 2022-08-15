@@ -90,6 +90,18 @@ def index():
 def main_pc():
     return render_template('main.html')
 
+#
+@app.route('/m-main')
+@login_required
+def main_m():
+    return render_template('m-main.html')
+
+# текстовый редактор
+@app.route('/editor')
+@login_required
+def editor():
+    return render_template('editor.html')
+
 @login_manager.user_loader
 def load_user(userid):
     return userBase.get_name_by_id(int(userid))
