@@ -2,6 +2,7 @@
   --scalex: calc(100% - 1280px);
 
   --width-left-bar: 200px;
+  --width-right-bar: 300px;
 
   --top-font-color: #D1D5DA;
   --main-font-color: #D1D5DA;
@@ -157,4 +158,35 @@ body::-webkit-scrollbar-thumb {
 
   background-color: #000;
   opacity: .5;
+}
+
+.button_margin p {
+  margin: -28px 40px;
+}
+
+.button_margin img {
+  margin: 7px 10px;
+}
+
+
+/* rotate animation */
+.anim_rotate {
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin {
+  100% { -moz-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes spin {
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform:rotate(360deg);
+  }
 }

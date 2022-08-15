@@ -322,24 +322,34 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   document.getElementById("file_download_button").downlaod = name;
   document.getElementById("file_delete_button").onclick = function(){delete_file(path, dir_str, name)};//`delete_file(${path}, ${dir_str}, ${name})`;
 
-  openModal('rightBar');
+  open_right_bar();
   openModal('file_info_block');
   closeModal('file_list_block');
 }
 
 // закрытие страницы информации о файле
+var right_bar_bool = false;
 function close_rightBar() {
+  right_bar_bool = false;
   undo_files_checkBox();
-  closeModal('rightBar');
+
+  if (!uploading_bool)
+    closeModal('rightBar');
+
   closeModal('file_info_block');
   closeModal('file_list_block');
+}
+
+function open_right_bar() {
+  right_bar_bool = true;
+  openModal('rightBar');
 }
 
 var list_checked_file = [];
 
 // выделение файла
 function checkBox_file(e, name, type) {
-  openModal('rightBar');
+  open_right_bar();
   closeModal('file_info_block');
   openModal('file_list_block');
 

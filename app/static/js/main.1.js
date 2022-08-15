@@ -35,7 +35,7 @@ function checkModal(modalId) {
 }
 
 //
-function set_disk_space(state=0) {
+function set_disk_space(state = 0) {
   document.getElementById("disk_space_progress").style.width = (space_bar_width/100) * state;
 }
 

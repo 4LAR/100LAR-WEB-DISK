@@ -1,4 +1,6 @@
 
+var uploading_bool = false;
+
 // выгрузка файлов
 let dropArea = document.getElementById('html');
 
@@ -32,26 +34,51 @@ dropArea.addEventListener('drop', handleDrop, false)
 function handleDrop(e) {
   let dt = e.dataTransfer
   let files = dt.files
-  handleFiles(files)
+  //handleFiles(files)
+  uploadFile(files);
 
 }
 
-function handleFiles(files) {
-  console.log('uploading files');
-  ([...files]).forEach(uploadFile);
+const upload_bar_width = 300;
+function set_upload_bar(state = 0) {
+  document.getElementById("upload_progress").style.width = (upload_bar_width/100) * state;
 }
 
-function uploadFile(file) {
-  form = new FormData();
-  var xhr = new XMLHttpRequest();
-  form.append("file", file);
-  xhr.open('post', `upload_file?path=${path}&dir=${dir_str}&file=${file.name}`, true);
-  xhr.upload.onprogress = function(event) {
-    //document.getElementById("upload_bar").max = event.total;
-    //document.getElementById("upload_bar").value = event.loaded;
-  }
-  xhr.upload.onload = function() {
+function uploadFile(files, count = 0) {
+  openModal('rightBar');
+
+  if (count < files.length) {
+    uploading_bool = true;
+    openModal('file_upload_block');
+
+    file = files[count];
+
+    document.getElementById("upload_file_count").innerHTML = `Upload ${files.length - count} files...`;
+    document.getElementById("upload_file_name").innerHTML = files[count].name;
+
+    form = new FormData();
+    var xhr = new XMLHttpRequest();
+    form.append("file", file);
+    xhr.open('post', `upload_file?path=${path}&dir=${dir_str}&file=${file.name}`, true);
+    xhr.upload.onprogress = function(event) {
+      set_upload_bar((100 / event.total) * event.loaded);
+      //document.getElementById("upload_bar").max = event.total;
+      //document.getElementById("upload_bar").value = event.loaded;
+    }
+    xhr.upload.onload = function() {
+      uploadFile(files, ++count);
+      //
+    }
+    xhr.send(form);
+
+  } else {
+    uploading_bool = false;
+    closeModal('file_upload_block');
+    if (!right_bar_bool) {
+      close_rightBar();
+    }
     update_dir();
   }
-  xhr.send(form);
+
+
 }

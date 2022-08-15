@@ -200,3 +200,70 @@
 .file_list_delete_button:hover {
   background-color: var(--main-red-color);
 }
+
+/**/
+
+.file_list_copy_button {
+  position: absolute;
+  left: 0px;
+  top: 210px;
+  width: 149px;
+  height: 35px;
+  border-right: 1px solid var(--main-border-color);
+  border-top: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+
+  cursor: pointer;
+}
+
+.file_list_copy_button:hover {
+  background-color: var(--hover-color);
+}
+
+.file_list_cut_button {
+  position: absolute;
+  left: 150px;
+  top: 210px;
+  width: 149px;
+  height: 35px;
+  border-top: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+
+  cursor: pointer;
+}
+
+.file_list_cut_button:hover {
+  background-color: var(--hover-color);
+}
+
+/* выгрузка */
+.upload_bg {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: var(--width-right-bar);
+  height: 5px;
+  border-top: 1px solid var(--main-border-color);
+  background-color: var(--top-color);
+}
+
+.upload_progress {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 40px;
+  height: 5px;
+  background-color: #999999;
+}
+
+.file_upload_info {
+  position: absolute;
+  right: 0px;
+  bottom: 5px;
+  width: var(--width-right-bar);
+  height: 80px;
+  border-top: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+}

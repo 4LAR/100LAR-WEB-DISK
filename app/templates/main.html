@@ -43,29 +43,29 @@
     <!--информационная панель-->
     <div id="rightBar" class="rightBar" style="display: none">
       <!--закрытие панели-->
-      <div class="file_close_button block_select" onclick="close_rightBar()">
-        <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/cross.svg">
-        <p style="margin: -28px 40px;">close</p>
+      <div class="file_close_button block_select button_margin" onclick="close_rightBar()">
+        <img class="icon" width="20" height="20" src="static/img/cross.svg">
+        <p>close</p>
       </div>
 
       <!--информация о выбранном файле-->
       <div id="file_info_block" style="display: none">
         <!--редактирование-->
-        <div id="file_activity_edit_button" class="file_activity_button block_select" style="width: 80px; display: none" onclick="()">
-          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/edit.svg">
-          <p style="margin: -28px 40px;">edit</p>
+        <div id="file_activity_edit_button" class="file_activity_button block_select button_margin" style="width: 80px; display: none" onclick="()">
+          <img class="icon" width="20" height="20" src="static/img/activity/edit.svg">
+          <p>edit</p>
         </div>
 
         <!--распаковка-->
-        <div id="file_activity_unpack_button" class="file_activity_button block_select" style="width: 100px; display: none" onclick="activity_unpack_file()">
-          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/unzip.svg">
-          <p style="margin: -28px 40px;">unpack</p>
+        <div id="file_activity_unpack_button" class="file_activity_button block_select button_margin" style="width: 100px; display: none" onclick="activity_unpack_file()">
+          <img class="icon" width="20" height="20" src="static/img/activity/unzip.svg">
+          <p>unpack</p>
         </div>
 
         <!--просмотр-->
-        <!--<div id="file_activity_view_button" class="file_activity_button block_select" style="width: 80px; display: none" onclick="()">
-          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/activity/see.svg">
-          <p style="margin: -28px 40px;">view</p>
+        <!--<div id="file_activity_view_button" class="file_activity_button block_select button_margin" style="width: 80px; display: none" onclick="()">
+          <img class="icon" width="20" height="20" src="static/img/activity/see.svg">
+          <p>view</p>
         </div>-->
 
         <!--иконка и имя файла-->
@@ -85,16 +85,16 @@
 
         <!--кнопка скачивания-->
         <a id="file_download_button" href="" download="test">
-          <div class="file_download_button block_select">
-            <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/download.svg">
-            <p style="margin: -28px 40px;">download</p>
+          <div class="file_download_button block_select button_margin">
+            <img class="icon" width="20" height="20" src="static/img/download.svg">
+            <p>download</p>
           </div>
         </a>
 
         <!--кнопка удаления файла-->
-        <div id="file_delete_button" class="file_delete_button block_select">
-          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
-          <p style="margin: -28px 40px;">delete</p>
+        <div id="file_delete_button" class="file_delete_button block_select button_margin">
+          <img class="icon" width="20" height="20" src="static/img/trash.svg">
+          <p>delete</p>
         </div>
 
         <!--продпросмотр фотографии-->
@@ -115,9 +115,9 @@
 
       <!--информация о выбранных файлах и каталогах-->
       <div id="file_list_block" style="display: none">
-        <div id="file_select_all_button" class="file_activity_button block_select" onclick="all_files_checkBox()">
-          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/select all.svg">
-          <p style="margin: -28px 40px;">select all</p>
+        <div id="file_select_all_button" class="file_activity_button block_select button_margin" onclick="all_files_checkBox()">
+          <img class="icon" width="20" height="20" src="static/img/select all.svg">
+          <p>select all</p>
         </div>
 
         <!--количество выбранных файлов-->
@@ -131,23 +131,45 @@
 
         <!--кнопка для скачивания выбранных файлов-->
         <a id="file_list_download_button" href="" download="test">
-          <div class="file_list_download_button block_select">
-            <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/download.svg">
-            <p style="margin: -28px 40px;">download</p>
+          <div class="file_list_download_button block_select button_margin">
+            <img class="icon" width="20" height="20" src="static/img/download.svg">
+            <p>download</p>
           </div>
         </a>
 
         <!--кнопка для удаления выбранных файлов-->
-        <div id="file_list_delete_button" class="file_list_delete_button block_select" onclick="delete_files()">
-          <img class="icon" style="margin: 7px 10px;" width="20" height="20" src="static/img/trash.svg">
-          <p style="margin: -28px 40px;">delete</p>
+        <div id="file_list_delete_button" class="file_list_delete_button block_select button_margin" onclick="delete_files()">
+          <img class="icon" width="20" height="20" src="static/img/trash.svg">
+          <p>delete</p>
+        </div>
+
+        <!--кнопка для копирования выбранных файлов-->
+        <div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" onclick="()">
+          <img class="icon" width="20" height="20" src="static/img/copy.svg">
+          <p>copy</p>
+        </div>
+
+        <!--кнопка для копирования выбранных файлов-->
+        <div id="file_list_cut_button" class="file_list_cut_button block_select button_margin" onclick="()">
+          <img class="icon" width="20" height="20" src="static/img/cut.svg">
+          <p>cut</p>
         </div>
 
       </div>
 
       <!--индикация состояния загрузки файла-->
       <div id="file_upload_block" style="display: none">
+        <!---->
+        <div class="file_upload_info">
+          <img class="icon anim_rotate" style="position: absolute; right: 8px; top: 8px;" width="35" height="35" src="static/img/dvd-disk.svg">
+          <p id="upload_file_count" style="margin: 10px 10px;">Upload 0 files...</p>
+          <h3 id="upload_file_name" style="margin: 10px 10px;">test.txt</h3>
+        </div>
 
+        <!--информация о диске в виде прогресс бара-->
+        <div class="upload_bg">
+          <div id="upload_progress" class="upload_progress"></div>
+        </div>
       </div>
 
       <!--панель с информацией и кнопками для вставки файлов-->
@@ -159,10 +181,10 @@
 
     <div class="topBar">
       <!--кнопки для навигации-->
-      <img id="go_back" class="icon_topBar path_buttons block_select" style="left: 210px; transform: rotate(-90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_back_dir_history()">
-      <img id="go_forward" class="icon_topBar path_buttons block_select" style="left: 210px; transform: rotate(90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_forward_dir_history()">
-      <img id="refresh" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/refresh.svg" onclick="update_dir()">
-      <img id="go_home" class="icon_topBar path_buttons block_select" style="left: 210px" width="30" height="30" src="static/img/home.svg" onclick="go_home()">
+      <img id="go_back" class="icon_topBar path_buttons block_select button_margin" style="left: 210px; transform: rotate(-90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_back_dir_history()">
+      <img id="go_forward" class="icon_topBar path_buttons block_select button_margin" style="left: 210px; transform: rotate(90deg)" width="30" height="30" src="static/img/arrow up.svg" onclick="go_forward_dir_history()">
+      <img id="refresh" class="icon_topBar path_buttons block_select button_margin" style="left: 210px" width="30" height="30" src="static/img/refresh.svg" onclick="update_dir()">
+      <img id="go_home" class="icon_topBar path_buttons block_select button_margin" style="left: 210px" width="30" height="30" src="static/img/home.svg" onclick="go_home()">
       <input id="path" class="input_style path_input" type=text placeholder="Path" onkeypress="return parse_dir_enter(event)">
 
       <!--поиска файлов (не используется)-->
@@ -175,9 +197,9 @@
     <div id="background_black" class="background_black" style="display: none"></div>
 
     <div id="leftBar_user" class="leftBar_user" style="display: none">
-      <!--<div class="small_button_style block_select" style="left: 0px; top: 45px; width: 200px">
-        <img class="icon_topBar" style="margin: 7px 10px;" width="20" height="20" src="static/img/settings.svg">
-        <p class="top_bar_font_color" style="margin: -28px 40px;">settings</p>
+      <!--<div class="small_button_style block_select button_margin" style="left: 0px; top: 45px; width: 200px">
+        <img class="icon_topBar" width="20" height="20" src="static/img/settings.svg">
+        <p class="top_bar_font_color">settings</p>
       </div>-->
       <div style="position: absolute; top: 45px; left: 10px;">
         <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
@@ -185,14 +207,14 @@
       </div>
 
       <!--кнопка для выхода из аккаунта-->
-      <div class="button_exit_style block_select" onclick="logout()">
-        <img class="icon_topBar" style="margin: 7px 10px;" width="20" height="20" src="static/img/logout.svg">
-        <p class="top_bar_font_color" style="margin: -28px 40px;">logout</p>
+      <div class="button_exit_style block_select button_margin" onclick="logout()">
+        <img class="icon_topBar" width="20" height="20" src="static/img/logout.svg">
+        <p class="top_bar_font_color">logout</p>
       </div>
     </div>
 
     <!--кнопка для открытия настроек-->
-    <div id="user_button" class="user_button block_select" onclick="open_close_user_button()">
+    <div id="user_button" class="user_button block_select button_margin" onclick="open_close_user_button()">
       <img class="icon_topBar" style="margin: 0px 15px" width="25" height="25" src="static/img/user.svg">
       <p class="top_bar_font_color" id="user_status" style="margin: -22px 45px; color: #959DA5">user</p>
       <p class="top_bar_font_color" id="user_name" style="margin: 15px 45px">100LAR</p>
