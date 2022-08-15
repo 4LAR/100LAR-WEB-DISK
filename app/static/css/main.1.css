@@ -1,5 +1,6 @@
 :root {
   --scalex: calc(100% - 1280px);
+  --scaley: calc(100% - 720px);
 
   --width-left-bar: 200px;
   --width-right-bar: 300px;
@@ -111,17 +112,17 @@ body {
   user-select: none;
 }
 
-body::-webkit-scrollbar {
+.scroll_style::-webkit-scrollbar {
   /* ширина */
   width: 2px;
 }
 
-body::-webkit-scrollbar-track {
+.scroll_style::-webkit-scrollbar-track {
   /* фон */
   background: #1D2125;
 }
 
-body::-webkit-scrollbar-thumb {
+.scroll_style::-webkit-scrollbar-thumb {
   /* цвет ползунка */
   background-color: #4F5357;
 }
@@ -168,6 +169,11 @@ body::-webkit-scrollbar-thumb {
   margin: 7px 10px;
 }
 
+.pixel {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
 
 /* rotate animation */
 .anim_rotate {

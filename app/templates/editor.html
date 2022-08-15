@@ -11,7 +11,15 @@
   </head>
 
   <body>
-    <textarea class="code_area" name="name" rows="8" cols="80"></textarea>
+
+    <textarea id="lines_area" class="lines_area" name="name" wrap='off' readonly unselectable="on">1</textarea>
+    <textarea id="code_area" class="code_area scroll_style" name="name" wrap='off'></textarea>
+    <div class="topBar">
+      <h3 style="position: absolute; margin: auto; left: 50%">test file.txt -- [ Stone Editor ]</h3>
+      <div class="topBar_button" style="left: 60px; width: 70px;">
+        <p align="center">File</p>
+      </div>
+    </div>
   </body>
 
   <script type="text/javascript" src="static/js/main.1.js"></script>

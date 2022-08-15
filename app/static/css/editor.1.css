@@ -1,7 +1,79 @@
 .code_area {
   position: absolute;
+  top: 26px;
+  left: 60px;
+  width: calc(1220px + var(--scalex));
+  /*height: calc(694px + var(--scaley));*/
+  bottom: 0px;
+
+  resize: none;
+
+  color: var(--main-font-color);
+  padding: 0px 5px;
+
+  background-color: var(--bg-color);
+  border-color: var(--bg-color);
+  border-left: 1px solid var(--main-border-color);
+}
+
+.code_area:focus {
+  outline: none !important;
+}
+
+.lines_area {
+  position: absolute;
+  top: 26px;
+  left: 0px;
+  width: 60px;
+  bottom: 0px;
+
+  overflow-y: hidden;
+
+  text-align: right;
+  color: #B1B1B2;
+  padding: 0px 5px;
+
+  background-color: #24282B;
+  border-color: #24282B;
+  resize: none;
+
+  cursor: default;
+}
+
+.lines_area:focus {
+  outline: none !important;
+}
+
+.topBar {
+  position: fixed;
+  background-color: var(--top-color);
+
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 100%;
+  height: 25px;
+
+  border-bottom: 1px solid var(--top-border-color);
+}
+
+.topBar_button {
+  position: absolute;
+
+  border-left: 1px solid var(--top-border-color);
+  border-right: 1px solid var(--top-border-color);
+
+  height: 25px;
+
+  background-color: var(--top-color);
+
+  cursor: pointer;
+}
+
+.topBar_button p {
+  margin: 0px auto;
+  color: var(--top-font-color);
+}
+
+.topBar_button:hover {
+  background-color: var(--top-hover-color);
 }
