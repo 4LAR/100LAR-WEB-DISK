@@ -299,14 +299,15 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
     case 'archive':
       openModal('file_activity_unpack_button');
       break;
+
     case 'text file':
       openModal('file_activity_edit_button');
+      document.getElementById('file_activity_edit_button').onclick = function(){openInNewTab(`/editor?path=${path}&dir${file_path}&file=${name}`)};
       break;
+
     case 'image':
       openModal('file_activity_view_button');
-
       load_preview_image();
-
       break;
   }
 

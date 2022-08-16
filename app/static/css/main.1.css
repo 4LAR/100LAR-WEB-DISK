@@ -30,6 +30,9 @@
   --top-checkBox-color: #999999;
   --main-checkBox-color: #999999;
 
+  --scroll-color: #4F5357;
+  --scroll-bg-color: #1D2125;
+
 }
 
 [data-theme = "light"] {
@@ -114,17 +117,18 @@ body {
 
 .scroll_style::-webkit-scrollbar {
   /* ширина */
-  width: 2px;
+  width: 5px;
+  height: 5px;
 }
 
 .scroll_style::-webkit-scrollbar-track {
   /* фон */
-  background: #1D2125;
+  background: var(--scroll-bg-color);
 }
 
 .scroll_style::-webkit-scrollbar-thumb {
   /* цвет ползунка */
-  background-color: #4F5357;
+  background-color: var(--scroll-color);
 }
 
 .hr_style{

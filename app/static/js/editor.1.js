@@ -5,6 +5,38 @@ hello world
 123
 `;
 
+function load_code() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', `/download?path=${path}&dir=${dir_str}&file=${name}`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      code_area.value = xhr.responseText.toString();
+      line_counter();
+    }
+  };
+  xhr.send();
+}
+
+function save() {
+  var formData = new FormData;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', `/save?path=${path}&dir=${dir_str}&file=${name}`);
+  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      if (xhr.responseText.toString() === 'ok') {
+        closeModal('save_state');
+        load_code();
+      }
+
+    }
+  };
+  //xhr.send(`"code": ${code_area.value}`);
+  xhr.send(JSON.stringify({"code": code_area.value}))
+}
+
 var code_area = document.getElementById('code_area');
 var lines_area = document.getElementById('lines_area');
 
@@ -28,6 +60,7 @@ code_area.addEventListener('scroll', () => {
 });
 
 code_area.addEventListener('input', () => {
+  openModal('save_state');
   line_counter();
 });
 
@@ -42,5 +75,13 @@ code_area.addEventListener('keydown', (e) => {
   }
 });
 
-code_area.value = code_example;
-line_counter();
+//load_code(0, '/', 'log.txt');
+load_code();
+
+document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 83) {
+        save();
+
+        return false;
+    }
+};

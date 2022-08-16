@@ -15,12 +15,19 @@
     <textarea id="lines_area" class="lines_area" name="name" wrap='off' readonly unselectable="on">1</textarea>
     <textarea id="code_area" class="code_area scroll_style" name="name" wrap='off'></textarea>
     <div class="topBar">
-      <h3 style="position: absolute; margin: auto; left: 50%">test file.txt -- [ Stone Editor ]</h3>
-      <div class="topBar_button" style="left: 60px; width: 70px;">
-        <p align="center">File</p>
+      <p id="save_state" style="position: absolute; display: none; font-size: 25px; margin: -9px 0px; left: 85px;">•</p>
+      <p style="position: absolute; margin: auto; left: 98px;">{{ data[2] }}</p>
+      <div class="topBar_button" style="left: 0px; width: 70px;" onclick="save()">
+        <p align="center">save</p>
       </div>
     </div>
   </body>
+
+  <script type="text/javascript">
+    var path = '{{ data[0] }}';
+    var dir_str = '{{ data[1] }}';
+    var name = '{{ data[2] }}';
+  </script>
 
   <script type="text/javascript" src="static/js/main.1.js"></script>
 

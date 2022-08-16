@@ -79,6 +79,8 @@ login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)
 
+#####################################################
+
 # Запросы
 @app.route('/')
 def index():
@@ -96,18 +98,54 @@ def main_pc():
 def main_m():
     return render_template('m-main.html')
 
+#####################################################
+
 # текстовый редактор
 @app.route('/editor')
 @login_required
 def editor():
-    return render_template('editor.html')
+    path = request.args.get("path", "")
+    dir = request.args.get("dir", "")
+    file = request.args.get("file", "")
+
+    print(path, dir, file)
+
+    data = [path, dir, file]
+
+    return render_template(
+        'editor.html',
+        data=data
+    )
+
+# запись в файл новых данных
+@app.route('/save', methods=['GET' , 'POST'])
+@login_required
+def save_file():
+    try:
+        path = request.args.get("path", "")
+        dir = request.args.get("dir", "")
+        file = request.args.get("file", "")
+
+        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+        f = open(user_path + dir + '/' + file, 'w', encoding = 'utf-8')
+        f.write(request.json['code'])
+        f.close()
+
+        return 'ok'
+
+    except Exception as e:
+        console_term.print('/save: ' + str(e), 3)
+        return 'ERROR'
+
+#####################################################
 
 @login_manager.user_loader
 def load_user(userid):
     return userBase.get_name_by_id(int(userid))
 
 # авторизация
-@app.route('/login' , methods=['GET' , 'POST'])
+@app.route('/login', methods=['GET' , 'POST'])
 def login():
     username = request.args.get("username", "")
     password = request.args.get("password", "")
@@ -278,7 +316,7 @@ def downlaod():
         else:
             files_list = json.loads(files)['files']
 
-            # содаём буфер
+            # создаём буфер
             zip_buffer = io.BytesIO()
 
             # открываем архив и хапичваем в него все нужные файлы

@@ -33,3 +33,8 @@ function checkModal(modalId) {
     return false;
   }
 }
+
+//
+function openInNewTab(url) {
+  window.open(url, '_blank').focus();
+}
