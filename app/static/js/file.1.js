@@ -302,7 +302,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
 
     case 'text file':
       openModal('file_activity_edit_button');
-      document.getElementById('file_activity_edit_button').onclick = function(){openInNewTab(`/editor?path=${path}&dir${file_path}&file=${name}`)};
+      document.getElementById('file_activity_edit_button').onclick = function(){openInNewTab(`/editor?path=${path}&dir=${dir_str}&file=${name}`)};
       break;
 
     case 'image':
@@ -402,6 +402,11 @@ function checkBox_file(e, name, type) {
 
   }
 
+}
+
+// копирование файла
+function copy_file() {
+  
 }
 
 // выделить все файлы

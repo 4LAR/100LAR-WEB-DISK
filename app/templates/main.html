@@ -143,18 +143,38 @@
           <p>delete</p>
         </div>
 
+
         <!--кнопка для копирования выбранных файлов-->
-        <div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" onclick="()">
+        <!--<div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" onclick="()">
           <img class="icon" width="20" height="20" src="static/img/copy.svg">
           <p>copy</p>
-        </div>
+        </div>-->
 
         <!--кнопка для копирования выбранных файлов-->
-        <div id="file_list_cut_button" class="file_list_cut_button block_select button_margin" onclick="()">
+        <!--<div id="file_list_cut_button" class="file_list_cut_button block_select button_margin" onclick="()">
           <img class="icon" width="20" height="20" src="static/img/cut.svg">
           <p>cut</p>
+        </div>-->
+
+      </div>
+
+      <!--панель с информацией и кнопками для вставки файлов-->
+      <div id="copy_or_paste_block" style="display: none">
+
+        <!--количество выбранных файлов-->
+        <div class="file_list_info_div" style="height: 114px">
+          <p style="margin: 0px 0px;" align="center">Selected elements</p>
+          <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/files/file.svg">
+          <p id="file_list_files" style="position: absolute; left: 40px; top: 3px;">Files: None</p>
+          <img class="icon" style="position: absolute; top: 47px; left: 10px;" width="25" height="25" src="static/img/files/folder.svg">
+          <p id="file_list_folders" style="position: absolute; left: 40px; top: 37px;">Folders: None</p>
         </div>
 
+        <!--кнопка для вставки выбранных файлов-->
+        <div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" style="border-right: 1px solid var(--main-border-color);" onclick="()">
+          <img class="icon" width="20" height="20" src="static/img/copy.svg">
+          <p>paste</p>
+        </div>
       </div>
 
       <!--индикация состояния загрузки файла-->
@@ -170,11 +190,6 @@
         <div class="upload_bg">
           <div id="upload_progress" class="upload_progress"></div>
         </div>
-      </div>
-
-      <!--панель с информацией и кнопками для вставки файлов-->
-      <div id="copy_or_paste_block" style="display: none">
-
       </div>
 
     </div>
@@ -218,7 +233,7 @@
       <img class="icon_topBar" style="margin: 0px 15px" width="25" height="25" src="static/img/user.svg">
       <p class="top_bar_font_color" id="user_status" style="margin: -22px 45px; color: #959DA5">user</p>
       <p class="top_bar_font_color" id="user_name" style="margin: 15px 45px">100LAR</p>
-      <img id="user_button_triangle" class="icon_topBar" style="position:absolute; right: 10px; top: 18px" width="10" height="10" src="static/img/triangle.svg">
+      <img id="user_button_triangle" class="icon_topBar" style="position:absolute; right: 10px; top: 10px" width="10" height="10" src="static/img/triangle.svg">
     </div>
 
   </body>

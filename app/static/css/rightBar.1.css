@@ -162,7 +162,8 @@
   left: 0px;
   top: 80px;
   width: 300px;
-  height: 75px;
+  /*height: 150px;*/
+  height: 100px;
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
@@ -171,9 +172,11 @@
 .file_list_download_button {
   position: absolute;
   left: 0px;
-  top: 157px;
+  /*top: 210px;*/
+  top: 159px;
   width: 150px;
   height: 35px;
+  border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   border-right: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
@@ -188,9 +191,11 @@
 .file_list_delete_button {
   position: absolute;
   left: 151px;
-  top: 157px;
+  /*top: 210px;*/
+  top: 159px;
   width: 149px;
   height: 35px;
+  border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 
@@ -206,10 +211,9 @@
 .file_list_copy_button {
   position: absolute;
   left: 0px;
-  top: 210px;
-  width: 149px;
+  top: 159px;
+  width: 150px;
   height: 35px;
-  border-right: 1px solid var(--main-border-color);
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
@@ -224,9 +228,10 @@
 .file_list_cut_button {
   position: absolute;
   left: 150px;
-  top: 210px;
+  top: 159px;
   width: 149px;
   height: 35px;
+  border-left: 1px solid var(--main-border-color);
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
