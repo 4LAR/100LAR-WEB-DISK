@@ -54,8 +54,9 @@ set_disk_space(0);
 document.addEventListener('keydown', function(event){
 
   if(event.keyCode == 27){
-    if (open_close_user_bool) {
-      open_close_user_button();
+    if (open_close_user_bool || open_close_path_bool) {
+      open_close_user_button(true);
+      open_close_path_button(true);
     } else {
       close_rightBar();
     }
