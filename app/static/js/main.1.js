@@ -38,3 +38,18 @@ function checkModal(modalId) {
 function openInNewTab(url) {
   window.open(url, '_blank').focus();
 }
+
+//
+function append_to_ul(id, content) {
+  var ul = document.getElementById(id);
+
+  var li = document.createElement("li");
+
+  li.innerHTML = content;
+
+  ul.appendChild(li);
+}
+
+function clear_ul(id) {
+  document.getElementById(id).innerHTML = '';
+}

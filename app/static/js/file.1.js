@@ -8,6 +8,13 @@ var files_json = {}
 
 var url_file = "";
 
+//
+function set_path(path_id) {
+  path = path_id;
+  open_close_path_button(true);
+  update_dir();
+}
+
 // переход в домашнюю директорию
 function go_home() {
   if (dir.length > 0) {
@@ -406,7 +413,7 @@ function checkBox_file(e, name, type) {
 
 // копирование файла
 function copy_file() {
-  
+
 }
 
 // выделить все файлы
@@ -437,10 +444,15 @@ function all_files_checkBox() {
 
 // убрать выделение со всех файлов
 function undo_files_checkBox() {
-  for (i in files_json['files']) {
-    document.getElementById('checkbox_file_' + files_json['files'][i]['name']).checked = false;
+  try {
+    for (i in files_json['files']) {
+      document.getElementById('checkbox_file_' + files_json['files'][i]['name']).checked = false;
+    }
+    list_checked_file = [];
+  } catch {
+
   }
-  list_checked_file = [];
+
 }
 
 // удаление файла
