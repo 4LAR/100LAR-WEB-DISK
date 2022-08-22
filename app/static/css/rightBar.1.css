@@ -210,11 +210,11 @@
 
 .file_list_copy_button {
   position: absolute;
-  left: 0px;
-  top: 159px;
+  left: 150px;
+  top: 232px;
   width: 150px;
   height: 35px;
-  border-top: 1px solid var(--main-border-color);
+  border-left: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 
@@ -228,11 +228,10 @@
 .file_list_cut_button {
   position: absolute;
   left: 150px;
-  top: 159px;
+  top: 196px;
   width: 149px;
   height: 35px;
   border-left: 1px solid var(--main-border-color);
-  border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 
