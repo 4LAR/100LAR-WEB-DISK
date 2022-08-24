@@ -146,15 +146,15 @@
 
 
         <!--кнопка для копирования выбранных файлов-->
-        <div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" onclick="()">
+        <div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" onclick="copy_file_buf()">
           <img class="icon" width="20" height="20" src="static/img/copy.svg">
           <p>copy</p>
         </div>
 
         <!--кнопка для копирования выбранных файлов-->
-        <div id="file_list_cut_button" class="file_list_cut_button block_select button_margin" onclick="()">
+        <div id="file_list_cut_button" class="file_list_cut_button block_select button_margin" onclick="copy_file_buf(true)">
           <img class="icon" width="20" height="20" src="static/img/cut.svg">
-          <p>cut</p>
+          <p>move</p>
         </div>
 
       </div>
@@ -163,16 +163,16 @@
       <div id="copy_or_paste_block" style="display: none">
 
         <!--количество выбранных файлов-->
-        <div class="file_list_info_div" style="height: 114px">
-          <p style="margin: 0px 0px;" align="center">Selected elements</p>
+        <div class="file_list_info_div" style="height: 78px">
+          <p id="cop_info" style="margin: 0px 0px;" align="center"></p>
           <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/files/file.svg">
-          <p id="file_list_files" style="position: absolute; left: 40px; top: 3px;">Files: None</p>
+          <p id="cop_file_list_files" style="position: absolute; left: 40px; top: 3px;">Files: None</p>
           <img class="icon" style="position: absolute; top: 47px; left: 10px;" width="25" height="25" src="static/img/files/folder.svg">
-          <p id="file_list_folders" style="position: absolute; left: 40px; top: 37px;">Folders: None</p>
+          <p id="cop_file_list_folders" style="position: absolute; left: 40px; top: 37px;">Folders: None</p>
         </div>
 
         <!--кнопка для вставки выбранных файлов-->
-        <div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" style="border-right: 1px solid var(--main-border-color);" onclick="()">
+        <div id="file_list_paste_button" class="file_list_paste_button block_select button_margin" style="border-right: 1px solid var(--main-border-color);" onclick="paste_files()">
           <img class="icon" width="20" height="20" src="static/img/copy.svg">
           <p>paste</p>
         </div>

@@ -208,6 +208,23 @@
 
 /**/
 
+.file_list_paste_button {
+  position: absolute;
+  left: 0px;
+  top: 160px;
+  width: 150px;
+  height: 35px;
+  border-right: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+
+  cursor: pointer;
+}
+
+.file_list_paste_button:hover {
+  background-color: var(--hover-color);
+}
+
 .file_list_copy_button {
   position: absolute;
   left: 150px;

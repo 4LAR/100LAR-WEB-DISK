@@ -375,6 +375,50 @@ def delete():
         console_term.print('/delete: ' + str(e), 3)
         return 'ERROR'
 
+# копирование файлов
+@app.route('/copy', methods=['POST', 'GET'])
+@login_required
+def copy_files():
+    try:
+        path = request.args.get("path", "")
+        dir = request.args.get("dir", "")
+        files = request.args.get("files", "")
+        to = request.args.get("to", "")
+        cut_bool = request.args.get("move", "")
+
+        cut_bool = (cut_bool.lower() == 'true')
+
+        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        files_list = json.loads(files)['files']
+
+        # цикл по файлам
+        for f in files_list:
+            if cut_bool:
+                # перемещаем
+                shutil.move(
+                    user_path + dir + '/' + f[0],
+                    user_path + to
+                )
+
+            else:
+                # копирование
+                shutil.copy2(
+                    user_path + dir + '/' + f[0],
+                    user_path + to
+                )
+
+        # лог
+        console_term.print(
+            '/copy: %s %s files from %s to %s' %
+            (current_user.username, ('move' if (cut_bool) else 'copy'), '/' + dir, '/' + to),
+            1
+        )
+        return 'ok'
+
+    except Exception as e:
+        console_term.print('/copy: ' + str(e), 3)
+        return 'ERROR'
+
 # загрузка файла
 @app.route('/upload_file', methods=['POST', 'GET'])
 @login_required

@@ -346,6 +346,7 @@ function close_rightBar() {
 
   closeModal('file_info_block');
   closeModal('file_list_block');
+  closeModal('copy_or_paste_block');
 }
 
 function open_right_bar() {
@@ -412,8 +413,42 @@ function checkBox_file(e, name, type) {
 }
 
 // копирование файла
-function copy_file() {
+var copied_files = [];
+var copied_dir = '';
+var move_files_bool = false;
+function copy_file_buf(move=false) {
+  copied_files = list_checked_file.slice();
+  copied_dir = dir_str;
+  move_files_bool = move;
+  undo_files_checkBox();
+  closeModal('file_list_block');
+  openModal('copy_or_paste_block');
 
+  var count_files = 0;
+  var count_folders = 0;
+
+  for (let i = 0; i < copied_files.length; i++)
+    if (copied_files[i][1] === 'dir')
+      count_folders += 1;
+    else
+      count_files += 1;
+
+  document.getElementById("cop_info").innerHTML = (move)? 'move elements': 'copy elements';
+  document.getElementById("cop_file_list_files").innerHTML = 'Files: ' + count_files;
+  document.getElementById("cop_file_list_folders").innerHTML = 'Folders: ' + count_folders;
+}
+
+function paste_files() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', `/copy?path=${path}&dir=${copied_dir}&files=${JSON.stringify({"files": copied_files})}&to=${dir_str}&move=${move_files_bool}`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      update_dir();
+      close_rightBar();
+    }
+  };
+  xhr.send();
 }
 
 // выделить все файлы
