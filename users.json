@@ -6,7 +6,7 @@
       {
         "name": "home",
         "path": "/disk/100LAR/",
-        "size": 10737418240
+        "size": 1073741824
       },
       {
         "name": "users",

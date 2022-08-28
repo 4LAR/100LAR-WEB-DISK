@@ -3,8 +3,9 @@
   position: absolute;
   left: var(--width-left-bar);
   top: 30px;
+  right: 0px;
 
-  width: calc(1080px + var(--scalex));
+  /*width: calc(1080px + var(--scalex));*/
 }
 
 .file {

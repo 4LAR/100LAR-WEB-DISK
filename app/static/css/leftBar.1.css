@@ -52,46 +52,20 @@
   background-color: var(--bg-color);
 }
 
-.path_map_div {
-  position: absolute;
-
-  top: 100px;
-  left: 0px;
-  width: var(--width-left-bar);
-
-}
-
-.path_map_img_rotate {
-  transform: rotate(-90deg);
-}
-
-.path_map_button {
-  position: relative;
-  left: 0px;
-  width: var(--width-left-bar);
-  height: 20px;
-  background-color: var(--bg-color);
-
-  cursor: pointer;
-}
-
-.path_map_button:hover {
-  background-color: var(--hover-color);
-}
-
 .small_button_style {
   position: absolute;
-  width: 200px;
   height: 35px;
-  border-bottom: 1px solid var(--top-border-color);
-  border-right: 1px solid var(--top-border-color);
-  background-color: var(--top-color);
+
+  border-top: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+  border-right: 1px solid var(--main-border-color);
+  background-color: var(--main-color);
 
   cursor: pointer;
 }
 
 .small_button_style:hover {
-  background-color: var(--top-hover-color);
+  background-color: var(--hover-color);
 }
 
 .button_exit_style {

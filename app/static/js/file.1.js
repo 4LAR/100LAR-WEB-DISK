@@ -538,6 +538,23 @@ function rename_file() {
 
 }
 
+/* создание */
+
+var create_file_bool = false;
+function create_file(folder=false) {
+  create_file_bool = true;
+
+  openModal('dialog_bg');
+  openModal('dialog_create_file');
+}
+
+function close_create_file() {
+  create_file_bool = false;
+  
+  closeModal('dialog_bg');
+  closeModal('dialog_create_file');
+}
+
 /*------------------------------активности------------------------------*/
 
 // распаковка

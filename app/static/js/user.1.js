@@ -28,6 +28,12 @@ function open_close_path_button(close_bool=false) {
 }
 
 //
+function close_user() {
+  open_close_user_button(true);
+  open_close_path_button(true);
+}
+
+//
 function logout() {
   xhr = new XMLHttpRequest();
   xhr.open('POST', '/logout');
