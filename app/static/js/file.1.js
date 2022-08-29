@@ -538,7 +538,27 @@ function rename_file() {
 
 }
 
-/* создание */
+/*-----------------отображение------------------------*/
+
+//localStorage.getItem('draw_type');
+
+var draw_type_checkox = ['list', 'table'];
+var draw_type = 'list';
+function switch_draw_type(type='list', e) {
+  if (e.checked && draw_type != type) {
+    draw_type = type;
+  }
+
+  for (let i = 0; i < draw_type_checkox.length; i++) {
+    document.getElementById("checkbox_draw_type_" + draw_type_checkox[i]).checked = false;
+  }
+  document.getElementById("checkbox_draw_type_" + draw_type).checked = true;
+
+  localStorage.setItem('draw_type', draw_type);
+
+}
+
+/*-----------------создание------------------------*/
 
 // открытие диалогового окна для создания файла или директории
 var create_file_bool = false;

@@ -28,14 +28,14 @@
 
       <!---->
       <div style="position: absolute; left: 10px; top: 55px">
-        <input type="checkbox" class="custom-checkbox" id="checkbox_draw_type_list" name="checkbox_draw_type_list" value="yes" onchange="()">
+        <input type="checkbox" class="custom-checkbox" id="checkbox_draw_type_list" name="checkbox_draw_type_list" value="yes" onchange="switch_draw_type('list', this)" checked>
         <label for="checkbox_draw_type_list">
           <img class="icon" width="30" height="30" src="static/img/file list.svg">
         </label>
       </div>
 
       <div style="position: absolute; left: 80px; top: 55px">
-        <input type="checkbox" class="custom-checkbox" id="checkbox_draw_type_table" name="checkbox_draw_type_table" value="yes" onchange="load_preview_image()">
+        <input type="checkbox" class="custom-checkbox" id="checkbox_draw_type_table" name="checkbox_draw_type_table" value="yes" onchange="switch_draw_type('table', this)">
         <label for="checkbox_draw_type_table">
           <img class="icon" width="30" height="30" src="static/img/file table.svg">
         </label>
