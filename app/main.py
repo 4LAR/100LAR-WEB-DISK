@@ -254,6 +254,36 @@ def files():
     except:
         return 'ERROR DIR'
 
+# создание файла
+@app.route("/create_file", methods=['GET' , 'POST'])
+@login_required
+def create_file():
+    path = request.args.get("path", "")
+    dir = request.args.get("dir", "")
+    file = request.args.get("file", "")
+
+    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+    f = open(user_path + dir + '/' + file, 'w')
+    f.write("HELLO WORLD")
+    f.close()
+
+    return 'ok'
+
+# создание папки
+@app.route("/create_folder", methods=['GET' , 'POST'])
+@login_required
+def create_folder():
+    path = request.args.get("path", "")
+    dir = request.args.get("dir", "")
+    file = request.args.get("folder_name", "")
+
+    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+    os.mkdir(user_path + dir + '/' + file)
+
+    return 'ok'
+
 # переименование файла
 @app.route("/rename", methods=['GET' , 'POST'])
 @login_required

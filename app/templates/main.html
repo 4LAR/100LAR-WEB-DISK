@@ -41,12 +41,12 @@
         </label>
       </div>
 
-      <div class="small_button_style block_select button_margin" style="top: 95px; width: 200px;" onclick="create_file()">
+      <div class="small_button_style block_select button_margin" style="top: 95px; width: 200px;" onclick="create_file_dialog(true)">
         <img class="icon" width="20" height="20" src="static/img/new folder.svg">
         <p>create folder</p>
       </div>
 
-      <div class="small_button_style block_select button_margin" style="top: 131px; width: 200px;" onclick="create_file()">
+      <div class="small_button_style block_select button_margin" style="top: 131px; width: 200px;" onclick="create_file_dialog()">
         <img class="icon" width="20" height="20" src="static/img/files/file.svg">
         <p>create file</p>
       </div>
@@ -285,18 +285,18 @@
     <!--диалоговые окна-->
     <div id="dialog_create_file" class="dialog_create_file">
       <div class="dialog_top_name">
-        <div class="dialog_close_button block_select button_margin" onclick="close_create_file()">
+        <div class="dialog_close_button block_select button_margin" onclick="close_create_file_dialog()">
           <img class="icon" width="20" height="20" src="static/img/cross.svg">
           <p>close</p>
         </div>
       </div>
 
       <div class="dialog_info">
-        <img class="icon" style="position: absolute; left: 10px; top: 10px;" width="40" height="40" src="static/img/files/file.svg">
-        <input id="create_fileName_input" class="input_style create_fileName_input" style="" type=text placeholder="file name" onkeypress="return gg(event)">
+        <img class="icon" id="create_file_image" style="position: absolute; left: 10px; top: 10px;" width="40" height="40" src="">
+        <input id="create_fileName_input" class="input_style create_fileName_input" style="" type=text placeholder="file name" onkeypress="return create_file_enter(event)">
       </div>
 
-      <div class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+      <div id="create_file_button" class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
         <p style="margin: 5px 28px">create</p>
       </div>
     </div>

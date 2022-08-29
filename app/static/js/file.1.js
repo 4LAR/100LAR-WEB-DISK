@@ -540,19 +540,66 @@ function rename_file() {
 
 /* создание */
 
+// открытие диалогового окна для создания файла или директории
 var create_file_bool = false;
-function create_file(folder=false) {
+function create_file_dialog(folder=false) {
   create_file_bool = true;
+
+  if (folder) {
+    document.getElementById("create_file_image").src = "static/img/files/folder.svg"
+    document.getElementById("create_file_button").onclick = function(){create_file(true)};
+    document.getElementById("create_fileName_input").placeholder = 'New directory name';
+  } else {
+    document.getElementById("create_file_image").src = "static/img/files/file.svg"
+    document.getElementById("create_file_button").onclick = function(){create_file()};
+    document.getElementById("create_fileName_input").placeholder = 'New file name';
+  }
 
   openModal('dialog_bg');
   openModal('dialog_create_file');
+
+  document.getElementById("create_fileName_input").focus();
 }
 
-function close_create_file() {
+// закрытие диалогового окна для создания файла или директории
+function close_create_file_dialog() {
   create_file_bool = false;
-  
+
   closeModal('dialog_bg');
   closeModal('dialog_create_file');
+}
+
+// создание файла или директории
+function create_file(folder=false) {
+  var xhr = new XMLHttpRequest();
+
+  file_name = document.getElementById("create_fileName_input");
+
+  if (folder) {
+    xhr.open('POST', `/create_folder?path=${path}&dir=${dir_str}&folder_name=${file_name.value}`);
+
+  } else {
+    xhr.open('POST', `/create_file?path=${path}&dir=${dir_str}&file=${file_name.value}`);
+  }
+
+  file_name.value = '';
+
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      close_create_file_dialog();
+      update_dir();
+    }
+  };
+  xhr.send();
+}
+
+//
+function create_file_enter(e) {
+  if (e.keyCode == 13) {
+    (document.getElementById("create_file_button").onclick)()
+    return false;
+  }
 }
 
 /*------------------------------активности------------------------------*/

@@ -55,7 +55,7 @@ document.addEventListener('keydown', function(event){
 
   if(event.keyCode == 27){
     if (create_file_bool) {
-      close_create_file();
+      close_create_file_dialog();
     } else if (open_close_user_bool || open_close_path_bool) {
       close_user();
     } else {
