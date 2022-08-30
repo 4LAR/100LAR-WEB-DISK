@@ -21,7 +21,7 @@
   <body class="scroll_style">
 
     <div id="file_list_div" class="file_list">
-      <ul id="file_list"></ul>
+      <ul id="file_list" style="overflow-x:hidden;"></ul>
     </div>
 
     <div class="leftBar">
@@ -35,8 +35,8 @@
       </div>
 
       <div style="position: absolute; left: 80px; top: 55px">
-        <input type="checkbox" class="custom-checkbox" id="checkbox_draw_type_table" name="checkbox_draw_type_table" value="yes" onchange="switch_draw_type('table', this)">
-        <label for="checkbox_draw_type_table">
+        <input type="checkbox" class="custom-checkbox" id="checkbox_draw_type_grid" name="checkbox_draw_type_grid" value="yes" onchange="switch_draw_type('grid', this)">
+        <label for="checkbox_draw_type_grid">
           <img class="icon" width="30" height="30" src="static/img/file table.svg">
         </label>
       </div>

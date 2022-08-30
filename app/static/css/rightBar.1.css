@@ -119,7 +119,7 @@
   top: 350px;
   width: 300px;
 
-  border-top: 1px solid var(--main-border-color);
+  /*border-top: 1px solid var(--main-border-color);*/
   border-bottom: 1px solid var(--main-border-color);
 
   cursor: pointer;
