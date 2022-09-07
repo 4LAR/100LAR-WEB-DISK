@@ -283,7 +283,28 @@
     <div id="dialog_bg" class="dialog_backgound"></div>
 
     <!--диалоговые окна-->
-    <div id="dialog_create_file" class="dialog_create_file">
+
+    <!-- Удаление файлов -->
+    <div id="dialog_delete_file" class="dialog_style">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_delete_file_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <div class="dialog_info">
+        <img class="icon" id="create_file_image" style="position: absolute; left: 10px; top: 10px;" width="40" height="40" src="static/img/trash.svg">
+        <input id="create_fileName_input" class="input_style create_fileName_input" style="" type=text placeholder="file name">
+      </div>
+
+      <div id="create_file_button" class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+        <p style="margin: 5px 28px">delete</p>
+      </div>
+    </div>
+    
+    <!-- Создание файлов и директорий -->
+    <div id="dialog_create_file" class="dialog_style">
       <div class="dialog_top_name">
         <div class="dialog_close_button block_select button_margin" onclick="close_create_file_dialog()">
           <img class="icon" width="20" height="20" src="static/img/cross.svg">

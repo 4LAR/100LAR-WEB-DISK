@@ -1,1 +1,1 @@
-sudo python3 app/main.py
+sudo python3.9 app/main.py

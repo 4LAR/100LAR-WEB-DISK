@@ -621,6 +621,23 @@ if (localStorage.getItem('draw_type') == null) {
 
 switch_draw_type(localStorage.getItem('draw_type'), {"checked": true});
 
+/**/
+
+var delete_file_bool = false;
+function delete_file_dialog() {
+  delete_file_bool = true;
+
+  openModal('dialog_bg');
+  openModal('dialog_delete_file');
+
+}
+
+function close_delete_file_dialog() {
+  delete_file_bool = false;
+
+  closeModal('dialog_bg');
+  closeModal('dialog_delete_file');
+}
 
 /*-----------------создание------------------------*/
 
