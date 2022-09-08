@@ -382,7 +382,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
 
   document.getElementById("file_download_button").href = url_file;
   document.getElementById("file_download_button").downlaod = name;
-  document.getElementById("file_delete_button").onclick = function(){delete_file(path, dir_str, name)};//`delete_file(${path}, ${dir_str}, ${name})`;
+  document.getElementById("file_delete_button").onclick = function(){delete_file_dialog(path, dir_str, name)};//`delete_file(${path}, ${dir_str}, ${name})`;
 
   open_right_bar();
   openModal('file_info_block');
@@ -554,6 +554,7 @@ function delete_file(path, dir_str, name) {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
+      close_delete_file_dialog();
       close_rightBar();
       update_dir();
     }
@@ -568,6 +569,7 @@ function delete_files() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
+      close_delete_file_dialog();
       update_dir();
       undo_files_checkBox();
       close_rightBar();
@@ -624,8 +626,20 @@ switch_draw_type(localStorage.getItem('draw_type'), {"checked": true});
 /**/
 
 var delete_file_bool = false;
-function delete_file_dialog() {
+function delete_file_dialog(path='', dir_str='', name='') {
   delete_file_bool = true;
+  var str = '';
+  if (path.length != '') {
+    str = '-' + name;
+    document.getElementById("delete_file_button").onclick = function(){delete_file(path, dir_str, name)};
+  } else {
+    str = '';
+    for (let i = 0; i < list_checked_file.length; i++) {
+      str += '-' + list_checked_file[i][0] + '\n'
+    }
+    document.getElementById("delete_file_button").onclick = function(){delete_files()};
+  }
+  document.getElementById("delete_file_list").innerHTML = str;
 
   openModal('dialog_bg');
   openModal('dialog_delete_file');

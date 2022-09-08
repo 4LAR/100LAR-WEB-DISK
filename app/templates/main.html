@@ -161,7 +161,7 @@
         </a>
 
         <!--кнопка для удаления выбранных файлов-->
-        <div id="file_list_delete_button" class="file_list_delete_button block_select button_margin" onclick="delete_files()">
+        <div id="file_list_delete_button" class="file_list_delete_button block_select button_margin" onclick="delete_file_dialog()">
           <img class="icon" width="20" height="20" src="static/img/trash.svg">
           <p>delete</p>
         </div>
@@ -293,16 +293,14 @@
         </div>
       </div>
 
-      <div class="dialog_info">
-        <img class="icon" id="create_file_image" style="position: absolute; left: 10px; top: 10px;" width="40" height="40" src="static/img/trash.svg">
-        <input id="create_fileName_input" class="input_style create_fileName_input" style="" type=text placeholder="file name">
-      </div>
+      <p style="position: absolute; left: 10px; top: 40px">Delete file list:</p>
+      <textarea id="delete_file_list" class="input_style fileDescription scroll_style" style="position: absolute; top: 40px; left: 125px; width: 460px; height: 140px;" readonly></textarea>
 
-      <div id="create_file_button" class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+      <div id="delete_file_button" class="red_dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
         <p style="margin: 5px 28px">delete</p>
       </div>
     </div>
-    
+
     <!-- Создание файлов и директорий -->
     <div id="dialog_create_file" class="dialog_style">
       <div class="dialog_top_name">

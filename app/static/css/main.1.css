@@ -129,6 +129,7 @@ body {
 .scroll_style::-webkit-scrollbar-thumb {
   /* цвет ползунка */
   background-color: var(--scroll-color);
+  border-radius: 2px;
 }
 
 .hr_style{
