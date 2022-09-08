@@ -148,6 +148,7 @@ const SORT_BY_TYPE = [
   'archive',
   'image',
   'text file',
+  'pdf',
   'file'
 ];
 
@@ -366,8 +367,12 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
       document.getElementById('file_activity_edit_button').onclick = function(){openInNewTab(`/editor?path=${path}&dir=${dir_str}&file=${name}`)};
       break;
 
-    case 'image':
+    case 'pdf':
       openModal('file_activity_view_button');
+      document.getElementById('file_activity_view_button_href').href = url_file;
+      break;
+
+    case 'image':
       load_preview_image();
       break;
   }
