@@ -354,6 +354,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   closeModal('file_activity_unpack_button');
   closeModal('file_activity_edit_button');
   closeModal('file_activity_view_button');
+  closeModal('file_activity_view');
 
   url_file = `/download?path=${path}&dir=${dir_str}&file=${name}`;
 
@@ -373,6 +374,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
       break;
 
     case 'image':
+      openModal('file_activity_view');
       load_preview_image();
       break;
   }
