@@ -54,7 +54,9 @@ set_disk_space(0);
 document.addEventListener('keydown', function(event){
 
   if(event.keyCode == 27){
-    if (create_file_bool) {
+    if (delete_file_bool) {
+      close_delete_file_dialog();
+    } else if (create_file_bool) {
       close_create_file_dialog();
     } else if (open_close_user_bool || open_close_path_bool) {
       close_user();

@@ -5,12 +5,12 @@
     "path": [
       {
         "name": "home",
-        "path": "/disk/100LAR/",
+        "path": "/home/stolar/disk/100LAR/",
         "size": 1073741824
       },
       {
         "name": "users",
-        "path": "/disk/",
+        "path": "/home/stolar/disk/",
         "size": 0
       }
     ]
@@ -21,7 +21,7 @@
     "path": [
       {
         "name": "home",
-        "path": "/disk/guap/",
+        "path": "/home/stolar/disk/guap/",
         "size": 10737418240
       }
     ]
