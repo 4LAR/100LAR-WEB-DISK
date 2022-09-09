@@ -316,6 +316,11 @@ def unpack():
         dir_name = file.split('.')[0]
         #os.mkdir(user_path + dir + '/' + dir_name)
 
+        # Узнаём суммарный размер файлов в архиве
+        f = zipfile.ZipFile(user_path + dir + '/' + file, 'r')
+        size = sum([zinfo.file_size for zinfo in f.filelist])
+        print(size)
+
         # распаковка
         with zipfile.ZipFile(user_path + dir + '/' + file, 'r') as f:
             zipInfo = f.infolist()
@@ -461,6 +466,9 @@ def upload_file_disk():
     file = request.args.get("file", "")
 
     f = request.files['file']
+    size = len(f.read())
+    print(size)
+    f.seek(0, os.SEEK_SET)
 
     user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
     f.save(user_path + dir + '/' + file)
