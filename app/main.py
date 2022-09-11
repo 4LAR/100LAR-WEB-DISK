@@ -512,7 +512,7 @@ def upload_file_disk():
         user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
         f.save(user_path + dir + '/' + file)
 
-        return 'OK'
+        return 'ok'
 
     else:
         return 'NO PLACE'

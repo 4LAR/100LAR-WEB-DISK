@@ -293,6 +293,23 @@
 
     <!--диалоговые окна-->
 
+    <div id="dialog_no_place" class="dialog_style" style="height: 160px;">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_no_place_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <img class="icon" width="60" height="60" style="position: absolute; right: 30px; top: 45px;" src="static/img/warning.svg">
+      <h3 style="position: absolute; top: 40px; left: 140px;" align="right">There is no space to write the file.</h3>
+      <p style="position: absolute; top: 70px; left: 50px;" align="right">Delete unnecessary files or ask the administrator to increase the limit.</p>
+
+      <div class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;" onclick="close_no_place_dialog()">
+        <p style="margin: 5px 40px">ok</p>
+      </div>
+    </div>
+
     <!-- Удаление файлов -->
     <div id="dialog_delete_file" class="dialog_style">
       <div class="dialog_top_name">

@@ -67,7 +67,22 @@ function uploadFile(files, count = 0) {
     }
     xhr.upload.onload = function() {
       uploadFile(files, ++count);
-      //
+
+    }
+
+    xhr.onload = function() {
+      console.log(xhr.responseText.toString())
+      if (xhr.responseText.toString() === 'NO PLACE') {
+        no_place_dialog();
+
+        uploading_bool = false;
+        closeModal('file_upload_block');
+        if (!right_bar_bool) {
+          close_rightBar();
+        }
+        update_dir();
+      }
+
     }
     xhr.send(form);
 

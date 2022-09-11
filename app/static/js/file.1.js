@@ -630,8 +630,25 @@ if (localStorage.getItem('draw_type') == null) {
 
 switch_draw_type(localStorage.getItem('draw_type'), {"checked": true});
 
-/**/
+/* Уведомление о том что нет места */
+var no_place_file_bool = false;
 
+var delete_file_bool = false;
+function no_place_dialog() {
+  delete_file_bool = true;
+
+  openModal('dialog_bg');
+  openModal('dialog_no_place');
+}
+
+function close_no_place_dialog() {
+  delete_file_bool = false;
+
+  closeModal('dialog_bg');
+  closeModal('dialog_no_place');
+}
+
+/* Диалог для удаления файла */
 var delete_file_bool = false;
 function delete_file_dialog(path='', dir_str='', name='') {
   delete_file_bool = true;
@@ -709,8 +726,11 @@ function create_file(folder=false) {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      close_create_file_dialog();
-      update_dir();
+      if (xhr.responseText.toString() != 'NO PLACE') {
+        close_create_file_dialog();
+        update_dir();
+      } else no_place_dialog();
+
     }
   };
   xhr.send();
@@ -733,8 +753,11 @@ function activity_unpack_file() {
   xhr.open('POST', `/unpack?path=${path}&dir=${selected_file_dir}&file=${selected_file_name}&new_file=${selected_file_name}`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
-    if (xhr.status === 200 && xhr.responseText.toString() === 'ok') {
-      update_dir();
+    if (xhr.status === 200) {
+      if (xhr.responseText.toString() != 'NO PLACE') {
+        update_dir();
+      } else no_place_dialog();
+
     }
   };
 
