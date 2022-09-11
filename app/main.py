@@ -81,6 +81,18 @@ login_manager.init_app(app)
 
 #####################################################
 
+def check_size(current_user, path, file_size):
+
+    busy = get_size(userBase.get_user_info(current_user.username)['path'][int(path)]['path'])
+    user_size = userBase.get_user_info(current_user.username)['path'][int(path)]['size']
+
+    return (busy + file_size <= user_size)
+
+def utf8len(s):
+    return len(s.encode('utf-8'))
+
+#####################################################
+
 # Запросы
 @app.route('/')
 def index():
@@ -128,7 +140,23 @@ def save_file():
 
         user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
-        f = open(user_path + dir + '/' + file, 'w', encoding = 'utf-8')
+        file_path = user_path + dir + '/' + file
+
+        size = 0
+
+        if os.path.exists(file_path):
+            f = open(file_path, 'r', encoding = 'utf-8')
+            size = utf8len(f.read())
+            f.close()
+
+            if not check_size(current_user, path, utf8len(request.json['code']) - size):
+                return 'NO PLACE'
+
+        else:
+            if not check_size(current_user, path, size):
+                return 'NO PLACE'
+
+        f = open(file_path, 'w', encoding = 'utf-8')
         f.write(request.json['code'])
         f.close()
 
@@ -264,14 +292,19 @@ def create_file():
     path = request.args.get("path", "")
     dir = request.args.get("dir", "")
     file = request.args.get("file", "")
+    hello_data = request.args.get("hello", "HELLO WORLD")
 
     user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
-    f = open(user_path + dir + '/' + file, 'w')
-    f.write("HELLO WORLD")
-    f.close()
+    if check_size(current_user, path, utf8len(hello_data)):
+        f = open(user_path + dir + '/' + file, 'w')
+        f.write("HELLO WORLD")
+        f.close()
 
-    return 'ok'
+        return 'ok'
+
+    else:
+        return 'NO PLACE'
 
 # создание папки
 @app.route("/create_folder", methods=['GET' , 'POST'])
@@ -319,18 +352,23 @@ def unpack():
         # Узнаём суммарный размер файлов в архиве
         f = zipfile.ZipFile(user_path + dir + '/' + file, 'r')
         size = sum([zinfo.file_size for zinfo in f.filelist])
-        print(size)
 
-        # распаковка
-        with zipfile.ZipFile(user_path + dir + '/' + file, 'r') as f:
-            zipInfo = f.infolist()
-            for member in zipInfo:
-                # меняем кодировку именя файла чтобы была кириллица
-                member.filename = member.filename.encode('cp437').decode('cp866')
-                print(member)
-                f.extract(member, user_path + dir + '/' + dir_name)
+        # проверяем есть ли свободное место
+        if check_size(current_user, path, size):
 
-        return 'ok'
+            # распаковка
+            with zipfile.ZipFile(user_path + dir + '/' + file, 'r') as f:
+                zipInfo = f.infolist()
+                for member in zipInfo:
+                    # меняем кодировку именя файла чтобы была кириллица
+                    member.filename = member.filename.encode('cp437').decode('cp866')
+                    print(member)
+                    f.extract(member, user_path + dir + '/' + dir_name)
+
+            return 'ok'
+
+        else:
+            return 'NO PLACE'
 
     except Exception as e:
         console_term.print('/unpack: ' + str(e), 3)
@@ -467,13 +505,17 @@ def upload_file_disk():
 
     f = request.files['file']
     size = len(f.read())
-    print(size)
-    f.seek(0, os.SEEK_SET)
 
-    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
-    f.save(user_path + dir + '/' + file)
+    if check_size(current_user, path, size):
+        f.seek(0, os.SEEK_SET)
 
-    return 'OK'
+        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        f.save(user_path + dir + '/' + file)
+
+        return 'OK'
+
+    else:
+        return 'NO PLACE'
 
 # создаём WSGI сервер
 http_server = WSGIServer(
