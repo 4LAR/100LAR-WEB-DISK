@@ -81,13 +81,43 @@ login_manager.init_app(app)
 
 #####################################################
 
+#
 def check_size(current_user, path, file_size):
 
     busy = get_size(userBase.get_user_info(current_user.username)['path'][int(path)]['path'])
     user_size = userBase.get_user_info(current_user.username)['path'][int(path)]['size']
+    if (user_size != 0):
+        return (busy + file_size <= user_size)
 
-    return (busy + file_size <= user_size)
+    else:
+        return True
 
+#
+def check_size_list(current_user, path, dir, files=[]):
+    files_size = 0
+
+    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+
+    busy = get_size(user_path)
+    user_size = userBase.get_user_info(current_user.username)['path'][int(path)]['size']
+
+    if (user_size != 0):
+        for f in files:
+            if (f[1] == 'dir'):
+                files_size += get_size(user_path + dir + f[0])
+
+            else:
+                files_size += os.path.getsize(
+                    user_path + dir + '/' + f[0]
+                )
+
+        print(files_size)
+        return (busy + files_size <= user_size)
+    
+    else:
+        return True
+
+#
 def utf8len(s):
     return len(s.encode('utf-8'))
 
@@ -467,29 +497,43 @@ def copy_files():
         user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
         files_list = json.loads(files)['files']
 
-        # цикл по файлам
-        for f in files_list:
-            if cut_bool:
-                # перемещаем
-                shutil.move(
-                    user_path + dir + '/' + f[0],
-                    user_path + to
-                )
+        print(files_list)
 
-            else:
-                # копирование
-                shutil.copy2(
-                    user_path + dir + '/' + f[0],
-                    user_path + to
-                )
+        if (cut_bool or check_size_list(current_user, path, dir, files_list)):
+            # цикл по файлам
+            for f in files_list:
+                print(user_path + dir + '/' + f[0])
+                if cut_bool:
+                    # перемещаем
+                    shutil.move(
+                        user_path + dir + '/' + f[0],
+                        user_path + to
+                    )
 
-        # лог
-        console_term.print(
-            '/copy: %s %s files from %s to %s' %
-            (current_user.username, ('move' if (cut_bool) else 'copy'), '/' + dir, '/' + to),
-            1
-        )
-        return 'ok'
+                else:
+                    if (f[1] == 'dir'):
+                        # копирование директории
+                        shutil.copytree(
+                            user_path + dir + '/' + f[0],
+                            user_path + to
+                        )
+                    else:
+                        # копирование файла
+                        shutil.copy2(
+                            user_path + dir + '/' + f[0],
+                            user_path + to
+                        )
+
+            # лог
+            console_term.print(
+                '/copy: %s %s files from %s to %s' %
+                (current_user.username, ('move' if (cut_bool) else 'copy'), '/' + dir, '/' + to),
+                1
+            )
+            return 'ok'
+
+        else:
+            return 'NO PLACE'
 
     except Exception as e:
         console_term.print('/copy: ' + str(e), 3)
