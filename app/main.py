@@ -113,7 +113,7 @@ def check_size_list(current_user, path, dir, files=[]):
 
         print(files_size)
         return (busy + files_size <= user_size)
-    
+
     else:
         return True
 
@@ -515,7 +515,7 @@ def copy_files():
                         # копирование директории
                         shutil.copytree(
                             user_path + dir + '/' + f[0],
-                            user_path + to
+                            user_path + to + '/' + f[0]
                         )
                     else:
                         # копирование файла

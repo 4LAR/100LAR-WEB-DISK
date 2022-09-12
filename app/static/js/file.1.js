@@ -508,8 +508,14 @@ function paste_files() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      update_dir();
-      close_rightBar();
+      if (xhr.responseText.toString() != 'NO PLACE') {
+        update_dir();
+        close_rightBar();
+      } else {
+        no_place_dialog();
+        close_rightBar();
+      }
+
     }
   };
   xhr.send();
