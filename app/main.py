@@ -142,6 +142,13 @@ def main_m():
 
 #####################################################
 
+@app.route('/admin')
+@login_required
+def admin():
+    return render_template('admin.html')
+
+#####################################################
+
 # текстовый редактор
 @app.route('/editor')
 @login_required

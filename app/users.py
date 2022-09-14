@@ -37,7 +37,23 @@ class UserBase():
         self.path = 'users'
         self.key = key
 
-        self.users_dict = {}
+        self.users_dict = {
+            "admin": {	
+                "status": "admin",	
+                "password": "12345678",	
+                "path": [	
+                    {	
+                        "type": "path",
+                        "name": "root",	
+                        "path": "/",	
+                        "size": 10737418240	
+                    }	
+                ]	
+            }	
+        }
+
+        self.templates_dict = {}
+
         self.users = {}
 
         self.read()
@@ -48,7 +64,15 @@ class UserBase():
             self.save()
 
         else:
-            self.users_dict = read_dict(self.path)
+            json_dict = read_dict(self.path)
+
+            self.users_dict = json_dict['users']
+            self.templates_dict = json_dict['templates']
+
+            for user in self.users_dict:
+                for i in range(len(self.users_dict[user]['path'])):
+                    if self.users_dict[user]['path'][i]['type'] == 'template':
+                        self.users_dict[user]['path'][i] = self.templates_dict[self.users_dict[user]['path'][i]['name']]
 
         self.update_users()
 
@@ -93,7 +117,13 @@ class UserBase():
 
     #
     def save(self):
-        save_dict(self.users_dict, self.path)
+        save_dict(
+            {   
+                'templates': self.templates_dict,
+                'users': self.users_dict
+            }, 
+            self.path
+        )
 
     def add_user(self):
         pass
