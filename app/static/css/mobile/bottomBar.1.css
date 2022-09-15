@@ -1,0 +1,50 @@
+
+.bottomBar {
+  position: fixed;
+
+  bottom: 0px;
+  left: 0px;
+  height: 25px;
+  width: 100%;
+
+  background-color: var(--top-color);
+
+  border-top: 1px solid var(--top-border-color);
+}
+
+.move_buttons {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  height: 45px;
+
+  width: 175px;
+
+  background-color: var(--top-color);
+
+  border-top: 1px solid var(--top-border-color);
+  border-left: 1px solid var(--top-border-color);
+}
+
+.disk_info {
+
+}
+
+.disk_space {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: calc(100% - 175px);
+  height: 3px;
+  border-top: 1px solid var(--top-border-color);
+  background-color: var(--top-color);
+}
+
+.disk_space_progress {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 40px;
+  height: 3px;
+  background-color: #999999;
+}

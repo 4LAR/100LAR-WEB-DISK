@@ -5,7 +5,7 @@ import json
 from flask_login import UserMixin
 
 def save_dict(dict, name):
-    json.dump(dict, open(str(name) + '.json','w'))
+    json.dump(dict, open(str(name) + '.json','w'), indent=2)
 
 def read_dict(name):
     with open(str(name) + '.json', encoding='utf-8') as fh:
@@ -38,18 +38,18 @@ class UserBase():
         self.key = key
 
         self.users_dict = {
-            "admin": {	
-                "status": "admin",	
-                "password": "12345678",	
-                "path": [	
-                    {	
+            "admin": {
+                "status": "admin",
+                "password": "12345678",
+                "path": [
+                    {
                         "type": "path",
-                        "name": "root",	
-                        "path": "/",	
-                        "size": 10737418240	
-                    }	
-                ]	
-            }	
+                        "name": "root",
+                        "path": "/",
+                        "size": 0
+                    }
+                ]
+            }
         }
 
         self.templates_dict = {}
@@ -118,10 +118,10 @@ class UserBase():
     #
     def save(self):
         save_dict(
-            {   
+            {
                 'templates': self.templates_dict,
                 'users': self.users_dict
-            }, 
+            },
             self.path
         )
 

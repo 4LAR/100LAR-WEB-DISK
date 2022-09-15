@@ -1,0 +1,24 @@
+
+.file_list {
+    position: fixed;
+
+    left: 0px;
+    right: 0px;
+
+    top: 30px;
+    bottom: 30px;
+
+    overflow-y: scroll;
+
+}
+
+.file {
+  border-bottom: 1px solid var(--main-border-color);
+
+  height: 45px;
+  width: 100%;
+}
+
+.file p {
+  white-space: nowrap;
+}

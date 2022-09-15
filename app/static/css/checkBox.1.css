@@ -28,6 +28,12 @@
   background-size: 100% 100%;
 }
 
+.custom-checkbox-mobile+label::before {
+  width: 1.5em;
+  height: 1.5em;
+  border: 3px solid var(--main-checkBox-color);
+}
+
 .custom-checkbox:checked+label::before {
   border-color: var(--main-checkBox-color);
 

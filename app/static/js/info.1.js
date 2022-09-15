@@ -46,7 +46,7 @@ function get_info() {
 
 //
 function set_disk_space(state = 0) {
-  document.getElementById("disk_space_progress").style.width = (space_bar_width/100) * state;
+  document.getElementById("disk_space_progress").style.width = (document.getElementById("disk_space_div").offsetWidth/100) * state;
 }
 
 set_disk_space(0);
