@@ -15,7 +15,7 @@ function login() {
         console.log('ERROR LOGIN');
 
       } else {
-        window.location.href = '/main';
+        check_login();
 
       }
     }
@@ -32,12 +32,24 @@ function login_enter(e) {
 }
 
 //
+function check_device() {
+  return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+}
+
+console.log(check_device())
+
+//
 function check_login() {
   xhr = new XMLHttpRequest();
   xhr.open('POST', '/info');
   xhr.onload = function () {
     if (xhr.status === 200 && xhr.responseText.toString() != 'ERROR LOGIN') {
-      window.location.href = '/main';
+      if (check_device()) {
+        window.location.href = '/m-main';
+      } else {
+        window.location.href = '/main';
+      }
+
     }
   };
   xhr.send();

@@ -1,57 +1,115 @@
 
+@media screen and (orientation: landscape) {
+  .login_class {
+    position:absolute;
 
-.login_class {
-  position:absolute;
+    background-color: var(--right-color);
+    border: 1px solid var(--main-border-color);
 
-  background-color: var(--right-color);
-  border: 1px solid var(--main-border-color);
+    right: 0px;
+    top: 0px;
 
-  right: 0px;
-  top: 0px;
+    height: 100%;
+    width: 400px;
 
-  height: 100%;
-  width: 400px;
+  }
 
+  .login_container {
+    position: absolute;
+
+    /*top: 121px;*/
+    top: 80px;
+    right: 0px;
+
+    height: 150px;
+    width: 400px;
+
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--main-border-color);
+    border-bottom: 1px solid var(--main-border-color);
+  }
+
+  .login_name_container {
+    position: absolute;
+
+    top: 80px;
+    right: 0px;
+
+    height: 40px;
+    width: 400px;
+
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--main-border-color);
+
+  }
+
+  .login_input {
+    position: absolute;
+
+    left: 10px;
+
+    width: 380px;
+
+    background-color: var(--main-input-color);
+  }
 }
 
-.login_container {
-  position: absolute;
+@media screen and (orientation: portrait) {
+  .login_class {
+    position:absolute;
 
-  /*top: 121px;*/
-  top: 80px;
-  right: 0px;
+    background-color: var(--right-color);
 
-  height: 150px;
-  width: 400px;
+    left: 0px;
+    top: 0px;
 
-  background-color: var(--bg-color);
-  border-top: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
+    height: 100%;
+    width: 100%;
+
+  }
+
+  .login_container {
+    position: absolute;
+
+    /*top: 121px;*/
+    top: 80px;
+    right: 0px;
+
+    height: 150px;
+    width: 100%;
+
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--main-border-color);
+    border-bottom: 1px solid var(--main-border-color);
+  }
+
+  .login_name_container {
+    position: absolute;
+
+    top: 80px;
+    left: 0px;
+
+    height: 40px;
+    width: 100%;
+
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--main-border-color);
+
+  }
+
+  .login_input {
+    position: absolute;
+
+    left: 10px;
+
+    left: 10px;
+    right: 10px;
+
+    background-color: var(--main-input-color);
+  }
 }
 
-.login_name_container {
-  position: absolute;
 
-  top: 80px;
-  right: 0px;
-
-  height: 40px;
-  width: 400px;
-
-  background-color: var(--bg-color);
-  border-top: 1px solid var(--main-border-color);
-
-}
-
-.login_input {
-  position: absolute;
-
-  left: 10px;
-
-  width: 380px;
-
-  background-color: var(--main-input-color);
-}
 
 .login_button {
   position: absolute;
