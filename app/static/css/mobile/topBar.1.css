@@ -27,10 +27,6 @@
   cursor: pointer;
 }
 
-.user_button:hover {
-  background-color: var(--top-hover-color);
-}
-
 .user_button img {
   position: relative;
   top: 10px;

@@ -453,6 +453,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   open_right_bar();
   openModal('file_info_block');
   closeModal('file_list_block');
+  if (mobile) closeModal('addFileMenu');
 }
 
 // закрытие страницы информации о файле
@@ -467,6 +468,7 @@ function close_rightBar() {
   closeModal('file_info_block');
   closeModal('file_list_block');
   closeModal('copy_or_paste_block');
+  if (mobile) closeModal('addFileMenu');
 
   if (!mobile) document.getElementById("file_list_div").style.right = '0px';
   else document.getElementById("file_list_div").style.bottom = '30px';
@@ -488,6 +490,7 @@ var list_checked_file = [];
 function checkBox_file(e, name, type) {
   open_right_bar();
   closeModal('file_info_block');
+  if (mobile) closeModal('addFileMenu');
   openModal('file_list_block');
 
   var ok = false;
@@ -672,6 +675,16 @@ function rename_file() {
     xhr.send();
   }
 
+}
+
+//
+function open_file_add() {
+  open_right_bar();
+  closeModal('file_info_block');
+  closeModal('file_list_block');
+  closeModal('copy_or_paste_block');
+
+  openModal('addFileMenu');
 }
 
 /*-----------------отображение------------------------*/

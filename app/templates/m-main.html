@@ -11,6 +11,8 @@
     <link rel="stylesheet" href = "static/css/mobile/topBar.1.css"/>
     <link rel="stylesheet" href = "static/css/mobile/bottomBar.1.css"/>
     <link rel="stylesheet" href = "static/css/mobile/fileinfoBar.1.css"/>
+    <link rel="stylesheet" href = "static/css/mobile/addFileMenu.1.css"/>
+    <link rel="stylesheet" href = "static/css/mobile/dialog.1.css"/>
 
   </head>
   <body class="scroll_style">
@@ -34,6 +36,10 @@
         <div id="disk_space_progress" class="disk_space_progress"></div>
       </div>
 
+      <div class="add_button_div">
+        <img id="" class="icon_topBar path_buttons block_select button_margin" style="position: absolute; right: 8px; top: 4px" width="35" height="35" src="static/img/add.svg" onclick="open_file_add()">
+      </div>
+
       <div class="move_buttons">
         <img id="go_back" class="icon_topBar path_buttons block_select button_margin" style="position: absolute; right: 135px; top: 3px; transform: rotate(-90deg)" width="35" height="35" src="static/img/arrow up.svg" onclick="go_back_dir_history()">
         <img id="go_forward" class="icon_topBar path_buttons block_select button_margin" style="position: absolute; right: 95px; top: 3px; transform: rotate(90deg)" width="35" height="35" src="static/img/arrow up.svg" onclick="go_forward_dir_history()">
@@ -44,6 +50,7 @@
     </div>
 
     <div id="file_info_bar_background_black" class="background_black" style="display: none" onclick="close_rightBar()"></div>
+
     <div class="rightBar" id="rightBar" style="display: none">
       <!--закрытие панели-->
       <div class="file_close_button block_select button_margin" onclick="close_rightBar()">
@@ -196,6 +203,27 @@
           <div id="upload_progress" class="upload_progress"></div>
         </div>
       </div>
+
+      <div id="addFileMenu" style="display: none">
+        <label for="fileElem">
+          <div class="small_button_style block_select button_margin" style="right: 0px; top: 35px; width: 50%;">
+            <img class="icon" width="20" height="20" src="static/img/upload.svg">
+            <p>upload file</p>
+          </div>
+        </label>
+
+        <div class="small_button_style block_select button_margin" style="top: 35px; width: 50%;" onclick="create_file_dialog(true)">
+          <img class="icon" width="20" height="20" src="static/img/new folder.svg">
+          <p>create folder</p>
+        </div>
+
+        <div class="small_button_style block_select button_margin" style="top: 71px; width: 50%;" onclick="create_file_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/files/file.svg">
+          <p>create file</p>
+        </div>
+
+      </div>
+
     </div>
 
     <div id="background_black" class="background_black" style="display: none" onclick="close_user()"></div>
@@ -235,6 +263,65 @@
         <img id="user_button_triangle" class="icon_topBar" style="position:absolute; right: 10px; top: 10px" width="10" height="10" src="static/img/triangle.svg">
       </div>
     </div>
+
+    <div id="dialog_bg" class="dialog_backgound"></div>
+
+    <!--диалоговые окна-->
+
+    <div id="dialog_no_place" class="dialog_style" style="height: 200px;">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_no_place_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <!-- <img class="icon" width="60" height="60" style="position: absolute; right: 30px; top: 45px;" src="static/img/warning.svg"> -->
+      <h3 style="position: absolute; top: 40px; left: 10px;" align="left">There is no disk space to modify the file.</h3>
+      <p style="position: absolute; top: 70px; left: 10px;" align="left">Delete unnecessary files or ask the administrator to increase the limit.</p>
+
+      <div class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;" onclick="close_no_place_dialog()">
+        <p style="margin: 5px 40px">ok</p>
+      </div>
+    </div>
+
+    <!-- Удаление файлов -->
+    <div id="dialog_delete_file" class="dialog_style">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_delete_file_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <p style="position: absolute; left: 10px; top: 40px">Delete file list:</p>
+      <textarea id="delete_file_list" class="input_style fileDescription scroll_style" style="position: absolute; top: 40px; left: 125px; right: 10px; height: 140px;" readonly></textarea>
+
+      <div id="delete_file_button" class="red_dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+        <p style="margin: 5px 28px">delete</p>
+      </div>
+    </div>
+
+    <!-- Создание файлов и директорий -->
+    <div id="dialog_create_file" class="dialog_style">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_create_file_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <div class="dialog_info">
+        <img class="icon" id="create_file_image" style="position: absolute; left: 10px; top: 10px;" width="40" height="40" src="">
+        <input id="create_fileName_input" class="input_style create_fileName_input" style="" type=text placeholder="file name" onkeypress="return create_file_enter(event)">
+      </div>
+
+      <div id="create_file_button" class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+        <p style="margin: 5px 28px">create</p>
+      </div>
+    </div>
+
+    <input name="fileElem" type="file" id="fileElem" style="display: none;" multiple onchange="uploadFile(this.files)">
 
   </body>
 

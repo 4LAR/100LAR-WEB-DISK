@@ -26,6 +26,20 @@
   border-left: 1px solid var(--top-border-color);
 }
 
+.add_button_div {
+  position: fixed;
+  right: 0px;
+  bottom: 45px;
+  height: 45px;
+
+  width: 50px;
+
+  background-color: var(--top-color);
+
+  border-top: 1px solid var(--top-border-color);
+  border-left: 1px solid var(--top-border-color);
+}
+
 .disk_info {
 
 }
@@ -34,7 +48,7 @@
   position: absolute;
   left: 0px;
   bottom: 0px;
-  width: calc(100% - 175px);
+  width: calc(100% - (175px + 50px));
   height: 3px;
   border-top: 1px solid var(--top-border-color);
   background-color: var(--top-color);

@@ -1,0 +1,12 @@
+
+.small_button_style {
+  position: absolute;
+  height: 35px;
+
+  border-top: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+  border-right: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+
+  cursor: pointer;
+}
