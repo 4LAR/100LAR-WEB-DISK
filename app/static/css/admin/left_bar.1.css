@@ -1,0 +1,98 @@
+
+
+@media screen and (orientation: landscape) {
+  .left_bar {
+    position: absolute;
+    top: 40px;
+    left: 2%;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .left_bar {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    margin: 0 -125;
+  }
+}
+
+.menu_table {
+  width: 250px;
+
+  border-collapse: collapse;
+}
+
+.left_bar_hr{
+  border: none;
+  background-color:  #1E2329;
+  color: #1E2329;
+  height: 1px;
+}
+
+.left_bar_button_p p{
+  padding-top: 4px;
+  padding-left: 35px;
+}
+
+.left_bar_button_p img{
+  position: absolute;
+  margin: 6px 8px;
+  left: 2px
+}
+
+.left_bar_description {
+  font-size: 12px;
+  color: #8B949E;
+}
+
+.left_bar_button_selected {
+  position:relative;
+  background-color: #1A1E25;
+
+  border-radius: 5px;
+  /*margin-top: -15px;*/
+
+  border-radius: 5px;
+
+  left:10px;
+
+  width: 220px;
+  height: 30px;
+
+  cursor: pointer;
+}
+
+.left_bar_button_selected p {
+  font-weight: bold;
+  color: #C9D1D9;
+
+}
+
+.left_bar_button_selected:hover {
+  background-color: #21262C;
+}
+
+.left_bar_button {
+  position:relative;
+  background-color: #0D1117;
+
+  border-radius: 5px;
+  /*margin-top: -15px;*/
+
+  left:10px;
+
+  width: 220px;
+  height: 30px;
+
+  cursor: pointer;
+}
+
+.left_bar_button p {
+  font-weight: normal;
+
+}
+
+.left_bar_button:hover {
+  background-color: #21262C;
+}
