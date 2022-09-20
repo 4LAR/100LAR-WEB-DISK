@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href = "static/css/admin/main.1.css"/>
     <link rel="stylesheet" href = "static/css/admin/left_bar.1.css"/>
+    <link rel="stylesheet" href = "static/css/admin/main_page.1.css"/>
 
   </head>
 
@@ -19,7 +20,7 @@
       <table class="menu_table left_bar_button_p">
         <tr><th>
           <div class="left_bar_button" id="left_bar_dashboard" onclick="open_page('dashboard')">
-            <img class="icon" width="18" height="18" src="static/img/dashboard.svg">
+            <img class="icon" width="18" height="18" src="static/img/admin/dashboard.svg">
             <p align="left">dashboard</p>
           </div>
         </th></tr>
@@ -30,14 +31,14 @@
           <p class="left_bar_description" align="left">Disk</p>
         </th></tr>
         <tr><th>
-          <div class="left_bar_button_selected" id="left_bar_appointment" onclick="open_page('appointment')">
-            <img class="icon" width="18" height="18" src="static/img/appointment.svg">
+          <div class="left_bar_button_selected" id="left_bar_users" onclick="open_page('users')">
+            <img class="icon" width="18" height="18" src="static/img/admin/user.svg">
             <p align="left">users</p>
           </div>
         </th></tr>
         <tr><th>
-          <div class="left_bar_button" id="left_bar_happy_birthday" onclick="open_page('happy_birthday')">
-            <img class="icon" width="18" height="18" src="static/img/happy birthday.svg">
+          <div class="left_bar_button" id="left_bar_templates" onclick="open_page('templates')">
+            <img class="icon" width="18" height="18" src="static/img/admin/.svg">
             <p align="left">templates</p>
           </div>
         </th></tr>
@@ -49,13 +50,13 @@
         </th></tr>
         <tr><th>
           <div class="left_bar_button" id="left_bar_logs" onclick="open_page('logs')">
-            <img class="icon" width="18" height="18" src="static/img/log.svg">
+            <img class="icon" width="18" height="18" src="static/img/admin/log.svg">
             <p align="left">logs</p>
           </div>
         </th></tr>
         <tr><th>
           <div class="left_bar_button" id="left_bar_settings" onclick="open_page('settings')">
-            <img class="icon" width="18" height="18" src="static/img/settings.svg">
+            <img class="icon" width="18" height="18" src="static/img/admin/settings.svg">
             <p align="left">settings</p>
           </div>
         </th></tr>
@@ -63,14 +64,78 @@
           <hr class="left_bar_hr">
         </th></tr>
         <tr><th>
-          <div class="left_bar_button" id="left_bar_data_base" onclick="logout()">
-            <img class="icon" width="18" height="18" src="static/img/logout.svg">
+          <div class="left_bar_button" id="left_bar_data_base" onclick="()">
+            <img class="icon" width="18" height="18" src="static/img/admin/logout.svg">
             <p align="left">exit</p>
           </div>
         </th></tr>
       </table>
     </div>
 
+    <!--dashboard-->
+    <div class="main_page" id="dashboard" style="display: none;">
+      <div class="border border_size">
+        <div class="name_area_border border_size" style="height: 52px">
+          <img class="icon" width="30" height="30" src="static/img/admin/dashboard.svg">
+          <h2>Dashboard</h2>
+        </div>
+        <hr class="main_page_hr">
+        <p>hello</p>
+      </div>
+    </div>
+
+    <!--users-->
+    <div class="main_page" id="users" style="display: none;">
+      <div class="border border_size">
+        <div class="name_area_border border_size" style="height: 52px">
+          <img class="icon" width="30" height="30" src="static/img/admin/user.svg">
+          <h2>Users</h2>
+        </div>
+        <hr class="main_page_hr">
+        <p>hello</p>
+      </div>
+    </div>
+
+    <!--templates-->
+    <div class="main_page" id="templates" style="display: none;">
+      <div class="border border_size">
+        <div class="name_area_border border_size" style="height: 52px">
+          <img class="icon" width="30" height="30" src="static/img/admin/.svg">
+          <h2>Templates</h2>
+        </div>
+        <hr class="main_page_hr">
+        <p>hello</p>
+      </div>
+    </div>
+
+    <!--logs-->
+    <div class="main_page" id="logs" style="display: none;">
+      <div class="border border_size">
+        <div class="name_area_border border_size" style="height: 52px">
+          <img class="icon" width="30" height="30" src="static/img/admin/log.svg">
+          <h2>Logs</h2>
+        </div>
+        <hr class="main_page_hr">
+        <p>hello</p>
+      </div>
+    </div>
+
+    <!--setings-->
+    <div class="main_page" id="settings" style="display: none;">
+      <div class="border border_size">
+        <div class="name_area_border border_size" style="height: 52px">
+          <img class="icon" width="30" height="30" src="static/img/admin/settings.svg">
+          <h2>Setings</h2>
+        </div>
+        <hr class="main_page_hr">
+        <p>hello</p>
+      </div>
+    </div>
+
   </body>
+
+  <script type="text/javascript" src="static/js/main.1.js"></script>
+  <script type="text/javascript" src="static/js/admin.1.js"></script>
+
 
 </html>

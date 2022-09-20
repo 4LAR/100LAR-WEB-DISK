@@ -1,0 +1,160 @@
+
+@media screen and (min-width: 900px) {
+  .main_page {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    margin: 0 -350px;
+  }
+
+  .border_size {
+    width: 700px;
+  }
+
+  .main_page_textarea {
+    position: absolute;
+    resize: none;
+    text-align: left;
+    vertical-align:top;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main_page {
+    position: absolute;
+    top: 480px;
+    left: 50%;
+    margin: 0 -175px;
+  }
+
+  .border_size {
+    width: 350px;
+  }
+
+  .main_page_textarea {
+    display: none;
+  }
+}
+
+.border {
+  border-radius: 10px;
+  border: 1px solid #30363D;
+  display: block;
+  border-collapse: collapse; 
+}
+
+.name_area_border {
+  position:relative;
+  border-radius: 10px 10px 0 0; 
+  display: block;
+  border-collapse: collapse; 
+
+  background-color:  #161B22;
+
+  /* top: 0px; */
+  /* height: 52px; */
+
+  
+}
+
+.name_area_border img {
+  position: relative; 
+  margin: 10px 10px;
+}
+
+.name_area_border h2 {
+  margin: -38px 50px;
+}
+
+.main_page_hr{
+  border: none;
+  background-color:  #30363D;
+  color: #1E2329;
+  height: 1px;
+
+  margin: 0px;
+}
+
+.main_page_button {
+  border-radius: 5px;
+  border: 1px solid #30363D;
+  display: block;
+  border-collapse: collapse; 
+  background-color: #21262D;
+
+  height: 30px;
+}
+
+.main_page_button:hover {
+  border: 1px solid #21262D;
+  cursor: pointer;
+}
+
+.main_page_button p {
+  margin: 6px 10px;
+  color: #C9D1D9;
+}
+
+/*loglist*/
+
+.loglist img {
+  position: relative;
+  left: 10px;
+}
+
+.loglist p {
+  display: inline-block;
+  position: relative;
+  margin: 0px 15px;
+}
+
+.log_download {
+  position: relative;
+  margin: 0px 20px;
+
+  cursor: pointer;
+}
+
+/*userlisr*/
+
+.userlist img {
+  position: relative;
+  left: 10px;
+}
+
+.userlist p {
+  display: inline-block;
+  position: relative;
+  margin: 0px 15px;
+}
+
+/**/
+.settings_name {
+  position: relative;
+  border-radius: 10px 10px 0 0;
+  display: block;
+  border-collapse: collapse; 
+
+  margin: 0px 0px;
+  padding: 0px;
+
+  background-color:  #161B22;
+}
+
+/**/
+.dashboard_info {
+  display: block;
+
+  height: 40px;
+
+}
+
+.dashboard_info img {
+  margin: 5px 10px
+
+}
+
+.dashboard_info p {
+  margin: -28px 50px
+
+}
