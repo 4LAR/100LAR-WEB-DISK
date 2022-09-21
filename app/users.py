@@ -14,13 +14,14 @@ def read_dict(name):
 
 #
 class User(UserMixin):
-    def __init__(self, id, username, password, status, path, key='secret_key'):
+    def __init__(self, id, username, password, status, panel, path, key='secret_key'):
         self.id = id
 
         self.username = username
         self.password = password
 
         self.status = status
+        self.panel = panel
         self.path = path
 
     def get_id(self):
@@ -41,6 +42,7 @@ class UserBase():
             "admin": {
                 "status": "admin",
                 "password": "12345678",
+                "panel": True,
                 "path": [
                     {
                         "type": "path",
@@ -87,6 +89,7 @@ class UserBase():
                 username = user,
                 password = self.users_dict[user]['password'],
                 status = self.users_dict[user]['status'],
+                panel = self.users_dict[user]['panel'],
                 path = self.users_dict[user]['path'],
                 key = self.key
             )

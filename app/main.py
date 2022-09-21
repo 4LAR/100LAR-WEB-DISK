@@ -145,7 +145,11 @@ def main_m():
 @app.route('/admin')
 @login_required
 def admin():
-    return render_template('admin.html')
+    if (current_user.panel):
+        return render_template('admin.html')
+    
+    else:
+        return "NO ADMIN"
 
 #####################################################
 
