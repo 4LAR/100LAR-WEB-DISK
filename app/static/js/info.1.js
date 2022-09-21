@@ -10,6 +10,12 @@ function get_info() {
     if (xhr.status === 200) {
       info_json = JSON.parse(xhr.responseText.toString());
 
+      // показ кнопки админ панели
+      if (info_json['panel']) {
+        openModal('admin_panel');
+        document.getElementById('other_options').style.top = "82px";
+      }
+
       document.getElementById('user_status').innerHTML = info_json['status'];
       document.getElementById('user_name').innerHTML = info_json['name'];
 

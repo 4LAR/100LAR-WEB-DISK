@@ -245,23 +245,30 @@
 
     <div id="leftBar_user" class="leftBar_user" style="display: none">
 
-      <p class="top_bar_font_color" style="position: absolute; left: 8px; top: 32px;">Theme</p>
-
-      <div style="position: absolute; top: 55px; left: 15px;">
-        <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
-        <label for="lightThame_chekcbox"><p class="top_bar_font_color">Light theme</p></label>
+      <div id="admin_panel" class="small_button_left_style block_select button_margin" style="top: 45px; display: none" onclick="openInNewTab('admin')">
+        <img class="icon_topBar" width="20" height="20" src="static/img/admin/dashboard.svg">
+        <p class="top_bar_font_color">admin panel</p>
       </div>
 
-      <!--<div style="position: absolute; top: 85px; left: 15px;">
-        <input type="checkbox" class="custom-checkbox top_checkBox" id="darkThame_chekcbox" name="darkThame_chekcbox" value="yes" onchange="(this)">
-        <label for="darkThame_chekcbox"><p class="top_bar_font_color">Dark theme</p></label>
+      <div id="other_options" style="position: absolute; top: 42px; width: 100%;">
+        <p class="top_bar_font_color" style="position: absolute; left: 8px; top: 0px;">Theme</p>
+
+        <div style="position: absolute; top: 20px; left: 15px;">
+          <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
+          <label for="lightThame_chekcbox"><p class="top_bar_font_color">Light theme</p></label>
+        </div>
+
+        <!--<div style="position: absolute; top: 85px; left: 15px;">
+          <input type="checkbox" class="custom-checkbox top_checkBox" id="darkThame_chekcbox" name="darkThame_chekcbox" value="yes" onchange="(this)">
+          <label for="darkThame_chekcbox"><p class="top_bar_font_color">Dark theme</p></label>
+        </div>
+
+        <div style="position: absolute; top: 115px; left: 15px;">
+          <input type="checkbox" class="custom-checkbox top_checkBox" id="systemThame_chekcbox" name="systemThame_chekcbox" value="yes" onchange="(this)">
+          <label for="systemThame_chekcbox"><p class="top_bar_font_color">System theme</p></label>
+        </div>-->
+
       </div>
-
-      <div style="position: absolute; top: 115px; left: 15px;">
-        <input type="checkbox" class="custom-checkbox top_checkBox" id="systemThame_chekcbox" name="systemThame_chekcbox" value="yes" onchange="(this)">
-        <label for="systemThame_chekcbox"><p class="top_bar_font_color">System theme</p></label>
-      </div>-->
-
       <!--кнопка для выхода из аккаунта-->
       <div class="button_exit_style block_select button_margin" onclick="logout()">
         <img class="icon_topBar" width="20" height="20" src="static/img/logout.svg">
