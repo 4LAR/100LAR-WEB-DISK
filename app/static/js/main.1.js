@@ -53,3 +53,37 @@ function append_to_ul(id, content) {
 function clear_ul(id) {
   document.getElementById(id).innerHTML = '';
 }
+
+//
+function getBaseLog(x, y) {
+  return Math.log(y) / Math.log(x);
+}
+
+//
+function convert_size(size_bytes) {
+  if (size_bytes == 0)
+    return '0 B';
+
+  size_name = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+  i = Math.floor(getBaseLog(1024, size_bytes));
+  p = Math.pow(1024, i);
+  s = Math.round((size_bytes / p) * 100) / 100;
+
+  console.log(s)
+
+  return s + ' ' + size_name[i]
+}
+
+//
+function set_progressbar(name, state = 0, count=1) {
+  if (count > 1) {
+    for (let i = 0; i < count; i++) {
+      document.getElementById(name + "_" + i).style.width = (document.getElementById(name + "_div").offsetWidth/100) * state[i];
+    }
+
+  } else {
+    document.getElementById(name).style.width = (document.getElementById(name + "_div").offsetWidth/100) * state;
+
+  }
+}

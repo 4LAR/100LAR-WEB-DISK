@@ -11,6 +11,11 @@
     width: 700px;
   }
 
+  .sub_border_size {
+    width: 335px;
+    background-color: #161B22;
+  }
+
   .main_page_textarea {
     position: absolute;
     resize: none;
@@ -31,6 +36,11 @@
     width: 350px;
   }
 
+  .sub_border_size {
+    width: 165px;
+    background-color: #161B22;
+  }
+
   .main_page_textarea {
     display: none;
   }
@@ -40,25 +50,31 @@
   border-radius: 10px;
   border: 1px solid #30363D;
   display: block;
-  border-collapse: collapse; 
+  border-collapse: collapse;
+}
+
+.page_table {
+  width: 100%;
+}
+
+.page_table th {
+  vertical-align: top
 }
 
 .name_area_border {
   position:relative;
-  border-radius: 10px 10px 0 0; 
+  border-radius: 10px 10px 0 0;
   display: block;
-  border-collapse: collapse; 
+  border-collapse: collapse;
 
   background-color:  #161B22;
 
-  /* top: 0px; */
-  /* height: 52px; */
+  width: 100%;
 
-  
 }
 
 .name_area_border img {
-  position: relative; 
+  position: relative;
   margin: 10px 10px;
 }
 
@@ -79,7 +95,7 @@
   border-radius: 5px;
   border: 1px solid #30363D;
   display: block;
-  border-collapse: collapse; 
+  border-collapse: collapse;
   background-color: #21262D;
 
   height: 30px;
@@ -133,7 +149,7 @@
   position: relative;
   border-radius: 10px 10px 0 0;
   display: block;
-  border-collapse: collapse; 
+  border-collapse: collapse;
 
   margin: 0px 0px;
   padding: 0px;

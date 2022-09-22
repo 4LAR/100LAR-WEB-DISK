@@ -46,6 +46,12 @@ import io
 #
 import magic
 
+# для получения информации и системе и сервере
+import psutil
+from memory_profiler import memory_usage
+
+start_time = datetime.datetime.now()
+
 # импортируем py файлы
 from console import *
 from get_time import *
@@ -147,7 +153,25 @@ def main_m():
 def admin():
     if (current_user.panel):
         return render_template('admin.html')
-    
+
+    else:
+        return "NO ADMIN"
+
+@app.route('/system_info', methods=['GET' , 'POST'])
+@login_required
+def system_info():
+    if (current_user.panel):
+        info = {}
+
+        memory = psutil.virtual_memory()
+
+        info['total_memory'] = memory.total
+        info['used_memory'] = memory.used
+        info['program_memory'] = (memory_usage()[0] * 1024 * 1024)
+        info['server_time_running'] = str(datetime.datetime.now() - start_time).split('.')[0],
+
+        return info
+
     else:
         return "NO ADMIN"
 
