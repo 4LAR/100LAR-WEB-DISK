@@ -90,14 +90,12 @@ login_manager.init_app(app)
 #
 def reboot():
     console_term.print('Server rebooting', 0)
-    user_information.run_check = False
     os.execv(sys.executable, ['python3'] + sys.argv)
     exit()
 
 #
 def shutdown():
     console_term.print('Server shutdown', 0)
-    user_information.run_check = False
     exit()
 
 #
@@ -170,6 +168,7 @@ def admin():
     else:
         return "NO ADMIN"
 
+# вывод информации о сервере
 @app.route('/system_info', methods=['GET' , 'POST'])
 @login_required
 def system_info():
@@ -182,8 +181,31 @@ def system_info():
         info['used_memory'] = memory.used
         info['program_memory'] = (memory_usage()[0] * 1024 * 1024)
         info['server_time_running'] = str(datetime.datetime.now() - start_time).split('.')[0],
+        info['settings'] = settings.options
 
         return info
+
+    else:
+        return "NO ADMIN"
+
+# изменение настроек
+@app.route('/settings_set', methods=['POST'])
+@login_required
+def settings_set():
+    if (current_user.panel):
+        try:
+            section = request.args.get("section", "")
+            parameter = request.args.get("parameter", "")
+            state = request.args.get("state", "")
+
+            settings.set_settings(section, parameter, state)
+
+            settings.save_settings()
+
+            return 'OK'
+
+        except:
+            return 'ERROR'
 
     else:
         return "NO ADMIN"
@@ -195,7 +217,8 @@ def web_reboot():
     if (current_user.panel):
         reboot()
 
-    return "NO ADMIN"
+    else:
+        return "NO ADMIN"
 
 # остановка скрипта
 @app.route('/shutdown', methods=['POST', 'GET'])
@@ -204,7 +227,8 @@ def web_shutdown():
     if (current_user.panel):
         shutdown()
 
-    return "NO ADMIN"
+    else:
+        return "NO ADMIN"
 
 # получение имён логов
 @app.route('/get_logs_names', methods=['POST'])
@@ -216,7 +240,8 @@ def get_logs_names():
         files.reverse()
         return {'logs': files}
 
-    return "NO ADMIN"
+    else:
+        return "NO ADMIN"
 
 # получение содержимого лог файла
 @app.route('/read_current_log', methods=['POST', 'GET'])
@@ -226,7 +251,8 @@ def read_current_log():
         name = request.args.get("name", "")
         return str(console_term.read_current_log(name))
 
-    return "NO ADMIN"
+    else:
+        return "NO ADMIN"
 
 # удаление всех лог файлов
 @app.route('/delete_all_logs', methods=['POST'])
@@ -242,7 +268,8 @@ def delete_all_logs():
 
         return 'OK'
 
-    return "NO ADMIN"
+    else:
+        return "NO ADMIN"
 
 #####################################################
 

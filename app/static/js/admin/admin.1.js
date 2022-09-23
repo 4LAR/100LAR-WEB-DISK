@@ -39,6 +39,10 @@ function get_server_info() {
     if (xhr.status === 200) {
       info_json = JSON.parse(xhr.responseText.toString());
 
+      settings_json = info_json['settings'];
+      console.log(settings_json);
+      generate_settingslist();
+
       document.getElementById("server_time_running").innerHTML = `${info_json['server_time_running']}`;
       document.getElementById("server_program_memory").innerHTML = `Disk: ${convert_size(info_json['program_memory'])}`;
       document.getElementById("server_used_memory").innerHTML = `Other: ${convert_size(info_json['used_memory'] - info_json['program_memory'])}`;
