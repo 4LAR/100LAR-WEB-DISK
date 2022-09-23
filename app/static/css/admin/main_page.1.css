@@ -113,8 +113,13 @@
 
 /*loglist*/
 
+.loglist {
+  margin: 2px;
+}
+
 .loglist img {
   position: relative;
+  top: 5px;
   left: 10px;
 }
 

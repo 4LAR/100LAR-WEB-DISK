@@ -64,7 +64,7 @@
           <hr class="left_bar_hr">
         </th></tr>
         <tr><th>
-          <div class="left_bar_button" id="left_bar_data_base" onclick="window.close()">
+          <div class="left_bar_button block_select" id="left_bar_data_base" onclick="window.close()">
             <img class="icon" width="18" height="18" src="static/img/admin/logout.svg">
             <p align="left">exit</p>
           </div>
@@ -80,7 +80,7 @@
           <h2>Dashboard</h2>
         </div>
         <hr class="main_page_hr">
-        <div class="main_page_button" style="width: 100px; margin: 10px" onclick="get_server_info()">
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="get_server_info()">
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
           <p style="margin: -25px 35px">refresh</p>
         </div>
@@ -154,8 +154,24 @@
           <h2>Logs</h2>
         </div>
         <hr class="main_page_hr">
-        <p>hello</p>
+
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="get_all_logs()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/refresh.svg">
+          <p style="margin: -25px 35px">refresh</p>
+        </div>
+
+        <div class="main_page_button block_select" style="right: 0px; top: 54px; width: 160px; margin: 10px; position: absolute;" onclick="delete_all_logs()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+          <p style="margin: -25px 35px">delete all logs</p>
+        </div>
+
       </div>
+      <br>
+
+      <div class="border border_size">
+        <ul id="loglist" class="loglist"></ul>
+      </div>
+
     </div>
 
     <!--setings-->
@@ -163,7 +179,7 @@
       <div class="border border_size">
         <div class="name_area_border border_size" style="height: 52px">
           <img class="icon" width="30" height="30" src="static/img/admin/settings.svg">
-          <h2>Setings</h2>
+          <h2>Settings</h2>
         </div>
         <hr class="main_page_hr">
         <p>hello</p>
@@ -173,7 +189,8 @@
   </body>
 
   <script type="text/javascript" src="static/js/main.1.js"></script>
-  <script type="text/javascript" src="static/js/admin.1.js"></script>
+  <script type="text/javascript" src="static/js/admin/admin.1.js"></script>
+  <script type="text/javascript" src="static/js/admin/logs.1.js"></script>
 
 
 </html>

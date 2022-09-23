@@ -88,6 +88,19 @@ login_manager.init_app(app)
 #####################################################
 
 #
+def reboot():
+    console_term.print('Server rebooting', 0)
+    user_information.run_check = False
+    os.execv(sys.executable, ['python3'] + sys.argv)
+    exit()
+
+#
+def shutdown():
+    console_term.print('Server shutdown', 0)
+    user_information.run_check = False
+    exit()
+
+#
 def check_size(current_user, path, file_size):
 
     busy = get_size(userBase.get_user_info(current_user.username)['path'][int(path)]['path'])
@@ -174,6 +187,62 @@ def system_info():
 
     else:
         return "NO ADMIN"
+
+# перезапуск скрипта
+@app.route('/reboot', methods=['POST', 'GET'])
+@login_required
+def web_reboot():
+    if (current_user.panel):
+        reboot()
+
+    return "NO ADMIN"
+
+# остановка скрипта
+@app.route('/shutdown', methods=['POST', 'GET'])
+@login_required
+def web_shutdown():
+    if (current_user.panel):
+        shutdown()
+
+    return "NO ADMIN"
+
+# получение имён логов
+@app.route('/get_logs_names', methods=['POST'])
+@login_required
+def get_logs_names():
+    if (current_user.panel):
+        files = console_term.get_all_logs()
+        files = sorted(files, key=lambda x: os.path.getmtime(console_term.path + x))
+        files.reverse()
+        return {'logs': files}
+
+    return "NO ADMIN"
+
+# получение содержимого лог файла
+@app.route('/read_current_log', methods=['POST', 'GET'])
+@login_required
+def read_current_log():
+    if (current_user.panel):
+        name = request.args.get("name", "")
+        return str(console_term.read_current_log(name))
+
+    return "NO ADMIN"
+
+# удаление всех лог файлов
+@app.route('/delete_all_logs', methods=['POST'])
+@login_required
+def delete_all_logs():
+    if (current_user.panel):
+        files = console_term.get_all_logs()
+        for f in files:
+            os.remove(console_term.path + f)
+
+        console_term.create_log()
+        console_term.print('Delete all logs', 0)
+
+        return 'OK'
+
+    return "NO ADMIN"
 
 #####################################################
 

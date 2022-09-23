@@ -85,3 +85,9 @@ body {
   list-style-type: disc;
   white-space: nowrap;
 }
+
+.block_select {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}

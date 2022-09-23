@@ -17,10 +17,10 @@ function open_page(page_name) {
   for (let i = 0; i < page_names.length; i++){
     if (page_names[i] == page_name){
       openModal(page_names[i]);
-      document.getElementById('left_bar_' + page_names[i]).className = 'left_bar_button_selected';
+      document.getElementById('left_bar_' + page_names[i]).className = 'left_bar_button_selected block_select';
     } else {
       closeModal(page_names[i]);
-      document.getElementById('left_bar_' + page_names[i]).className = 'left_bar_button';
+      document.getElementById('left_bar_' + page_names[i]).className = 'left_bar_button block_select';
     }
   }
 
@@ -29,6 +29,7 @@ function open_page(page_name) {
   }
 }
 
+//---DASHBOARD------------------------------------------------------
 function get_server_info() {
 
   var xhr = new XMLHttpRequest();
