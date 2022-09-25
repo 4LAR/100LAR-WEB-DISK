@@ -17,7 +17,7 @@ function generate_settingslist() {
       'settings_' + ((left)? 'left': 'right'),
       `
         <div class="border sub_border_size" align="left">
-          <p style="margin: 10px 50px; width: 100%; color: #8B949E; font-weight: normal;">${section}</p>
+          <p style="margin: 10px 50px; color: #8B949E; font-weight: normal; white-space: nowrap;">${section}</p>
           <hr class="main_page_hr">
           <ul id="settings_${section}"></ul>
         </div>

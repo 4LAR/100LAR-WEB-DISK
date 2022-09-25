@@ -1,3 +1,8 @@
+
+:root {
+  --min-width: 900px;
+}
+
 p {
   color: #C1C2BF; /* Цвет текста */
 }
@@ -78,7 +83,7 @@ body {
 }
 
 .memory_usage_ul {
-  margin: 10px 30px;
+  margin: -30px 30px;
 }
 
 .memory_usage_ul li {
