@@ -177,10 +177,11 @@ def system_info():
 
         memory = psutil.virtual_memory()
 
+        info['cpu_usage'] = psutil.cpu_percent()
         info['total_memory'] = memory.total
         info['used_memory'] = memory.used
         info['program_memory'] = (memory_usage()[0] * 1024 * 1024)
-        info['server_time_running'] = str(datetime.datetime.now() - start_time).split('.')[0],
+        info['server_time_running'] = str(datetime.datetime.now() - start_time).split('.')[0]
         info['settings'] = settings.options
 
         return info

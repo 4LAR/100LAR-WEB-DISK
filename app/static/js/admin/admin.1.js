@@ -43,7 +43,10 @@ function get_server_info() {
       console.log(settings_json);
       generate_settingslist();
 
+      //TIME
       document.getElementById("server_time_running").innerHTML = `${info_json['server_time_running']}`;
+
+      //RAM
       document.getElementById("server_program_memory").innerHTML = `Disk: ${convert_size(info_json['program_memory'])}`;
       document.getElementById("server_used_memory").innerHTML = `Other: ${convert_size(info_json['used_memory'] - info_json['program_memory'])}`;
       document.getElementById("server_total_memory").innerHTML = `Total: ${convert_size(info_json['total_memory'])}`;
@@ -52,6 +55,10 @@ function get_server_info() {
       used_memory = (100 / info_json['total_memory']) * info_json['used_memory'];
 
       set_progressbar('ram_memory_usage', [used_memory, program_memory], 2);
+
+      //CPU
+      document.getElementById("server_cpu_usage").innerHTML = `Usage: ${info_json['cpu_usage']}%`;
+      set_progressbar('cpu_usage', info_json['cpu_usage']);
 
     }
   };

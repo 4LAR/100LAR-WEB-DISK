@@ -90,6 +90,22 @@
       <table class="page_table">
         <tr>
           <th align="left">
+            <!-- cpu usage -->
+            <div class="border sub_border_size" style="height: 80px;" align="left">
+              <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/cpu.svg">
+              <p style="position: absolute; margin: 10px 50px; white-space: nowrap; color: #8B949E; font-weight: normal;">CPU usage</p>
+              <div id="cpu_usage_div" class="progress_bar" style="margin: 35px 0px;">
+                <div id="cpu_usage" class="progress_bar_state"></div>
+              </div>
+              <ul class="memory_usage_ul">
+                <li style="color: #949494;">
+                  <p id="server_cpu_usage" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
+                </li>
+                </li>
+              </ul>
+            </div>
+            <br>
+            <!-- time running -->
             <div class="border sub_border_size" style="height: 70px;" align="left">
               <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/clock.svg">
               <p style="margin: 10px 50px; width: 100%; color: #8B949E; font-weight: normal;">time running</p>
@@ -97,6 +113,7 @@
             </div>
           </th>
           <th align="right">
+            <!-- memory usage -->
             <div class="border sub_border_size" style="height: 120px;" align="left">
               <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/memory.svg">
               <p style="position: absolute; margin: 10px 50px; white-space: nowrap; color: #8B949E; font-weight: normal;">RAM usage</p>
@@ -106,7 +123,6 @@
               </div>
               <ul class="memory_usage_ul">
                 <li style="color: #949494;">
-                  <!-- <p style="">•</p> -->
                   <p id="server_program_memory" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
                 </li>
                 <li style="color: #707070;">
