@@ -168,6 +168,7 @@ def admin():
     else:
         return "NO ADMIN"
 
+############DASHBOARD
 # вывод информации о сервере
 @app.route('/system_info', methods=['GET' , 'POST'])
 @login_required
@@ -189,6 +190,17 @@ def system_info():
     else:
         return "NO ADMIN"
 
+############USERS
+@app.route('/get_users', methods=['POST'])
+@login_required
+def get_users():
+    if (current_user.panel):
+        return userBase.get_users()
+
+    else:
+        return "NO ADMIN"
+
+############SETTINGS
 # изменение настроек
 @app.route('/settings_set', methods=['POST'])
 @login_required
@@ -231,6 +243,7 @@ def web_shutdown():
     else:
         return "NO ADMIN"
 
+############LOGS
 # получение имён логов
 @app.route('/get_logs_names', methods=['POST'])
 @login_required

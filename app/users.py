@@ -95,6 +95,12 @@ class UserBase():
             )
             i += 1
 
+    def get_users(self):
+        return self.users_dict
+
+    def get_templates(self):
+        return self.templates_dict
+
     def get_user(self, name):
         try:
             return self.users[name]

@@ -101,7 +101,6 @@
                 <li style="color: #949494;">
                   <p id="server_cpu_usage" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
                 </li>
-                </li>
               </ul>
             </div>
             <br>
@@ -147,7 +146,14 @@
           <h2>Users</h2>
         </div>
         <hr class="main_page_hr">
-        <p>hello</p>
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
+          <p style="margin: -25px 35px">refresh</p>
+        </div>
+      </div>
+      <br>
+      <div class="border border_size">
+        <ul id="userlist" class="loglist"></ul>
       </div>
     </div>
 
@@ -173,7 +179,7 @@
         <hr class="main_page_hr">
 
         <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="get_all_logs()">
-          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/refresh.svg">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
           <p style="margin: -25px 35px">refresh</p>
         </div>
 
@@ -226,6 +232,7 @@
 
   <script type="text/javascript" src="static/js/main.1.js"></script>
   <script type="text/javascript" src="static/js/admin/admin.1.js"></script>
+  <script type="text/javascript" src="static/js/admin/users.1.js"></script>
   <script type="text/javascript" src="static/js/admin/settings.1.js"></script>
   <script type="text/javascript" src="static/js/admin/logs.1.js"></script>
 
