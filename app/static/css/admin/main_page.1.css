@@ -183,4 +183,7 @@
 /**/
 .user_info {
   white-space: normal;
+  background-color: #161B22;
+  margin-top: 10px;
+  border-radius: 8px;
 }

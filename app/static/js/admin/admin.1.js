@@ -4,7 +4,7 @@
 var page_names = [
     'dashboard',
     'users',
-    'templates',
+    'memory',
     'logs',
     'settings'
   ];

@@ -28,16 +28,28 @@ function get_users() {
           if (users_JSON[user]['path'][i]['type'] == 'path') {
             path_list_str += `
               <br>
-              <p>type: ${users_JSON[user]['path'][i]['type']}</p><br>
-              <p>name: ${users_JSON[user]['path'][i]['name']}</p><br>
-              <p>path: ${users_JSON[user]['path'][i]['path']}</p><br>
-              <p>size: ${users_JSON[user]['path'][i]['size']}</p><br>
+              <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Type</p>
+              <input id="users_path_${i}_${user}_type" class="input_border" style="margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['path'][i]['type']}">
+              <br>
+              <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Name</p>
+              <input id="users_name_${user}" class="input_border" style="margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['path'][i]['name']}">
+              <br>
+              <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Path</p>
+              <input id="users_name_${user}" class="input_border" style="margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['path'][i]['path']}">
+              <br>
+              <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Size</p>
+              <input id="users_name_${user}" class="input_border" style="margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['path'][i]['size']}">
+              <br>
             `
           } else {
             path_list_str += `
               <br>
-              <p>type: ${users_JSON[user]['path'][i]['type']}</p><br>
-              <p>name: ${users_JSON[user]['path'][i]['name']}</p><br>
+              <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Type</p>
+              <input id="users_path_${i}_${user}_type" class="input_border" style="margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['path'][i]['type']}">
+              <br>
+              <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Name</p>
+              <input id="users_name_${user}" class="input_border" style="margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['path'][i]['name']}">
+              <br>
             `
           }
 
@@ -53,10 +65,23 @@ function get_users() {
                 <img align="right" id="users_triangle_${user}" style="margin: 5px 20px; transform: rotate(90deg)" class="icon" width="10" height="10" src="static/img/triangle.svg">
               </div>
               <div id="users_info_${user}" class="user_info" style="display: none">
+                
+                <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Name</p><br>
+                <input id="users_name_${user}" class="input_border" style="left: 10px; width: 90%; margin-top: 0px;" type=text placeholder="..." value="${user}">
+                
+                <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Password</p><br>
+                <input id="users_password_${user}" class="input_border" style="left: 10px; width: 90%; margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['password']}">
                 <br>
-                <p>STATUS: ${users_JSON[user]['status']}</p><br>
-                <p>PASSWORD: ${users_JSON[user]['password']}</p><br>
-                <p>PANEL: ${users_JSON[user]['panel']}</p><br>
+                <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Status</p><br>
+                <input id="users_status_${user}" class="input_border" style="left: 10px; width: 90%; margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['status']}">
+
+                <div style="margin-left: 20px; height: 30px;">
+                  <input type="checkbox" class="custom-checkbox" id="users_panel_${user}" name="users_panel_${user}" value="yes" onchange="switch_draw_type('list', this)" ${(users_JSON[user]['panel'])? 'checked': ''}>
+                  <label for="users_panel_${user}">
+                    <p style="font-weight: normal; margin: 0px 0px;">Panel</p>
+                  </label>
+                </div>
+                <hr class="main_page_hr">
 
                 ${path_list_str}
                 <br>

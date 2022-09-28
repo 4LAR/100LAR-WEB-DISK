@@ -75,6 +75,7 @@ class UserBase():
                 for i in range(len(self.users_dict[user]['path'])):
                     if self.users_dict[user]['path'][i]['type'] == 'template':
                         self.users_dict[user]['path'][i] = self.templates_dict[self.users_dict[user]['path'][i]['name']]
+                        self.users_dict[user]['path'][i]['type'] = 'template'
 
         self.update_users()
 
