@@ -70,8 +70,6 @@ function convert_size(size_bytes) {
   p = Math.pow(1024, i);
   s = Math.round((size_bytes / p) * 100) / 100;
 
-  console.log(s)
-
   return s + ' ' + size_name[i]
 }
 

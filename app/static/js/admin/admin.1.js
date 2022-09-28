@@ -40,7 +40,6 @@ function get_server_info() {
       info_json = JSON.parse(xhr.responseText.toString());
 
       settings_json = info_json['settings'];
-      console.log(settings_json);
       generate_settingslist();
 
       //TIME
