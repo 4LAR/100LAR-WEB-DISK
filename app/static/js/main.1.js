@@ -59,18 +59,24 @@ function getBaseLog(x, y) {
   return Math.log(y) / Math.log(x);
 }
 
-//
-function convert_size(size_bytes) {
-  if (size_bytes == 0)
-    return '0 B';
+var size_name = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
-  size_name = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+//
+function convert_size(size_bytes, name_bool=false) {
+  if (size_bytes == 0)
+    if (name_bool)
+      return [0, 'B', 0]
+    else
+      return '0 B';
 
   i = Math.floor(getBaseLog(1024, size_bytes));
   p = Math.pow(1024, i);
   s = Math.round((size_bytes / p) * 100) / 100;
 
-  return s + ' ' + size_name[i]
+  if (name_bool)
+    return [s, size_name[i], i]
+  else
+    return s + ' ' + size_name[i]
 }
 
 //

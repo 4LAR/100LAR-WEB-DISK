@@ -13,6 +13,7 @@ function open_close_user(name) {
 }
 
 function get_users() {
+  clear_ul('userlist');
   var xhr = new XMLHttpRequest();
   xhr.open('POST', `/get_users`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -28,29 +29,34 @@ function get_users() {
             // <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Type</p>
             // <input id="users_path_${i}_${user}_type" class="input_border" style="margin-top: 0px;" type=text placeholder="..." value="${users_JSON[user]['path'][i]['type']}">
             // <br>
+
+            size = convert_size(users_JSON[user]['path'][i]['size'], true);
+
+            str_size_name_select = '';
+            for (let size_ = 0; size_ < size_name.length; size_++) {
+              str_size_name_select += `<option value="${size_name[size_]}" ${(size_ == size[2])? 'selected': ''}>${size_name[size_]}</option>`;
+            }
+
             path_list_str += `
               <div class="path_grid">
                 <br>
                 <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Type</p><br>
-                <select id="standard-select" class="input_border" style="left: 10px; margin-top: 0px; padding: 0px 0px; width: 90%">
-                  <option value="path">path</option>
+                <select id="users_path_type_${i}_${user}" class="input_border" style="left: 10px; margin-top: 0px; padding: 0px 0px; width: 90%">
+                  <option value="path" selected>path</option>
                   <option value="template">template</option>
                 </select>
                 <br>
                 <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Name</p><br>
-                <input id="users_name_${user}" class="input_border" style="left: 10px; margin-top: 0px; width: 90%" type=text placeholder="..." value="${users_JSON[user]['path'][i]['name']}">
+                <input id="users_path_name_${i}_${user}" class="input_border" style="left: 10px; margin-top: 0px; width: 90%" type=text placeholder="..." value="${users_JSON[user]['path'][i]['name']}">
                 <br>
                 <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Path</p><br>
-                <input id="users_name_${user}" class="input_border" style="left: 10px; margin-top: 0px; width: 90%" type=text placeholder="..." value="${users_JSON[user]['path'][i]['path']}">
+                <input id="users_path_path_${i}_${user}" class="input_border" style="left: 10px; margin-top: 0px; width: 90%" type=text placeholder="..." value="${users_JSON[user]['path'][i]['path']}">
                 <br>
                 <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Size</p><br>
-                <select id="standard-select" class="input_border" style="left: 10px; margin-top: 0px; padding: 0px 0px; width: 20%">
-                  <option value="path">GB</option>
-                  <option value="template">MB</option>
-                  <option value="template">KB</option>
-                  <option value="template">B</option>
+                <select id="users_sizen_name_${i}_${user}" class="input_border" style="left: 10px; margin-top: 0px; padding: 0px 0px; width: 20%">
+                  ${str_size_name_select}
                 </select>
-                <input id="users_name_${user}" class="input_border" style="left: 10px; margin-top: 0px; width: 70%" type=text placeholder="..." value="${users_JSON[user]['path'][i]['size']}">
+                <input id="users_size_name_${i}_${user}" class="input_border" style="left: 10px; margin-top: 0px; width: 70%" type=text placeholder="..." value="${size[0]}">
                 <br>
               </div>
             `
@@ -59,13 +65,13 @@ function get_users() {
               <div class="path_grid">
                 <br>
                 <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Type</p>
-                <select id="standard-select" class="input_border" style="left: 10px; margin-top: 0px; padding: 0px 0px; width: 90%">
+                <select id="users_path_type_${i}_${user}" class="input_border" style="left: 10px; margin-top: 0px; padding: 0px 0px; width: 90%">
                   <option value="path">path</option>
-                  <option value="template">template</option>
+                  <option value="template" selected>template</option>
                 </select>
                 <br>
                 <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Name</p>
-                <input id="users_name_${user}" class="input_border" style="margin-top: 0px;width: 90% " type=text placeholder="..." value="${users_JSON[user]['path'][i]['name']}">
+                <input id="users_path_name_${i}_${user}" class="input_border" style="margin-top: 0px;width: 90% " type=text placeholder="..." value="${users_JSON[user]['path'][i]['name']}">
                 <br>
               </div>
             `
@@ -99,6 +105,12 @@ function get_users() {
                     <p style="font-weight: normal; margin: 0px 0px;">Panel</p>
                   </label>
                 </div>
+
+                <div align="left" class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="()">
+                  <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/admin/save.svg">
+                  <p style="margin: -15px 35px; font-weight: normal">save</p>
+                </div>
+
                 <hr class="main_page_hr">
 
                 <div class="path_list_grid">
