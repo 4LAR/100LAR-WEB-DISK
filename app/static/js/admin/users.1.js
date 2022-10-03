@@ -58,6 +58,11 @@ function get_users() {
                 </select>
                 <input id="users_size_name_${i}_${user}" class="input_border" style="left: 10px; margin-top: 0px; width: 70%" type=text placeholder="..." value="${size[0]}">
                 <br>
+                <div align="left" class="main_page_button block_select" style="width: 150px; margin: 0px 10px" onclick="()">
+                  <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
+                  <p style="margin: -15px 35px; font-weight: normal">delete path</p>
+                </div>
+                <br>
               </div>
             `
           } else {
@@ -72,6 +77,11 @@ function get_users() {
                 <br>
                 <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">Name</p>
                 <input id="users_path_name_${i}_${user}" class="input_border" style="margin-top: 0px;width: 90% " type=text placeholder="..." value="${users_JSON[user]['path'][i]['name']}">
+                <br>
+                <div align="left" class="main_page_button block_select" style="width: 100px; margin: 0px 10px" onclick="()">
+                  <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/admin/save.svg">
+                  <p style="margin: -15px 35px; font-weight: normal">save</p>
+                </div>
                 <br>
               </div>
             `
@@ -106,12 +116,30 @@ function get_users() {
                   </label>
                 </div>
 
-                <div align="left" class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="()">
-                  <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/admin/save.svg">
-                  <p style="margin: -15px 35px; font-weight: normal">save</p>
-                </div>
+
+                <table class="table_width">
+                  <tr>
+                    <th>
+                      <div align="left" class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="()">
+                        <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/admin/save.svg">
+                        <p style="margin: -15px 35px; font-weight: normal">save</p>
+                      </div>
+                    </th>
+                    <th align="right">
+                      <div align="left" class="main_page_button block_select" style="width: 160px; margin: 0px 10px" onclick="()">
+                        <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
+                        <p style="margin: -15px 35px; font-weight: normal">delete user</p>
+                      </div>
+                    </th>
+                  </tr>
+                </table>
 
                 <hr class="main_page_hr">
+
+                <div align="left" class="main_page_button block_select" style="width: 160px; margin: 10px" onclick="()">
+                  <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/admin/add.svg">
+                  <p style="margin: -15px 35px; font-weight: normal">add new path</p>
+                </div>
 
                 <div class="path_list_grid">
                   ${path_list_str}
@@ -127,6 +155,20 @@ function get_users() {
     }
   };
   xhr.send();
+}
+
+function set_user_info(name) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/set_user');
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+
+
+    }
+  };
+  xhr.send()
+
 }
 
 get_users();

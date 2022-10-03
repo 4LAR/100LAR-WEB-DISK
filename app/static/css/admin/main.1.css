@@ -32,6 +32,14 @@ body {
   line-height: 1.5;
 }
 
+.table_width {
+  width: 100%;
+  table-layout: fixed;
+}
+.table_width td {
+  width: 100%;
+}
+
 .icon {
   filter: invert(60%);
 }
