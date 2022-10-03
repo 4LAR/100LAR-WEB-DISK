@@ -204,7 +204,7 @@ def get_users():
 # изменение настроек пользователя 
 @app.route('/set_user', methods=['POST'])
 @login_required
-def get_users():
+def set_user():
     if (current_user.panel):
         user_json = json.loads(request.args.get("user", ""))
         user_name = request.args.get("name", "")
