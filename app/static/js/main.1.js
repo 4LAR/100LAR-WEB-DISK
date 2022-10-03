@@ -20,7 +20,7 @@ function openModal(modalId) {
   }
 }
 
-//
+// проверка на показ элемента
 function checkModal(modalId) {
   try {
     var modal = document.getElementById(modalId);
@@ -34,12 +34,12 @@ function checkModal(modalId) {
   }
 }
 
-//
+// открыть новую вкладку 
 function openInNewTab(url) {
   window.open(url, '_blank').focus();
 }
 
-//
+// добавить элемент в список (ul)
 function append_to_ul(id, content) {
   var ul = document.getElementById(id);
 
@@ -50,18 +50,19 @@ function append_to_ul(id, content) {
   ul.appendChild(li);
 }
 
+// очистить список (ul)
 function clear_ul(id) {
   document.getElementById(id).innerHTML = '';
 }
 
-//
+// вычисление логарифма
 function getBaseLog(x, y) {
   return Math.log(y) / Math.log(x);
 }
 
 var size_name = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
-//
+// конвертирование байтов в [size_name]
 function convert_size(size_bytes, name_bool=false) {
   if (size_bytes == 0)
     if (name_bool)
@@ -79,7 +80,12 @@ function convert_size(size_bytes, name_bool=false) {
     return s + ' ' + size_name[i]
 }
 
-//
+// конвертирование [size_name] в байты
+function convert_size_to_b(size, name_i = 0) {
+  return Math.pow(size, name_i);
+}
+
+// установка размера прогресса в зависимости от размера 
 function set_progressbar(name, state = 0, count=1) {
   if (count > 1) {
     for (let i = 0; i < count; i++) {

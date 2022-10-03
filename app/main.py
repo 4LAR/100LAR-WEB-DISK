@@ -191,11 +191,30 @@ def system_info():
         return "NO ADMIN"
 
 ############USERS
-@app.route('/get_users', methods=['POST'])
+# получить настройки пользователя
+@app.route('/get_users', methods=['GET', 'POST'])
 @login_required
 def get_users():
     if (current_user.panel):
         return userBase.get_users()
+
+    else:
+        return "NO ADMIN"
+
+# изменение настроек пользователя 
+@app.route('/set_user', methods=['POST'])
+@login_required
+def get_users():
+    if (current_user.panel):
+        user_json = json.loads(request.args.get("user", ""))
+        user_name = request.args.get("name", "")
+        
+        userBase.users_dict[name] = user_json
+
+        if request.args.get("reload", "").lower() == 'true':
+            userBase.update_users()
+
+        return 'ok'
 
     else:
         return "NO ADMIN"
