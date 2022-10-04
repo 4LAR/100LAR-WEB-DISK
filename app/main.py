@@ -191,7 +191,17 @@ def system_info():
         return "NO ADMIN"
 
 ############USERS
-# получить настройки пользователя
+# получить настройки пользователей
+@app.route('/get_templates', methods=['GET', 'POST'])
+@login_required
+def get_templates():
+    if (current_user.panel):
+        return userBase.templates_dict
+
+    else:
+        return "NO ADMIN"
+
+# получить настройки пользователей
 @app.route('/get_users', methods=['GET', 'POST'])
 @login_required
 def get_users():
