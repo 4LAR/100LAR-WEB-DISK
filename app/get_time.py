@@ -14,8 +14,8 @@ class Time_now():
     def get_time_now(self):
         return datetime.datetime.now(self.offset).strftime("%H:%M:%S")
 
-    def get_all_now(self):
-        return self.get_time_now() + '|' + self.get_date_now()
+    def get_all_now(self, separator='|'):
+        return self.get_time_now() + separator + self.get_date_now()
 
 def add_time_date(date, count):
     date = datetime.datetime.strptime(date, "%d.%m")

@@ -28,6 +28,10 @@ class settings():
                 'save_logs': True,
                 'timedelta': 3
             },
+            'History': {
+                'length': 100,
+                'use': True
+            },
             'Base': {
                 'path': 'users'
             }

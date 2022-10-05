@@ -1,6 +1,7 @@
 import os
 import multiprocessing
 import termcolor
+from pathlib import Path
 
 # класс для логирования и вывода информации в консоль
 # изначально он писался для игрового движка
@@ -30,11 +31,17 @@ class console_term():
         ]
 
         self.promt = ""
-        
+
         self.warning_list = []
+
+        self.time = None
 
     # Функция для создания нового лог файла
     def create_log(self):
+
+        if not (Path("logs").is_dir()):
+            os.mkdir('logs')
+
         if self.log_bool:
             self.str_data = self.time.get_date_now()
 
@@ -66,13 +73,13 @@ class console_term():
             self.create_log()
 
         time_str = (('[' + str(self.time.get_all_now()) + '] ') if self.log_time_bool else '') if not no_time_bool else ''
-        
+
         if print_bool:
             termcolor.cprint(time_str + str(text), self.type_color[type])
 
         if (type == 3):
             self.warning_list.append(time_str + str(text))
-        
+
         if (self.log_bool):
             log_file = open(self.file_name, 'a')
             log_file.write(time_str + str(text) + '\n')

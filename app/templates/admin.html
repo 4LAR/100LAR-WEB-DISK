@@ -170,10 +170,18 @@
           <h2>History</h2>
         </div>
         <hr class="main_page_hr">
-        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="()">
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="get_history()">
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
           <p style="margin: -25px 35px">refresh</p>
         </div>
+        <div class="main_page_button" style="right: 0px; top: 54px; width: 150px; margin: 10px; position: absolute;" onclick="delete_all_history()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+          <p style="margin: -25px 35px">clear history</p>
+        </div>
+      </div>
+      <br>
+      <div class="border border_size">
+        <ul id="historylist" class="loglist"></ul>
       </div>
     </div>
 
@@ -279,6 +287,7 @@
   <script type="text/javascript" src="static/js/admin/templates.1.js"></script>
   <script type="text/javascript" src="static/js/admin/settings.1.js"></script>
   <script type="text/javascript" src="static/js/admin/logs.1.js"></script>
+  <script type="text/javascript" src="static/js/admin/history.1.js"></script>
 
 
 </html>

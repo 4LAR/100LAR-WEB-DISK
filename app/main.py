@@ -58,6 +58,7 @@ from get_time import *
 from settings import *
 from users import *
 from file import *
+from history import *
 
 settings = settings()
 
@@ -69,13 +70,18 @@ console_term = console_term(
     log_bool =  settings.options['Logs']['save_logs'],
     path =      settings.options['Logs']['path']
 )
+console_term.time = time_now
+
+history = History(
+    length = settings.options['History']['length'],
+    use_bool = settings.options['History']['use']
+)
+history.time = time_now
 
 userBase = UserBase(
     path =      settings.options['Base']['path'],
     key =       settings.options['Flask']['secret_key']
 )
-
-console_term.time = time_now
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = settings.options['Flask']['secret_key']
@@ -195,14 +201,40 @@ def system_info():
 @app.route('/clear_warnings', methods=['POST', 'GET'])
 @login_required
 def clear_warnings():
-    console_term.warning_list = []
-    return 'OK'
+    if (current_user.panel):
+        console_term.warning_list = []
+        return 'OK'
+
+    else:
+        return "NO ADMIN"
 
 # Учебная тревога
 @app.route('/error')
 def error():
     if (current_user.panel):
         console_term.print('test error', 3)
+        return 'OK'
+
+    else:
+        return "NO ADMIN"
+
+############HISTORY
+# получить историю
+@app.route('/get_history', methods=['POST', 'GET'])
+@login_required
+def get_history():
+    if (current_user.panel):
+        return {'history': history.get()}
+
+    else:
+        return "NO ADMIN"
+
+# удалить историю
+@app.route('/clear_history', methods=['POST', 'GET'])
+@login_required
+def clear_history():
+    if (current_user.panel):
+        history.clear()
         return 'OK'
 
     else:
@@ -229,14 +261,14 @@ def get_users():
     else:
         return "NO ADMIN"
 
-# изменение настроек пользователя 
+# изменение настроек пользователя
 @app.route('/set_user', methods=['POST'])
 @login_required
 def set_user():
     if (current_user.panel):
         user_json = json.loads(request.args.get("user", ""))
         user_name = request.args.get("name", "")
-        
+
         userBase.users_dict[name] = user_json
 
         if request.args.get("reload", "").lower() == 'true':
@@ -402,6 +434,7 @@ def login():
     user = userBase.get_user(username)
     if user != None and user.password == password:
         login_user(user, remember=True)
+        history.add(0, '%s login' % username)
         return 'OK'
 
     else:
@@ -411,6 +444,7 @@ def login():
 @app.route("/logout", methods=['GET' , 'POST'])
 @login_required
 def logout():
+    history.add(1, '%s logout' % current_user.username)
     logout_user()
     return 'ok'
 
@@ -523,6 +557,8 @@ def create_file():
         f.write("HELLO WORLD")
         f.close()
 
+        history.add(5, '%s create file (%s)' % (current_user.username, user_path + dir + file))
+
         return 'ok'
 
     else:
@@ -540,6 +576,8 @@ def create_folder():
 
     os.mkdir(user_path + dir + '/' + file)
 
+    history.add(5, '%s create folder (%s)' % (current_user.username, user_path + dir + file))
+
     return 'ok'
 
 # переименование файла
@@ -554,6 +592,8 @@ def rename():
     user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
     os.rename(user_path + dir + '/' + file, user_path + dir + '/' + new_file)
+
+    history.add(7, '%s rename file (%s to %s)' % (current_user.username, user_path + dir + file, user_path + dir + new_file))
 
     return 'ok'
 
@@ -609,10 +649,13 @@ def downlaod():
         user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
         if len(file) > 0:
+            history.add(2, '%s download file (%s)' % (current_user.username, user_path + dir + file))
+
             return send_from_directory(user_path + dir, file)
 
         else:
             files_list = json.loads(files)['files']
+            files_list_log = []
 
             # создаём буфер
             zip_buffer = io.BytesIO()
@@ -629,8 +672,12 @@ def downlaod():
                     else:
                         archive.write(user_path + dir + '/' + file[0])
 
+                    files_list_log.append(file[0])
+
             # переходим в начало архива
             zip_buffer.seek(0)
+
+            history.add(2, '%s download files (%s)' % (current_user.username, user_path + dir + str(files_list_log)))
 
             # отправляем архив
             return Response(zip_buffer.getvalue(),
@@ -654,10 +701,14 @@ def delete():
         user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
 
         if len(file) > 0:
+
+            history.add(6, '%s delete file (%s)' % (current_user.username, user_path + dir + file))
+
             os.remove(user_path + dir + '/' + file)
 
         else:
             files_list = json.loads(files)['files']
+            files_list_log = []
 
             print(files_list)
 
@@ -666,6 +717,10 @@ def delete():
                     shutil.rmtree(user_path + dir + '/' + file[0])
                 else:
                     os.remove(user_path + dir + '/' + file[0])
+
+                files_list_log.append(file[0])
+
+            history.add(6, '%s delete files (%s)' % (current_user.username, user_path + dir + str(files_list_log)))
 
         return 'ok'
 
@@ -688,8 +743,7 @@ def copy_files():
 
         user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
         files_list = json.loads(files)['files']
-
-        print(files_list)
+        files_list_log = []
 
         if (cut_bool or check_size_list(current_user, path, dir, files_list)):
             # цикл по файлам
@@ -716,12 +770,17 @@ def copy_files():
                             user_path + to
                         )
 
+                files_list_log.append(f[0])
+
             # лог
             console_term.print(
                 '/copy: %s %s files from %s to %s' %
                 (current_user.username, ('move' if (cut_bool) else 'copy'), '/' + dir, '/' + to),
                 1
             )
+
+            history.add(4, '%s %s file (%s) to %s' % (current_user.username, ('move' if (cut_bool) else 'copy'), user_path + dir + str(files_list_log), user_path + dir + to))
+
             return 'ok'
 
         else:
@@ -747,6 +806,9 @@ def upload_file_disk():
 
         user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
         f.save(user_path + dir + '/' + file)
+
+        history.add(3, '%s upload file (%s)' % (current_user.username, user_path + dir + file))
+
 
         return 'ok'
 
