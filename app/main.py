@@ -184,8 +184,26 @@ def system_info():
         info['program_memory'] = (memory_usage()[0] * 1024 * 1024)
         info['server_time_running'] = str(datetime.datetime.now() - start_time).split('.')[0]
         info['settings'] = settings.options
+        info['warnings'] = console_term.warning_list
 
         return info
+
+    else:
+        return "NO ADMIN"
+
+# Очищение списка ошибок
+@app.route('/clear_warnings', methods=['POST', 'GET'])
+@login_required
+def clear_warnings():
+    console_term.warning_list = []
+    return 'OK'
+
+# Учебная тревога
+@app.route('/error')
+def error():
+    if (current_user.panel):
+        console_term.print('test error', 3)
+        return 'OK'
 
     else:
         return "NO ADMIN"

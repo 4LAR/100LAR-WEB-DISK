@@ -26,6 +26,12 @@
           </div>
         </th></tr>
         <tr><th>
+          <div class="left_bar_button" id="left_bar_history" onclick="open_page('history')">
+            <img class="icon" width="18" height="18" src="static/img/admin/history.svg">
+            <p align="left">history</p>
+          </div>
+        </th></tr>
+        <tr><th>
           <hr class="left_bar_hr">
         </th></tr>
         <tr><th>
@@ -135,7 +141,40 @@
           </th>
         </tr>
       </table>
+      <br>
+      <div class="border border_size">
+        <div class="name_area_border border_size" style="height: 52px">
+          <img class="icon" width="30" height="30" src="static/img/admin/warning.svg">
+          <h2>Warnings</h2>
+        </div>
+        <hr class="main_page_hr">
 
+        <div id="clear_errors_div" style="display: None;">
+          <div class="main_page_button" style="width: 160px; margin: 10px" onclick="clear_error_list()">
+            <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+            <p style="margin: -25px 35px">clear error list</p>
+          </div>
+          <hr class="main_page_hr">
+        </div>
+
+        <ul id="warnings_list"></ul>
+
+      </div>
+    </div>
+
+    <!--history-->
+    <div class="main_page" id="history" style="display: none;">
+      <div class="border border_size">
+        <div class="name_area_border border_size" style="height: 52px">
+          <img class="icon" width="30" height="30" src="static/img/admin/history.svg">
+          <h2>History</h2>
+        </div>
+        <hr class="main_page_hr">
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
+          <p style="margin: -25px 35px">refresh</p>
+        </div>
+      </div>
     </div>
 
     <!--users-->
