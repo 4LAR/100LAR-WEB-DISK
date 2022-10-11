@@ -34,7 +34,7 @@ function checkModal(modalId) {
   }
 }
 
-// открыть новую вкладку 
+// открыть новую вкладку
 function openInNewTab(url) {
   window.open(url, '_blank').focus();
 }
@@ -70,9 +70,9 @@ function convert_size(size_bytes, name_bool=false) {
     else
       return '0 B';
 
-  i = Math.floor(getBaseLog(1024, size_bytes));
+  i = Math.floor(getBaseLog(1024, size_bytes)); // индекс названия
   p = Math.pow(1024, i);
-  s = Math.round((size_bytes / p) * 100) / 100;
+  s = Math.round((size_bytes / p) * 100) / 100; // размер
 
   if (name_bool)
     return [s, size_name[i], i]
@@ -85,7 +85,7 @@ function convert_size_to_b(size, name_i = 0) {
   return Math.pow(size, name_i);
 }
 
-// установка размера прогресса в зависимости от размера 
+// установка размера прогресса в зависимости от размера
 function set_progressbar(name, state = 0, count=1) {
   if (count > 1) {
     for (let i = 0; i < count; i++) {

@@ -266,13 +266,17 @@ def get_users():
 @login_required
 def set_user():
     if (current_user.panel):
-        user_json = json.loads(request.args.get("user", ""))
+        user_json = request.args.get("user", "")
+        print(user_json)
+        user_json = json.loads(user_json)
         user_name = request.args.get("name", "")
 
-        userBase.users_dict[name] = user_json
+        userBase.users_dict_static[user_name] = user_json[user_name]
 
         if request.args.get("reload", "").lower() == 'true':
+            userBase.reload(user_name)
             userBase.update_users()
+            userBase.save()
 
         return 'ok'
 

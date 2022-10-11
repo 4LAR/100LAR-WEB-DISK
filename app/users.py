@@ -53,6 +53,7 @@ class UserBase():
                 ]
             }
         }
+        self.users_dict_static = {}
 
         self.templates_dict = {}
 
@@ -69,15 +70,29 @@ class UserBase():
             json_dict = read_dict(self.path)
 
             self.users_dict = json_dict['users']
+            self.users_dict_static = json_dict['users'].copy()
             self.templates_dict = json_dict['templates']
 
-            for user in self.users_dict:
-                for i in range(len(self.users_dict[user]['path'])):
-                    if self.users_dict[user]['path'][i]['type'] == 'template':
-                        self.users_dict[user]['path'][i] = self.templates_dict[self.users_dict[user]['path'][i]['name']]
-                        self.users_dict[user]['path'][i]['type'] = 'template'
+            for user in self.users_dict_static:
+                self.reload(user)
 
         self.update_users()
+
+    #
+    def reload(self, user):
+        for i in range(len(self.users_dict_static[user]['path'])):
+            if self.users_dict[user]['path'][i]['type'] == 'template':
+                self.users_dict[user]['path'][i] = self.templates_dict[self.users_dict_static[user]['path'][i]['name']].copy()
+                self.users_dict[user]['path'][i]['type'] = 'template'
+
+    #
+    def save(self):
+        json_dict = {
+            "templates": self.templates_dict,
+            "users": self.users_dict_static
+        }
+        save_dict(json_dict, self.path)
+
 
     #
     def update_users(self):
@@ -97,7 +112,7 @@ class UserBase():
             i += 1
 
     def get_users(self):
-        return self.users_dict
+        return self.users_dict_static
 
     def get_templates(self):
         return self.templates_dict
@@ -124,16 +139,6 @@ class UserBase():
 
     def get_user_info(self, name):
         return self.users_dict[name]
-
-    #
-    def save(self):
-        save_dict(
-            {
-                'templates': self.templates_dict,
-                'users': self.users_dict
-            },
-            self.path
-        )
 
     def add_user(self):
         pass
