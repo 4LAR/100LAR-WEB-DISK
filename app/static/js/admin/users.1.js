@@ -44,11 +44,11 @@ function generate_details(name, status, password, panel) {
   details_block = document.getElementById('users_info_' + name);
   checked = panel? 'checked': '';
   details_block.innerHTML = `
-    <p style="font-size: 18; font-weight: bold">Name</p><br>
+    <p style="font-size: 18; font-weight: normal">Name</p><br>
     <input id="users_info_${name}_name" type=text class="input_border" value="${name}" style="margin-left: 14px; margin-top: -3px"><br>
-    <p style="font-size: 18; font-weight: bold">Status</p><br>
+    <p style="font-size: 18; font-weight: normal">Status</p><br>
     <input id="users_info_${name}_status" type=text class="input_border" value="${status}" style="margin-left: 14px; margin-top: -3px"><br>
-    <p style="font-size: 18; font-weight: bold">Password</p><br>
+    <p style="font-size: 18; font-weight: normal">Password</p><br>
     <input id="users_info_${name}_password" type=text class="input_border" value="${password}" style="margin-left: 14px; margin-top: -3px"><br>
     <input id="users_info_${name}_panel" type=checkbox class="custom-checkbox" value="${panel}" style="position: relative; margin: 10 -5 15 5;" ${checked}>
     <label for="users_info_${name}_panel">
@@ -56,7 +56,7 @@ function generate_details(name, status, password, panel) {
     </label>
     <hr class="main_page_hr">
     <p style="font-size: 18; font-weight: bold">Path</p><br>
-    <ul id="users_info_${name}_path"></ul>
+    <ul id="users_info_${name}_path" class="path_list_grid"></ul>
     <img src="../static/img/add.svg" class=icon style="width: 15px; margin-left: 10px; margin-bottom: 5px" onclick="add_new_path('${name}')">
     <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="set_user_info('${name}')">
       <p style="margin: 5.3px 25px">Update</p>
@@ -72,22 +72,32 @@ function generate_details_path(user) {
   var i = 0;
   for (path of users_JSON[user]['path']) {
     updated_paths.push(`users_info_${user}_path_${path['name']}`);
-    i++;
+
     selected_path = (path['type'] === 'path')? 'selected': '';
     selected_template = (path['type'] === 'template')? 'selected': '';
     append_to_ul(
       `users_info_${user}_path`,
       `
-        <div id="users_info_${user}_${path['name']}_main">
+        <div id="users_info_${user}_${path['name']}_main" style="">
           <p style="font-size: 16; text-transform: capitalize">${path['name']}</p>
           <img src="../static/img/cross.svg" onclick="delete_existing_path('${user}', '${path['name']}')" class=icon style="width: 15px; margin-left: -25px; margin-bottom: 3px"><br>
-          <label for='users_info_${user}_path_${path['name']}_type>'>
-            <p style="font-size: 14">Type</p><br>
-          </label>
-          <select id='users_info_${user}_path_${path['name']}_type' class='input_border' style='padding: 0; margin: 2px 15px; width: 200px' onchange="type_change('${user}', '${path['name']}', '${i}')">
-            <option value="path" ${selected_path}>path</option>
-            <option value="template" ${selected_template}>template</option>
-          </select>
+
+          <table class="table_width" style="width: 90%">
+            <tr>
+              <th align="left">
+                <label for='users_info_${user}_path_${path['name']}_type>'>
+                  <p style="font-size: 14; font-weight: normal">Type</p><br>
+                </label>
+                <select id='users_info_${user}_path_${path['name']}_type' class='input_border' style='padding: 0; margin: 2px 13px; width: 98%' onchange="type_change('${user}', '${path['name']}', '${i}')">
+                  <option value="path" ${selected_path}>path</option>
+                  <option value="template" ${selected_template}>template</option>
+                </select>
+              </th>
+              <th align="left" id="users_info_${user}_path_${path['name']}_name_th">
+
+              </th>
+            </tr>
+          </table>
 
           <div id="users_info_${user}_path_${path['name']}">
           </div>
@@ -95,34 +105,45 @@ function generate_details_path(user) {
       `
     );
     type_change(user, path['name'], i);
-    last_path_id = i + 1;
+    i++;
+    last_path_id[user] = i + 1;
   }
 }
 
 //Добавление нового пути
 function add_new_path(user) {
-  updated_paths.push(`users_info_${user}_path_${last_path_id}`);
+  updated_paths.push(`users_info_${user}_path_${last_path_id[user]}`);
   append_to_ul(
     `users_info_${user}_path`,
     `
-      <div id="users_info_${user}_${last_path_id}_main">
-        <p style="font-size: 16; text-transform: capitalize">New Path ${last_path_id}</p>
-        <img src="../static/img/cross.svg" onclick="delete_existing_path('${user}', '${last_path_id}')" class=icon style="width: 15px; margin-left: -25px; margin-bottom: 3px"><br>
-        <label for='users_info_${user}_path_${last_path_id}_type>'>
-          <p style="font-size: 14">Type</p><br>
-        </label>
-        <select id='users_info_${user}_path_${last_path_id}_type' class='input_border' style='padding: 0; margin: 2px 15px; width: 200px' onchange="type_change('${user}', '${last_path_id}', '${last_path_id}')">
-          <option value="path">path</option>
-          <option value="template">template</option>
-        </select>
+      <div id="users_info_${user}_${last_path_id[user]}_main">
+        <p style="font-size: 16; text-transform: capitalize">New Path ${last_path_id[user]}</p>
+        <img src="../static/img/cross.svg" onclick="delete_existing_path('${user}', '${last_path_id[user]}')" class=icon style="width: 15px; margin-left: -25px; margin-bottom: 3px"><br>
 
-        <div id="users_info_${user}_path_${last_path_id}">
+        <table class="table_width" style="width: 90%">
+          <tr>
+            <th align="left">
+              <label for='users_info_${user}_path_${last_path_id[user]}_type>'>
+                <p style="font-size: 14; font-weight: normal">Type</p><br>
+              </label>
+              <select id='users_info_${user}_path_${last_path_id[user]}_type' class='input_border' style='padding: 0; margin: 2px 13px; width: 98%' onchange="type_change('${user}', '${last_path_id[user]}', '${i}')">
+                <option value="path" ${selected_path}>path</option>
+                <option value="template" ${selected_template}>template</option>
+              </select>
+            </th>
+            <th align="left" id="users_info_${user}_path_${last_path_id[user]}_name_th">
+
+            </th>
+          </tr>
+        </table>
+
+        <div id="users_info_${user}_path_${last_path_id[user]}">
         </div>
       </div>
     `
   );
-  type_change(user, last_path_id, last_path_id);
-  last_path_id++;
+  type_change(user, last_path_id[user], last_path_id[user]);
+  last_path_id[user]++;
 }
 
 //снести путь
@@ -135,17 +156,21 @@ function delete_existing_path(user, path) {
 //Смена вида при выборе темплейтов/пасов
 function type_change(user, path, index) {
   div_path = document.getElementById(`users_info_${user}_path_${path}`);
+  div_path_name = document.getElementById(`users_info_${user}_path_${path}_name_th`);
   div_path_type = document.getElementById(`users_info_${user}_path_${path}_type`);
   if (div_path_type.options[div_path_type.selectedIndex].value === 'template') {
     var templates = "";
     for (name in templates_JSON) {
       templates += `<option value="${name}">${name}</option>`
     }
-    div_path.innerHTML = `
-      <select id='users_info_${user}_path_${path}_template' class='input_border' style='padding: 0; margin: 2px 15px; width: 200px'>
+    div_path_name.innerHTML = `
+      <p style="font-size: 14">Name</p><br>
+      <select id='users_info_${user}_path_${path}_template' class='input_border' style='padding: 0; margin: 2px 15px; width: 100%'>
         ${templates}
       </select>
-      `;
+    `;
+
+    div_path.innerHTML = ``;
   }
   else if (div_path_type.options[div_path_type.selectedIndex].value === 'path') {
     var sizes = "";
@@ -153,23 +178,33 @@ function type_change(user, path, index) {
       sizes += `<option value="${size}">${size}</option>`
     }
     try {
+
       var path_val = "";
       var size_val = "";
       try {path_val = users_JSON[user]['path'][index]['path'];}
       catch {};
       try {size_val = users_JSON[user]['path'][index]['size'];}
       catch {};
+
+      div_path_name.innerHTML = `
+        <p style="font-size: 14; font-weight: normal">Name</p><br>
+        <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin: 2px 15px; width: 100%"><br>
+      `
+
+      // <p style="font-size: 14">Name</p><br>
+      // <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
+
       div_path.innerHTML = `
-        <p style="font-size: 14">Name</p><br>
-        <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin-left: 14px; margin-top: -3px"><br>
+
         <p style="font-size: 14">Path</p><br>
-        <input id="users_info_${user}_path_${path}_path" type=text class="input_border" value="${path_val}" style="margin-left: 14px; margin-top: -3px"><br>
+        <input id="users_info_${user}_path_${path}_path" type=text class="input_border" value="${path_val}" style="margin-left: 14px; margin-top: -3px; width: 90%""><br>
         <p style="font-size: 14">Size</p><br>
         <select id='users_info_${user}_path_${path}_size_type' class='input_border' style='padding: 0; margin: 2px 15px; width: 50px' onchange="convert_this('${user}', '${path}')">
           ${sizes}
         </select>
-        <input id="users_info_${user}_path_${path}_size" type=text class="input_border" value="${size_val}" style="margin-left: 14px; margin-top: -3px"><br>
-        `;
+        <input id="users_info_${user}_path_${path}_size" type=text class="input_border" value="${size_val}" style="margin-left: -13px; margin-top: -3px; width: 50%"><br>
+      `;
+
     } catch {
       var path_val = "";
       var size_val = "";
@@ -177,9 +212,17 @@ function type_change(user, path, index) {
       catch {};
       try {size_val = templates_JSON[path]['size'];}
       catch {};
+
+      div_path_name.innerHTML = `
+        <p style="font-size: 14; font-weight: normal">Name</p><br>
+        <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin: 2px 15px; width: 100%"><br>
+      `
+
+      // <p style="font-size: 14">Name</p><br>
+      // <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin-left: 14px; margin-top: -3px"><br>
+
       div_path.innerHTML = `
-        <p style="font-size: 14">Name</p><br>
-        <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin-left: 14px; margin-top: -3px"><br>
+
         <p style="font-size: 14">Path</p><br>
         <input id="users_info_${user}_path_${path}_path" type=text class="input_border" value="${path_val}" style="margin-left: 14px; margin-top: -3px"><br>
         <p style="font-size: 14">Size</p><br>
@@ -201,6 +244,7 @@ function convert_this(user, path) {
 }
 
 function get_users() {
+  last_path_id = {};
   updated_users_JSON = {};
   updated_paths = [];
   var xhr = new XMLHttpRequest();
@@ -212,10 +256,10 @@ function get_users() {
       get_templates();
       generate_users();
       for (user in users_JSON) {
+        last_path_id[user] = 0;
         updated_users_JSON[user] = new Object();
         prev_type[user] = new Object();
-        for (path of users_JSON[user]['path'])
-        {
+        for (path of users_JSON[user]['path']) {
           prev_type[user][path['name']] = 0;
         }
       }
