@@ -80,10 +80,14 @@ class UserBase():
 
     #
     def reload(self, user):
+        self.users_dict[user] = self.users_dict_static[user].copy()
         for i in range(len(self.users_dict_static[user]['path'])):
-            if self.users_dict[user]['path'][i]['type'] == 'template':
+            if self.users_dict_static[user]['path'][i]['type'] == 'template':
+                print(self.users_dict_static[user]['path'][i]['name'])
+                print(self.templates_dict)
                 self.users_dict[user]['path'][i] = self.templates_dict[self.users_dict_static[user]['path'][i]['name']].copy()
                 self.users_dict[user]['path'][i]['type'] = 'template'
+
 
     #
     def save(self):

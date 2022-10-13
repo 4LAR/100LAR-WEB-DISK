@@ -44,22 +44,37 @@ function generate_details(name, status, password, panel) {
   details_block = document.getElementById('users_info_' + name);
   checked = panel? 'checked': '';
   details_block.innerHTML = `
-    <p style="font-size: 18; font-weight: normal">Name</p><br>
-    <input id="users_info_${name}_name" type=text class="input_border" value="${name}" style="margin-left: 14px; margin-top: -3px"><br>
-    <p style="font-size: 18; font-weight: normal">Status</p><br>
-    <input id="users_info_${name}_status" type=text class="input_border" value="${status}" style="margin-left: 14px; margin-top: -3px"><br>
-    <p style="font-size: 18; font-weight: normal">Password</p><br>
-    <input id="users_info_${name}_password" type=text class="input_border" value="${password}" style="margin-left: 14px; margin-top: -3px"><br>
-    <input id="users_info_${name}_panel" type=checkbox class="custom-checkbox" value="${panel}" style="position: relative; margin: 10 -5 15 5;" ${checked}>
-    <label for="users_info_${name}_panel">
-      <p style="font-weight: normal; font-size: 18">Panel</p>
-    </label>
+    <div class="path_list_grid">
+      <div>
+        <p style="font-size: 18; font-weight: normal">Name</p><br>
+        <input id="users_info_${name}_name" type=text class="input_border" value="${name}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
+        <p style="font-size: 18; font-weight: normal">Status</p><br>
+        <input id="users_info_${name}_status" type=text class="input_border" value="${status}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
+        <p style="font-size: 18; font-weight: normal">Password</p><br>
+        <input id="users_info_${name}_password" type=text class="input_border" value="${password}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
+        <input id="users_info_${name}_panel" type=checkbox class="custom-checkbox" value="${panel}" style="position: relative; margin: 10 -5 15 5;" ${checked}>
+        <label for="users_info_${name}_panel">
+          <p style="font-weight: normal; font-size: 18">Panel</p>
+        </label>
+      </div>
+      <div>
+        <div class="main_page_button block_select" style="width: 140px; margin: 10px; display: inline-block;" onclick="">
+          <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
+          <p style="margin: -15px 35px">delete user</p>
+        </div><br>
+        <div class="main_page_button block_select" style="width: 145px; margin: 10px; display: inline-block;" onclick="set_user_info('${name}')">
+          <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
+          <p style="margin: -15px 35px">update user</p>
+        </div>
+      </div>
+    </div>
+
     <hr class="main_page_hr">
     <p style="font-size: 18; font-weight: normal">Path & templates</p><br>
     <ul id="users_info_${name}_path" class="path_list_grid"></ul>
-    <img src="../static/img/add.svg" class=icon style="width: 15px; margin-left: 10px; margin-bottom: 5px" onclick="add_new_path('${name}')">
-    <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="set_user_info('${name}')">
-      <p style="margin: 5.3px 25px">Update</p>
+    <div class="main_page_button block_select" style="width: 130px; margin: 10px; display: inline-block;" onclick="add_new_path('${name}')">
+      <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/add.svg">
+      <p style="margin: -15px 35px">add path</p>
     </div>
     &nbsp;
   `;
@@ -121,8 +136,12 @@ function add_new_path(user) {
     `users_info_${user}_path`,
     `
       <div id="users_info_${user}_${last_path_id[user]}_main" class="path_panel">
-        <p style="font-size: 16; text-transform: capitalize">New Path ${last_path_id[user]}</p>
-        <img src="../static/img/cross.svg" onclick="delete_existing_path('${user}', '${last_path_id[user]}')" class=icon style="width: 15px; margin-left: -25px; margin-bottom: 3px"><br>
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="delete_existing_path('${user}', '${last_path_id[user]}')">
+          <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
+          <p style="margin: -15px 35px">delete</p>
+        </div>
+
+        <p style="font-size: 16; text-transform: capitalize; font-weight: bold">${last_path_id[user]}</p>
 
         <table class="table_width" style="width: 90%">
           <tr>
