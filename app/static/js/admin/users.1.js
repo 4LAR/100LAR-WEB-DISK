@@ -52,10 +52,10 @@ function generate_details(name, status, password, panel) {
     <input id="users_info_${name}_password" type=text class="input_border" value="${password}" style="margin-left: 14px; margin-top: -3px"><br>
     <input id="users_info_${name}_panel" type=checkbox class="custom-checkbox" value="${panel}" style="position: relative; margin: 10 -5 15 5;" ${checked}>
     <label for="users_info_${name}_panel">
-      <p style="font-weight: bold; font-size: 18">Panel</p>
+      <p style="font-weight: normal; font-size: 18">Panel</p>
     </label>
     <hr class="main_page_hr">
-    <p style="font-size: 18; font-weight: bold">Path</p><br>
+    <p style="font-size: 18; font-weight: normal">Path & templates</p><br>
     <ul id="users_info_${name}_path" class="path_list_grid"></ul>
     <img src="../static/img/add.svg" class=icon style="width: 15px; margin-left: 10px; margin-bottom: 5px" onclick="add_new_path('${name}')">
     <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="set_user_info('${name}')">
@@ -78,9 +78,13 @@ function generate_details_path(user) {
     append_to_ul(
       `users_info_${user}_path`,
       `
-        <div id="users_info_${user}_${path['name']}_main" style="">
-          <p style="font-size: 16; text-transform: capitalize">${path['name']}</p>
-          <img src="../static/img/cross.svg" onclick="delete_existing_path('${user}', '${path['name']}')" class=icon style="width: 15px; margin-left: -25px; margin-bottom: 3px"><br>
+        <div id="users_info_${user}_${path['name']}_main" style="" class="path_panel">
+          <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="delete_existing_path('${user}', '${path['name']}')">
+            <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
+            <p style="margin: -15px 35px">delete</p>
+          </div>
+
+          <p style="font-size: 16; text-transform: capitalize; font-weight: bold">${path['name']}</p>
 
           <table class="table_width" style="width: 90%">
             <tr>
@@ -116,7 +120,7 @@ function add_new_path(user) {
   append_to_ul(
     `users_info_${user}_path`,
     `
-      <div id="users_info_${user}_${last_path_id[user]}_main">
+      <div id="users_info_${user}_${last_path_id[user]}_main" class="path_panel">
         <p style="font-size: 16; text-transform: capitalize">New Path ${last_path_id[user]}</p>
         <img src="../static/img/cross.svg" onclick="delete_existing_path('${user}', '${last_path_id[user]}')" class=icon style="width: 15px; margin-left: -25px; margin-bottom: 3px"><br>
 
@@ -150,7 +154,12 @@ function add_new_path(user) {
 function delete_existing_path(user, path) {
   var index = updated_paths.indexOf(`users_info_${user}_path_${path}`);
   if (index !== -1) updated_paths.splice(index, 1);
-  document.getElementById(`users_info_${user}_${path}_main`).innerHTML = "";
+  //document.getElementById(`users_info_${user}_${path}_main`).style = "background-color: #FFF";
+  document.getElementById(`users_info_${user}_${path}_main`).innerHTML = `
+    <h1 align="center">DELETED PATH</h1>
+    <h2 align="center" style="margin: -20px -50px">(${path})</h2>
+    <br>
+  `;
 }
 
 //Смена вида при выборе темплейтов/пасов
@@ -164,7 +173,7 @@ function type_change(user, path, index) {
       templates += `<option value="${name}">${name}</option>`
     }
     div_path_name.innerHTML = `
-      <p style="font-size: 14">Name</p><br>
+      <p style="font-size: 14; font-weight: normal">Name</p><br>
       <select id='users_info_${user}_path_${path}_template' class='input_border' style='padding: 0; margin: 2px 15px; width: 100%'>
         ${templates}
       </select>
