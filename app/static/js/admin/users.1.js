@@ -23,7 +23,7 @@ function generate_users() {
       'userlist',
       `
         <div id="users_${user}" style="height: 30px" class="block_select">
-          <div onclick="open_close_user('${user}'); generate_details('${user}', '${users_JSON[user]['status']}', '${users_JSON[user]['password']}', '${users_JSON[user]['panel']}'); generate_details_path('${user}')" style="cursor: pointer">
+          <div onclick="open_close_user('${user}'); generate_details('${user}', '${users_JSON[user]['status']}', '${users_JSON[user]['password']}', ${users_JSON[user]['panel']}); generate_details_path('${user}')" style="cursor: pointer">
             <img class="icon" width="20" height="20" src="static/img/user.svg">
             <p>${user}</p>
             <img align="right" id="users_triangle_${user}" style="margin: 5px 20px; transform: rotate(90deg)" class="icon" width="10" height="10" src="static/img/triangle.svg">
@@ -42,7 +42,6 @@ function generate_users() {
 //Внутренности юзер блока, вызывается при открытии юзера вместе с open_close_user
 function generate_details(name, status, password, panel) {
   details_block = document.getElementById('users_info_' + name);
-  checked = panel? 'checked': '';
   details_block.innerHTML = `
     <div class="path_list_grid">
       <div>
@@ -52,7 +51,7 @@ function generate_details(name, status, password, panel) {
         <input id="users_info_${name}_status" type=text class="input_border" value="${status}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
         <p style="font-size: 18; font-weight: normal">Password</p><br>
         <input id="users_info_${name}_password" type=text class="input_border" value="${password}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
-        <input id="users_info_${name}_panel" type=checkbox class="custom-checkbox" value="${panel}" style="position: relative; margin: 10 -5 15 5;" ${checked}>
+        <input id="users_info_${name}_panel" type=checkbox class="custom-checkbox" style="position: relative; margin: 10 -5 15 5;" ${(panel)? 'checked': ''}>
         <label for="users_info_${name}_panel">
           <p style="font-weight: normal; font-size: 18">Panel</p>
         </label>
