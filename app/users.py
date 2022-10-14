@@ -2,6 +2,8 @@
 import os
 import json
 
+import copy
+
 from flask_login import UserMixin
 
 def save_dict(dict, name):
@@ -73,21 +75,21 @@ class UserBase():
             self.users_dict_static = json_dict['users'].copy()
             self.templates_dict = json_dict['templates']
 
-            for user in self.users_dict_static:
-                self.reload(user)
+            self.reload_all()
 
         self.update_users()
 
+    def reload_all(self):
+        for user in self.users_dict_static:
+            self.reload(user)
+
     #
     def reload(self, user):
-        self.users_dict[user] = self.users_dict_static[user].copy()
+        self.users_dict[user] = copy.deepcopy(self.users_dict_static[user])
         for i in range(len(self.users_dict_static[user]['path'])):
             if self.users_dict_static[user]['path'][i]['type'] == 'template':
-                print(self.users_dict_static[user]['path'][i]['name'])
-                print(self.templates_dict)
                 self.users_dict[user]['path'][i] = self.templates_dict[self.users_dict_static[user]['path'][i]['name']].copy()
                 self.users_dict[user]['path'][i]['type'] = 'template'
-
 
     #
     def save(self):

@@ -7,9 +7,9 @@ function get_templates() {
   xhr.onload = function () {
     if (xhr.status === 200) {
       templates_JSON = JSON.parse(xhr.responseText.toString());
+
       
-      console.log(templates_JSON)
-      
+
     }
   };
   xhr.send();

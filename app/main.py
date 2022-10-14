@@ -267,7 +267,6 @@ def get_users():
 def set_user():
     if (current_user.panel):
         user_json = request.args.get("user", "")
-        print(user_json)
         user_json = json.loads(user_json)
         user_name = request.args.get("name", "")
 
@@ -280,6 +279,24 @@ def set_user():
 
         return 'ok'
 
+    else:
+        return "NO ADMIN"
+
+# удаление пользователя
+@app.route('/delete_user', methods=['POST'])
+@login_required
+def delete_user():
+    if (current_user.panel):
+        user_name = request.args.get("name", "")
+
+        userBase.users_dict_static.pop(user_name)
+        userBase.users_dict.pop(user_name)
+
+        if request.args.get("reload", "").lower() == 'true':
+            userBase.update_users()
+            userBase.save()
+
+        return 'ok'
     else:
         return "NO ADMIN"
 

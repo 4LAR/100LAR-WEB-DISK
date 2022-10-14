@@ -1,7 +1,7 @@
 var users_JSON = {};
 var templates_JSON = {};
 var updated_users_JSON = {};
-var updated_paths = [];
+var updated_paths = {};
 
 function open_close_user(name) {
   if (document.getElementById('users_' + name).style.height == '30px') {
@@ -58,7 +58,7 @@ function generate_details(name, status, password, panel) {
         </label>
       </div>
       <div>
-        <div class="main_page_button block_select" style="width: 140px; margin: 10px; display: inline-block;" onclick="">
+        <div class="main_page_button block_select" style="width: 140px; margin: 10px; display: inline-block;" onclick="delete_user('${name}')">
           <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -15px 35px">delete user</p>
         </div><br>
@@ -86,7 +86,7 @@ function generate_details_path(user) {
   clear_ul(`users_info_${user}_path`);
   var i = 0;
   for (path of users_JSON[user]['path']) {
-    updated_paths.push(`users_info_${user}_path_${path['name']}`);
+    updated_paths[user].push(`users_info_${user}_path_${path['name']}`);
 
     selected_path = (path['type'] === 'path')? 'selected': '';
     selected_template = (path['type'] === 'template')? 'selected': '';
@@ -131,7 +131,7 @@ function generate_details_path(user) {
 
 //Добавление нового пути
 function add_new_path(user) {
-  updated_paths.push(`users_info_${user}_path_${last_path_id[user]}`);
+  updated_paths[user].push(`users_info_${user}_path_${last_path_id[user]}`);
   append_to_ul(
     `users_info_${user}_path`,
     `
@@ -171,8 +171,8 @@ function add_new_path(user) {
 
 //снести путь
 function delete_existing_path(user, path) {
-  var index = updated_paths.indexOf(`users_info_${user}_path_${path}`);
-  if (index !== -1) updated_paths.splice(index, 1);
+  var index = updated_paths[user].indexOf(`users_info_${user}_path_${path}`);
+  if (index !== -1) updated_paths[user].splice(index, 1);
   //document.getElementById(`users_info_${user}_${path}_main`).style = "background-color: #FFF";
   document.getElementById(`users_info_${user}_${path}_main`).innerHTML = `
     <h1 align="center">DELETED PATH</h1>
@@ -189,7 +189,7 @@ function type_change(user, path, index) {
   if (div_path_type.options[div_path_type.selectedIndex].value === 'template') {
     var templates = "";
     for (name in templates_JSON) {
-      templates += `<option value="${name}">${name}</option>`
+      templates += `<option value="${name}" ${(name == path)? 'selected': ''}>${name}</option>`
     }
     div_path_name.innerHTML = `
       <p style="font-size: 14; font-weight: normal">Name</p><br>
@@ -274,7 +274,7 @@ function convert_this(user, path) {
 function get_users() {
   last_path_id = {};
   updated_users_JSON = {};
-  updated_paths = [];
+  updated_paths = {};
   var xhr = new XMLHttpRequest();
   xhr.open('POST', `/get_users`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -284,6 +284,7 @@ function get_users() {
       get_templates();
       generate_users();
       for (user in users_JSON) {
+        updated_paths[user] = [];
         last_path_id[user] = 0;
         updated_users_JSON[user] = new Object();
         prev_type[user] = new Object();
@@ -291,18 +292,6 @@ function get_users() {
           prev_type[user][path['name']] = 0;
         }
       }
-    }
-  };
-  xhr.send();
-}
-
-function get_templates() { //Полуение шаблонов, копия получения юзеров
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/get_templates`);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      templates_JSON = JSON.parse(xhr.responseText.toString());
     }
   };
   xhr.send();
@@ -320,7 +309,7 @@ function set_user_info(name) {
   updated_users_JSON[name]['panel'] = panel;
   var j = 0;
   updated_users_JSON[name]['path'] = [];
-  for (path of updated_paths) {
+  for (path of updated_paths[name]) {
     updated_users_JSON[name]['path'].push(new Object());
     type = document.getElementById(`${path}_type`).options[document.getElementById(`${path}_type`).selectedIndex].value;
     updated_users_JSON[name]['path'][j]['type'] = type;
@@ -348,6 +337,23 @@ function set_user_info(name) {
     }
   };
   xhr.send()
+
+}
+
+function delete_user(name) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', `/delete_user?name=${name}&reload=true`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      get_users();
+
+    }
+  };
+  xhr.send()
+}
+
+function new_user() {
 
 }
 
