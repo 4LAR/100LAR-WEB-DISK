@@ -1,4 +1,5 @@
 
+VERSION = '0.1.2 (stable)'
 
 import requests
 import configparser
@@ -149,19 +150,28 @@ def utf8len(s):
 # Запросы
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return render_template(
+        'login.html',
+        version = VERSION
+    )
 
 #
 @app.route('/main')
 @login_required
 def main_pc():
-    return render_template('main.html')
+    return render_template(
+        'main.html',
+        version = VERSION
+    )
 
 #
 @app.route('/m-main')
 @login_required
 def main_m():
-    return render_template('m-main.html')
+    return render_template(
+        'm-main.html',
+        version = VERSION
+    )
 
 #####################################################
 

@@ -180,6 +180,22 @@ body {
   image-rendering: crisp-edges;
 }
 
+.div_ver {
+
+}
+
+.div_ver a {
+  text-decoration: none;
+}
+
+.div_ver a:hover {
+  text-decoration: underline;
+}
+
+.div_ver p {
+  opacity: .6;
+}
+
 /* rotate animation */
 .anim_rotate {
   -webkit-animation:spin 4s linear infinite;
