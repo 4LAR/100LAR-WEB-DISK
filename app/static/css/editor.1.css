@@ -1,5 +1,8 @@
 :root {
   --lines-area-color: #24282B;
+
+  --size-bars: 25px;
+  --size-lines-number: 40px;
 }
 
 [data-theme = "light"] {
@@ -8,11 +11,12 @@
 
 .code_area {
   position: absolute;
-  top: 26px;
-  left: 60px;
-  width: calc(1220px + var(--scalex));
+  top: calc(var(--size-bars) + 1px);
+  left: var(--size-lines-number);
+  right: 0px;
+  bottom: calc(var(--size-bars) + 1px);
+  /* width: calc(1220px + var(--scalex)); */
   /*height: calc(694px + var(--scaley));*/
-  bottom: 0px;
 
   resize: none;
 
@@ -30,10 +34,10 @@
 
 .lines_area {
   position: absolute;
-  top: 26px;
+  top: calc(var(--size-bars) + 1px);
   left: 0px;
-  width: 60px;
-  bottom: 0px;
+  width: var(--size-lines-number);
+  bottom: calc(var(--size-bars) + 1px);
 
   overflow-y: hidden;
 
@@ -52,6 +56,8 @@
   outline: none !important;
 }
 
+/**/
+
 .topBar {
   position: fixed;
   background-color: var(--top-color);
@@ -59,7 +65,7 @@
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 25px;
+  height: var(--size-bars);
 
   border-bottom: 1px solid var(--top-border-color);
 }
@@ -88,4 +94,17 @@
 
 .topBar_button:hover {
   background-color: var(--top-hover-color);
+}
+
+/**/
+.bottomBar {
+  position: fixed;
+  background-color: var(--top-color);
+
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: var(--size-bars);
+
+  border-top: 1px solid var(--top-border-color);
 }
