@@ -9,6 +9,24 @@
   --lines-area-color: #EBEEF1;
 }
 
+.CodeMirror * {
+  /* font-family: Arial, monospace; */
+  font-size: 12px;
+}
+  
+
+.code_form {
+  position: absolute;
+  top: calc(var(--size-bars) + 1px);
+  left: 0px;
+  right: 0px;
+  bottom: calc(var(--size-bars) - 12px);
+  /* width: calc(1220px + var(--scalex)); */
+  /*height: calc(694px + var(--scaley));*/
+
+  resize: none;
+}
+
 .code_area {
   position: absolute;
   top: calc(var(--size-bars) + 1px);

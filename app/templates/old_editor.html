@@ -8,17 +8,13 @@
 
     <link rel="stylesheet" href = "static/css/editor.1.css"/>
 
-    {{ codemirror.include_codemirror() }}
-
   </head>
 
   <body>
 
-    <form method="POST" class="code_form">
-      {{ form.csrf_token }}
-      {{ form.source_code }}
-    </form>
-
+    <textarea id="lines_area" class="lines_area" name="name" wrap='off' readonly unselectable="on">1</textarea>
+    <textarea id="code_area" class="code_area scroll_style" name="name" wrap='off'></textarea>
+    
     <div class="topBar">
       <p id="save_state" style="position: absolute; display: none; font-size: 25px; margin: -9px 0px; left: 85px;">•</p>
       <p style="position: absolute; margin: auto; left: 98px;">{{ data[2] }}</p>
@@ -37,8 +33,6 @@
     var path = '{{ data[0] }}';
     var dir_str = '{{ data[1] }}';
     var name = '{{ data[2] }}';
-
-    editor_for_source_code.setSize("100%", "100%");
   </script>
 
   <script type="text/javascript" src="static/js/main.1.js"></script>
@@ -48,4 +42,3 @@
   <script type="text/javascript" src="static/js/editor.1.js"></script>
 
 </html>
-  

@@ -25,13 +25,17 @@ from flask import send_file
 
 from gevent.pywsgi import WSGIServer
 
-# импортируем всё что нужно для автоизации
+# импортируем всё что нужно для авторизации
 from flask_login import LoginManager
 from flask_login import login_required
 from flask_login import UserMixin
 from flask_login import login_user
 from flask_login import current_user
 from flask_login import logout_user
+
+from flask_codemirror import CodeMirror
+from flask_codemirror.fields import CodeMirrorField
+from flask_wtf import FlaskForm
 
 #
 import time
@@ -84,9 +88,23 @@ userBase = UserBase(
     key =       settings.options['Flask']['secret_key']
 )
 
+CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
+WTF_CSRF_ENABLED = True
+
+CODEMIRROR_THEME = 'elegant'#'default'
+CODEMIRROR_ADDONS = (
+    (
+        'ADDON_DIR',
+        'ADDON_NAME'
+    ),
+)
+
 app = Flask(__name__)
+app.config.from_object(__name__)
 app.config['SECRET_KEY'] = settings.options['Flask']['secret_key']
 app.debug = settings.options['Flask']['debug']
+
+codemirror = CodeMirror(app)
 
 login_manager = LoginManager()
 login_manager.login_view = "login"
@@ -397,6 +415,14 @@ def delete_all_logs():
 
 #####################################################
 
+class EditorForm(FlaskForm):
+    source_code = CodeMirrorField(
+        language = 'clike', 
+        config = {
+            'lineNumbers': 'true'
+        }
+    )
+
 # текстовый редактор
 @app.route('/editor')
 @login_required
@@ -405,13 +431,14 @@ def editor():
     dir = request.args.get("dir", "")
     file = request.args.get("file", "")
 
-    print(path, dir, file)
-
     data = [path, dir, file]
+
+    form = EditorForm()
 
     return render_template(
         'editor.html',
-        data=data
+        data=data,
+        form=form
     )
 
 # запись в файл новых данных
