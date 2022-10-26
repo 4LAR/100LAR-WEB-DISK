@@ -91,7 +91,8 @@ userBase = UserBase(
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
 WTF_CSRF_ENABLED = True
 
-CODEMIRROR_THEME = 'elegant'#'default'
+# CODEMIRROR_THEME = 'eclipse'#'ayu-dark'#'material'#'elegant'
+# CODEMIRROR_THEME = ['eclipse', 'ayu-dark', 'material', 'elegant']
 CODEMIRROR_ADDONS = (
     (
         'ADDON_DIR',
@@ -417,7 +418,7 @@ def delete_all_logs():
 
 class EditorForm(FlaskForm):
     source_code = CodeMirrorField(
-        language = 'clike', 
+        language = 'text/x-csrc',
         config = {
             'lineNumbers': 'true'
         }
@@ -431,7 +432,12 @@ def editor():
     dir = request.args.get("dir", "")
     file = request.args.get("file", "")
 
-    data = [path, dir, file]
+    data = [
+        path,
+        userBase.get_user_info(current_user.username)['path'][int(path)]['name'],
+        dir,
+        file
+    ]
 
     form = EditorForm()
 
@@ -881,6 +887,12 @@ http_server = WSGIServer(
     ),
     app
 )
+
+# app.run(
+#     settings.options['Flask']['IP'],
+#     settings.options['Flask']['PORT'],
+#     debug=True
+# )
 
 console_term.create_log()
 print('100LAR-WEB-DISK')

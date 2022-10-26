@@ -9,7 +9,7 @@ function load_code() {
     if (xhr.status === 200) {
       editor_for_source_code.setValue(xhr.responseText.toString());
       closeModal('save_state');
-      
+
     }
   };
   xhr.send();
@@ -25,7 +25,7 @@ function save() {
     if (xhr.status === 200) {
       if (xhr.responseText.toString() === 'ok') {
         closeModal('save_state');
-        
+
       }
 
     }
@@ -34,8 +34,13 @@ function save() {
   xhr.send(JSON.stringify({"code": editor_for_source_code.getValue()}))
 }
 
-editor_for_source_code.on('change',function(cMirror){
+editor_for_source_code.on('change', function(cMirror){
   openModal('save_state');
+});
+
+editor_for_source_code.on('cursorActivity', function(cMirror){
+  cursor_pos = editor_for_source_code.getCursor();
+  document.getElementById('cursor_pos').innerHTML = `${cursor_pos.line + 1}:${cursor_pos.ch}`;
 });
 
 //load_code(0, '/', 'log.txt');
@@ -48,3 +53,13 @@ document.onkeydown = function(e) {
         return false;
     }
 };
+
+function set_mode(selectObject) {
+  editor_for_source_code.setOption("mode", selectObject.value);
+}
+
+function set_theme(selectObject) {
+  console.log(selectObject.options[selectObject.selectedIndex].text);
+  // editor_for_source_code.setOption("theme", selectObject.options[selectObject.selectedIndex].text);
+  editor_for_source_code.setOption("theme", '3024-night');
+}
