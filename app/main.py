@@ -91,14 +91,20 @@ userBase = UserBase(
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
 WTF_CSRF_ENABLED = True
 
-# CODEMIRROR_THEME = 'eclipse'#'ayu-dark'#'material'#'elegant'
-# CODEMIRROR_THEME = ['eclipse', 'ayu-dark', 'material', 'elegant']
-CODEMIRROR_ADDONS = (
-    (
-        'ADDON_DIR',
-        'ADDON_NAME'
-    ),
-)
+#CODEMIRROR_THEME = 'eclipse'#'ayu-dark'#'material'#'elegant'
+CODEMIRROR_THEMES = [
+    'eclipse',
+    'midnight',
+    'material',
+    '3024-night'
+]
+
+# CODEMIRROR_ADDONS = (
+#     (
+#         'ADDON_DIR',
+#         'ADDON_NAME'
+#     ),
+# )
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -418,7 +424,7 @@ def delete_all_logs():
 
 class EditorForm(FlaskForm):
     source_code = CodeMirrorField(
-        language = 'text/x-csrc',
+        #language = 'text/x-csrc',
         config = {
             'lineNumbers': 'true'
         }
@@ -432,6 +438,10 @@ def editor():
     dir = request.args.get("dir", "")
     file = request.args.get("file", "")
 
+    themes_str = ''
+    for theme_name in CODEMIRROR_THEMES:
+        themes_str += '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/theme/%s.css">\n' % (theme_name)
+
     data = [
         path,
         userBase.get_user_info(current_user.username)['path'][int(path)]['name'],
@@ -444,7 +454,8 @@ def editor():
     return render_template(
         'editor.html',
         data=data,
-        form=form
+        form=form,
+        codemirror_themes = themes_str
     )
 
 # запись в файл новых данных

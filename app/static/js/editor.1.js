@@ -1,6 +1,11 @@
 
 var code_example = `HELLO WORLD`;
 
+function selectElement(id, valueToSelect) {
+    let element = document.getElementById(id);
+    element.value = valueToSelect;
+}
+
 function load_code() {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', `/download?path=${path}&dir=${dir_str}&file=${name}`);
@@ -54,12 +59,53 @@ document.onkeydown = function(e) {
     }
 };
 
-function set_mode(selectObject) {
-  editor_for_source_code.setOption("mode", selectObject.value);
+function setOption(name_option, selectObject=null, id=null, value=null) {
+  if (selectObject === null) {
+    editor_for_source_code.setOption(name_option, value);
+    selectElement(id, value);
+    localStorage.setItem('cm_' + name_option, value);
+
+  } else {
+    editor_for_source_code.setOption(name_option, selectObject.value);
+    localStorage.setItem('cm_' + name_option, selectObject.value);
+
+  }
+
+
 }
 
-function set_theme(selectObject) {
-  console.log(selectObject.options[selectObject.selectedIndex].text);
-  // editor_for_source_code.setOption("theme", selectObject.options[selectObject.selectedIndex].text);
-  editor_for_source_code.setOption("theme", '3024-night');
+var lang_dict = {
+  'python': ['py'],
+  'text/x-csrc': ['c', 'h'],
+  'text/x-c++src': ['cpp', 'hpp'],
+  'text/x-java': ['class', 'java']
 }
+
+function check_lang(file_name) {
+  extension_file = file_name.split('.');
+  extension_file = extension_file[extension_file.length - 1];
+  for (var key in lang_dict) {
+    if (lang_dict[key].includes(extension_file)) return key;
+  }
+
+  return 'text/plain';
+}
+
+selected_lang = check_lang(name);
+setOption('mode', null, 'set_mode', selected_lang)
+
+function get_localStorage(key, default_return=null) {
+  if (localStorage.getItem(key) != null)
+    return localStorage.getItem(key);
+
+  else
+    return default_return;
+}
+
+var tabSize = get_localStorage('cm_tabSize', '2');
+var theme = get_localStorage('cm_theme', 'default');
+
+setOption('tabSize', null, 'set_tabSize', tabSize)
+setOption('theme', null, 'set_theme', theme)
+
+editor_for_source_code.setOption("indentUnit", 1);
