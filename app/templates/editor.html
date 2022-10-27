@@ -21,16 +21,16 @@
     </form>
 
     <div class="topBar">
-      <div class="topBar_button" style="left: 0px; width: 70px;" onclick="save()">
+      <div class="topBar_button block_select" style="left: 0px; width: 70px;" onclick="open_drop_down_menu('menu_file')">
         <p align="center">File</p>
       </div>
-      <div class="topBar_button" style="left: 70px; width: 70px;" onclick="save()">
+      <div class="topBar_button block_select" style="left: 70px; width: 70px;" onclick="open_drop_down_menu('menu_edit')">
         <p align="center">Edit</p>
       </div>
       <p id="save_state" align="center" style="position: absolute; display: none; font-size: 25px; margin: -9px calc(50% - 20px); left: 8px;">•</p>
       <p style="position: absolute; margin: 0px 50%" align="center">{{ data[3] }}</p>
 
-      <label for="set_theme" style="position: absolute; left: 150px; top: 0px; color: var(--color-font-bars)">
+      <label for="" style="position: absolute; left: 150px; top: 0px; color: var(--color-font-bars)">
         Theme:
         <select onchange="setOption('theme', this)" class="selector" id="set_theme" style="">
           <option value="default">default</option>
@@ -42,12 +42,50 @@
       </label>
     </div>
 
+    <div id="background_black_editor" class="background_black_editor" onclick="close_all_drop_down_menu()"></div>
+
+    <div id="menu_file" class="drop_down_menu" style="left: 0px; width: 220px">
+      <div class="drop_down_menu_button block_select" onclick="save(); close_all_drop_down_menu();">
+        <p style="">Save</p>
+        <p align="right" style="float: right">Ctrl + S</p>
+      </div>
+      <div class="drop_down_menu_button block_select" onclick="close_all_drop_down_menu();">
+        <p>Export</p>
+        <p align="right" style="float: right">Ctrl + Shift + S</p>
+      </div>
+      <hr class="drop_down_menu_hr">
+      <div class="drop_down_menu_button block_select" onclick="close_all_drop_down_menu();">
+        <p>Settings</p>
+      </div>
+      <hr class="drop_down_menu_hr">
+      <div class="drop_down_menu_button block_select" onclick="window.close()">
+        <p>Exit</p>
+        <p align="right" style="float: right">Ctrl + W</p>
+      </div>
+    </div>
+
+    <div id="menu_edit" class="drop_down_menu" style="left: 70px;">
+      <div class="drop_down_menu_button block_select" onclick="editor_for_source_code.undo(); close_all_drop_down_menu();">
+        <p style="">Undo</p>
+        <p align="right" style="float: right">Ctrl + Z</p>
+      </div>
+      <div class="drop_down_menu_button block_select" onclick="editor_for_source_code.redo(); close_all_drop_down_menu();">
+        <p>Redo</p>
+        <p align="right" style="float: right">Ctrl + Y</p>
+      </div>
+      <!-- <hr class="drop_down_menu_hr">
+      <div class="drop_down_menu_button block_select" onclick="editor_for_source_code.selectAll(); close_all_drop_down_menu();">
+        <p>Select all</p>
+        <p align="right" style="float: right">Ctrl + A</p>
+      </div> -->
+    </div>
+
     <div class="bottomBar">
       <p style="margin: 0px 8px">{{ data[1] }}:/{{ data[2] }}/{{ data[3] }}</p>
       <p id="cursor_pos"></p>
 
 
-      <label for="set_tabSize" style="position: absolute; right: 100px;">
+      <label for="" style="position: absolute; right: 100px;">
         <p style="">spaces: </p>
         <select id="set_tabSize" class="selector" style="" onchange="setOption('tabSize', this)">
           <option value="1">1</option>

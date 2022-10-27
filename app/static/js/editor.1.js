@@ -109,3 +109,24 @@ setOption('tabSize', null, 'set_tabSize', tabSize)
 setOption('theme', null, 'set_theme', theme)
 
 editor_for_source_code.setOption("indentUnit", 1);
+
+var drop_down_menu_list = ['menu_file', 'menu_edit'];
+function open_drop_down_menu(id) {
+  if (checkModal(id)) {
+    close_all_drop_down_menu();
+    closeModal(id);
+  } else {
+    close_all_drop_down_menu();
+    
+    openModal(id);
+    openModal('background_black_editor');
+  }
+}
+
+function close_all_drop_down_menu() {
+  for (let i = 0; i < drop_down_menu_list.length; i++) {
+    closeModal(drop_down_menu_list[i]);
+  }
+  closeModal('background_black_editor');
+
+}

@@ -186,6 +186,7 @@ body {
 
 .div_ver a {
   text-decoration: none;
+  color: var(--top-font-color);
 }
 
 .div_ver a:hover {
