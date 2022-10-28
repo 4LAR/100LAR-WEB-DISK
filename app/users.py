@@ -40,7 +40,8 @@ class UserBase():
         self.path = 'users'
         self.key = key
 
-        self.users_dict = {
+        self.users_dict = {}
+        self.users_dict_static = {
             "admin": {
                 "status": "admin",
                 "password": "12345678",
@@ -51,13 +52,22 @@ class UserBase():
                         "name": "root",
                         "path": "/",
                         "size": 0
+                    },
+                    {
+                        "type": "template",
+                        "name": "root_template"
                     }
                 ]
             }
         }
-        self.users_dict_static = {}
 
-        self.templates_dict = {}
+        self.templates_dict = {
+            "root_template": {
+                "name": "root_template",
+                "path": "/",
+                "size": 0
+            }
+        }
 
         self.users = {}
 
@@ -67,6 +77,7 @@ class UserBase():
     def read(self):
         if not os.path.exists(self.path + '.json'):
             self.save()
+            self.read()
 
         else:
             json_dict = read_dict(self.path)
