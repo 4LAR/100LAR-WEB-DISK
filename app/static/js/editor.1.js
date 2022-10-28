@@ -1,6 +1,25 @@
 
 var code_example = `HELLO WORLD`;
 
+function download(filename, text) {
+    var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    pom.setAttribute('download', filename);
+
+    if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+    }
+    else {
+        pom.click();
+    }
+}
+
+function export_file() {
+  download(name, editor_for_source_code.getValue());
+}
+
 function selectElement(id, valueToSelect) {
     let element = document.getElementById(id);
     element.value = valueToSelect;
@@ -52,7 +71,11 @@ editor_for_source_code.on('cursorActivity', function(cMirror){
 load_code();
 
 document.onkeydown = function(e) {
-    if (e.ctrlKey && e.keyCode === 83) {
+    if (e.ctrlKey && e.shiftKey && e.keyCode === 83) {
+        export_file();
+
+        return false;
+    } else if (e.ctrlKey && e.keyCode === 83) {
         save();
 
         return false;
@@ -117,7 +140,7 @@ function open_drop_down_menu(id) {
     closeModal(id);
   } else {
     close_all_drop_down_menu();
-    
+
     openModal(id);
     openModal('background_black_editor');
   }
