@@ -395,8 +395,9 @@ function load_preview_image() {
 
 function set_preview_image_type(type="auto") {
   document.getElementById("preview_image").style.imageRendering = type;
+  localStorage.setItem('preview_imageRendering', type);
+  selectElement("preview_image_type", type);
 }
-
 
 function preview_image_type(selectObject) {
   set_preview_image_type(selectObject.value);
@@ -406,9 +407,8 @@ if (localStorage.getItem('preview_image') == null) {
   localStorage.setItem('preview_image', false);
 }
 
-console.log(Boolean(localStorage.getItem('preview_image')))
 document.getElementById("checkbox_preview_image").checked = (localStorage.getItem('preview_image') === 'true');
-//load_preview_image();
+set_preview_image_type(get_localStorage("preview_imageRendering", "auto"));
 
 var selected_file_name = '';
 var selected_file_dir = '';

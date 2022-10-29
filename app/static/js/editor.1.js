@@ -1,28 +1,8 @@
 
 var code_example = `HELLO WORLD`;
 
-function download(filename, text) {
-    var pom = document.createElement('a');
-    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    pom.setAttribute('download', filename);
-
-    if (document.createEvent) {
-        var event = document.createEvent('MouseEvents');
-        event.initEvent('click', true, true);
-        pom.dispatchEvent(event);
-    }
-    else {
-        pom.click();
-    }
-}
-
 function export_file() {
   download(name, editor_for_source_code.getValue());
-}
-
-function selectElement(id, valueToSelect) {
-    let element = document.getElementById(id);
-    element.value = valueToSelect;
 }
 
 function load_code() {
@@ -116,14 +96,6 @@ function check_lang(file_name) {
 
 selected_lang = check_lang(name);
 setOption('mode', null, 'set_mode', selected_lang)
-
-function get_localStorage(key, default_return=null) {
-  if (localStorage.getItem(key) != null)
-    return localStorage.getItem(key);
-
-  else
-    return default_return;
-}
 
 var tabSize = get_localStorage('cm_tabSize', '2');
 var theme = get_localStorage('cm_theme', 'default');

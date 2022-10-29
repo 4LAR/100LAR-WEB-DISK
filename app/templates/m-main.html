@@ -120,6 +120,19 @@
 
           <div class="preview_image" id="preview_image_div">
             <img id="preview_image" class="" width="300px" src="" />
+
+            <div class="preview_display_type">
+              <label for="" style="position: absolute; margin: 0px 10px;">
+                Rendering type:
+                <select onchange="preview_image_type(this)" class="preview_rendering_selector" id="preview_image_type" style="margin: 0px 5px">
+                  <option value="auto">auto</option>
+                  <option value="crisp-edges">crisp-edges</option>
+                  <option value="pixelated">pixelated</option>
+                  <option value="initial">initial</option>
+                  <option value="inherit">inherit</option>
+                </select>
+              </label>
+            </div>
           </div>
         </div>
 
