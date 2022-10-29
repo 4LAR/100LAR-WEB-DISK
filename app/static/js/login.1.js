@@ -1,6 +1,7 @@
 
 //
 function login() {
+  openModal('loading_login');
   var username = document.getElementById("login_input").value;
   var password = document.getElementById("password_input").value;
 
@@ -13,6 +14,8 @@ function login() {
     } else {
       if (xhr.responseText.toString() == 'ERROR LOGIN'){
         console.log('ERROR LOGIN');
+        closeModal('loading_login');
+
 
       } else {
         check_login();

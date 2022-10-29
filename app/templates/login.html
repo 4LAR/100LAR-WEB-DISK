@@ -16,12 +16,21 @@
       </div>-->
 
       <div class="login_container">
+        <div id="inputs" style="display: block">
+          <input id="login_input" class="input_style login_input" style="top: 20px;" type=text placeholder="login">
+          <input id="password_input" class="input_style login_input" style="top: 60px;" type=password placeholder="password" onkeypress="return login_enter(event)">
 
-        <input id="login_input" class="input_style login_input" style="top: 20px;" type=text placeholder="login">
-        <input id="password_input" class="input_style login_input" style="top: 60px;" type=password placeholder="password" onkeypress="return login_enter(event)">
+          <div class="login_button block_select" onclick="login()">
+            <p style="margin: 8px 50px">login</p>
+          </div>
+        </div>
 
-        <div class="login_button block_select" onclick="login()">
-          <p style="margin: 8px 50px">login</p>
+        <div id="loading_login" style="display: none">
+          <div style="position: absolute; width: 100%; height: 100%; background-color: #000; opacity: .2;"></div>
+          <div style="position: absolute;">
+            <img id="refresh" class="icon anim_rotate" style="position: absolute; left: 10px; top: 10px;" width="30" height="30" src="static/img/admin/refresh.svg">
+            <p style="margin: 10px 50px; font-size: 20px;">Login...</p>
+          </div>
         </div>
 
       </div>
@@ -38,6 +47,7 @@
 
   </body>
 
+  <script type="text/javascript" src="static/js/main.1.js"></script>
   <script type="text/javascript" src="static/js/login.1.js"></script>
 
   <script type="text/javascript" src="static/js/theme.1.js"></script>
