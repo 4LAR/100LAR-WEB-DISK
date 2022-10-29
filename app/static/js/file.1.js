@@ -393,6 +393,15 @@ function load_preview_image() {
 
 }
 
+function set_preview_image_type(type="auto") {
+  document.getElementById("preview_image").style.imageRendering = type;
+}
+
+
+function preview_image_type(selectObject) {
+  set_preview_image_type(selectObject.value);
+}
+
 if (localStorage.getItem('preview_image') == null) {
   localStorage.setItem('preview_image', false);
 }
