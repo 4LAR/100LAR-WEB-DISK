@@ -15,6 +15,11 @@
         <h2 style="margin: -35px 40px;">login</h2>
       </div>-->
 
+      <div id="login_warning" class="login_warning" style="display: none">
+        <img id="refresh" class="icon" style="position: absolute; left: 4px; top: 4px;" width="20" height="20" src="static/img/warning.svg">
+        <p style="margin: 5px 30px">Incorrect login or password.</p>
+        <img id="refresh" class="icon" style="position: absolute; right: 4px; top: 4px; cursor: pointer;" width="20" height="20" src="static/img/cross.svg" onclick="close_warning()">
+      </div>
       <div class="login_container">
         <div id="inputs" style="display: block">
           <input id="login_input" class="input_style login_input" style="top: 20px;" type=text placeholder="login">
@@ -34,6 +39,7 @@
         </div>
 
       </div>
+
 
       <!--версия-->
       <div class="div_ver" style="position: absolute; left: 0px; bottom: 0px; width: 100%" align="left">

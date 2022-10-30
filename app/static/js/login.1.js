@@ -1,5 +1,10 @@
 
 //
+function close_warning() {
+  closeModal('login_warning');
+}
+
+//
 function login() {
   openModal('loading_login');
   var username = document.getElementById("login_input").value;
@@ -15,6 +20,7 @@ function login() {
       if (xhr.responseText.toString() == 'ERROR LOGIN'){
         console.log('ERROR LOGIN');
         closeModal('loading_login');
+        openModal('login_warning');
 
 
       } else {
@@ -38,8 +44,6 @@ function login_enter(e) {
 function check_device() {
   return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
-
-console.log(check_device())
 
 //
 function check_login() {
