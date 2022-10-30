@@ -506,9 +506,10 @@ def load_user(userid):
 def login():
     username = request.args.get("username", "")
     password = request.args.get("password", "")
+    remember = True if (request.args.get("remember", "false").lower() == 'true') else False
     user = userBase.get_user(username)
     if user != None and user.password == password:
-        login_user(user, remember=True)
+        login_user(user, remember=remember)
         history.add(0, '%s login' % username)
         return 'OK'
 

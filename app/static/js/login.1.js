@@ -7,11 +7,13 @@ function close_warning() {
 //
 function login() {
   openModal('loading_login');
+  closeModal('login_warning');
   var username = document.getElementById("login_input").value;
   var password = document.getElementById("password_input").value;
+  var remember = document.getElementById("remember_chekcbox").checked;
 
   xhr = new XMLHttpRequest();
-  xhr.open('POST', `/login?username=${username}&password=${password}`);
+  xhr.open('POST', `/login?username=${username}&password=${password}&remember=${remember}`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status !== 200) {
