@@ -2,6 +2,7 @@ var users_JSON = {};
 var templates_JSON = {};
 var updated_users_JSON = {};
 var updated_paths = {};
+var new_user_id = 0;
 
 function open_close_user(name) {
   if (document.getElementById('users_' + name).style.height == '30px') {
@@ -37,6 +38,30 @@ function generate_users() {
       `
     );
   }
+}
+
+//добавление юзверя
+function add_new_user() {
+  append_to_ul(
+    'userlist',
+    `
+      <hr class="main_page_hr">
+      <div id="users_${new_user_id}" style="height: 30px" class="block_select">
+        <div onclick="open_close_user('${new_user_id}'); generate_details('${new_user_id}', '${new_user_id}_status', '${new_user_id}_password', ${false}); generate_details_path('${new_user_id}')" style="cursor: pointer">
+          <img class="icon" width="20" height="20" src="static/img/user.svg">
+          <p>${new_user_id}</p>
+          <img align="right" id="users_triangle_${new_user_id}" style="margin: 5px 20px; transform: rotate(90deg)" class="icon" width="10" height="10" src="static/img/triangle.svg">
+        </div>
+        <div id="users_info_${new_user_id}" class="user_info" style="display: none">
+          <p>You're not supposed to see this.</p>
+        </div>
+      </div>
+    `
+  );
+  updated_users_JSON[new_user_id] = new Object();
+  updated_paths[new_user_id] = [];
+  last_path_id[new_user_id] = 0;
+  new_user_id++;
 }
 
 //Внутренности юзер блока, вызывается при открытии юзера вместе с open_close_user
@@ -84,47 +109,49 @@ var last_path_id = 0;
 function generate_details_path(user) {
   clear_ul(`users_info_${user}_path`);
   var i = 0;
-  for (path of users_JSON[user]['path']) {
-    updated_paths[user].push(`users_info_${user}_path_${path['name']}`);
+  if (users_JSON[user]) {
+    for (path of users_JSON[user]['path']) {
+      updated_paths[user].push(`users_info_${user}_path_${path['name']}`);
 
-    selected_path = (path['type'] === 'path')? 'selected': '';
-    selected_template = (path['type'] === 'template')? 'selected': '';
-    append_to_ul(
-      `users_info_${user}_path`,
-      `
-        <div id="users_info_${user}_${path['name']}_main" style="" class="path_panel">
-          <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="delete_existing_path('${user}', '${path['name']}')">
-            <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
-            <p style="margin: -15px 35px">delete</p>
+      selected_path = (path['type'] === 'path')? 'selected': '';
+      selected_template = (path['type'] === 'template')? 'selected': '';
+      append_to_ul(
+        `users_info_${user}_path`,
+        `
+          <div id="users_info_${user}_${path['name']}_main" style="" class="path_panel">
+            <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="delete_existing_path('${user}', '${path['name']}')">
+              <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
+              <p style="margin: -15px 35px">delete</p>
+            </div>
+
+            <p style="font-size: 16; text-transform: capitalize; font-weight: bold">${path['name']}</p>
+
+            <table class="table_width" style="width: 90%">
+              <tr>
+                <th align="left">
+                  <label for='users_info_${user}_path_${path['name']}_type>'>
+                    <p style="font-size: 14; font-weight: normal">Type</p><br>
+                  </label>
+                  <select id='users_info_${user}_path_${path['name']}_type' class='input_border' style='padding: 0; margin: 2px 13px; width: 98%' onchange="type_change('${user}', '${path['name']}', '${i}')">
+                    <option value="path" ${selected_path}>path</option>
+                    <option value="template" ${selected_template}>template</option>
+                  </select>
+                </th>
+                <th align="left" id="users_info_${user}_path_${path['name']}_name_th">
+
+                </th>
+              </tr>
+            </table>
+
+            <div id="users_info_${user}_path_${path['name']}">
+            </div>
           </div>
-
-          <p style="font-size: 16; text-transform: capitalize; font-weight: bold">${path['name']}</p>
-
-          <table class="table_width" style="width: 90%">
-            <tr>
-              <th align="left">
-                <label for='users_info_${user}_path_${path['name']}_type>'>
-                  <p style="font-size: 14; font-weight: normal">Type</p><br>
-                </label>
-                <select id='users_info_${user}_path_${path['name']}_type' class='input_border' style='padding: 0; margin: 2px 13px; width: 98%' onchange="type_change('${user}', '${path['name']}', '${i}')">
-                  <option value="path" ${selected_path}>path</option>
-                  <option value="template" ${selected_template}>template</option>
-                </select>
-              </th>
-              <th align="left" id="users_info_${user}_path_${path['name']}_name_th">
-
-              </th>
-            </tr>
-          </table>
-
-          <div id="users_info_${user}_path_${path['name']}">
-          </div>
-        </div>
-      `
-    );
-    type_change(user, path['name'], i);
-    i++;
-    last_path_id[user] = i + 1;
+        `
+      );
+      type_change(user, path['name'], i);
+      i++;
+      last_path_id[user] = i + 1;
+    }
   }
 }
 
@@ -149,8 +176,8 @@ function add_new_path(user) {
                 <p style="font-size: 14; font-weight: normal">Type</p><br>
               </label>
               <select id='users_info_${user}_path_${last_path_id[user]}_type' class='input_border' style='padding: 0; margin: 2px 13px; width: 98%' onchange="type_change('${user}', '${last_path_id[user]}', '${i}')">
-                <option value="path" ${selected_path}>path</option>
-                <option value="template" ${selected_template}>template</option>
+                <option value="path">path</option>
+                <option value="template">template</option>
               </select>
             </th>
             <th align="left" id="users_info_${user}_path_${last_path_id[user]}_name_th">
@@ -325,9 +352,10 @@ function set_user_info(name) {
     updated_users_JSON[name]['path'][j]['name'] = path_name;
     j++;
   }
+  new_name = document.getElementById(`users_info_${name}_name`).value;
 
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/set_user?user=${JSON.stringify(updated_users_JSON)}&name=${name}&reload=true`);
+  xhr.open('POST', `/set_user?user=${JSON.stringify(updated_users_JSON)}&name=${name}&new_name=${new_name}&reload=true`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {

@@ -304,11 +304,13 @@ def set_user():
         user_json = request.args.get("user", "")
         user_json = json.loads(user_json)
         user_name = request.args.get("name", "")
+        user_new_name = request.args.get("new_name", "")
 
-        userBase.users_dict_static[user_name] = user_json[user_name]
+        userBase.users_dict_static.pop(user_name)
+        userBase.users_dict_static[user_new_name] = user_json[user_name]
 
         if request.args.get("reload", "").lower() == 'true':
-            userBase.reload(user_name)
+            userBase.reload(user_new_name)
             userBase.update_users()
             userBase.save()
 
