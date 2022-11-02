@@ -7,7 +7,8 @@ var page_names = [
     'users',
     'memory',
     'logs',
-    'settings'
+    'settings',
+    'terminal'
   ];
 
 //
