@@ -133,8 +133,8 @@ def shutdown():
 #
 def check_size(current_user, path, file_size):
 
-    busy = get_size(userBase.get_user_info(current_user.username)['path'][int(path)]['path'])
-    user_size = userBase.get_user_info(current_user.username)['path'][int(path)]['size']
+    busy = get_size(userBase.get_user_info(current_user.id)['path'][int(path)]['path'])
+    user_size = userBase.get_user_info(current_user.id)['path'][int(path)]['size']
     if (user_size != 0):
         return (busy + file_size <= user_size)
 
@@ -145,10 +145,10 @@ def check_size(current_user, path, file_size):
 def check_size_list(current_user, path, dir, files=[]):
     files_size = 0
 
-    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+    user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
     busy = get_size(user_path)
-    user_size = userBase.get_user_info(current_user.username)['path'][int(path)]['size']
+    user_size = userBase.get_user_info(current_user.id)['path'][int(path)]['size']
 
     if (user_size != 0):
         for f in files:
@@ -304,18 +304,44 @@ def set_user():
         user_json = request.args.get("user", "")
         user_json = json.loads(user_json)
         user_name = request.args.get("name", "")
-        user_new_name = request.args.get("new_name", "")
 
-        userBase.users_dict_static.pop(user_name)
-        userBase.users_dict_static[user_new_name] = user_json[user_name]
+        #userBase.users_dict_static.pop(user_name)
+        #userBase.users_dict_static[user_new_name] = user_json[user_name]
+        #userBase.users_dict_static[str(userBase.get_id_by_name(user_name))] = user_json[user_name]
+
+        userBase.users_dict_static[user_name] = user_json[user_name]
 
         if request.args.get("reload", "").lower() == 'true':
-            userBase.reload(user_new_name)
+            #userBase.reload(str(userBase.get_id_by_name(user_name)))
+            userBase.reload(user_name)
             userBase.update_users()
             userBase.save()
 
         return 'ok'
 
+    else:
+        return "NO ADMIN"
+
+@app.route('/create_user', methods=['POST'])
+@login_required
+def create_user():
+    if (current_user.panel):
+
+        userBase.last_id += 1
+        userBase.users_dict_static[str(userBase.last_id)] = {
+            "username": "new_user_" + str(userBase.last_id),
+            "status": "user",
+            "password": "12345678",
+            "panel": False,
+            "path": []
+        }
+
+        if request.args.get("reload", "").lower() == 'true':
+            userBase.reload(str(userBase.last_id))
+            userBase.update_users()
+            userBase.save()
+
+        return 'ok'
     else:
         return "NO ADMIN"
 
@@ -327,7 +353,8 @@ def delete_user():
         user_name = request.args.get("name", "")
 
         userBase.users_dict_static.pop(user_name)
-        userBase.users_dict.pop(user_name)
+        #userBase.users_dict_static.pop(str(userBase.get_id_by_name(user_name)))
+        #userBase.users_dict.pop(str(userBase.get_id_by_name(user_name)))
 
         if request.args.get("reload", "").lower() == 'true':
             userBase.update_users()
@@ -446,7 +473,7 @@ def editor():
 
     data = [
         path,
-        userBase.get_user_info(current_user.username)['path'][int(path)]['name'],
+        userBase.get_user_info(current_user.id)['path'][int(path)]['name'],
         dir,
         file
     ]
@@ -469,7 +496,7 @@ def save_file():
         dir = request.args.get("dir", "")
         file = request.args.get("file", "")
 
-        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
         file_path = user_path + dir + '/' + file
 
@@ -501,7 +528,7 @@ def save_file():
 
 @login_manager.user_loader
 def load_user(userid):
-    return userBase.get_name_by_id(int(userid))
+    return userBase.get_user(int(userid))
 
 # авторизация
 @app.route('/login', methods=['GET' , 'POST'])
@@ -509,7 +536,7 @@ def login():
     username = request.args.get("username", "")
     password = request.args.get("password", "")
     remember = True if (request.args.get("remember", "false").lower() == 'true') else False
-    user = userBase.get_user(username)
+    user = userBase.get_user(userBase.get_id_by_name(username))
     if user != None and user.password == password:
         login_user(user, remember=remember)
         history.add(0, '%s login' % username)
@@ -530,7 +557,7 @@ def logout():
 @app.route("/info", methods=['GET' , 'POST'])
 @login_required
 def info():
-    info_json = userBase.get_user_info(current_user.username)
+    info_json = userBase.get_user_info(current_user.id)
     info_json['name'] = current_user.username
     for i in range(len(info_json['path'])):
         info_json['path'][i]['size_converted'] = convert_size(info_json['path'][i]['size'])
@@ -552,7 +579,7 @@ def files():
 
             #dir = dir.replace('/', '"/"')
 
-            user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+            user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
             files = os.listdir(user_path + dir)
 
@@ -628,14 +655,14 @@ def create_file():
     file = request.args.get("file", "")
     hello_data = request.args.get("hello", "HELLO WORLD")
 
-    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+    user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
     if check_size(current_user, path, utf8len(hello_data)):
         f = open(user_path + dir + '/' + file, 'w')
         f.write("HELLO WORLD")
         f.close()
 
-        history.add(5, '%s create file (%s)' % (current_user.username, user_path + dir + file))
+        history.add(5, '%s create file (%s)' % (current_user.id, user_path + dir + file))
 
         return 'ok'
 
@@ -650,11 +677,11 @@ def create_folder():
     dir = request.args.get("dir", "")
     file = request.args.get("folder_name", "")
 
-    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+    user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
     os.mkdir(user_path + dir + '/' + file)
 
-    history.add(5, '%s create folder (%s)' % (current_user.username, user_path + dir + file))
+    history.add(5, '%s create folder (%s)' % (current_user.id, user_path + dir + file))
 
     return 'ok'
 
@@ -667,7 +694,7 @@ def rename():
     file = request.args.get("file", "")
     new_file = request.args.get("new_file", "")
 
-    user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+    user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
     os.rename(user_path + dir + '/' + file, user_path + dir + '/' + new_file)
 
@@ -684,7 +711,7 @@ def unpack():
         dir = request.args.get("dir", "")
         file = request.args.get("file", "")
 
-        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
         dir_name = file.split('.')[0]
         #os.mkdir(user_path + dir + '/' + dir_name)
@@ -724,7 +751,7 @@ def downlaod():
         file = request.args.get("file", "")
         files = request.args.get("files", "")
 
-        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
         if len(file) > 0:
             history.add(2, '%s download file (%s)' % (current_user.username, user_path + dir + file))
@@ -776,7 +803,7 @@ def delete():
         file = request.args.get("file", "")
         files = request.args.get("files", "")
 
-        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
         if len(file) > 0:
 
@@ -819,7 +846,7 @@ def copy_files():
 
         cut_bool = (cut_bool.lower() == 'true')
 
-        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
         files_list = json.loads(files)['files']
         files_list_log = []
 
@@ -881,8 +908,8 @@ def upload_file_disk():
 
     if check_size(current_user, path, size):
         f.seek(0, os.SEEK_SET)
-
-        user_path = userBase.get_user_info(current_user.username)['path'][int(path)]['path']
+        print(userBase.get_user_info(current_user.id))
+        user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
         f.save(user_path + dir + '/' + file)
 
         history.add(3, '%s upload file (%s)' % (current_user.username, user_path + dir + file))

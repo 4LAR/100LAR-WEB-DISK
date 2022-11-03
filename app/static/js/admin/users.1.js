@@ -24,9 +24,9 @@ function generate_users() {
       'userlist',
       `
         <div id="users_${user}" style="height: 30px" class="block_select">
-          <div onclick="open_close_user('${user}'); generate_details('${user}', '${users_JSON[user]['status']}', '${users_JSON[user]['password']}', ${users_JSON[user]['panel']}); generate_details_path('${user}')" style="cursor: pointer">
+          <div onclick="open_close_user('${user}'); generate_details('${user}', '${users_JSON[user]['username']}', '${users_JSON[user]['status']}', '${users_JSON[user]['password']}', ${users_JSON[user]['panel']}); generate_details_path('${user}')" style="cursor: pointer">
             <img class="icon" width="20" height="20" src="static/img/user.svg">
-            <p>${user}</p>
+            <p>${users_JSON[user]['username']}:${user}</p>
             <img align="right" id="users_triangle_${user}" style="margin: 5px 20px; transform: rotate(90deg)" class="icon" width="10" height="10" src="static/img/triangle.svg">
           </div>
           <div id="users_info_${user}" class="user_info" style="display: none">
@@ -40,38 +40,38 @@ function generate_users() {
   }
 }
 
-//добавление юзверя
-function add_new_user() {
-  append_to_ul(
-    'userlist',
-    `
-      <hr class="main_page_hr">
-      <div id="users_${new_user_id}" style="height: 30px" class="block_select">
-        <div onclick="open_close_user('${new_user_id}'); generate_details('${new_user_id}', '${new_user_id}_status', '${new_user_id}_password', ${false}); generate_details_path('${new_user_id}')" style="cursor: pointer">
-          <img class="icon" width="20" height="20" src="static/img/user.svg">
-          <p>${new_user_id}</p>
-          <img align="right" id="users_triangle_${new_user_id}" style="margin: 5px 20px; transform: rotate(90deg)" class="icon" width="10" height="10" src="static/img/triangle.svg">
-        </div>
-        <div id="users_info_${new_user_id}" class="user_info" style="display: none">
-          <p>You're not supposed to see this.</p>
-        </div>
-      </div>
-    `
-  );
-  updated_users_JSON[new_user_id] = new Object();
-  updated_paths[new_user_id] = [];
-  last_path_id[new_user_id] = 0;
-  new_user_id++;
-}
+//добавление юзверя (old)
+// function add_new_user() {
+//   append_to_ul(
+//     'userlist',
+//     `
+//       <hr class="main_page_hr">
+//       <div id="users_${new_user_id}" style="height: 30px" class="block_select">
+//         <div onclick="open_close_user('${new_user_id}'); generate_details('${new_user_id}', '${new_user_id}_status', '${new_user_id}_password', ${false}); generate_details_path('${new_user_id}')" style="cursor: pointer">
+//           <img class="icon" width="20" height="20" src="static/img/user.svg">
+//           <p>${new_user_id}</p>
+//           <img align="right" id="users_triangle_${new_user_id}" style="margin: 5px 20px; transform: rotate(90deg)" class="icon" width="10" height="10" src="static/img/triangle.svg">
+//         </div>
+//         <div id="users_info_${new_user_id}" class="user_info" style="display: none">
+//           <p>You're not supposed to see this.</p>
+//         </div>
+//       </div>
+//     `
+//   );
+//   updated_users_JSON[new_user_id] = new Object();
+//   updated_paths[new_user_id] = [];
+//   last_path_id[new_user_id] = 0;
+//   new_user_id++;
+// }
 
 //Внутренности юзер блока, вызывается при открытии юзера вместе с open_close_user
-function generate_details(name, status, password, panel) {
+function generate_details(name, username, status, password, panel) {
   details_block = document.getElementById('users_info_' + name);
   details_block.innerHTML = `
     <div class="path_list_grid">
       <div>
         <p style="font-size: 18; font-weight: normal">Name</p><br>
-        <input id="users_info_${name}_name" type=text class="input_border" value="${name}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
+        <input id="users_info_${name}_name" type=text class="input_border" value="${username}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
         <p style="font-size: 18; font-weight: normal">Status</p><br>
         <input id="users_info_${name}_status" type=text class="input_border" value="${status}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
         <p style="font-size: 18; font-weight: normal">Password</p><br>
@@ -324,12 +324,13 @@ function get_users() {
 }
 
 function set_user_info(name) {
-
+  username = document.getElementById(`users_info_${name}_name`).value;
   status = document.getElementById(`users_info_${name}_status`).value;
   password = document.getElementById(`users_info_${name}_password`).value;
   panel = document.getElementById(`users_info_${name}_panel`);
   if (panel.checked) panel = true;
   else panel = false;
+  updated_users_JSON[name]['username'] = username;
   updated_users_JSON[name]['status'] = status;
   updated_users_JSON[name]['password'] = password;
   updated_users_JSON[name]['panel'] = panel;
@@ -352,10 +353,10 @@ function set_user_info(name) {
     updated_users_JSON[name]['path'][j]['name'] = path_name;
     j++;
   }
-  new_name = document.getElementById(`users_info_${name}_name`).value;
+  //new_name = document.getElementById(`users_info_${name}_name`).value;
 
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/set_user?user=${JSON.stringify(updated_users_JSON)}&name=${name}&new_name=${new_name}&reload=true`);
+  xhr.open('POST', `/set_user?user=${JSON.stringify(updated_users_JSON)}&name=${name}&reload=true`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -380,8 +381,18 @@ function delete_user(name) {
   xhr.send()
 }
 
-function new_user() {
+//добавление юзверя
+function add_new_user() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', `/create_user?reload=true`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      get_users();
 
+    }
+  };
+  xhr.send()
 }
 
 get_users();
