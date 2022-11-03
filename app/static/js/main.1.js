@@ -62,6 +62,13 @@ function getBaseLog(x, y) {
 
 var size_name = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
+function get_size_index_by_name(name) {
+  for (let i = 0; i < size_name.length; i++) {
+    if (name === size_name[i]) return i;
+  }
+  return -1;
+}
+
 // конвертирование байтов в [size_name]
 function convert_size(size_bytes, name_bool=false) {
   if (size_bytes == 0)
@@ -82,7 +89,7 @@ function convert_size(size_bytes, name_bool=false) {
 
 // конвертирование [size_name] в байты
 function convert_size_to_b(size, name_i = 0) {
-  return Math.pow(size, name_i);
+  return Math.pow(1024, name_i) * size;
 }
 
 // установка размера прогресса в зависимости от размера

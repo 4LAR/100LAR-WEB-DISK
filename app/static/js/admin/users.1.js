@@ -4,6 +4,8 @@ var updated_users_JSON = {};
 var updated_paths = {};
 var new_user_id = 0;
 
+var prev_type = new Object();
+
 function open_close_user(name) {
   if (document.getElementById('users_' + name).style.height == '30px') {
     document.getElementById('users_' + name).style.height = '';
@@ -227,18 +229,19 @@ function type_change(user, path, index) {
     div_path.innerHTML = ``;
   }
   else if (div_path_type.options[div_path_type.selectedIndex].value === 'path') {
-    var sizes = "";
-    for (size of size_name) {
-      sizes += `<option value="${size}">${size}</option>`
-    }
+
     try {
 
       var path_val = "";
       var size_val = "";
-      try {path_val = users_JSON[user]['path'][index]['path'];}
-      catch {};
-      try {size_val = users_JSON[user]['path'][index]['size'];}
-      catch {};
+      try {path_val = users_JSON[user]['path'][index]['path'];} catch {};
+      try {size_val = users_JSON[user]['path'][index]['size'];} catch {};
+
+      var sizes = "";
+      converted_size = convert_size(size_val, true)
+      for (size of size_name) {
+        sizes += `<option value="${size}" ${(size == converted_size[1])? 'selected': ''}>${size}</option>`
+      }
 
       div_path_name.innerHTML = `
         <p style="font-size: 14; font-weight: normal">Name</p><br>
@@ -253,54 +256,25 @@ function type_change(user, path, index) {
         <p style="font-size: 14">Path</p><br>
         <input id="users_info_${user}_path_${path}_path" type=text class="input_border" value="${path_val}" style="margin-left: 14px; margin-top: -3px; width: 90%""><br>
         <p style="font-size: 14">Size</p><br>
-        <select id='users_info_${user}_path_${path}_size_type' class='input_border' style='padding: 0; margin: 2px 15px; width: 50px' onchange="convert_this('${user}', '${path}')">
+        <select id='users_info_${user}_path_${path}_size_type' class='input_border' style='padding: 0; margin: 2px 15px; width: 50px'>
           ${sizes}
         </select>
-        <input id="users_info_${user}_path_${path}_size" type=text class="input_border" value="${size_val}" style="margin-left: -13px; margin-top: -3px; width: 50%"><br>
+        <input id="users_info_${user}_path_${path}_size" type=text class="input_border" value="${converted_size[0]}" style="margin-left: -13px; margin-top: -3px; width: 50%"><br>
       `;
 
     } catch {
-      var path_val = "";
-      var size_val = "";
-      try {path_val = templates_JSON[path]['path'];}
-      catch {};
-      try {size_val = templates_JSON[path]['size'];}
-      catch {};
 
-      div_path_name.innerHTML = `
-        <p style="font-size: 14; font-weight: normal">Name</p><br>
-        <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin: 2px 15px; width: 100%"><br>
-      `
-
-      // <p style="font-size: 14">Name</p><br>
-      // <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin-left: 14px; margin-top: -3px"><br>
-
-      div_path.innerHTML = `
-
-        <p style="font-size: 14">Path</p><br>
-        <input id="users_info_${user}_path_${path}_path" type=text class="input_border" value="${path_val}" style="margin-left: 14px; margin-top: -3px"><br>
-        <p style="font-size: 14">Size</p><br>
-        <select id="users_info_${user}_path_${path}_size_type" class='input_border' style='padding: 0; margin: 2px 15px; width: 50px' onchange="convert_this('${user}', '${path}')">
-          ${sizes}
-        </select>
-        <input id="users_info_${user}_path_${path}_size" type=text class="input_border" value="${size_val}" style="margin-left: 14px; margin-top: -3px"><br>
-        `;
     }
   }
 }
 
-//блядское конвертирование
-var prev_type = new Object();
-function convert_this(user, path) {
-  current_size = document.getElementById(`users_info_${user}_path_${path}_size`).value * Math.pow(1024, prev_type[user][path]);
-  document.getElementById(`users_info_${user}_path_${path}_size`).value = current_size / Math.pow(1024, document.getElementById(`users_info_${user}_path_${path}_size_type`).selectedIndex);
-  prev_type[user][path] = document.getElementById(`users_info_${user}_path_${path}_size_type`).selectedIndex;
-}
-
 function get_users() {
+  users_JSON = {};
   last_path_id = {};
   updated_users_JSON = {};
   updated_paths = {};
+  new_user_id = 0;
+
   var xhr = new XMLHttpRequest();
   xhr.open('POST', `/get_users`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -345,7 +319,8 @@ function set_user_info(name) {
       path_disk = document.getElementById(`${path}_path`).value;
       size = document.getElementById(`${path}_size`).value;
       updated_users_JSON[name]['path'][j]['path'] = path_disk;
-      updated_users_JSON[name]['path'][j]['size'] = parseInt(size);
+      var size_type = document.getElementById(`${path}_size_type`).value;
+      updated_users_JSON[name]['path'][j]['size'] = convert_size_to_b(parseInt(size), get_size_index_by_name(size_type));
     }
     else {
       path_name = document.getElementById(`${path}_template`).value;
