@@ -135,3 +135,7 @@ function get_localStorage(key, default_return=null) {
   else
     return default_return;
 }
+
+function open_git_releases() {
+  openInNewTab('https://github.com/4LAR/100LAR-WEB-DISK/releases');
+}
