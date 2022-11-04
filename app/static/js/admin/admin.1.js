@@ -5,7 +5,7 @@ var page_names = [
     'dashboard',
     'history',
     'users',
-    'memory',
+    'templates',
     'logs',
     'settings',
     'terminal'
@@ -72,11 +72,11 @@ function get_server_info() {
               ${(i == info_json['warnings'].length - 1)? '': '<hr class="main_page_hr">'}
             `
           );
-  
+
         }
       } else {
         closeModal('clear_errors_div');
-        append_to_ul('warnings_list', 
+        append_to_ul('warnings_list',
           `<h2 align="center">NO ERRORS</h2>`
           );
       }

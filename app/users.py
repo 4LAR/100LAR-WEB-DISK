@@ -103,10 +103,13 @@ class UserBase():
     #
     def reload(self, user):
         self.users_dict[user] = copy.deepcopy(self.users_dict_static[user])
-        for i in range(len(self.users_dict_static[user]['path'])):
-            if self.users_dict_static[user]['path'][i]['type'] == 'template':
+        for i in range(len(self.users_dict_static[user]['path']) - 1, 0, -1):
+            if self.users_dict_static[user]['path'][i]['type'] == 'template' and self.users_dict_static[user]['path'][i]['name'] in self.templates_dict:
                 self.users_dict[user]['path'][i] = self.templates_dict[self.users_dict_static[user]['path'][i]['name']].copy()
                 self.users_dict[user]['path'][i]['type'] = 'template'
+
+            else:
+                self.users_dict[user]['path'].pop(i)
 
     #
     def save(self):

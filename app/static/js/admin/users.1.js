@@ -96,7 +96,6 @@ function generate_details(name, username, status, password, panel) {
     </div>
 
     <hr class="main_page_hr">
-    <p style="font-size: 18; font-weight: normal">Path & templates</p><br>
     <ul id="users_info_${name}_path" class="path_list_grid"></ul>
     <div class="main_page_button block_select" style="width: 130px; margin: 10px; display: inline-block;" onclick="add_new_path('${name}')">
       <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/add.svg">

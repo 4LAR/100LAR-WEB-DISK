@@ -275,8 +275,8 @@ def clear_history():
     else:
         return "NO ADMIN"
 
-############USERS
-# получить настройки пользователей
+############TEMPLATES
+# получить список шаблонов путей
 @app.route('/get_templates', methods=['GET', 'POST'])
 @login_required
 def get_templates():
@@ -286,6 +286,69 @@ def get_templates():
     else:
         return "NO ADMIN"
 
+# # изменение шаблона пути
+@app.route('/set_template', methods=['GET', 'POST'])
+@login_required
+def set_template():
+    if (current_user.panel):
+        template_json = request.args.get("json", "")
+        template_json = json.loads(template_json)
+
+        userBase.templates_dict[template_json['name']] = template_json
+
+        if request.args.get("reload", "").lower() == 'true':
+            userBase.reload_all()
+            userBase.update_users()
+            userBase.save()
+
+        return 'ok'
+
+    else:
+        return "NO ADMIN"
+
+# # создание шаблона пути
+@app.route('/create_template', methods=['GET', 'POST'])
+@login_required
+def create_template():
+    if (current_user.panel):
+        random_name = random_string(10)
+
+        userBase.templates_dict[random_name] = {
+            "name": random_name,
+            "path": "/",
+            "size": 0
+        }
+
+        if request.args.get("reload", "").lower() == 'true':
+            userBase.reload_all()
+            userBase.update_users()
+            userBase.save()
+
+        return "ok"
+
+    else:
+        return "NO ADMIN"
+
+# удаление шаблона пути
+@app.route('/delete_template', methods=['GET', 'POST'])
+@login_required
+def delete_template():
+    if (current_user.panel):
+        template_name = request.args.get("name", "")
+
+        userBase.templates_dict.pop(template_name)
+
+        if request.args.get("reload", "").lower() == 'true':
+            userBase.reload_all()
+            userBase.update_users()
+            userBase.save()
+
+        return 'ok'
+
+    else:
+        return "NO ADMIN"
+
+############USERS
 # получить настройки пользователей
 @app.route('/get_users', methods=['GET', 'POST'])
 @login_required
@@ -305,14 +368,9 @@ def set_user():
         user_json = json.loads(user_json)
         user_name = request.args.get("name", "")
 
-        #userBase.users_dict_static.pop(user_name)
-        #userBase.users_dict_static[user_new_name] = user_json[user_name]
-        #userBase.users_dict_static[str(userBase.get_id_by_name(user_name))] = user_json[user_name]
-
         userBase.users_dict_static[user_name] = user_json[user_name]
 
         if request.args.get("reload", "").lower() == 'true':
-            #userBase.reload(str(userBase.get_id_by_name(user_name)))
             userBase.reload(user_name)
             userBase.update_users()
             userBase.save()
@@ -353,8 +411,6 @@ def delete_user():
         user_name = request.args.get("name", "")
 
         userBase.users_dict_static.pop(user_name)
-        #userBase.users_dict_static.pop(str(userBase.get_id_by_name(user_name)))
-        #userBase.users_dict.pop(str(userBase.get_id_by_name(user_name)))
 
         if request.args.get("reload", "").lower() == 'true':
             userBase.update_users()

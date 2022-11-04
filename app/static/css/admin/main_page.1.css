@@ -26,12 +26,17 @@
   .path_list_grid {
     grid-template-columns: repeat(2, 50%);
   }
+
+  .save_template {
+    position: absolute;
+    margin: -40px 32%;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .main_page {
     position: absolute;
-    top: 480px;
+    top: 500px;
     left: 50%;
     margin: 0 -175px;
   }
@@ -51,6 +56,11 @@
 
   .path_list_grid {
     grid-template-columns: repeat(1, 100%);
+  }
+
+  .save_template {
+    position: absolute;
+    margin: -40px 62%;
   }
 }
 
@@ -206,4 +216,25 @@
   width: 100%;
   /* border: 1px solid #30363D;
   border-collapse: collapse; */
+}
+
+/**/
+
+.template_border {
+  background-color: #161B22;
+  border-radius: 5px;
+
+  border: 1px solid #30363D;
+  display: block;
+  border-collapse: collapse;
+
+  margin: 10px 5px;
+
+}
+
+.template_border p {
+  display: inline-block;
+  position: relative;
+  margin: 0px 15px;
+  font-weight: normal;
 }
