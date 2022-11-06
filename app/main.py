@@ -1,5 +1,5 @@
 
-VERSION = '0.1.2 (stable)'
+VERSION = '1.0.0 (stable)'
 
 import requests
 import configparser
@@ -91,20 +91,12 @@ userBase = UserBase(
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
 WTF_CSRF_ENABLED = True
 
-#CODEMIRROR_THEME = 'eclipse'#'ayu-dark'#'material'#'elegant'
 CODEMIRROR_THEMES = [
     'eclipse',
     'midnight',
     'material',
     '3024-night'
 ]
-
-# CODEMIRROR_ADDONS = (
-#     (
-#         'ADDON_DIR',
-#         'ADDON_NAME'
-#     ),
-# )
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -975,6 +967,15 @@ def upload_file_disk():
 
     else:
         return 'NO PLACE'
+
+@app.before_request
+def log_request_info():
+    try:
+        pass
+    except Exception as e:
+        pass
+        # console_term.print('[ERROR]')
+
 
 # создаём WSGI сервер
 http_server = WSGIServer(
