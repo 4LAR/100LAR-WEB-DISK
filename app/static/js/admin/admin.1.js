@@ -31,6 +31,20 @@ function open_page(page_name) {
   }
 }
 
+//---ALERTS------------------------------------------------------
+function open_alert(html, height = 200) {
+  document.getElementById("alert_div").innerHTML = html;
+  document.getElementById("alert").style.height = height + "px";
+
+  openModal('alert_bg');
+  openModal('alert');
+}
+
+function close_alert() {
+  closeModal('alert_bg');
+  closeModal('alert');
+}
+
 //---DASHBOARD------------------------------------------------------
 function get_server_info() {
 
@@ -99,6 +113,18 @@ function clear_error_list() {
   };
   xhr.send()
 }
+
+function open_alert_clear_error_list() {
+  open_alert(`
+    <h3 style="margin: 50px 10px;" align="center">Are you sure you want to clear the error list?</h3>
+
+    <div class="main_page_button" style="position: absolute; width: 100px; bottom: 10px; left: 10px;" onclick="clear_error_list(); close_alert()">
+      <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+      <p style="margin: -25px 35px">clear</p>
+    </div>
+  `, 130);
+}
+
 
 get_server_info();
 

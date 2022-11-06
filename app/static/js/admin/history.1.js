@@ -9,6 +9,8 @@ var history_types = [
   ['edit', 'admin/edit.svg'],
 ]
 
+var history_json = {};
+
 function get_history() {
   clear_ul('historylist');
 
@@ -60,4 +62,16 @@ function delete_all_history() {
     }
   };
   xhr.send()
+}
+
+function open_alert_delete_all_history() {
+  open_alert(`
+    <h3 style="margin: 50px 10px;" align="center">Are you sure you want to clear the activity history?</h3>
+    <p style="margin: -50px 10px;" align="center">${history_json['history'].length} elements</p>
+
+    <div class="main_page_button" style="position: absolute; width: 100px; bottom: 10px; left: 10px;" onclick="delete_all_history(); close_alert()">
+      <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+      <p style="margin: -25px 35px">delete</p>
+    </div>
+  `, 150);
 }

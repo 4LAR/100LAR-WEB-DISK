@@ -31,11 +31,6 @@ function generate_settingslist() {
       name_parametr = parameter + '-' + section;
       if (typeof(settings_json[section][parameter]) === "boolean") {
         checked = (settings_json[section][parameter])? 'checked': '';
-        // append_to_ul(section_ul, `
-        //   <input style="margin: 2px 10px" type="checkbox" id="${name_parametr}" name="${name_parametr}" ${checked}>
-        //   <label style="margin: 0px -20px" for="${name_parametr}"><p style="font-weight: normal;">${parameter}</p></label>
-        //   <hr class="main_page_hr">
-        // `);
         append_to_ul(section_ul, `
           <div style="margin: -10px 10px; height: 50px;">
             <input type="checkbox" class="custom-checkbox" id="${name_parametr}" name="${name_parametr}" value="yes" onchange="switch_draw_type('list', this)" ${checked}>
@@ -112,4 +107,16 @@ function shutdown_script() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.send();
 
+}
+
+function open_alert_reboot_script() {
+  open_alert(`
+    <h3 style="margin: 50px 10px;" align="center">Do you really want to restart the server now?</h3>
+    <p style="margin: -50px 10px;" align="center">This may take some time</p>
+
+    <div class="main_page_button" style="position: absolute; width: 100px; bottom: 10px; left: 10px;" onclick="reboot_script(); close_alert()">
+      <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/refresh.svg">
+      <p style="margin: -25px 35px">reboot</p>
+    </div>
+  `, 150);
 }

@@ -156,7 +156,7 @@
         <hr class="main_page_hr">
 
         <div id="clear_errors_div" style="display: None;">
-          <div class="main_page_button" style="width: 160px; margin: 10px" onclick="clear_error_list()">
+          <div class="main_page_button" style="width: 160px; margin: 10px" onclick="open_alert_clear_error_list()">
             <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
             <p style="margin: -25px 35px">clear error list</p>
           </div>
@@ -180,7 +180,7 @@
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
           <p style="margin: -25px 35px">refresh</p>
         </div>
-        <div class="main_page_button" style="right: 0px; top: 54px; width: 150px; margin: 10px; position: absolute;" onclick="delete_all_history()">
+        <div class="main_page_button" style="right: 0px; top: 54px; width: 150px; margin: 10px; position: absolute;" onclick="open_alert_delete_all_history()">
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -25px 35px">clear history</p>
         </div>
@@ -203,14 +203,14 @@
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
           <p style="margin: -25px 35px">refresh</p>
         </div>
+        <div class="main_page_button block_select" style="width: 130px; margin: 10px; right: 0px; top: 54px; position: absolute;" onclick="add_new_user()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/add.svg">
+          <p style="margin: -27px 35px">add user</p>
+        </div>
       </div>
       <br>
       <div class="border border_size">
         <ul id="userlist" class="loglist"></ul>
-      </div>
-      <div class="main_page_button block_select" style="width: 130px; margin: 10px; display: inline-block;" onclick="add_new_user()">
-        <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/add.svg">
-        <p style="margin: -27px 35px">add user</p>
       </div>
     </div>
 
@@ -253,7 +253,7 @@
           <p style="margin: -25px 35px">refresh</p>
         </div>
 
-        <div class="main_page_button block_select" style="right: 0px; top: 54px; width: 160px; margin: 10px; position: absolute;" onclick="delete_all_logs()">
+        <div class="main_page_button block_select" style="right: 0px; top: 54px; width: 160px; margin: 10px; position: absolute;" onclick="open_alert_delete_all_logs()">
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -25px 35px">delete all logs</p>
         </div>
@@ -274,7 +274,7 @@
           <h2>Settings</h2>
         </div>
         <hr class="main_page_hr">
-        <div class="main_page_button" style="width: 155px; margin: 10px" onclick="reboot_script()">
+        <div class="main_page_button" style="width: 155px; margin: 10px" onclick="open_alert_reboot_script()">
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/refresh.svg">
           <p style="margin: -25px 35px">reboot server</p>
         </div>
@@ -309,7 +309,19 @@
         <h2 align="center">IN FUTURE UPDATES</h2>
       </div>
       <br>
-      
+    </div>
+
+    <!--alert-->
+    <div id="alert_bg" class="alert_bg"></div>
+    <div id="alert" class="alert">
+      <div class="alert_top_name">
+        <div class="alert_close_button block_select button_margin" onclick="close_alert()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <div id="alert_div"></div>
     </div>
 
   </body>

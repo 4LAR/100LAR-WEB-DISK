@@ -34,7 +34,7 @@ function generate_templates() {
       'templateslist',
       `
         <div class="path_list_grid template_border">
-          <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="delete_template('${name}')">
+          <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="open_alert_delete_template('${name}')">
             <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
             <p style="margin: -25px 35px; font-weight: normal;">delete</p>
           </div>
@@ -107,4 +107,16 @@ function add_new_template() {
     }
   };
   xhr.send()
+}
+
+function open_alert_delete_template(name) {
+  open_alert(`
+    <h3 style="margin: 50px 10px;" align="center">Are you sure you want to remove the path pattern?</h3>
+    <p style="margin: -50px 10px;" align="center">"${name}"</p>
+
+    <div class="main_page_button" style="position: absolute; width: 100px; bottom: 10px; left: 10px;" onclick="delete_template('${name}'); close_alert()">
+      <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+      <p style="margin: -25px 35px">delete</p>
+    </div>
+  `, 150);
 }

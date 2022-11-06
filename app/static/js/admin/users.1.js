@@ -42,30 +42,6 @@ function generate_users() {
   }
 }
 
-//добавление юзверя (old)
-// function add_new_user() {
-//   append_to_ul(
-//     'userlist',
-//     `
-//       <hr class="main_page_hr">
-//       <div id="users_${new_user_id}" style="height: 30px" class="block_select">
-//         <div onclick="open_close_user('${new_user_id}'); generate_details('${new_user_id}', '${new_user_id}_status', '${new_user_id}_password', ${false}); generate_details_path('${new_user_id}')" style="cursor: pointer">
-//           <img class="icon" width="20" height="20" src="static/img/user.svg">
-//           <p>${new_user_id}</p>
-//           <img align="right" id="users_triangle_${new_user_id}" style="margin: 5px 20px; transform: rotate(90deg)" class="icon" width="10" height="10" src="static/img/triangle.svg">
-//         </div>
-//         <div id="users_info_${new_user_id}" class="user_info" style="display: none">
-//           <p>You're not supposed to see this.</p>
-//         </div>
-//       </div>
-//     `
-//   );
-//   updated_users_JSON[new_user_id] = new Object();
-//   updated_paths[new_user_id] = [];
-//   last_path_id[new_user_id] = 0;
-//   new_user_id++;
-// }
-
 //Внутренности юзер блока, вызывается при открытии юзера вместе с open_close_user
 function generate_details(name, username, status, password, panel) {
   details_block = document.getElementById('users_info_' + name);
@@ -84,7 +60,7 @@ function generate_details(name, username, status, password, panel) {
         </label>
       </div>
       <div>
-        <div class="main_page_button block_select" style="width: 140px; margin: 10px; display: inline-block;" onclick="delete_user('${name}')">
+        <div class="main_page_button block_select" style="width: 140px; margin: 10px; display: inline-block;" onclick="open_alert_delete_user('${name}')">
           <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -15px 35px">delete user</p>
         </div><br>
@@ -120,7 +96,7 @@ function generate_details_path(user) {
         `users_info_${user}_path`,
         `
           <div id="users_info_${user}_${path['name']}_main" style="" class="path_panel">
-            <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="delete_existing_path('${user}', '${path['name']}')">
+            <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="open_alert_delete_existing_path('${user}', '${path['name']}', '${path['name']}')">
               <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
               <p style="margin: -15px 35px">delete</p>
             </div>
@@ -163,7 +139,7 @@ function add_new_path(user) {
     `users_info_${user}_path`,
     `
       <div id="users_info_${user}_${last_path_id[user]}_main" class="path_panel">
-        <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="delete_existing_path('${user}', '${last_path_id[user]}')">
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="open_alert_delete_existing_path('${user}', '${last_path_id[user]}', '${path['name']}')">
           <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/trash.svg">
           <p style="margin: -15px 35px">delete</p>
         </div>
@@ -370,3 +346,27 @@ function add_new_user() {
 }
 
 get_users();
+
+function open_alert_delete_user(name) {
+  open_alert(`
+    <h3 style="margin: 50px 10px;" align="center">Are you sure you want to delete this user?</h3>
+    <p style="margin: -50px 10px;" align="center">"${users_JSON[name]['username']}"</p>
+
+    <div class="main_page_button" style="position: absolute; width: 100px; bottom: 10px; left: 10px;" onclick="delete_user('${name}'); close_alert()">
+      <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+      <p style="margin: -25px 35px">delete</p>
+    </div>
+  `, 150);
+}
+
+function open_alert_delete_existing_path(user, last_path_id, name_path) {
+  open_alert(`
+    <h3 style="margin: 50px 10px;" align="center">Are you sure you want to delete this path?</h3>
+    <p style="margin: -50px 10px;" align="center">"${name_path}"</p>
+
+    <div class="main_page_button" style="position: absolute; width: 100px; bottom: 10px; left: 10px;" onclick="delete_existing_path('${user}', '${last_path_id}'); close_alert()">
+      <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+      <p style="margin: -25px 35px">delete</p>
+    </div>
+  `, 150);
+}

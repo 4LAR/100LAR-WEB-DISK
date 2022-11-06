@@ -52,6 +52,12 @@ class UserBase():
                 "path": [
                     {
                         "type": "path",
+                        "name": "disk",
+                        "path": (os.getcwd()[2:] if (os.name == "nt") else os.getcwd()) + "/",
+                        "size": 0
+                    },
+                    {
+                        "type": "path",
                         "name": "root",
                         "path": "/",
                         "size": 0

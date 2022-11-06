@@ -1,4 +1,6 @@
 
+var log_list_json = {};
+
 //
 function get_all_logs() {
 
@@ -58,3 +60,15 @@ function delete_all_logs() {
 }
 
 get_all_logs();
+
+function open_alert_delete_all_logs() {
+  open_alert(`
+    <h3 style="margin: 50px 10px;" align="center">Clear the entire list of logs?</h3>
+    <p style="margin: -50px 10px;" align="center">${log_list_json['logs'].length} elements</p>
+
+    <div class="main_page_button" style="position: absolute; width: 100px; bottom: 10px; left: 10px;" onclick="delete_all_logs(); close_alert()">
+      <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
+      <p style="margin: -25px 35px">delete</p>
+    </div>
+  `, 150);
+}
