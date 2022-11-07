@@ -21,7 +21,9 @@ class settings():
                 'IP': '0.0.0.0',
                 'PORT': 80,
                 'debug': True,
-                'secret_key': random_string(4)
+                'secret_key': random_string(4),
+                'threaded': True,
+                'processes': 1
             },
             'Logs': {
                 'path': 'logs/',

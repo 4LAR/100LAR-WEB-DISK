@@ -1011,25 +1011,33 @@ def log_request_info():
             console_term.print(str_log, print_bool=False, comment='[REQUEST] ')
 
     except Exception as e:
-        console_term.print(e, 3, comment='[ERROR REQUEST] ')
+        #console_term.print(e, 3, comment='[ERROR REQUEST] ')
+        pass
 
 
 # создаём WSGI сервер
-http_server = WSGIServer(
-    (
-        settings.options['Flask']['IP'],
-        settings.options['Flask']['PORT']
-    ),
-    app
-)
-
-# app.run(
-#     settings.options['Flask']['IP'],
-#     settings.options['Flask']['PORT'],
-#     debug=True
+# http_server = WSGIServer(
+#     (
+#         settings.options['Flask']['IP'],
+#         settings.options['Flask']['PORT']
+#     ),
+#     app
 # )
 
 console_term.create_log()
 print('100LAR-WEB-DISK')
 
-http_server.serve_forever()
+# создаём сервер
+from waitress import serve
+app.run(
+    host = settings.options['Flask']['IP'],
+    port = settings.options['Flask']['PORT'],
+    debug = settings.options['Flask']['debug'],
+    threaded = settings.options['Flask']['threaded'],
+    processes = int(settings.options['Flask']['processes'])
+)
+
+
+
+
+# http_server.serve_forever()
