@@ -67,7 +67,12 @@ class console_term():
         except:
             return False
 
-    def print(self, text, type=0, no_time_bool=False, print_bool=True):
+    def print(self, text, type=0, no_time_bool=False, print_bool=True, comment=""):
+        # type:
+        #   0 - text
+        #   1 - good
+        #   2 - warnng
+        #   3 - error
 
         if self.time.get_date_now() != self.str_data:
             self.create_log()
@@ -75,12 +80,12 @@ class console_term():
         time_str = (('[' + str(self.time.get_all_now()) + '] ') if self.log_time_bool else '') if not no_time_bool else ''
 
         if print_bool:
-            termcolor.cprint(time_str + str(text), self.type_color[type])
+            termcolor.cprint(comment + time_str + str(text), self.type_color[type])
 
         if (type == 3):
             self.warning_list.append(time_str + str(text))
 
         if (self.log_bool):
             log_file = open(self.file_name, 'a')
-            log_file.write(time_str + str(text) + '\n')
+            log_file.write(comment + time_str + str(text) + '\n')
             log_file.close()

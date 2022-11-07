@@ -113,13 +113,13 @@ login_manager.init_app(app)
 
 #
 def reboot():
-    console_term.print('Server rebooting', 0)
+    console_term.print('Server rebooting', 0, comment='[SERVER] ')
     os.execv(sys.executable, ['python3'] + sys.argv)
     exit()
 
 #
 def shutdown():
-    console_term.print('Server shutdown', 0)
+    console_term.print('Server shutdown', 0, comment='[SERVER] ')
     exit()
 
 #
@@ -230,6 +230,7 @@ def system_info():
 def clear_warnings():
     if (current_user.panel):
         console_term.warning_list = []
+        console_term.print('clear warnings', print_bool=True, comment='[ADMIN] ')
         return 'OK'
 
     else:
@@ -239,7 +240,7 @@ def clear_warnings():
 @app.route('/error')
 def error():
     if (current_user.panel):
-        console_term.print('test error', 3)
+        console_term.print('test error', 3, comment='[ERROR] ')
         return 'OK'
 
     else:
@@ -262,6 +263,7 @@ def get_history():
 def clear_history():
     if (current_user.panel):
         history.clear()
+        console_term.print('clear history', print_bool=True, comment='[ADMIN] ')
         return 'OK'
 
     else:
@@ -293,6 +295,8 @@ def set_template():
             userBase.update_users()
             userBase.save()
 
+        console_term.print('set template: %s' % (template_json['name']), print_bool=True, comment='[ADMIN] ')
+
         return 'ok'
 
     else:
@@ -316,6 +320,8 @@ def create_template():
             userBase.update_users()
             userBase.save()
 
+        console_term.print('create template: %s' % (random_name), print_bool=True, comment='[ADMIN] ')
+
         return "ok"
 
     else:
@@ -334,6 +340,8 @@ def delete_template():
             userBase.reload_all()
             userBase.update_users()
             userBase.save()
+
+        console_term.print('delete template: %s' % (template_name), print_bool=True, comment='[ADMIN] ')
 
         return 'ok'
 
@@ -367,6 +375,8 @@ def set_user():
             userBase.update_users()
             userBase.save()
 
+        console_term.print('set user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
+
         return 'ok'
 
     else:
@@ -391,6 +401,8 @@ def create_user():
             userBase.update_users()
             userBase.save()
 
+        console_term.print('create user: %d' % (userBase.last_id), print_bool=True, comment='[ADMIN] ')
+
         return 'ok'
     else:
         return "NO ADMIN"
@@ -408,6 +420,8 @@ def delete_user():
             userBase.update_users()
             userBase.save()
 
+        console_term.print('delete user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
+
         return 'ok'
     else:
         return "NO ADMIN"
@@ -424,6 +438,7 @@ def settings_set():
             state = request.args.get("state", "")
 
             settings.set_settings(section, parameter, state)
+            console_term.print('set parametr: [%s] %s = %s' % (section, parameter, state), print_bool=True, comment='[ADMIN] ')
 
             settings.save_settings()
 
@@ -490,7 +505,7 @@ def delete_all_logs():
             os.remove(console_term.path + f)
 
         console_term.create_log()
-        console_term.print('Delete all logs', 0)
+        console_term.print('Delete all logs', 0, comment='[SERVER] ')
 
         return 'OK'
 
@@ -569,7 +584,7 @@ def save_file():
         return 'ok'
 
     except Exception as e:
-        console_term.print('/save: ' + str(e), 3)
+        console_term.print('/save: ' + str(e), 3, comment='[ERROR] ')
         return 'ERROR'
 
 #####################################################
@@ -587,7 +602,9 @@ def login():
     user = userBase.get_user(userBase.get_id_by_name(username))
     if user != None and user.password == password:
         login_user(user, remember=remember)
-        history.add(0, '%s login' % username)
+        str_log = '%s login' % username
+        history.add(0, str_log)
+        console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
         return 'OK'
 
     else:
@@ -597,7 +614,9 @@ def login():
 @app.route("/logout", methods=['GET' , 'POST'])
 @login_required
 def logout():
-    history.add(1, '%s logout' % current_user.username)
+    str_log = '%s logout' % current_user.username
+    history.add(1, str_log)
+    console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
     logout_user()
     return 'ok'
 
@@ -710,7 +729,9 @@ def create_file():
         f.write("HELLO WORLD")
         f.close()
 
-        history.add(5, '%s create file (%s)' % (current_user.id, user_path + dir + file))
+        str_log = '%s create file (%s)' % (current_user.username, user_path + dir + file)
+        history.add(5, str_log)
+        console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
         return 'ok'
 
@@ -729,7 +750,9 @@ def create_folder():
 
     os.mkdir(user_path + dir + '/' + file)
 
-    history.add(5, '%s create folder (%s)' % (current_user.id, user_path + dir + file))
+    str_log = '%s create folder (%s)' % (current_user.username, user_path + dir + file)
+    history.add(5, str_log)
+    console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
     return 'ok'
 
@@ -746,7 +769,9 @@ def rename():
 
     os.rename(user_path + dir + '/' + file, user_path + dir + '/' + new_file)
 
-    history.add(7, '%s rename file (%s to %s)' % (current_user.username, user_path + dir + file, user_path + dir + new_file))
+    str_log = '%s rename file (%s to %s)' % (current_user.username, user_path + dir + file, user_path + dir + new_file)
+    history.add(7, str_log)
+    console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
     return 'ok'
 
@@ -786,7 +811,7 @@ def unpack():
             return 'NO PLACE'
 
     except Exception as e:
-        console_term.print('/unpack: ' + str(e), 3)
+        console_term.print('/unpack: ' + str(e), 3, comment='[ERROR] ')
         return 'ERROR'
 
 # скачивание файла
@@ -802,7 +827,9 @@ def downlaod():
         user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
         if len(file) > 0:
-            history.add(2, '%s download file (%s)' % (current_user.username, user_path + dir + file))
+            str_log = '%s download file (%s)' % (current_user.username, user_path + dir + file)
+            history.add(2, str_log)
+            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
             return send_from_directory(user_path + dir, file)
 
@@ -830,7 +857,9 @@ def downlaod():
             # переходим в начало архива
             zip_buffer.seek(0)
 
-            history.add(2, '%s download files (%s)' % (current_user.username, user_path + dir + str(files_list_log)))
+            str_log = '%s download files (%s)' % (current_user.username, user_path + dir + str(files_list_log))
+            history.add(2, str_log)
+            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
             # отправляем архив
             return Response(zip_buffer.getvalue(),
@@ -838,7 +867,7 @@ def downlaod():
                 headers={'Content-Disposition': 'attachment;filename=%s.zip' % (current_user.username)})
 
     except Exception as e:
-        console_term.print('/download: ' + str(e), 3)
+        console_term.print('/download: ' + str(e), 3, comment='[ERROR] ')
         return 'ERROR'
 
 # удаление файла
@@ -873,12 +902,14 @@ def delete():
 
                 files_list_log.append(file[0])
 
-            history.add(6, '%s delete files (%s)' % (current_user.username, user_path + dir + str(files_list_log)))
+            str_log = '%s delete files (%s)' % (current_user.username, user_path + dir + str(files_list_log))
+            history.add(6, str_log)
+            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
         return 'ok'
 
     except Exception as e:
-        console_term.print('/delete: ' + str(e), 3)
+        console_term.print('/delete: ' + str(e), 3, comment='[ERROR] ')
         return 'ERROR'
 
 # копирование файлов
@@ -926,13 +957,10 @@ def copy_files():
                 files_list_log.append(f[0])
 
             # лог
-            console_term.print(
-                '/copy: %s %s files from %s to %s' %
-                (current_user.username, ('move' if (cut_bool) else 'copy'), '/' + dir, '/' + to),
-                1
-            )
+            str_log = '%s %s file (%s) to %s' % (current_user.username, ('move' if (cut_bool) else 'copy'), user_path + dir + str(files_list_log), user_path + dir + to)
+            history.add(4, str_log)
+            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-            history.add(4, '%s %s file (%s) to %s' % (current_user.username, ('move' if (cut_bool) else 'copy'), user_path + dir + str(files_list_log), user_path + dir + to))
 
             return 'ok'
 
@@ -940,7 +968,7 @@ def copy_files():
             return 'NO PLACE'
 
     except Exception as e:
-        console_term.print('/copy: ' + str(e), 3)
+        console_term.print('/copy: ' + str(e), 3, comment='[ERROR] ')
         return 'ERROR'
 
 # загрузка файла
@@ -960,7 +988,9 @@ def upload_file_disk():
         user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
         f.save(user_path + dir + '/' + file)
 
-        history.add(3, '%s upload file (%s)' % (current_user.username, user_path + dir + file))
+        str_log = '%s upload file (%s)' % (current_user.username, user_path + dir + '/' + file)
+        history.add(3, str_log)
+        console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
 
         return 'ok'
@@ -971,10 +1001,17 @@ def upload_file_disk():
 @app.before_request
 def log_request_info():
     try:
-        pass
+        if 'text/html' in request.headers['Accept']:
+            str_log = ' '.join([
+            request.remote_addr,
+            request.method,
+            request.url,
+            '\n\t'.join([': '.join(x) for x in request.headers])])
+
+            console_term.print(str_log, print_bool=False, comment='[REQUEST] ')
+
     except Exception as e:
-        pass
-        # console_term.print('[ERROR]')
+        console_term.print(e, 3, comment='[ERROR REQUEST] ')
 
 
 # создаём WSGI сервер
