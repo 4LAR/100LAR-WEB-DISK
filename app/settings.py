@@ -20,7 +20,7 @@ class settings():
             'Flask': {
                 'IP': '0.0.0.0',
                 'PORT': 80,
-                'debug': True,
+                'debug': False,
                 'secret_key': random_string(4),
                 'threaded': True,
                 'processes': 1

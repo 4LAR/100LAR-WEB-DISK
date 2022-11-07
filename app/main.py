@@ -1014,21 +1014,11 @@ def log_request_info():
         #console_term.print(e, 3, comment='[ERROR REQUEST] ')
         pass
 
-
-# создаём WSGI сервер
-# http_server = WSGIServer(
-#     (
-#         settings.options['Flask']['IP'],
-#         settings.options['Flask']['PORT']
-#     ),
-#     app
-# )
-
 console_term.create_log()
 print('100LAR-WEB-DISK')
 
 # создаём сервер
-from waitress import serve
+# from waitress import serve
 app.run(
     host = settings.options['Flask']['IP'],
     port = settings.options['Flask']['PORT'],
@@ -1036,8 +1026,3 @@ app.run(
     threaded = settings.options['Flask']['threaded'],
     processes = int(settings.options['Flask']['processes'])
 )
-
-
-
-
-# http_server.serve_forever()
