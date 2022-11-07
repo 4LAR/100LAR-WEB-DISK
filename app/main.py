@@ -1,5 +1,5 @@
 
-VERSION = '1.0.0 (stable)'
+VERSION = '2.0.0 (stable)'
 
 import requests
 import configparser
