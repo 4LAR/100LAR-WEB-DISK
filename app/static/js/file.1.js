@@ -323,8 +323,8 @@ function append_file(type, name, size='', path='', date='', mime='') {
       } else {
         file_info = `
           <p style="margin: -29px 70px">${name}</p>
-          <p style="margin: 8px 300px">${date}</p>
-          <p style="margin: -30px 500px">${size}</p>
+          <p style="margin: 8px 110px" align="right">${date}</p>
+          <p style="margin: -30px 10px" align="right">${size}</p>
         `;
       }
 
@@ -334,11 +334,11 @@ function append_file(type, name, size='', path='', date='', mime='') {
       draw_type_class = 'file_grid';
       if (type == 'dir') {
         file_info = `
-          <p style="margin: -35px 90px">${name}</p>
+          <p style="margin: -35px 90px; white-space: nowrap;">${name}</p>
         `;
       } else {
         file_info = `
-          <p style="margin: -35px 90px">${name}</p>
+          <p style="margin: -35px 90px; white-space: nowrap;">${name}</p>
 
         `;
       }
