@@ -4,18 +4,36 @@ var updated_users_JSON = {};
 var updated_paths = {};
 var new_user_id = 0;
 
+var opened_users = [];
+
 var prev_type = new Object();
 
-function open_close_user(name) {
-  if (document.getElementById('users_' + name).style.height == '30px') {
+function open_close_user(name, only_open=false) {
+  if (document.getElementById('users_' + name).style.height == '30px' || only_open) {
     document.getElementById('users_' + name).style.height = '';
     document.getElementById('users_triangle_' + name).style.transform = 'rotate(0deg)';
     openModal('users_info_' + name);
+    if (opened_users.indexOf(name) == -1) opened_users.push(name);
+    return true;
   } else {
     document.getElementById('users_' + name).style.height = '30px';
     document.getElementById('users_triangle_' + name).style.transform = 'rotate(90deg)';
     closeModal('users_info_' + name);
+    if (opened_users.indexOf(name) != -1) opened_users.splice(opened_users.indexOf(name), 1);
+    return false;
   }
+}
+
+function open_user(user) {
+  try {
+    if (open_close_user(user)) {
+      generate_details(user, users_JSON[user]['username'], users_JSON[user]['status'], users_JSON[user]['password'], users_JSON[user]['panel']);
+      generate_details_path(user);
+    }
+  } catch {
+    opened_users.splice(opened_users.indexOf(user), 1);
+  }
+  
 }
 
 function generate_users() {
@@ -26,9 +44,9 @@ function generate_users() {
       'userlist',
       `
         <div id="users_${user}" style="height: 30px" class="block_select">
-          <div onclick="open_close_user('${user}'); generate_details('${user}', '${users_JSON[user]['username']}', '${users_JSON[user]['status']}', '${users_JSON[user]['password']}', ${users_JSON[user]['panel']}); generate_details_path('${user}')" style="cursor: pointer">
+          <div onclick="open_user(${user})" style="cursor: pointer">
             <img class="icon" width="20" height="20" src="static/img/user.svg">
-            <p>${users_JSON[user]['username']}:${user}</p>
+            <p>${user}:${users_JSON[user]['username']}</p>
             <img align="right" id="users_triangle_${user}" style="margin: 5px 20px; transform: rotate(90deg)" class="icon" width="10" height="10" src="static/img/triangle.svg">
           </div>
           <div id="users_info_${user}" class="user_info" style="display: none">
@@ -267,6 +285,8 @@ function get_users() {
           prev_type[user][path['name']] = 0;
         }
       }
+      for (let i = 0; i < opened_users.length; i++)
+        open_user(opened_users[i]);
     }
   };
   xhr.send();
@@ -310,7 +330,7 @@ function set_user_info(name) {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-
+      get_users();
 
     }
   };
