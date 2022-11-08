@@ -729,7 +729,7 @@ def create_file():
         f.write("HELLO WORLD")
         f.close()
 
-        str_log = '%s create file (%s)' % (current_user.username, user_path + dir + file)
+        str_log = '%s create file (%s)' % (current_user.username, user_path + dir + '/' + file)
         history.add(5, str_log)
         console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
@@ -750,7 +750,7 @@ def create_folder():
 
     os.mkdir(user_path + dir + '/' + file)
 
-    str_log = '%s create folder (%s)' % (current_user.username, user_path + dir + file)
+    str_log = '%s create folder (%s)' % (current_user.username, user_path + dir + '/' + file)
     history.add(5, str_log)
     console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
@@ -769,7 +769,7 @@ def rename():
 
     os.rename(user_path + dir + '/' + file, user_path + dir + '/' + new_file)
 
-    str_log = '%s rename file (%s to %s)' % (current_user.username, user_path + dir + file, user_path + dir + new_file)
+    str_log = '%s rename file (%s to %s)' % (current_user.username, user_path + dir + '/' + file, user_path + dir + '/' + new_file)
     history.add(7, str_log)
     console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
@@ -827,7 +827,7 @@ def downlaod():
         user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
         if len(file) > 0:
-            str_log = '%s download file (%s)' % (current_user.username, user_path + dir + file)
+            str_log = '%s download file (%s)' % (current_user.username, user_path + dir + '/' + file)
             history.add(2, str_log)
             console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
@@ -857,7 +857,7 @@ def downlaod():
             # переходим в начало архива
             zip_buffer.seek(0)
 
-            str_log = '%s download files (%s)' % (current_user.username, user_path + dir + str(files_list_log))
+            str_log = '%s download files (%s)' % (current_user.username, user_path + dir + '/' + str(files_list_log))
             history.add(2, str_log)
             console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
@@ -884,7 +884,7 @@ def delete():
 
         if len(file) > 0:
 
-            history.add(6, '%s delete file (%s)' % (current_user.username, user_path + dir + file))
+            history.add(6, '%s delete file (%s)' % (current_user.username, user_path + dir + '/' + file))
 
             os.remove(user_path + dir + '/' + file)
 
@@ -902,7 +902,7 @@ def delete():
 
                 files_list_log.append(file[0])
 
-            str_log = '%s delete files (%s)' % (current_user.username, user_path + dir + str(files_list_log))
+            str_log = '%s delete files (%s)' % (current_user.username, user_path + dir + '/' + str(files_list_log))
             history.add(6, str_log)
             console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
@@ -957,7 +957,7 @@ def copy_files():
                 files_list_log.append(f[0])
 
             # лог
-            str_log = '%s %s file (%s) to %s' % (current_user.username, ('move' if (cut_bool) else 'copy'), user_path + dir + str(files_list_log), user_path + dir + to)
+            str_log = '%s %s file (%s) to %s' % (current_user.username, ('move' if (cut_bool) else 'copy'), user_path + dir + '/'+  str(files_list_log), user_path + dir + '/' + to)
             history.add(4, str_log)
             console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
