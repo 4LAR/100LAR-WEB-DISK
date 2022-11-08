@@ -33,7 +33,8 @@ function get_info() {
         append_to_ul(
           'path_list',
           `
-            <div class="path_list_element" onclick="set_path(${i})">
+            <div class="path_list_element" onclick="set_path(${i})" id="set_path_div_${i}">
+              <div id="select_path_div_${i}" class="vl_style" style="height: 25px; margin: 10px 4px; position: absolute; display: ${(path == i)? 'block': 'none'}"></div>
               <img class="icon_topBar" style="margin: 10px 15px" width="25" height="25" src="static/img/dvd-disk.svg">
               <p class="top_bar_font_color" style="position: absolute; margin: -42px 45px; color: #959DA5">${info_json['path'][i]['size_converted']}</p>
               <p class="top_bar_font_color" style="position: absolute; margin: -28px 45px">${info_json['path'][i]['name']}</p>

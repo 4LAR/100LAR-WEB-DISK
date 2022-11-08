@@ -139,6 +139,11 @@ body {
   height: 1px;
 }
 
+.vl_style {
+  border-left: 2px solid #000;
+  filter: var(--top-icons-filter);
+}
+
 .input_style {
   position: relative;
   color: var(--main-font-color);

@@ -18,6 +18,11 @@ function set_path(path_id) {
 
   open_close_path_button(true);
   update_dir();
+
+  for (let i = 0; i < info_json['path'].length; i++) {
+    if (i == path_id) openModal(`select_path_div_${i}`);
+    else closeModal(`select_path_div_${i}`);
+  }
 }
 
 // переход в домашнюю директорию
