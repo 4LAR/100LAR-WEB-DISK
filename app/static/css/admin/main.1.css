@@ -191,10 +191,6 @@ body {
   border-bottom: 1px solid #30363D;
 }
 
-.alert_close_button:hover {
-  background-color: #161B22;
-}
-
 .alert_close_button {
   border-radius: 4px 0px 0px 0px;
   position: absolute;
@@ -203,7 +199,11 @@ body {
   width: 100px;
   height: 35px;
   border-right: 1px solid #30363D;
-  background-color: #161B22);
+  background-color: #161B22;
 
   cursor: pointer;
+}
+
+.alert_close_button:hover {
+  background-color: #21262D;
 }
