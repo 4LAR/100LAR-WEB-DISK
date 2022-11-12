@@ -841,7 +841,7 @@ def downlaod():
             zip_buffer = io.BytesIO()
 
             # размер строки (для удаления лишних путей)
-            cut_len = len(os.path.abspath(user_path + dir + '/')) - 1
+            cut_len = len(os.path.abspath(user_path + dir + '/')) - (1 if os.name == 'nt' else 0)
 
             # открываем архив и хапичваем в него все нужные файлы
             with zipfile.ZipFile(zip_buffer, 'w') as archive:
@@ -851,7 +851,6 @@ def downlaod():
                             for filename in filenames:
                                 filePath = os.path.join(folderName, filename)
                                 archive.write(filePath, arcname=filePath[cut_len:], compress_type=zipfile.ZIP_DEFLATED)
-
                                 files_list_log.append(filePath[cut_len:])
 
                     else:
