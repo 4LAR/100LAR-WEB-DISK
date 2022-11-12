@@ -1,5 +1,5 @@
 
-VERSION = '2.0.0 (stable)'
+VERSION = '2.1.0 (not stable)'
 
 import requests
 import configparser
@@ -840,6 +840,9 @@ def downlaod():
             # создаём буфер
             zip_buffer = io.BytesIO()
 
+            # размер строки (для удаления лишних путей)
+            cut_len = len(os.path.abspath(user_path + dir + '/')) - 1
+
             # открываем архив и хапичваем в него все нужные файлы
             with zipfile.ZipFile(zip_buffer, 'w') as archive:
                 for file in files_list:
@@ -847,12 +850,14 @@ def downlaod():
                         for folderName, subfolders, filenames in os.walk(user_path + dir + '/' + file[0]):
                             for filename in filenames:
                                 filePath = os.path.join(folderName, filename)
-                                archive.write(filePath, compress_type=zipfile.ZIP_DEFLATED)
+                                archive.write(filePath, arcname=filePath[cut_len:], compress_type=zipfile.ZIP_DEFLATED)
+
+                                files_list_log.append(filePath[cut_len:])
 
                     else:
-                        archive.write(user_path + dir + '/' + file[0])
+                        archive.write(user_path + dir + '/' + file[0], arcname=file[0])
 
-                    files_list_log.append(file[0])
+                        files_list_log.append(file[0])
 
             # переходим в начало архива
             zip_buffer.seek(0)
