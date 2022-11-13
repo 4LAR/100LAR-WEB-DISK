@@ -328,3 +328,13 @@
   border-top: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 }
+
+
+.preview_audio {
+  
+}
+
+.preview_audio::-webkit-media-controls-panel {
+  /* background-color: var(); */
+
+}

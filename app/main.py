@@ -704,6 +704,12 @@ def files():
                             elif mime.split('/')[0] in ['image']:
                                 files_list[i]['type'] = 'image'
 
+                            elif mime.split('/')[0] in ['video']:
+                                files_list[i]['type'] = 'video'
+
+                            elif mime.split('/')[0] in ['audio']:
+                                files_list[i]['type'] = 'audio'
+
                             else:
                                 files_list[i]['type'] = 'file'
 

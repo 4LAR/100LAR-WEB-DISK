@@ -7,6 +7,7 @@ var path = 0;
 var files_json = {}
 
 var url_file = "";
+var type_file = "";
 
 //
 function set_path(path_id) {
@@ -169,6 +170,8 @@ const SORT_BY_TYPE = [
   'image',
   'text file',
   'pdf',
+  'video',
+  'audio',
   'file'
 ];
 
@@ -300,7 +303,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
     if (type == 'dir') {
       // директория
       str += `
-        <div class="${draw_type_class}" onclick="forward_dir('${name}')">
+        <div class="${draw_type_class} block_select" onclick="forward_dir('${name}')">
           <img class="icon" style="margin: 5px 50px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
@@ -310,7 +313,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
       // файл
 
        str += `
-        <div class="${draw_type_class}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path}', '${date}', '${mime}')">
+        <div class="${draw_type_class} block_select" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path}', '${date}', '${mime}')">
           <img class="icon" style="margin: 5px 50px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
@@ -362,7 +365,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
     if (type == 'dir') {
       // директория
       str += `
-        <div class="${draw_type_class}" onclick="forward_dir('${name}')">
+        <div class="${draw_type_class} block_select" onclick="forward_dir('${name}')">
           <img class="icon" style="margin: 7px 40px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
@@ -372,7 +375,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
       // файл
 
        str += `
-        <div class="${draw_type_class}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path}', '${date}', '${mime}')">
+        <div class="${draw_type_class} block_select" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path}', '${date}', '${mime}')">
           <img class="icon" style="margin: 7px 40px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
@@ -387,6 +390,29 @@ function append_file(type, name, size='', path='', date='', mime='') {
   ul.appendChild(li);
 }
 
+
+
+function load_preview() {
+  document.getElementById("preview_video").pause();
+  document.getElementById("preview_audio").pause();
+  switch (type_file) {
+    case 'image':
+      openModal('file_activity_view');
+      load_preview_image();
+      break;
+
+    case 'video':
+      openModal('file_activity_view');
+      load_preview_video();
+      break;
+
+    case 'audio':
+      openModal('file_activity_view');
+      load_preview_audio();
+      break;
+  }
+}
+
 function load_preview_image() {
   if (document.getElementById("checkbox_preview_image").checked) {
     openModal('preview_image_div');
@@ -395,7 +421,24 @@ function load_preview_image() {
     closeModal('preview_image_div');
   }
   localStorage.setItem('preview_image', document.getElementById("checkbox_preview_image").checked);
+}
 
+function load_preview_video() {
+  if (document.getElementById("checkbox_preview_image").checked) {
+    openModal('preview_video_div');
+    document.getElementById("preview_video").setAttribute('src', url_file);
+  } else {
+    closeModal('preview_video_div');
+  }
+}
+
+function load_preview_audio() {
+  if (document.getElementById("checkbox_preview_image").checked) {
+    openModal('preview_audio_div');
+    document.getElementById("preview_audio").setAttribute('src', url_file);
+  } else {
+    closeModal('preview_audio_div');
+  }
 }
 
 function set_preview_image_type(type="auto") {
@@ -423,11 +466,19 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
 
   selected_file_name = name;
   selected_file_dir = dir_str;
+  type_file = type;
 
   closeModal('file_activity_unpack_button');
   closeModal('file_activity_edit_button');
   closeModal('file_activity_view_button');
   closeModal('file_activity_view');
+
+  closeModal('preview_image_div');
+  closeModal('preview_video_div');
+  closeModal('preview_audio_div');
+
+  document.getElementById("preview_video").pause()
+  document.getElementById("preview_audio").pause()
 
   url_file = `/download?path=${path}&dir=${dir_str}&file=${name}`;
 
@@ -449,6 +500,16 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
     case 'image':
       openModal('file_activity_view');
       load_preview_image();
+      break;
+
+    case 'video':
+      openModal('file_activity_view');
+      load_preview_video();
+      break;
+
+    case 'audio':
+      openModal('file_activity_view');
+      load_preview_audio();
       break;
   }
 
@@ -487,6 +548,8 @@ function close_rightBar() {
   if (!mobile) document.getElementById("file_list_div").style.right = '0px';
   else document.getElementById("file_list_div").style.bottom = '30px';
   //closeModal('file_info_bar_background_black');
+  document.getElementById("preview_video").pause()
+  document.getElementById("preview_audio").pause()
 }
 
 function open_right_bar() {
