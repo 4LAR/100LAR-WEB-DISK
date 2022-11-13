@@ -110,6 +110,18 @@ login_manager.login_view = "login"
 login_manager.init_app(app)
 
 #####################################################
+# константы
+
+ERROR = 'ERROR'
+OK = 'ok'
+NO_PLACE = 'NO PLACE'
+EMPTY = 'EMPTY'
+ERROR_DIR = 'ERROR DIR'
+ERROR_LOGIN = 'ERROR LOGIN'
+NO_ADMIN = 'NO ADMIN'
+READ_ONLY = 'READ ONLY'
+
+#####################################################
 
 #
 def reboot():
@@ -199,7 +211,7 @@ def admin():
         return render_template('admin.html')
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 ############DASHBOARD
 # вывод информации о сервере
@@ -222,7 +234,7 @@ def system_info():
         return info
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # Очищение списка ошибок
 @app.route('/clear_warnings', methods=['POST', 'GET'])
@@ -231,20 +243,20 @@ def clear_warnings():
     if (current_user.panel):
         console_term.warning_list = []
         console_term.print('clear warnings', print_bool=True, comment='[ADMIN] ')
-        return 'OK'
+        return OK
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # Учебная тревога
 @app.route('/error')
 def error():
     if (current_user.panel):
         console_term.print('test error', 3, comment='[ERROR] ')
-        return 'OK'
+        return OK
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 ############HISTORY
 # получить историю
@@ -255,7 +267,7 @@ def get_history():
         return {'history': history.get()}
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # удалить историю
 @app.route('/clear_history', methods=['POST', 'GET'])
@@ -264,10 +276,10 @@ def clear_history():
     if (current_user.panel):
         history.clear()
         console_term.print('clear history', print_bool=True, comment='[ADMIN] ')
-        return 'OK'
+        return OK
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 ############TEMPLATES
 # получить список шаблонов путей
@@ -278,7 +290,7 @@ def get_templates():
         return userBase.templates_dict
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # # изменение шаблона пути
 @app.route('/set_template', methods=['GET', 'POST'])
@@ -297,10 +309,10 @@ def set_template():
 
         console_term.print('set template: %s' % (template_json['name']), print_bool=True, comment='[ADMIN] ')
 
-        return 'ok'
+        return OK
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # # создание шаблона пути
 @app.route('/create_template', methods=['GET', 'POST'])
@@ -323,10 +335,10 @@ def create_template():
 
         console_term.print('create template: %s' % (random_name), print_bool=True, comment='[ADMIN] ')
 
-        return "ok"
+        return OK
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # удаление шаблона пути
 @app.route('/delete_template', methods=['GET', 'POST'])
@@ -344,10 +356,10 @@ def delete_template():
 
         console_term.print('delete template: %s' % (template_name), print_bool=True, comment='[ADMIN] ')
 
-        return 'ok'
+        return OK
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 ############USERS
 # получить настройки пользователей
@@ -358,7 +370,7 @@ def get_users():
         return userBase.get_users()
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # изменение настроек пользователя
 @app.route('/set_user', methods=['POST'])
@@ -378,10 +390,10 @@ def set_user():
 
         console_term.print('set user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
 
-        return 'ok'
+        return OK
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 @app.route('/create_user', methods=['POST'])
 @login_required
@@ -404,9 +416,9 @@ def create_user():
 
         console_term.print('create user: %d' % (userBase.last_id), print_bool=True, comment='[ADMIN] ')
 
-        return 'ok'
+        return OK
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # удаление пользователя
 @app.route('/delete_user', methods=['POST'])
@@ -423,9 +435,9 @@ def delete_user():
 
         console_term.print('delete user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
 
-        return 'ok'
+        return OK
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 ############SETTINGS
 # изменение настроек
@@ -443,13 +455,13 @@ def settings_set():
 
             settings.save_settings()
 
-            return 'OK'
+            return OK
 
         except:
-            return 'ERROR'
+            return ERROR
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # перезапуск скрипта
 @app.route('/reboot', methods=['POST', 'GET'])
@@ -459,7 +471,7 @@ def web_reboot():
         reboot()
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # остановка скрипта
 @app.route('/shutdown', methods=['POST', 'GET'])
@@ -469,7 +481,7 @@ def web_shutdown():
         shutdown()
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 ############LOGS
 # получение имён логов
@@ -483,7 +495,7 @@ def get_logs_names():
         return {'logs': files}
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # получение содержимого лог файла
 @app.route('/read_current_log', methods=['POST', 'GET'])
@@ -494,7 +506,7 @@ def read_current_log():
         return str(console_term.read_current_log(name))
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 # удаление всех лог файлов
 @app.route('/delete_all_logs', methods=['POST'])
@@ -508,10 +520,10 @@ def delete_all_logs():
         console_term.create_log()
         console_term.print('Delete all logs', 0, comment='[SERVER] ')
 
-        return 'OK'
+        return OK
 
     else:
-        return "NO ADMIN"
+        return NO_ADMIN
 
 #####################################################
 
@@ -566,27 +578,31 @@ def save_file():
 
         size = 0
 
-        if os.path.exists(file_path):
-            f = open(file_path, 'r', encoding = 'utf-8')
-            size = utf8len(f.read())
+        if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
+
+            if os.path.exists(file_path):
+                f = open(file_path, 'r', encoding = 'utf-8')
+                size = utf8len(f.read())
+                f.close()
+
+                if not check_size(current_user, path, utf8len(request.json['code']) - size):
+                    return NO_PLACE
+
+            else:
+                if not check_size(current_user, path, size):
+                    return NO_PLACE
+
+            f = open(file_path, 'w', encoding = 'utf-8')
+            f.write(request.json['code'])
             f.close()
 
-            if not check_size(current_user, path, utf8len(request.json['code']) - size):
-                return 'NO PLACE'
+            return OK
 
-        else:
-            if not check_size(current_user, path, size):
-                return 'NO PLACE'
-
-        f = open(file_path, 'w', encoding = 'utf-8')
-        f.write(request.json['code'])
-        f.close()
-
-        return 'ok'
+        return READ_ONLY
 
     except Exception as e:
         console_term.print('/save: ' + str(e), 3, comment='[ERROR] ')
-        return 'ERROR'
+        return ERROR
 
 #####################################################
 
@@ -606,10 +622,10 @@ def login():
         str_log = '%s login' % username
         history.add(0, str_log)
         console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
-        return 'OK'
+        return OK
 
     else:
-        return 'ERROR LOGIN'
+        return ERROR_LOGIN
 
 #
 @app.route("/logout", methods=['GET' , 'POST'])
@@ -619,7 +635,7 @@ def logout():
     history.add(1, str_log)
     console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
     logout_user()
-    return 'ok'
+    return OK
 
 #
 @app.route("/info", methods=['GET' , 'POST'])
@@ -706,13 +722,13 @@ def files():
                 return {'files': files_list}
 
             else:
-                return 'EMPTY'
+                return EMPTY
 
         else:
-            return 'ERROR DIR'
+            return ERROR_DIR
 
     except:
-        return 'ERROR DIR'
+        return ERROR_DIR
 
 # создание файла
 @app.route("/create_file", methods=['GET' , 'POST'])
@@ -734,13 +750,13 @@ def create_file():
             history.add(5, str_log)
             console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-            return 'ok'
+            return OK
 
         else:
-            return 'NO PLACE'
+            return NO_PLACE
 
     else:
-        return 'READ ONLY'
+        return READ_ONLY
 
 # создание папки
 @app.route("/create_folder", methods=['GET' , 'POST'])
@@ -759,10 +775,10 @@ def create_folder():
         history.add(5, str_log)
         console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-        return 'ok'
+        return OK
 
     else:
-        return 'READ ONLY'
+        return READ_ONLY
 
 # переименование файла
 @app.route("/rename", methods=['GET' , 'POST'])
@@ -781,7 +797,7 @@ def rename():
     history.add(7, str_log)
     console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-    return 'ok'
+    return OK
 
 # распоковка архива
 @app.route("/unpack", methods=['GET' , 'POST'])
@@ -814,17 +830,17 @@ def unpack():
                         print(member)
                         f.extract(member, user_path + dir + '/' + dir_name)
 
-                return 'ok'
+                return OK
 
             else:
-                return 'NO PLACE'
+                return NO_PLACE
 
         else:
-            return 'READ ONLY'
+            return READ_ONLY
 
     except Exception as e:
         console_term.print('/unpack: ' + str(e), 3, comment='[ERROR] ')
-        return 'ERROR'
+        return ERROR
 
 # скачивание файла
 @app.route("/download", methods=['GET' , 'POST'])
@@ -884,7 +900,7 @@ def downlaod():
 
     except Exception as e:
         console_term.print('/download: ' + str(e), 3, comment='[ERROR] ')
-        return 'ERROR'
+        return ERROR
 
 # удаление файла
 @app.route('/delete', methods=['POST', 'GET'])
@@ -923,13 +939,13 @@ def delete():
                 history.add(6, str_log)
                 console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-            return 'ok'
+            return OK
 
-        return 'READ ONLY'
+        return READ_ONLY
 
     except Exception as e:
         console_term.print('/delete: ' + str(e), 3, comment='[ERROR] ')
-        return 'ERROR'
+        return ERROR
 
 # копирование файлов
 @app.route('/copy', methods=['POST', 'GET'])
@@ -982,16 +998,16 @@ def copy_files():
                 console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
 
-                return 'ok'
+                return OK
 
             else:
-                return 'NO PLACE'
+                return NO_PLACE
 
-        return 'READ ONLY'
+        return READ_ONLY
 
     except Exception as e:
         console_term.print('/copy: ' + str(e), 3, comment='[ERROR] ')
-        return 'ERROR'
+        return ERROR
 
 # загрузка файла
 @app.route('/upload_file', methods=['POST', 'GET'])
@@ -1014,13 +1030,13 @@ def upload_file_disk():
             history.add(3, str_log)
             console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-            return 'ok'
+            return OK
 
         else:
-            return 'NO PLACE'
+            return NO_PLACE
 
     else:
-        return 'READ ONLY'
+        return READ_ONLY
 
 @app.before_request
 def log_request_info():
