@@ -589,13 +589,12 @@ function paste_files() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      if (xhr.responseText.toString() != 'NO PLACE') {
-        update_dir();
-        close_rightBar();
-      } else {
+      close_rightBar();
+      if (xhr.responseText.toString() === 'NO PLACE') {
         no_place_dialog();
-        close_rightBar();
-      }
+      } else if (xhr.responseText.toString() === 'READ ONLY') {
+        readonly_dialog();
+      } else update_dir();
 
     }
   };
@@ -649,8 +648,13 @@ function delete_file(path, dir_str, name) {
   xhr.onload = function () {
     if (xhr.status === 200) {
       close_delete_file_dialog();
-      close_rightBar();
-      update_dir();
+      if (xhr.responseText.toString() === 'READ ONLY') {
+        readonly_dialog();
+      } else {
+        close_rightBar();
+        update_dir();
+      }
+
     }
   };
   xhr.send();
@@ -728,19 +732,33 @@ if (localStorage.getItem('draw_type') == null) {
 if (!mobile)
   switch_draw_type(localStorage.getItem('draw_type'), {"checked": true});
 
+/* Уведомление о том что путь только для чтения */
+var readonly_path_bool = false;
+function readonly_dialog() {
+  readonly_path_bool = true;
+
+  openModal('dialog_bg');
+  openModal('dialog_readonly');
+}
+
+function close_readonly_dialog() {
+  readonly_path_bool = false;
+
+  closeModal('dialog_bg');
+  closeModal('dialog_readonly');
+}
+
 /* Уведомление о том что нет места */
 var no_place_file_bool = false;
-
-var delete_file_bool = false;
 function no_place_dialog() {
-  delete_file_bool = true;
+  no_place_file_bool = true;
 
   openModal('dialog_bg');
   openModal('dialog_no_place');
 }
 
 function close_no_place_dialog() {
-  delete_file_bool = false;
+  no_place_file_bool = false;
 
   closeModal('dialog_bg');
   closeModal('dialog_no_place');
@@ -824,10 +842,12 @@ function create_file(folder=false) {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      if (xhr.responseText.toString() != 'NO PLACE') {
-        close_create_file_dialog();
-        update_dir();
-      } else no_place_dialog();
+      close_create_file_dialog();
+      if (xhr.responseText.toString() === 'NO PLACE') {
+        no_place_dialog();
+      } else if (xhr.responseText.toString() === 'READ ONLY') {
+        readonly_dialog();
+      } else update_dir();
 
     }
   };
@@ -852,9 +872,11 @@ function activity_unpack_file() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      if (xhr.responseText.toString() != 'NO PLACE') {
-        update_dir();
-      } else no_place_dialog();
+      if (xhr.responseText.toString() === 'NO PLACE') {
+        no_place_dialog();
+      } else if (xhr.responseText.toString() === 'READ ONLY') {
+        readonly_dialog();
+      } else update_dir();
 
     }
   };

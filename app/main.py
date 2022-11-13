@@ -312,6 +312,7 @@ def create_template():
         userBase.templates_dict[random_name] = {
             "name": random_name,
             "path": "/",
+            "readonly": False,
             "size": 0
         }
 
@@ -723,20 +724,23 @@ def create_file():
     hello_data = request.args.get("hello", "HELLO WORLD")
 
     user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
+    if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
+        if check_size(current_user, path, utf8len(hello_data)):
+            f = open(user_path + dir + '/' + file, 'w')
+            f.write("HELLO WORLD")
+            f.close()
 
-    if check_size(current_user, path, utf8len(hello_data)):
-        f = open(user_path + dir + '/' + file, 'w')
-        f.write("HELLO WORLD")
-        f.close()
+            str_log = '%s create file (%s)' % (current_user.username, user_path + dir + '/' + file)
+            history.add(5, str_log)
+            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-        str_log = '%s create file (%s)' % (current_user.username, user_path + dir + '/' + file)
-        history.add(5, str_log)
-        console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+            return 'ok'
 
-        return 'ok'
+        else:
+            return 'NO PLACE'
 
     else:
-        return 'NO PLACE'
+        return 'READ ONLY'
 
 # создание папки
 @app.route("/create_folder", methods=['GET' , 'POST'])
@@ -748,13 +752,17 @@ def create_folder():
 
     user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
-    os.mkdir(user_path + dir + '/' + file)
+    if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
+        os.mkdir(user_path + dir + '/' + file)
 
-    str_log = '%s create folder (%s)' % (current_user.username, user_path + dir + '/' + file)
-    history.add(5, str_log)
-    console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+        str_log = '%s create folder (%s)' % (current_user.username, user_path + dir + '/' + file)
+        history.add(5, str_log)
+        console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-    return 'ok'
+        return 'ok'
+
+    else:
+        return 'READ ONLY'
 
 # переименование файла
 @app.route("/rename", methods=['GET' , 'POST'])
@@ -786,29 +794,33 @@ def unpack():
 
         user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
-        dir_name = file.split('.')[0]
-        #os.mkdir(user_path + dir + '/' + dir_name)
+        if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
+            dir_name = file.split('.')[0]
+            #os.mkdir(user_path + dir + '/' + dir_name)
 
-        # Узнаём суммарный размер файлов в архиве
-        f = zipfile.ZipFile(user_path + dir + '/' + file, 'r')
-        size = sum([zinfo.file_size for zinfo in f.filelist])
+            # Узнаём суммарный размер файлов в архиве
+            f = zipfile.ZipFile(user_path + dir + '/' + file, 'r')
+            size = sum([zinfo.file_size for zinfo in f.filelist])
 
-        # проверяем есть ли свободное место
-        if check_size(current_user, path, size):
+            # проверяем есть ли свободное место
+            if check_size(current_user, path, size):
 
-            # распаковка
-            with zipfile.ZipFile(user_path + dir + '/' + file, 'r') as f:
-                zipInfo = f.infolist()
-                for member in zipInfo:
-                    # меняем кодировку именя файла чтобы была кириллица
-                    member.filename = member.filename.encode('cp437').decode('cp866')
-                    print(member)
-                    f.extract(member, user_path + dir + '/' + dir_name)
+                # распаковка
+                with zipfile.ZipFile(user_path + dir + '/' + file, 'r') as f:
+                    zipInfo = f.infolist()
+                    for member in zipInfo:
+                        # меняем кодировку именя файла чтобы была кириллица
+                        member.filename = member.filename.encode('cp437').decode('cp866')
+                        print(member)
+                        f.extract(member, user_path + dir + '/' + dir_name)
 
-            return 'ok'
+                return 'ok'
+
+            else:
+                return 'NO PLACE'
 
         else:
-            return 'NO PLACE'
+            return 'READ ONLY'
 
     except Exception as e:
         console_term.print('/unpack: ' + str(e), 3, comment='[ERROR] ')
@@ -886,31 +898,34 @@ def delete():
 
         user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
-        if len(file) > 0:
+        if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
+            if len(file) > 0:
 
-            history.add(6, '%s delete file (%s)' % (current_user.username, user_path + dir + '/' + file))
+                history.add(6, '%s delete file (%s)' % (current_user.username, user_path + dir + '/' + file))
 
-            os.remove(user_path + dir + '/' + file)
+                os.remove(user_path + dir + '/' + file)
 
-        else:
-            files_list = json.loads(files)['files']
-            files_list_log = []
+            else:
+                files_list = json.loads(files)['files']
+                files_list_log = []
 
-            print(files_list)
+                print(files_list)
 
-            for file in files_list:
-                if file[1] == 'dir':
-                    shutil.rmtree(user_path + dir + '/' + file[0])
-                else:
-                    os.remove(user_path + dir + '/' + file[0])
+                for file in files_list:
+                    if file[1] == 'dir':
+                        shutil.rmtree(user_path + dir + '/' + file[0])
+                    else:
+                        os.remove(user_path + dir + '/' + file[0])
 
-                files_list_log.append(file[0])
+                    files_list_log.append(file[0])
 
-            str_log = '%s delete files (%s)' % (current_user.username, user_path + dir + '/' + str(files_list_log))
-            history.add(6, str_log)
-            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+                str_log = '%s delete files (%s)' % (current_user.username, user_path + dir + '/' + str(files_list_log))
+                history.add(6, str_log)
+                console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-        return 'ok'
+            return 'ok'
+
+        return 'READ ONLY'
 
     except Exception as e:
         console_term.print('/delete: ' + str(e), 3, comment='[ERROR] ')
@@ -933,43 +948,46 @@ def copy_files():
         files_list = json.loads(files)['files']
         files_list_log = []
 
-        if (cut_bool or check_size_list(current_user, path, dir, files_list)):
-            # цикл по файлам
-            for f in files_list:
-                print(user_path + dir + '/' + f[0])
-                if cut_bool:
-                    # перемещаем
-                    shutil.move(
-                        user_path + dir + '/' + f[0],
-                        user_path + to
-                    )
-
-                else:
-                    if (f[1] == 'dir'):
-                        # копирование директории
-                        shutil.copytree(
-                            user_path + dir + '/' + f[0],
-                            user_path + to + '/' + f[0]
-                        )
-                    else:
-                        # копирование файла
-                        shutil.copy2(
+        if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
+            if (cut_bool or check_size_list(current_user, path, dir, files_list)):
+                # цикл по файлам
+                for f in files_list:
+                    print(user_path + dir + '/' + f[0])
+                    if cut_bool:
+                        # перемещаем
+                        shutil.move(
                             user_path + dir + '/' + f[0],
                             user_path + to
                         )
 
-                files_list_log.append(f[0])
+                    else:
+                        if (f[1] == 'dir'):
+                            # копирование директории
+                            shutil.copytree(
+                                user_path + dir + '/' + f[0],
+                                user_path + to + '/' + f[0]
+                            )
+                        else:
+                            # копирование файла
+                            shutil.copy2(
+                                user_path + dir + '/' + f[0],
+                                user_path + to
+                            )
 
-            # лог
-            str_log = '%s %s file (%s) to %s' % (current_user.username, ('move' if (cut_bool) else 'copy'), user_path + dir + '/'+  str(files_list_log), user_path + dir + '/' + to)
-            history.add(4, str_log)
-            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+                    files_list_log.append(f[0])
+
+                # лог
+                str_log = '%s %s file (%s) to %s' % (current_user.username, ('move' if (cut_bool) else 'copy'), user_path + dir + '/'+  str(files_list_log), user_path + dir + '/' + to)
+                history.add(4, str_log)
+                console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
 
-            return 'ok'
+                return 'ok'
 
-        else:
-            return 'NO PLACE'
+            else:
+                return 'NO PLACE'
+
+        return 'READ ONLY'
 
     except Exception as e:
         console_term.print('/copy: ' + str(e), 3, comment='[ERROR] ')
@@ -985,22 +1003,24 @@ def upload_file_disk():
 
     f = request.files['file']
     size = len(f.read())
+    if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
+        if check_size(current_user, path, size):
+            f.seek(0, os.SEEK_SET)
+            print(userBase.get_user_info(current_user.id))
+            user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
+            f.save(user_path + dir + '/' + file)
 
-    if check_size(current_user, path, size):
-        f.seek(0, os.SEEK_SET)
-        print(userBase.get_user_info(current_user.id))
-        user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
-        f.save(user_path + dir + '/' + file)
+            str_log = '%s upload file (%s)' % (current_user.username, user_path + dir + '/' + file)
+            history.add(3, str_log)
+            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
 
-        str_log = '%s upload file (%s)' % (current_user.username, user_path + dir + '/' + file)
-        history.add(3, str_log)
-        console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+            return 'ok'
 
-
-        return 'ok'
+        else:
+            return 'NO PLACE'
 
     else:
-        return 'NO PLACE'
+        return 'READ ONLY'
 
 @app.before_request
 def log_request_info():

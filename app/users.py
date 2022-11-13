@@ -53,12 +53,14 @@ class UserBase():
                     {
                         "type": "path",
                         "name": "disk",
+                        "readonly": False,
                         "path": (os.getcwd()[2:] if (os.name == "nt") else os.getcwd()) + "/",
                         "size": 0
                     },
                     {
                         "type": "path",
                         "name": "root",
+                        "readonly": True,
                         "path": "/",
                         "size": 0
                     },
@@ -74,6 +76,7 @@ class UserBase():
             "root_template": {
                 "name": "root_template",
                 "path": "/",
+                "readonly": True,
                 "size": 0
             }
         }

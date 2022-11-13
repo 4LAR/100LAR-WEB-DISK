@@ -78,13 +78,16 @@ function uploadFile(files, count = 0) {
       if (xhr.responseText.toString() === 'NO PLACE') {
         no_place_dialog();
 
-        uploading_bool = false;
-        closeModal('file_upload_block');
-        if (!right_bar_bool) {
-          close_rightBar();
-        }
-        update_dir();
+      } else if (xhr.responseText.toString() === 'READ ONLY') {
+        readonly_dialog();
       }
+
+      uploading_bool = false;
+      closeModal('file_upload_block');
+      if (!right_bar_bool) {
+        close_rightBar();
+      }
+      update_dir();
 
     }
     xhr.send(form);

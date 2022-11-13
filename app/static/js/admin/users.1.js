@@ -33,7 +33,7 @@ function open_user(user) {
   } catch {
     opened_users.splice(opened_users.indexOf(user), 1);
   }
-  
+
 }
 
 function generate_users() {
@@ -194,7 +194,6 @@ function add_new_path(user) {
 function delete_existing_path(user, path) {
   var index = updated_paths[user].indexOf(`users_info_${user}_path_${path}`);
   if (index !== -1) updated_paths[user].splice(index, 1);
-  //document.getElementById(`users_info_${user}_${path}_main`).style = "background-color: #FFF";
   document.getElementById(`users_info_${user}_${path}_main`).innerHTML = `
     <h1 align="center">DELETED PATH</h1>
     <h2 align="center" style="margin: -20px -50px">(${path})</h2>
@@ -225,10 +224,12 @@ function type_change(user, path, index) {
 
     try {
 
-      var path_val = "";
+      var path_val = "/";
       var size_val = "";
+      var readonly_val = false;
       try {path_val = users_JSON[user]['path'][index]['path'];} catch {};
       try {size_val = users_JSON[user]['path'][index]['size'];} catch {};
+      try {readonly_val = users_JSON[user]['path'][index]['readonly'];} catch {};
 
       var sizes = "";
       converted_size = convert_size(size_val, true)
@@ -241,9 +242,6 @@ function type_change(user, path, index) {
         <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin: 2px 15px; width: 100%"><br>
       `
 
-      // <p style="font-size: 14">Name</p><br>
-      // <input id="users_info_${user}_path_${path}_name" type=text class="input_border" value="${path}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
-
       div_path.innerHTML = `
 
         <p style="font-size: 14">Path</p><br>
@@ -253,6 +251,13 @@ function type_change(user, path, index) {
           ${sizes}
         </select>
         <input id="users_info_${user}_path_${path}_size" type=text class="input_border" value="${converted_size[0]}" style="margin-left: -13px; margin-top: -3px; width: 50%"><br>
+
+        <div style="margin: 5px 16px; height: 30px;">
+          <input type="checkbox" class="custom-checkbox" id="users_info_${user}_path_${path}_readonly" name="users_info_${user}_path_${path}_readonly" ${(readonly_val)? 'checked': ''}>
+          <label for="users_info_${user}_path_${path}_readonly">
+            <p style="font-weight: normal; margin: 0px 0px">read only</p>
+          </label>
+        </div>
       `;
 
     } catch {
@@ -313,7 +318,9 @@ function set_user_info(name) {
       path_name = document.getElementById(`${path}_name`).value;
       path_disk = document.getElementById(`${path}_path`).value;
       size = document.getElementById(`${path}_size`).value;
+      path_readonly = document.getElementById(`${path}_readonly`).checked;
       updated_users_JSON[name]['path'][j]['path'] = path_disk;
+      updated_users_JSON[name]['path'][j]['readonly'] = path_readonly;
       var size_type = document.getElementById(`${path}_size_type`).value;
       updated_users_JSON[name]['path'][j]['size'] = convert_size_to_b(parseInt(size), get_size_index_by_name(size_type));
     }

@@ -44,6 +44,7 @@ function generate_templates() {
           <input id="template_${name}_name" type=text class="input_border" value="${name}" style="margin: 2px 15px; width: 90%"><br>
           <p style="font-size: 14">Path</p><br>
           <input id="template_${name}_path" type=text class="input_border" value="${template['path']}" style="margin-left: 14px; margin-top: 0px; width: 90%"><br>
+
           <p style="font-size: 14">Size</p><br>
           <select id="template_${name}_size_type" class='input_border' style='padding: 0; margin: 2px 15px; width: 50px'>
             ${sizes}
@@ -53,6 +54,12 @@ function generate_templates() {
           <div class="main_page_button block_select save_template" style="width: 100px" onclick="set_template('${name}')">
             <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/save.svg">
             <p style="margin: -25px 35px; font-weight: normal;">save</p>
+          </div>
+          <div style="margin: 5px 16px; height: 30px;">
+            <input type="checkbox" class="custom-checkbox" id="template_${name}_readonly" name="template_${name}_readonly" ${(template['readonly'])? 'checked': ''}>
+            <label for="template_${name}_readonly">
+              <p style="font-weight: normal; margin: 0px 0px">read only</p>
+            </label>
           </div>
         </div>
       `
@@ -64,6 +71,7 @@ function set_template(name) {
   var new_template_JSON = {};
   new_template_JSON['name'] = document.getElementById(`template_${name}_name`).value;
   new_template_JSON['path'] = document.getElementById(`template_${name}_path`).value;
+  new_template_JSON['readonly'] = document.getElementById(`template_${name}_readonly`).checked;
   var size_type = document.getElementById(`template_${name}_size_type`).value;
   var size = document.getElementById(`template_${name}_size`).value;
 
