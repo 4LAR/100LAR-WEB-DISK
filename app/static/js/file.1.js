@@ -248,6 +248,8 @@ function get_files() {
           // сортировка файлов по типу
           files_json['files'] = sort_files(files_json['files']);
 
+          audio_list = [];
+
           // добавляем файлы в список
           for (let i = 0; i < files_json['files'].length; i++){
             file = files_json['files'][i]
@@ -274,6 +276,10 @@ function get_files() {
 function append_file(type, name, size='', path='', date='', mime='') {
   var ul = document.getElementById("file_list");
   var li = document.createElement("li");
+
+  if (type === 'audio') {
+    audio_list.push([type, name, size, path, date, mime]);
+  }
 
   var draw_type_class = '';
   var file_info = '';
@@ -424,7 +430,7 @@ function load_preview_image() {
 }
 
 function load_preview_video() {
-  if (document.getElementById("checkbox_preview_image").checked) {
+  if (document.getElementById("checkbox_preview_image").checked && !check_device()) {
     openModal('preview_video_div');
     document.getElementById("preview_video").setAttribute('src', url_file);
   } else {
@@ -432,10 +438,13 @@ function load_preview_video() {
   }
 }
 
+var audio_list = [];
+
 function load_preview_audio() {
-  if (document.getElementById("checkbox_preview_image").checked) {
+  if (document.getElementById("checkbox_preview_image").checked && !check_device()) {
     openModal('preview_audio_div');
-    document.getElementById("preview_audio").setAttribute('src', url_file);
+    // document.getElementById("preview_audio").setAttribute('src', url_file);
+    load_audio(url_file, selected_file_name);
   } else {
     closeModal('preview_audio_div');
   }

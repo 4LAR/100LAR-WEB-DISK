@@ -136,6 +136,11 @@ function get_localStorage(key, default_return=null) {
     return default_return;
 }
 
+//
+function check_device() {
+  return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+}
+
 function open_git_releases() {
   openInNewTab('https://github.com/4LAR/100LAR-WEB-DISK/releases');
 }

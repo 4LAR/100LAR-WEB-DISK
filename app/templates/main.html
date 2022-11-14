@@ -14,6 +14,7 @@
     <link rel="stylesheet" href = "static/css/file.1.css"/>
 
     <link rel="stylesheet" href = "static/css/checkBox.1.css"/>
+    <link rel="stylesheet" href = "static/css/range.1.css"/>
     <link rel="stylesheet" href = "static/css/dialog.1.css"/>
 
   </head>
@@ -155,12 +156,18 @@
             </div>
           </div>
 
-          <div class="preview_image" id="preview_video_div">
+          <div class="preview_video" id="preview_video_div">
             <video id="preview_video" width="300px" controls></video>
           </div>
 
-          <div class="preview_image" id="preview_audio_div">
-            <audio id="preview_audio" style="margin: 5px 0px" width="300px" controls></video>
+          <div class="preview_audio block_select" id="preview_audio_div" style="height: 50px; cursor: default;">
+            <audio id="preview_audio" style="margin: 5px 0px; display: none" width="300px" controls></audio>
+            <img id="preview_play_pause_audio" class="icon" width="40" height="40" style="position: absolute; margin: 6px 4px;" src="static/img/player/play.svg" onclick="play_audio()"/>
+            <img class="icon" width="20" height="20" style="position: absolute; left: 45px;" src="static/img/player/back.svg"/>
+            <img class="icon" style="transform: rotate(-180deg); position: absolute; right: 4px;" width="20" height="20" src="static/img/player/back.svg"/>
+            <input id="preview_audio_name" class="preview_audio_name" style="left: 80px; right: 40px; margin-top: 4px;" type=text placeholder="file name" onkeypress="" readonly>
+            <input type="range" id="preview_audio_volume" style="width: 70px; position: absolute; right: -4px; bottom: 5px" name="cowbell" min="0" max="100" value="50" step="1" oninput="set_volume_audio(this.value)" onchange="set_volume_audio(this.value)">
+            <input type="range" id="preview_audio_input_duration" style="position: absolute; left: 45px; right: 75px; bottom: 5px" name="cowbell" min="0" max="100" value="0" step="1" onchange="set_duration_audio(this.value)" onmouseover="audio_duration_hover = true" onmouseout="audio_duration_hover = false">
           </div>
 
         </div>
@@ -406,6 +413,7 @@
   <script type="text/javascript" src="static/js/info.1.js"></script>
   <script type="text/javascript" src="static/js/user.1.js"></script>
   <script type="text/javascript" src="static/js/upload_file.1.js"></script>
+  <script type="text/javascript" src="static/js/player.1.js"></script>
   <script type="text/javascript" src="static/js/file.1.js"></script>
 
 </html>

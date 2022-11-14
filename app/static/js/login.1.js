@@ -43,11 +43,6 @@ function login_enter(e) {
 }
 
 //
-function check_device() {
-  return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
-}
-
-//
 function check_login() {
   xhr = new XMLHttpRequest();
   xhr.open('POST', '/info');
