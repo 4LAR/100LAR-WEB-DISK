@@ -130,11 +130,33 @@
   left: 0px;
   top: 350px;
   width: 300px;
-
-  /*border-top: 1px solid var(--main-border-color);*/
   border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+}
 
+.preview_video_controls {
+  height: 25px;
+  width: var(--width-right-bar);
+  border-top: 1px solid var(--main-border-color);
+}
+
+.preview_video img {
+  margin: 10px;
   cursor: pointer;
+}
+
+.preview_video img:hover {
+  filter: invert(50%);
+}
+
+.preview_video_duration_info {
+  display: none;
+  position: fixed;
+  overflow:hidden;
+}
+
+#preview_video_input_duration:hover ~ .preview_video_duration_info {
+  display: block;
 }
 
 .preview_audio {
@@ -146,7 +168,6 @@
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
 
-  cursor: pointer;
   background-color: var(--bg-color);
 }
 

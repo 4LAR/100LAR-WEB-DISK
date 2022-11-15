@@ -141,6 +141,14 @@ function check_device() {
   return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
 
+//
 function open_git_releases() {
   openInNewTab('https://github.com/4LAR/100LAR-WEB-DISK/releases');
+}
+
+//
+function seconds_to_hms(seconds) {
+  var date = new Date(null);
+  date.setSeconds(seconds);
+  return date.toISOString().substr(11, 8);
 }

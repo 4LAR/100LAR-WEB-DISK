@@ -157,7 +157,17 @@
           </div>
 
           <div class="preview_video" id="preview_video_div">
-            <video id="preview_video" width="300px" controls></video>
+            <video id="preview_video" width="300px"></video>
+            <div class="preview_video_controls">
+              <img id="preview_play_pause_video" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px;" src="static/img/player/play.svg" onclick="play_video()"/>
+              <input type="range" id="preview_video_volume" style="width: 65px; position: absolute; right: 20px; bottom: 8px" name="" min="0" max="100" value="50" step="1" oninput="set_volume_video(this.value)" onchange="set_volume_video(this.value)">
+              <input type="range" id="preview_video_input_duration" style="position: absolute; left: 30px; right: 95px; bottom: 8px" name="" min="0" max="100" value="0" step="1" onchange="set_duration_video(this.value)" onmouseover="video_duration_hover = true" onmouseout="video_duration_hover = false" onmousemove="showTooltip_video_duration(event)">
+              <img id="preview_fullscreen_video" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px; right: 0px" src="static/img/player/fullscreen.svg" onclick="()"/>
+
+              <div class="preview_video_duration_info" id="preview_video_duration_info">
+                <p id="preview_video_duration_info_p"></p>
+              </div>
+            </div>
           </div>
 
           <div class="preview_audio block_select" id="preview_audio_div" style="height: 50px; cursor: default;">

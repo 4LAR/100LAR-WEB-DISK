@@ -432,7 +432,7 @@ function load_preview_image() {
 function load_preview_video() {
   if (document.getElementById("checkbox_preview_image").checked && !check_device()) {
     openModal('preview_video_div');
-    document.getElementById("preview_video").setAttribute('src', url_file);
+    load_video(url_file, selected_file_name);
   } else {
     closeModal('preview_video_div');
   }
@@ -443,7 +443,6 @@ var audio_list = [];
 function load_preview_audio() {
   if (document.getElementById("checkbox_preview_image").checked && !check_device()) {
     openModal('preview_audio_div');
-    // document.getElementById("preview_audio").setAttribute('src', url_file);
     load_audio(url_file, selected_file_name);
   } else {
     closeModal('preview_audio_div');
