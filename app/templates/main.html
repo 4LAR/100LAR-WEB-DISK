@@ -157,13 +157,12 @@
           </div>
 
           <div class="preview_video" id="preview_video_div">
-            <video id="preview_video" width="300px"></video>
+            <video id="preview_video" width="300px" onclick="play_video()"></video>
             <div class="preview_video_controls">
               <img id="preview_play_pause_video" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px;" src="static/img/player/play.svg" onclick="play_video()"/>
               <input type="range" id="preview_video_volume" style="width: 65px; position: absolute; right: 20px; bottom: 8px" name="" min="0" max="100" value="50" step="1" oninput="set_volume_video(this.value)" onchange="set_volume_video(this.value)">
               <input type="range" id="preview_video_input_duration" style="position: absolute; left: 30px; right: 95px; bottom: 8px" name="" min="0" max="100" value="0" step="1" onchange="set_duration_video(this.value)" onmouseover="video_duration_hover = true" onmouseout="video_duration_hover = false" onmousemove="showTooltip_video_duration(event)">
-              <img id="preview_fullscreen_video" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px; right: 0px" src="static/img/player/fullscreen.svg" onclick="()"/>
-
+              <img id="preview_fullscreen_video" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px; right: 0px" src="static/img/player/fullscreen.svg" onclick="full_screen()"/>
               <div class="preview_video_duration_info" id="preview_video_duration_info">
                 <p id="preview_video_duration_info_p"></p>
               </div>
@@ -406,6 +405,23 @@
         <p style="margin: 5px 28px">create</p>
       </div>
     </div>
+
+    <!--видео в полный экран-->
+    <div id="preview_video_fullscreen_div" class="preview_video_fullscreen" style="display: none">
+      <video id="preview_video_fullscreen" class="preview_video_fullscreen_video" onclick="play_video()"></video>
+      <div class="preview_video_fullscreen_controls">
+        <img id="preview_play_pause_video_fullscreen" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px;" src="static/img/player/play.svg" onclick="play_video()"/>
+        <input type="range" id="preview_video_volume_fullscreen" style="width: 65px; position: absolute; right: 20px; bottom: 8px" name="" min="0" max="100" value="50" step="1" oninput="set_volume_video(this.value)" onchange="set_volume_video(this.value)">
+        <input type="range" id="preview_video_input_duration_fullscreen" style="position: absolute; left: 30px; right: 95px; bottom: 8px" name="" min="0" max="100" value="0" step="0.1" onchange="set_duration_video(this.value)" onmouseover="video_duration_hover = true" onmouseout="video_duration_hover = false" onmousemove="showTooltip_video_duration(event)">
+        <img id="preview_fullscreen_video_fullscreen" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px; right: 0px" src="static/img/player/fullscreen.svg" onclick="full_screen()"/>
+
+        <div class="preview_video_duration_info" id="preview_video_duration_info_fullscreen">
+          <p id="preview_video_duration_info_p_fullscreen"></p>
+        </div>
+      </div>
+    </div>
+
+
 
     <input name="fileElem" type="file" id="fileElem" style="display: none;" multiple onchange="uploadFile(this.files)">
 

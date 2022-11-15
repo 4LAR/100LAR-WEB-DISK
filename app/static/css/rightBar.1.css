@@ -125,6 +125,41 @@
   cursor: pointer;
 }
 
+.preview_video_fullscreen {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--bg-color);
+}
+
+.preview_video_fullscreen img {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.preview_video_fullscreen_video {
+  position: fixed;
+  top: 25px;
+  left: 0px;
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.preview_video_fullscreen_controls {
+  position: fixed;
+
+  bottom: 0px;
+  left: 0px;
+
+  height: 25px;
+  width: 100%;
+  border-top: 1px solid var(--main-border-color);
+}
+
 .preview_video {
   position: absolute;
   left: 0px;
@@ -156,6 +191,10 @@
 }
 
 #preview_video_input_duration:hover ~ .preview_video_duration_info {
+  display: block;
+}
+
+#preview_video_input_duration_fullscreen:hover ~ .preview_video_duration_info {
   display: block;
 }
 
