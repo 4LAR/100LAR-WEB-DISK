@@ -9,6 +9,7 @@ const audio_volume_id = "preview_audio_volume";
 var audio_duration_hover = false;
 
 set_volume_audio(get_localStorage('preview_audio_volume', 50));
+document.getElementById(audio_volume_id).value = get_localStorage('preview_audio_volume', 50);
 
 function load_audio(url, name) {
   document.getElementById(audio_id).setAttribute('src', url_file);
@@ -19,14 +20,14 @@ function load_audio(url, name) {
 
 function pause_audio() {
   document.getElementById(audio_id).pause();
-  document.getElementById(audio_play_pause_id).src = 'static/img/player/pause.svg';
+  document.getElementById(audio_play_pause_id).src = 'static/img/player/play.svg';
   document.getElementById(audio_play_pause_id).onclick = function(){play_audio()};
 }
 
 function play_audio() {
   document.getElementById(audio_duration_id).max = document.getElementById(audio_id).duration;
   document.getElementById(audio_id).play();
-  document.getElementById(audio_play_pause_id).src = 'static/img/player/play.svg';
+  document.getElementById(audio_play_pause_id).src = 'static/img/player/pause.svg';
   document.getElementById(audio_play_pause_id).onclick = function(){pause_audio()};
 
 }
