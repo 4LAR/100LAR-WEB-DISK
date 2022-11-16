@@ -8,8 +8,12 @@ const audio_volume_id = "preview_audio_volume";
 
 var audio_duration_hover = false;
 
-set_volume_audio(get_localStorage('preview_audio_volume', 50));
-document.getElementById(audio_volume_id).value = get_localStorage('preview_audio_volume', 50);
+if (!mobile) {
+  set_volume_audio(get_localStorage('preview_audio_volume', 50));
+  document.getElementById(audio_volume_id).value = get_localStorage('preview_audio_volume', 50);
+} else {
+  set_volume_audio(100);
+}
 
 function load_audio(url, name, video) {
   document.getElementById(audio_id).setAttribute('src', url_file);
@@ -34,7 +38,7 @@ function play_audio() {
 
 function set_volume_audio(volume) {
   document.getElementById(audio_id).volume = volume / 100;
-  localStorage.setItem('preview_audio_volume', volume);
+  if (!mobile) localStorage.setItem('preview_audio_volume', volume);
 }
 
 function set_duration_audio(time) {
@@ -67,8 +71,12 @@ var video_fullscreen = false;
 var video_fullscreen_nametag = '_fullscreen';
 var video_pause = true;
 
-set_volume_video(get_localStorage('preview_audio_volume', 50));
-document.getElementById(video_volume_id).value = get_localStorage('preview_audio_volume', 50);
+if (!mobile) {
+  set_volume_video(get_localStorage('preview_audio_volume', 50));
+  document.getElementById(video_volume_id).value = get_localStorage('preview_audio_volume', 50);
+} else {
+  set_volume_video(100);
+}
 
 function load_video(url, name, video) {
   document.getElementById(video_id).setAttribute('src', url_file);
@@ -106,7 +114,7 @@ function play_video() {
 function set_volume_video(volume) {
   document.getElementById(video_id + ((video_fullscreen)? video_fullscreen_nametag: '')).volume = volume / 100;
   document.getElementById(video_volume_id + ((video_fullscreen)? video_fullscreen_nametag: '')).value = volume;
-  localStorage.setItem('preview_audio_volume', volume);
+  if (!mobile) localStorage.setItem('preview_audio_volume', volume);
 }
 
 function set_duration_video(time) {

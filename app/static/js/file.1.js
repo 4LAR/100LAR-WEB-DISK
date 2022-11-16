@@ -401,6 +401,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
 function load_preview() {
   document.getElementById("preview_video").pause();
   document.getElementById("preview_audio").pause();
+  console.log(type_file)
   switch (type_file) {
     case 'image':
       openModal('file_activity_view');
@@ -430,23 +431,25 @@ function load_preview_image() {
 }
 
 function load_preview_video() {
-  if (document.getElementById("checkbox_preview_image").checked && !check_device()) {
+  if (document.getElementById("checkbox_preview_image").checked) {
     openModal('preview_video_div');
     load_video(url_file, selected_file_name);
   } else {
     closeModal('preview_video_div');
   }
+  localStorage.setItem('preview_image', document.getElementById("checkbox_preview_image").checked);
 }
 
 var audio_list = [];
 
 function load_preview_audio() {
-  if (document.getElementById("checkbox_preview_image").checked && !check_device()) {
+  if (document.getElementById("checkbox_preview_image").checked) {
     openModal('preview_audio_div');
     load_audio(url_file, selected_file_name);
   } else {
     closeModal('preview_audio_div');
   }
+  localStorage.setItem('preview_image', document.getElementById("checkbox_preview_image").checked);
 }
 
 function set_preview_image_type(type="auto") {
@@ -470,6 +473,7 @@ var selected_file_name = '';
 var selected_file_dir = '';
 // открытие информации о файле
 function open_fileInfo(name, type, size, file_path, date, mime, description='') {
+  if (mobile) openModal('file_info_bar_background_black');
   undo_files_checkBox();
 
   selected_file_name = name;
@@ -507,16 +511,19 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
 
     case 'image':
       openModal('file_activity_view');
+      if (mobile) openModal('checkbox_preview_image_div');
       load_preview_image();
       break;
 
     case 'video':
       openModal('file_activity_view');
+      if (mobile) openModal('checkbox_preview_image_div');
       load_preview_video();
       break;
 
     case 'audio':
       openModal('file_activity_view');
+      if (mobile) openModal('checkbox_preview_image_div');
       load_preview_audio();
       break;
   }
@@ -551,6 +558,8 @@ function close_rightBar() {
   closeModal('file_info_block');
   closeModal('file_list_block');
   closeModal('copy_or_paste_block');
+  if (mobile) closeModal('file_info_bar_background_black');
+  if (mobile) closeModal('checkbox_preview_image_div');
   if (mobile) closeModal('addFileMenu');
 
   if (!mobile) document.getElementById("file_list_div").style.right = '0px';
