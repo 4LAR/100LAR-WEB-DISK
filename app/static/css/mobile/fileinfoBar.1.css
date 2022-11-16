@@ -116,6 +116,7 @@
 .preview_image {
   position: absolute;
   left: 0px;
+  /* height: calc(100% - 250px - 25px - 45px ); */
   bottom: calc(250px + 25px);
   width: 100%;
 
@@ -129,11 +130,8 @@
   position: absolute;
   left: 0px;
   bottom: -25px;
-  /* margin: -25px 0px; */
   height: 25px;
   width: 100%;
-
-  /* border-bottom: 1px solid var(--main-border-color); */
   border-top: 1px solid var(--main-border-color);
 
   background-color: var(--bg-color);
@@ -142,7 +140,6 @@
 }
 
 .preview_rendering_selector {
-  /* width: 140px; */
   height: 25px;
   border-right: 1px solid var(--main-border-color);
   border-left: 1px solid var(--main-border-color);

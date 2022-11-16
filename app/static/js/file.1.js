@@ -273,12 +273,12 @@ function get_files() {
 }
 
 // добавление файла в список
-function append_file(type, name, size='', path='', date='', mime='') {
+function append_file(type, name, size='', path_s='', date='', mime='') {
   var ul = document.getElementById("file_list");
   var li = document.createElement("li");
 
   if (type === 'audio') {
-    audio_list.push([type, name, size, path, date, mime]);
+    audio_list.push([type, name, size, path_s, date, mime, `/download?path=${path}&dir=${dir_str}&file=${name}`]);
   }
 
   var draw_type_class = '';
@@ -319,7 +319,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
       // файл
 
        str += `
-        <div class="${draw_type_class} block_select" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path}', '${date}', '${mime}')">
+        <div class="${draw_type_class} block_select" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
           <img class="icon" style="margin: 5px 50px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
@@ -381,7 +381,7 @@ function append_file(type, name, size='', path='', date='', mime='') {
       // файл
 
        str += `
-        <div class="${draw_type_class} block_select" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path}', '${date}', '${mime}')">
+        <div class="${draw_type_class} block_select" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
           <img class="icon" style="margin: 7px 40px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
