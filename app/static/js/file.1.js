@@ -203,6 +203,7 @@ function sort_files(files_list) {
 // получение всех файлов от сервера в текущей директории
 var read_files_bool = false;
 function get_files() {
+  selected_file_name = "";
   if (!read_files_bool) {
     read_files_bool = true;
     undo_files_checkBox();
