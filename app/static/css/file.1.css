@@ -33,11 +33,24 @@
 
 /**/
 
+.file_selected {
+  background-color: var(--selected-file-color);
+}
+
 .file {
   border-bottom: 1px solid var(--main-border-color);
 
   height: 40px;
   width: 100%;
+}
+
+.checkBox_file {
+
+}
+
+.checkBox_file:hover ~ .file {
+  background-color: var(--hover-color);
+  cursor: pointer;
 }
 
 .file:hover {
@@ -47,6 +60,12 @@
 
 .file p {
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow:hidden;
+}
+
+.file_name {
+  width: calc(100% - 330px);
 }
 
 /**/
@@ -62,4 +81,12 @@
 .file_grid:hover {
   background-color: var(--hover-color);
   cursor: pointer;
+}
+
+.file_name_grid {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow:hidden;
+
+  width: calc(100% - 100px);
 }

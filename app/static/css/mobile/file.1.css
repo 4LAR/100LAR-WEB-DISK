@@ -12,6 +12,10 @@
 
 }
 
+.file_selected {
+  background-color: var(--selected-file-color);
+}
+
 .file {
   border-bottom: 1px solid var(--main-border-color);
 
@@ -21,4 +25,7 @@
 
 .file p {
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  width: calc(100% - 100px);
 }

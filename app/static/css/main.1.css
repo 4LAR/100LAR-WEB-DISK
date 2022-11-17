@@ -33,6 +33,8 @@
   --scroll-color: #4F5357;
   --scroll-bg-color: #1D2125;
 
+  --selected-file-color: #2A3137;
+
 }
 
 [data-theme = "light"] {
@@ -64,6 +66,9 @@
 
   --top-checkBox-color: #999999;
   --main-checkBox-color: #595959;
+
+  --selected-file-color: #E4E7EB;
+
 }
 
 p {

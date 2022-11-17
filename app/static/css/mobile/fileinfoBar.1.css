@@ -177,10 +177,10 @@
 
 .preview_video_fullscreen_video {
   position: fixed;
-  top: 25px;
+  top: 0px;
   left: 0px;
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100% - 25px);
 }
 
 .preview_video_fullscreen_controls {

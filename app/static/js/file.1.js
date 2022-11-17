@@ -56,6 +56,17 @@ function go_forward_dir_history() {
 
 // переход в выбранную директорию
 function forward_dir(name) {
+  if (list_checked_file.length > 0) {
+    var fileCheckBox = document.getElementById("checkbox_file_" + name);
+    fileCheckBox.checked = !fileCheckBox.checked;
+    checkBox_file(
+      {'checked':   fileCheckBox.checked},
+      name,
+      'dir'
+    );
+    return;
+  }
+
   forward_dir_history = [];
   back_dir_history.push(dir.slice());
   dir.push(name);
@@ -309,7 +320,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
     if (type == 'dir') {
       // директория
       str += `
-        <div class="${draw_type_class} block_select" onclick="forward_dir('${name}')">
+        <div class="${draw_type_class} block_select" id="${name}" onclick="forward_dir('${name}')">
           <img class="icon" style="margin: 5px 50px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
@@ -319,7 +330,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       // файл
 
        str += `
-        <div class="${draw_type_class} block_select" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
+        <div class="${draw_type_class} block_select" id="${name}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
           <img class="icon" style="margin: 5px 50px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
@@ -327,16 +338,16 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
     }
 
   } else {
-    if (draw_type == 'list'){
+    if (draw_type == 'list') {
       draw_type_class = 'file';
 
       if (type == 'dir') {
         file_info = `
-          <p style="margin: -29px 70px">${name}</p
+          <p style="margin: -29px 70px;">${name}</p
         `;
       } else {
         file_info = `
-          <p style="margin: -29px 70px">${name}</p>
+          <p style="margin: -29px 70px" class="file_name">${name}</p>
           <p style="margin: 8px 110px" align="right">${date}</p>
           <p style="margin: -30px 10px" align="right">${size}</p>
         `;
@@ -348,11 +359,11 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       draw_type_class = 'file_grid';
       if (type == 'dir') {
         file_info = `
-          <p style="margin: -35px 90px; white-space: nowrap;">${name}</p>
+          <p style="margin: -35px 90px; white-space: nowrap;" class="file_name_grid">${name}</p>
         `;
       } else {
         file_info = `
-          <p style="margin: -35px 90px; white-space: nowrap;">${name}</p>
+          <p style="margin: -35px 90px; white-space: nowrap;" class="file_name_grid">${name}</p>
 
         `;
       }
@@ -363,7 +374,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
     // checkBox
     var str = `
       <div style="position: absolute; margin: 10px 12px">
-        <input type="checkbox" class="custom-checkbox" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
+        <input type="checkbox" class="custom-checkbox checkBox_file" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
         <label for="checkbox_file_${name}"></label>
       </div>
     `
@@ -371,7 +382,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
     if (type == 'dir') {
       // директория
       str += `
-        <div class="${draw_type_class} block_select" onclick="forward_dir('${name}')">
+        <div class="${draw_type_class} block_select" id="${name}" onclick="forward_dir('${name}')">
           <img class="icon" style="margin: 7px 40px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
@@ -381,7 +392,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       // файл
 
        str += `
-        <div class="${draw_type_class} block_select" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
+        <div class="${draw_type_class} block_select" id="${name}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
           <img class="icon" style="margin: 7px 40px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
@@ -473,8 +484,25 @@ var selected_file_name = '';
 var selected_file_dir = '';
 // открытие информации о файле
 function open_fileInfo(name, type, size, file_path, date, mime, description='') {
+
+  if (list_checked_file.length > 0) {
+    var fileCheckBox = document.getElementById("checkbox_file_" + name);
+    fileCheckBox.checked = !fileCheckBox.checked;
+    checkBox_file(
+      {'checked':   fileCheckBox.checked},
+      name,
+      type
+    );
+    return;
+  }
+
   if (mobile) openModal('file_info_bar_background_black');
   undo_files_checkBox();
+
+  if (selected_file_name.length > 0)
+    document.getElementById(selected_file_name).classList.remove('file_selected');
+
+  document.getElementById(name).classList.add('file_selected');
 
   selected_file_name = name;
   selected_file_dir = dir_str;
@@ -552,6 +580,9 @@ function close_rightBar() {
   right_bar_bool = false;
   undo_files_checkBox();
 
+  if (selected_file_name.length > 0)
+    document.getElementById(selected_file_name).classList.remove('file_selected');
+
   if (!uploading_bool)
     closeModal('rightBar');
 
@@ -582,6 +613,10 @@ var list_checked_file = [];
 
 // выделение файла
 function checkBox_file(e, name, type) {
+
+  if (list_checked_file.length == 0 && selected_file_name.length > 0)
+    document.getElementById(selected_file_name).classList.remove('file_selected');
+
   open_right_bar();
   closeModal('file_info_block');
   if (mobile) closeModal('addFileMenu');
@@ -606,11 +641,14 @@ function checkBox_file(e, name, type) {
       if (list_checked_file[i][0] === name)
         ok = false;
     }
-    if (ok)
+    if (ok) {
       list_checked_file.push([name, type]);
+      document.getElementById(name).classList.add('file_selected');
+    }
 
   } else {
     list_checked_file.pop([name, type]);
+    document.getElementById(name).classList.remove('file_selected');
   }
 
 
@@ -712,6 +750,9 @@ function undo_files_checkBox() {
   try {
     for (i in files_json['files']) {
       document.getElementById('checkbox_file_' + files_json['files'][i]['name']).checked = false;
+      try {
+        document.getElementById(files_json['files'][i]['name']).classList.remove('file_selected');
+      } catch {}
     }
     list_checked_file = [];
   } catch {
