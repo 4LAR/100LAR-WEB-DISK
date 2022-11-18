@@ -216,3 +216,12 @@ window.onmousemove = function (e) {
   document.getElementById(video_duration_info + ((video_fullscreen)? video_fullscreen_nametag: '')).style.left = (e.clientX - 25) + "px";
   document.getElementById(video_duration_info + ((video_fullscreen)? video_fullscreen_nametag: '')).style.top = document.getElementById(video_duration_id + ((video_fullscreen)? video_fullscreen_nametag: '')).getBoundingClientRect().y - 50;
 }
+
+/* IMAGE */
+function load_image(url, name) {
+
+}
+
+function image_fullscreen() {
+
+}

@@ -261,6 +261,7 @@ function get_files() {
           files_json['files'] = sort_files(files_json['files']);
 
           audio_list = [];
+          photo_list = [];
 
           // добавляем файлы в список
           for (let i = 0; i < files_json['files'].length; i++){
@@ -291,6 +292,8 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 
   if (type === 'audio') {
     audio_list.push([type, name, size, path_s, date, mime, `/download?path=${path}&dir=${dir_str}&file=${name}`]);
+  } else if (type === 'image') {
+    photo_list.push([type, name, size, path_s, date, mime, `/download?path=${path}&dir=${dir_str}&file=${name}`]);
   }
 
   var draw_type_class = '';
@@ -453,6 +456,7 @@ function load_preview_video() {
 }
 
 var audio_list = [];
+var photo_list = [];
 
 function load_preview_audio() {
   if (document.getElementById("checkbox_preview_image").checked) {

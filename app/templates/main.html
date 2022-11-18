@@ -421,6 +421,24 @@
       </div>
     </div>
 
+    <!--изображение на полный экран-->
+    <div id="preview_image_fullscreen_div" class="preview_image_fullscreen">
+      <img id="preview_image_fullscreen" class="preview_image_fullscreen_image" src="/download?path=0&dir=&file=bg.jpg" />
+
+      <div class="preview_display_type_fullscreen">
+        <label for="" style="position: absolute; margin: 0px 10px; left: 0px;">
+          Rendering type:
+          <select onchange="preview_image_type(this)" class="preview_rendering_selector" id="preview_image_type_fullscreen" style="margin: 0px 5px">
+            <option value="auto">auto</option>
+            <option value="crisp-edges">crisp-edges</option>
+            <option value="pixelated">pixelated</option>
+            <option value="initial">initial</option>
+            <option value="inherit">inherit</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
     <input name="fileElem" type="file" id="fileElem" style="display: none;" multiple onchange="uploadFile(this.files)">
 
   </body>
