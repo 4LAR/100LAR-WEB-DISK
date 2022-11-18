@@ -67,7 +67,9 @@ set_disk_space(0);
 document.addEventListener('keydown', function(event){
 
   if(event.keyCode == 27 && !check_device()){
-    if (video_fullscreen) {
+    if (image_fullscreen_bool) {
+      image_fullscreen();
+    } else if (video_fullscreen) {
       full_screen();
     } else if (delete_file_bool) {
       close_delete_file_dialog();

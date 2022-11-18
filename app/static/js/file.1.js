@@ -261,7 +261,7 @@ function get_files() {
           files_json['files'] = sort_files(files_json['files']);
 
           audio_list = [];
-          photo_list = [];
+          image_list = [];
 
           // добавляем файлы в список
           for (let i = 0; i < files_json['files'].length; i++){
@@ -293,7 +293,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
   if (type === 'audio') {
     audio_list.push([type, name, size, path_s, date, mime, `/download?path=${path}&dir=${dir_str}&file=${name}`]);
   } else if (type === 'image') {
-    photo_list.push([type, name, size, path_s, date, mime, `/download?path=${path}&dir=${dir_str}&file=${name}`]);
+    image_list.push([type, name, size, path_s, date, mime, `/download?path=${path}&dir=${dir_str}&file=${name}`]);
   }
 
   var draw_type_class = '';
@@ -438,7 +438,7 @@ function load_preview() {
 function load_preview_image() {
   if (document.getElementById("checkbox_preview_image").checked) {
     openModal('preview_image_div');
-    document.getElementById("preview_image").src = url_file;
+    load_image(url_file, selected_file_name);
   } else {
     closeModal('preview_image_div');
   }
@@ -456,7 +456,7 @@ function load_preview_video() {
 }
 
 var audio_list = [];
-var photo_list = [];
+var image_list = [];
 
 function load_preview_audio() {
   if (document.getElementById("checkbox_preview_image").checked) {
@@ -470,6 +470,7 @@ function load_preview_audio() {
 
 function set_preview_image_type(type="auto") {
   document.getElementById("preview_image").style.imageRendering = type;
+  if (!mobile) document.getElementById("preview_image_fullscreen").style.imageRendering = type;
   localStorage.setItem('preview_imageRendering', type);
   selectElement("preview_image_type", type);
 }

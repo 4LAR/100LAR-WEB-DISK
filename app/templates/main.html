@@ -140,7 +140,7 @@
           </div>
 
           <div class="preview_image" id="preview_image_div">
-            <img id="preview_image" class="" width="300px" src="" />
+            <img id="preview_image" class="preview_image_image" width="300px" src="" onclick="image_fullscreen()"/>
 
             <div class="preview_display_type">
               <label for="" style="position: absolute; margin: 0px 10px;">
@@ -422,8 +422,16 @@
     </div>
 
     <!--изображение на полный экран-->
-    <div id="preview_image_fullscreen_div" class="preview_image_fullscreen">
-      <img id="preview_image_fullscreen" class="preview_image_fullscreen_image" src="/download?path=0&dir=&file=bg.jpg" />
+    <div id="preview_image_fullscreen_div" class="preview_image_fullscreen block_select">
+      <img id="preview_image_fullscreen" class="preview_image_fullscreen_image" src="/download?path=0&dir=&file=3.png" />
+
+      <div class="preview_image_fullscreen_move" style="left: 0px" onclick="next_image(true)">
+        <img class="icon" width="100%" height="100%" style="transform: rotate(-180deg)" src="static/img/player/back-image.svg"/>
+      </div>
+
+      <div class="preview_image_fullscreen_move" style="right: 0px" onclick="next_image()">
+        <img class="icon" width="100%" height="100%" src="static/img/player/back-image.svg"/>
+      </div>
 
       <div class="preview_display_type_fullscreen">
         <label for="" style="position: absolute; margin: 0px 10px; left: 0px;">
@@ -436,7 +444,15 @@
             <option value="inherit">inherit</option>
           </select>
         </label>
+        <p id="preview_image_fullscreen_name" class="allow_select" style="position: absolute; margin: 0px 0px; left: 250px">name</p>
+        <p id="preview_image_fullscreen_info" class="allow_select" style="position: absolute; margin: 0px 0px; right: 250px">width/height</p>
       </div>
+
+      <div class="preview_image_fullscreen_close_button" onclick="image_fullscreen()" align="left">
+        <img class="icon" width="18" height="18" src="static/img/cross.svg" style="margin: 4px">
+        <p style="margin: -25px 35px">close</p>
+      </div>
+
     </div>
 
     <input name="fileElem" type="file" id="fileElem" style="display: none;" multiple onchange="uploadFile(this.files)">

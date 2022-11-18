@@ -217,11 +217,70 @@ window.onmousemove = function (e) {
   document.getElementById(video_duration_info + ((video_fullscreen)? video_fullscreen_nametag: '')).style.top = document.getElementById(video_duration_id + ((video_fullscreen)? video_fullscreen_nametag: '')).getBoundingClientRect().y - 50;
 }
 
+const image_id = "preview_image";
+const image_fullscreen_id = "preview_image_fullscreen";
+
+var preview_image_url = "";
+var image_name = "";
+var image_fullscreen_bool = false;
+
 /* IMAGE */
 function load_image(url, name) {
+  document.getElementById(image_id).src = url;
+  if (!mobile) document.getElementById("preview_image_fullscreen_name").innerHTML = `filename: ${name}`;
+  image_name = name;
+  preview_image_url = url;
 
+  var old_image_fullscreen_bool = image_fullscreen_bool;
+  image_fullscreen_bool = false;
+
+  if (old_image_fullscreen_bool) {
+    image_fullscreen();
+  }
+}
+
+document.getElementById(image_id).onload = function (event) {
+  img = document.getElementById(image_id);
+  if (!mobile) document.getElementById("preview_image_fullscreen_info").innerHTML = `size: ${img.naturalWidth}x${img.naturalHeight}px`;
 }
 
 function image_fullscreen() {
+  if (image_fullscreen_bool) {
+    closeModal('preview_image_fullscreen_div');
+
+    image_fullscreen_bool = false;
+  } else {
+    document.getElementById(image_fullscreen_id).src = preview_image_url;
+    openModal('preview_image_fullscreen_div');
+    image_fullscreen_bool = true;
+  }
+}
+
+function next_image(back=false) {
+  var next_file = -1;
+  for (let i = 0; i < image_list.length; i++) {
+    if (image_name == image_list[i][1]) {
+      if (!back) {
+        if (i < image_list.length - 1) next_file = i + 1;
+        else next_file = 0;
+
+      } else {
+        if (i > 0) next_file = i - 1;
+        else next_file = image_list.length - 1;
+      }
+
+      break;
+    }
+  }
+  if (next_file != -1) {
+    open_fileInfo(
+      image_list[next_file][1],
+      image_list[next_file][0],
+      image_list[next_file][2],
+      image_list[next_file][3],
+      image_list[next_file][4],
+      image_list[next_file][5],
+    );
+  }
 
 }

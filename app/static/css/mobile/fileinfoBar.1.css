@@ -126,6 +126,13 @@
   background-color: var(--bg-color);
 }
 
+.preview_image_mobile_move {
+  position: absolute;
+  top: 0px;
+  width: 30%;
+  height: 100%;
+}
+
 .preview_display_type {
   position: absolute;
   left: 0px;

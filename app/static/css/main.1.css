@@ -35,6 +35,8 @@
 
   --selected-file-color: #2A3137;
 
+  --preview-bg: #000;
+
 }
 
 [data-theme = "light"] {
@@ -68,6 +70,8 @@
   --main-checkBox-color: #595959;
 
   --selected-file-color: #E4E7EB;
+
+  --preview-bg: #fff;
 
 }
 
@@ -118,6 +122,12 @@ body {
   -moz-user-select: none;
   -khtml-user-select: none;
   user-select: none;
+}
+
+.allow_select {
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  user-select: text;
 }
 
 .scroll_style::-webkit-scrollbar {
