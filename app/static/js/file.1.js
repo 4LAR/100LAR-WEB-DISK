@@ -514,6 +514,8 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   closeModal('file_activity_view_button');
   closeModal('file_activity_view');
 
+  if (mobile) closeModal('checkbox_preview_image_div');
+
   closeModal('preview_image_div');
   closeModal('preview_video_div');
   closeModal('preview_audio_div');
