@@ -65,6 +65,22 @@ function set_disk_space(state = 0) {
 set_disk_space(0);
 
 document.addEventListener('keydown', function(event){
+  if (event.keyCode === 32) {
+    if (video_fullscreen) {
+      if (video_pause) play_video();
+      else pause_video();
+    }
+  }
+
+  if (event.ctrlKey && event.keyCode === 37) {
+    go_back_dir_history();
+  } else if (event.ctrlKey && event.keyCode === 39) {
+    go_forward_dir_history();
+  } else if (event.keyCode === 37 && image_fullscreen_bool) {
+    next_image(true);
+  } else if (event.keyCode === 39 && image_fullscreen_bool) {
+    next_image();
+  }
 
   if(event.keyCode == 27 && !check_device()){
     if (image_fullscreen_bool) {

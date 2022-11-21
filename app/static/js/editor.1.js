@@ -51,15 +51,15 @@ editor_for_source_code.on('cursorActivity', function(cMirror){
 load_code();
 
 document.onkeydown = function(e) {
-    if (e.ctrlKey && e.shiftKey && e.keyCode === 83) {
-        export_file();
+  if (e.ctrlKey && e.shiftKey && e.keyCode === 83) {
+    export_file();
 
-        return false;
-    } else if (e.ctrlKey && e.keyCode === 83) {
-        save();
+    return false;
+  } else if (e.ctrlKey && e.keyCode === 83) {
+    save();
 
-        return false;
-    }
+    return false;
+  }
 };
 
 function setOption(name_option, selectObject=null, id=null, value=null) {
