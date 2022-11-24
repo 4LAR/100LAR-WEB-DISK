@@ -10,9 +10,9 @@ Cloud storage web application created using flask framework (https://flask.palle
   - users can change their current storage location
   - edit txt and source files (using codemirror)
   - image preview
+  - public file access ("share")
   
   Upcoming features:
-  - public file access ("share")
   - video and audio preview
 
 ## Installation:
