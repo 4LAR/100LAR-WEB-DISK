@@ -10,10 +10,10 @@ Cloud storage web application created using flask framework (https://flask.palle
   - users can change their current storage location
   - edit txt and source files (using codemirror)
   - image preview
-  - public file access ("share")
+  - video and audio preview
   
   Upcoming features:
-  - video and audio preview
+  - public file access ("share")
 
 ## Installation:
  - Download the latest release (https://github.com/4LAR/100LAR-WEB-DISK/releases)
