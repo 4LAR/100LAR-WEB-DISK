@@ -238,3 +238,6 @@
   margin: 0px 15px;
   font-weight: normal;
 }
+
+/**/
+.xterm-viewport { overflow: hidden !important; }
