@@ -25,6 +25,8 @@ from flask import send_file
 
 from gevent.pywsgi import WSGIServer
 
+from flask_socketio import SocketIO
+
 # импортируем всё что нужно для авторизации
 from flask_login import LoginManager
 from flask_login import login_required
@@ -37,19 +39,22 @@ from flask_codemirror import CodeMirror
 from flask_codemirror.fields import CodeMirrorField
 from flask_wtf import FlaskForm
 
-#
+# время
 import time
 import datetime
 
-#
+# очевидно
 import json
 
-#
+# архивы
 import zipfile
 import io
 
-#
+# тип файлов
 import magic
+
+#xterm
+# пусто
 
 # для получения информации и системе и сервере
 import psutil
@@ -108,6 +113,8 @@ codemirror = CodeMirror(app)
 login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)
+
+socketio = SocketIO(app)
 
 #####################################################
 # константы
@@ -1059,6 +1066,14 @@ def log_request_info():
     except Exception as e:
         #console_term.print(e, 3, comment='[ERROR REQUEST] ')
         pass
+
+#####################################################
+# соккеты
+
+
+
+
+#####################################################
 
 console_term.create_log()
 print('100LAR-WEB-DISK')
