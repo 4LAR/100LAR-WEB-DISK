@@ -5,7 +5,7 @@ from pathlib import Path
 
 # класс для логирования и вывода информации в консоль
 # изначально он писался для игрового движка
-class console_term():
+class Logging():
     def __init__(self, log_bool=True, log_time_bool=True, path=''):
         super().__init__()
 

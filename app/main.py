@@ -63,12 +63,13 @@ from memory_profiler import memory_usage
 start_time = datetime.datetime.now()
 
 # импортируем py файлы
-from console import *
+from log import *
 from get_time import *
 from settings import *
 from users import *
 from file import *
 from history import *
+from terminal import *
 
 settings = settings()
 
@@ -76,11 +77,11 @@ time_now = Time_now(
     timedelta = settings.options['Logs']['timedelta']
 )
 
-console_term = console_term(
+logging = Logging(
     log_bool =  settings.options['Logs']['save_logs'],
     path =      settings.options['Logs']['path']
 )
-console_term.time = time_now
+logging.time = time_now
 
 history = History(
     length = settings.options['History']['length'],
@@ -132,13 +133,13 @@ READ_ONLY = 'READ ONLY'
 
 #
 def reboot():
-    console_term.print('Server rebooting', 0, comment='[SERVER] ')
+    logging.print('Server rebooting', 0, comment='[SERVER] ')
     os.execv(sys.executable, ['python3'] + sys.argv)
     exit()
 
 #
 def shutdown():
-    console_term.print('Server shutdown', 0, comment='[SERVER] ')
+    logging.print('Server shutdown', 0, comment='[SERVER] ')
     exit()
 
 #
@@ -236,7 +237,7 @@ def system_info():
         info['program_memory'] = (memory_usage()[0] * 1024 * 1024)
         info['server_time_running'] = str(datetime.datetime.now() - start_time).split('.')[0]
         info['settings'] = settings.options
-        info['warnings'] = console_term.warning_list
+        info['warnings'] = logging.warning_list
 
         return info
 
@@ -248,8 +249,8 @@ def system_info():
 @login_required
 def clear_warnings():
     if (current_user.panel):
-        console_term.warning_list = []
-        console_term.print('clear warnings', print_bool=True, comment='[ADMIN] ')
+        logging.warning_list = []
+        logging.print('clear warnings', print_bool=True, comment='[ADMIN] ')
         return OK
 
     else:
@@ -259,7 +260,7 @@ def clear_warnings():
 @app.route('/error')
 def error():
     if (current_user.panel):
-        console_term.print('test error', 3, comment='[ERROR] ')
+        logging.print('test error', 3, comment='[ERROR] ')
         return OK
 
     else:
@@ -282,7 +283,7 @@ def get_history():
 def clear_history():
     if (current_user.panel):
         history.clear()
-        console_term.print('clear history', print_bool=True, comment='[ADMIN] ')
+        logging.print('clear history', print_bool=True, comment='[ADMIN] ')
         return OK
 
     else:
@@ -314,7 +315,7 @@ def set_template():
             userBase.update_users()
             userBase.save()
 
-        console_term.print('set template: %s' % (template_json['name']), print_bool=True, comment='[ADMIN] ')
+        logging.print('set template: %s' % (template_json['name']), print_bool=True, comment='[ADMIN] ')
 
         return OK
 
@@ -340,7 +341,7 @@ def create_template():
             userBase.update_users()
             userBase.save()
 
-        console_term.print('create template: %s' % (random_name), print_bool=True, comment='[ADMIN] ')
+        logging.print('create template: %s' % (random_name), print_bool=True, comment='[ADMIN] ')
 
         return OK
 
@@ -361,7 +362,7 @@ def delete_template():
             userBase.update_users()
             userBase.save()
 
-        console_term.print('delete template: %s' % (template_name), print_bool=True, comment='[ADMIN] ')
+        logging.print('delete template: %s' % (template_name), print_bool=True, comment='[ADMIN] ')
 
         return OK
 
@@ -395,7 +396,7 @@ def set_user():
             userBase.update_users()
             userBase.save()
 
-        console_term.print('set user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
+        logging.print('set user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
 
         return OK
 
@@ -421,7 +422,7 @@ def create_user():
             userBase.update_users()
             userBase.save()
 
-        console_term.print('create user: %d' % (userBase.last_id), print_bool=True, comment='[ADMIN] ')
+        logging.print('create user: %d' % (userBase.last_id), print_bool=True, comment='[ADMIN] ')
 
         return OK
     else:
@@ -440,7 +441,7 @@ def delete_user():
             userBase.update_users()
             userBase.save()
 
-        console_term.print('delete user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
+        logging.print('delete user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
 
         return OK
     else:
@@ -458,7 +459,7 @@ def settings_set():
             state = request.args.get("state", "")
 
             settings.set_settings(section, parameter, state)
-            console_term.print('set parametr: [%s] %s = %s' % (section, parameter, state), print_bool=True, comment='[ADMIN] ')
+            logging.print('set parametr: [%s] %s = %s' % (section, parameter, state), print_bool=True, comment='[ADMIN] ')
 
             settings.save_settings()
 
@@ -496,8 +497,8 @@ def web_shutdown():
 @login_required
 def get_logs_names():
     if (current_user.panel):
-        files = console_term.get_all_logs()
-        files = sorted(files, key=lambda x: os.path.getmtime(console_term.path + x))
+        files = logging.get_all_logs()
+        files = sorted(files, key=lambda x: os.path.getmtime(logging.path + x))
         files.reverse()
         return {'logs': files}
 
@@ -510,7 +511,7 @@ def get_logs_names():
 def read_current_log():
     if (current_user.panel):
         name = request.args.get("name", "")
-        return str(console_term.read_current_log(name))
+        return str(logging.read_current_log(name))
 
     else:
         return NO_ADMIN
@@ -520,12 +521,12 @@ def read_current_log():
 @login_required
 def delete_all_logs():
     if (current_user.panel):
-        files = console_term.get_all_logs()
+        files = logging.get_all_logs()
         for f in files:
-            os.remove(console_term.path + f)
+            os.remove(logging.path + f)
 
-        console_term.create_log()
-        console_term.print('Delete all logs', 0, comment='[SERVER] ')
+        logging.create_log()
+        logging.print('Delete all logs', 0, comment='[SERVER] ')
 
         return OK
 
@@ -608,7 +609,7 @@ def save_file():
         return READ_ONLY
 
     except Exception as e:
-        console_term.print('/save: ' + str(e), 3, comment='[ERROR] ')
+        logging.print('/save: ' + str(e), 3, comment='[ERROR] ')
         return ERROR
 
 #####################################################
@@ -628,7 +629,7 @@ def login():
         login_user(user, remember=remember)
         str_log = '%s login' % username
         history.add(0, str_log)
-        console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+        logging.print(str_log, print_bool=False, comment='[HISTORY] ')
         return OK
 
     else:
@@ -640,7 +641,7 @@ def login():
 def logout():
     str_log = '%s logout' % current_user.username
     history.add(1, str_log)
-    console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+    logging.print(str_log, print_bool=False, comment='[HISTORY] ')
     logout_user()
     return OK
 
@@ -761,7 +762,7 @@ def create_file():
 
             str_log = '%s create file (%s)' % (current_user.username, user_path + dir + '/' + file)
             history.add(5, str_log)
-            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+            logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
             return OK
 
@@ -786,7 +787,7 @@ def create_folder():
 
         str_log = '%s create folder (%s)' % (current_user.username, user_path + dir + '/' + file)
         history.add(5, str_log)
-        console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+        logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
         return OK
 
@@ -808,7 +809,7 @@ def rename():
 
     str_log = '%s rename file (%s to %s)' % (current_user.username, user_path + dir + '/' + file, user_path + dir + '/' + new_file)
     history.add(7, str_log)
-    console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+    logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
     return OK
 
@@ -852,7 +853,7 @@ def unpack():
             return READ_ONLY
 
     except Exception as e:
-        console_term.print('/unpack: ' + str(e), 3, comment='[ERROR] ')
+        logging.print('/unpack: ' + str(e), 3, comment='[ERROR] ')
         return ERROR
 
 # скачивание файла
@@ -870,7 +871,7 @@ def downlaod():
         if len(file) > 0:
             str_log = '%s download file (%s)' % (current_user.username, user_path + dir + '/' + file)
             history.add(2, str_log)
-            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+            logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
             return send_from_directory(user_path + dir, file)
 
@@ -904,7 +905,7 @@ def downlaod():
 
             str_log = '%s download files (%s)' % (current_user.username, user_path + dir + '/' + str(files_list_log))
             history.add(2, str_log)
-            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+            logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
             # отправляем архив
             return Response(zip_buffer.getvalue(),
@@ -912,7 +913,7 @@ def downlaod():
                 headers={'Content-Disposition': 'attachment;filename=%s.zip' % (current_user.username)})
 
     except Exception as e:
-        console_term.print('/download: ' + str(e), 3, comment='[ERROR] ')
+        logging.print('/download: ' + str(e), 3, comment='[ERROR] ')
         return ERROR
 
 # удаление файла
@@ -950,14 +951,14 @@ def delete():
 
                 str_log = '%s delete files (%s)' % (current_user.username, user_path + dir + '/' + str(files_list_log))
                 history.add(6, str_log)
-                console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+                logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
             return OK
 
         return READ_ONLY
 
     except Exception as e:
-        console_term.print('/delete: ' + str(e), 3, comment='[ERROR] ')
+        logging.print('/delete: ' + str(e), 3, comment='[ERROR] ')
         return ERROR
 
 # копирование файлов
@@ -1008,7 +1009,7 @@ def copy_files():
                 # лог
                 str_log = '%s %s file (%s) to %s' % (current_user.username, ('move' if (cut_bool) else 'copy'), user_path + dir + '/'+  str(files_list_log), user_path + dir + '/' + to)
                 history.add(4, str_log)
-                console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+                logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
 
                 return OK
@@ -1019,7 +1020,7 @@ def copy_files():
         return READ_ONLY
 
     except Exception as e:
-        console_term.print('/copy: ' + str(e), 3, comment='[ERROR] ')
+        logging.print('/copy: ' + str(e), 3, comment='[ERROR] ')
         return ERROR
 
 # загрузка файла
@@ -1041,7 +1042,7 @@ def upload_file_disk():
 
             str_log = '%s upload file (%s)' % (current_user.username, user_path + dir + '/' + file)
             history.add(3, str_log)
-            console_term.print(str_log, print_bool=False, comment='[HISTORY] ')
+            logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
             return OK
 
@@ -1061,10 +1062,10 @@ def log_request_info():
             request.url,
             '\n\t'.join([': '.join(x) for x in request.headers])])
 
-            console_term.print(str_log, print_bool=False, comment='[REQUEST] ')
+            logging.print(str_log, print_bool=False, comment='[REQUEST] ')
 
     except Exception as e:
-        #console_term.print(e, 3, comment='[ERROR REQUEST] ')
+        #logging.print(e, 3, comment='[ERROR REQUEST] ')
         pass
 
 #####################################################
@@ -1075,7 +1076,7 @@ def log_request_info():
 
 #####################################################
 
-console_term.create_log()
+logging.create_log()
 print('100LAR-WEB-DISK')
 
 # создаём сервер
