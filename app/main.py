@@ -94,6 +94,8 @@ userBase = UserBase(
     key =       settings.options['Flask']['secret_key']
 )
 
+terminal = Terminal()
+
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
 WTF_CSRF_ENABLED = True
 
@@ -108,6 +110,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = settings.options['Flask']['secret_key']
 app.debug = settings.options['Flask']['debug']
+socketio = SocketIO(app)
 
 codemirror = CodeMirror(app)
 
@@ -1071,20 +1074,55 @@ def log_request_info():
 #####################################################
 # соккеты
 
+def read_and_forward_pty_output():
+    max_read_bytes = 1024 * 20
+    while True:
+        socketio.sleep(0.01)
+        if terminal.fd:
+            timeout_sec = 0
+            (data_ready, _, _) = select.select([terminal.fd], [], [], timeout_sec)
+            if data_ready:
+                output = os.read(terminal.fd, max_read_bytes).decode(
+                    errors="ignore"
+                )
+                socketio.emit("pty-output", {"output": output}, namespace="/pty")
 
+@socketio.on("pty-input", namespace="/pty")
+def pty_input(data):
+    terminal.input(data)
+    pass
 
+@socketio.on("resize", namespace="/pty")
+def resize(data):
+    terminal.set_winsize(data["rows"], data["cols"])
 
+@socketio.on("connect", namespace="/pty")
+def connect():
+    print(123)
+    if terminal.create():
+        socketio.start_background_task(target=read_and_forward_pty_output)
+        pass
+    else:
+        return
 #####################################################
 
 logging.create_log()
 print('100LAR-WEB-DISK')
 
 # создаём сервер
-# from waitress import serve
-app.run(
-    host = settings.options['Flask']['IP'],
-    port = settings.options['Flask']['PORT'],
-    debug = settings.options['Flask']['debug'],
-    threaded = settings.options['Flask']['threaded'],
-    processes = int(settings.options['Flask']['processes'])
+# app.run(
+#     host = settings.options['Flask']['IP'],
+#     port = settings.options['Flask']['PORT'],
+#     debug = settings.options['Flask']['debug'],
+#     threaded = settings.options['Flask']['threaded'],
+#     processes = int(settings.options['Flask']['processes'])
+# )
+
+socketio.run(
+    app,
+    debug=settings.options['Flask']['debug'],
+    port=settings.options['Flask']['PORT'],
+    host=settings.options['Flask']['IP']#,
+    # threaded = settings.options['Flask']['threaded'],
+    # processes = int(settings.options['Flask']['processes'])
 )

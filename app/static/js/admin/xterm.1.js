@@ -17,11 +17,31 @@ console.log(`size: ${term.cols} columns, ${term.rows} rows`);
 fit.fit();
 term.writeln("copy: ctrl+shift+x");
 term.writeln("pase: ctrl+shift+v");
-for (let i = 0; i < 75; i++) {
-  term.write("-");
-}
 term.writeln('')
 term.onData((data) => {
   console.log("browser terminal received new data:", data);
-  // socket.emit("pty-input", { input: data });
+  socket.emit("pty-input", { input: data });
 });
+
+const socket = io.connect("/pty");
+const status = document.getElementById("status");
+
+socket.on("pty-output", function (data) {
+  console.log("new output received from server:", data.output);
+  term.write(data.output);
+});
+
+socket.on("connect", () => {
+  fitToscreen();
+  console.log("connect");
+  for (let i = 0; i < term.cols; i++) {
+    term.write("-");
+  }
+});
+
+function fitToscreen() {
+  fit.fit();
+  const dims = { cols: term.cols, rows: term.rows };
+  console.log("sending new dimensions to server's pty", dims);
+  socket.emit("resize", dims);
+}
