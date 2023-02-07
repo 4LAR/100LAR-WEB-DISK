@@ -11,6 +11,7 @@
   --bg-color: #24292E;
   --top-color: #1D2125;
   --right-color: #1D2125;
+  --left-color: #24292E;
 
   --top-hover-color: #2F363D;
   --hover-color: #2F363D;
@@ -21,8 +22,8 @@
   --top-input-color: #2F363D;
   --main-input-color: #2F363D;
 
-  --top-icons-filter: invert(60%);
-  --main-icons-filter: invert(60%);
+  --top-icons-filter: invert(65%);
+  --main-icons-filter: invert(65%);
 
   --top-border-color: #141414;
   --main-border-color: #141414;
