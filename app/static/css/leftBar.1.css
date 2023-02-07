@@ -102,3 +102,16 @@
 .button_exit_style:hover {
   background-color: var(--top-red_color);
 }
+
+.terminal_button_style {
+  position: absolute;
+  width: 200px;
+  height: 45px;
+  border-top: 1px solid var(--main-border-color);
+  background-color: var(--main-color);
+
+  bottom: 35px;
+  left: 0px;
+
+  cursor: pointer;
+}
