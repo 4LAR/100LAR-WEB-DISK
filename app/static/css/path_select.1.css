@@ -1,6 +1,20 @@
+.path_select_button_no_selected_color {
+  background-color: var(--top-color);
+  border-bottom: 1px solid var(--top-border-color);
+}
+
+.path_select_button_no_selected_color:hover {
+  background-color: var(--top-hover-color);
+}
+
+.path_select_button_selected_color {
+  background-color: var(--left-color);
+  border-bottom: none;
+}
+
 .path_select_button {
   position: fixed;
-  background-color: var(--top-color);
+  /* background-color: var(--top-color); */
 
   top: 0px;
   left: 350px;
@@ -9,13 +23,9 @@
 
   border-left: 1px solid var(--top-border-color);
   border-right: 1px solid var(--top-border-color);
-  border-bottom: 1px solid var(--top-border-color);
+  /* border-bottom: 1px solid var(--top-border-color); */
 
   cursor: pointer;
-}
-
-.path_select_button:hover {
-  background-color: var(--top-hover-color);
 }
 
 .path_select_list_div {
@@ -29,7 +39,7 @@
 }
 
 .path_list_element {
-  background-color: var(--top-color);
+  background-color: var(--left-color);
   border-bottom: 1px solid var(--top-border-color);
   border-left: 1px solid var(--top-border-color);
   border-right: 1px solid var(--top-border-color);

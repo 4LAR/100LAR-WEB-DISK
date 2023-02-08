@@ -37,9 +37,25 @@
 
 }
 
+/*----------------------------------------------------------------------------*/
+
+.user_button_no_selected_color {
+  background-color: var(--top-color);
+  border-bottom: 1px solid var(--top-border-color);
+}
+
+.user_button_no_selected_color:hover {
+  background-color: var(--top-hover-color);
+}
+
+.user_button_selected_color {
+  background-color: var(--left-color);
+  border-bottom: none;
+}
+
 .user_button {
   position: fixed;
-  background-color: var(--top-color);
+  /* background-color: var(--top-color); */
 
   top: 0px;
   left: 0px;
@@ -47,13 +63,9 @@
   height: 45px;
 
   border-right: 1px solid var(--top-border-color);
-  border-bottom: 1px solid var(--top-border-color);
+  /* border-bottom: 1px solid var(--top-border-color); */
 
   cursor: pointer;
-}
-
-.user_button:hover {
-  background-color: var(--top-hover-color);
 }
 
 .user_button img {

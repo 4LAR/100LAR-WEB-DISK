@@ -11,6 +11,11 @@ function open_close_user_button(close_bool=false) {
   document.getElementById("leftBar_user").style.display = (open_close_user_bool)? "block": "none";
   document.getElementById("user_button_triangle").style.transform = (open_close_user_bool)? "rotate(180deg)": "rotate(0deg)";
 
+  document.getElementById("user_button").classList.replace(
+    (open_close_user_bool)? "user_button_no_selected_color": "user_button_selected_color",
+    (open_close_user_bool)? "user_button_selected_color": "user_button_no_selected_color"
+  );
+
 }
 
 //
@@ -20,10 +25,14 @@ function open_close_path_button(close_bool=false) {
     open_close_user_button(true);
     open_close_path_bool = !open_close_path_bool;
   } else open_close_path_bool = false;
-
   document.getElementById("background_black").style.display = (open_close_path_bool)? "block": "none";
   document.getElementById("path_select_list_div").style.display = (open_close_path_bool)? "block": "none";
   document.getElementById("path_select_button_triangle").style.transform = (open_close_path_bool)? "rotate(180deg)": "rotate(0deg)";
+
+  document.getElementById("path_select_button").classList.replace(
+    (open_close_path_bool)? "path_select_button_no_selected_color": "path_select_button_selected_color",
+    (open_close_path_bool)? "path_select_button_selected_color": "path_select_button_no_selected_color"
+  );
 
 }
 
