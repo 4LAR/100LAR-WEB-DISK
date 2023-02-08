@@ -119,3 +119,8 @@
 .terminal_button_style:hover {
   background-color: var(--hover-color);
 }
+
+.terminal_button_style_online {
+  font-size: 0.9em;
+  color: #959DA5
+}
