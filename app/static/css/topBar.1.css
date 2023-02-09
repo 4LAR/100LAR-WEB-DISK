@@ -28,13 +28,8 @@
   position: absolute;
   left: 510px;
   right: 5px;
-  /*680px*/
-  /*width: calc(900px + var(--scalex));*/
-
   top: 0px;
-
   background-color: var(--top-input-color);
-
 }
 
 /*----------------------------------------------------------------------------*/

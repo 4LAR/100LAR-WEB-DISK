@@ -56,16 +56,15 @@
   position: absolute;
   height: 35px;
 
-  border-top: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-  border-right: 1px solid var(--main-border-color);
-  background-color: var(--main-color);
+  border-radius: 8px;
+  border: 1px solid var(--main-border-color);
+  background-color: var(--hover-color);
 
   cursor: pointer;
 }
 
 .small_button_style:hover {
-  background-color: var(--hover-color);
+  border: 1px solid var(--main-hover-border-color);
 }
 
 .small_button_left_style {
@@ -108,7 +107,7 @@
   width: 200px;
   height: 45px;
   border-top: 1px solid var(--main-border-color);
-  background-color: var(--main-color);
+  background-color: var(--top-color);
 
   bottom: 35px;
   left: 0px;

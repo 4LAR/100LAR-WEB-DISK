@@ -10,6 +10,7 @@
     <link rel="stylesheet" href = "static/css/leftBar.1.css"/>
     <link rel="stylesheet" href = "static/css/rightBar.1.css"/>
     <link rel="stylesheet" href = "static/css/path_select.1.css"/>
+    <link rel="stylesheet" href = "static/css/terminal.1.css"/>
 
     <link rel="stylesheet" href = "static/css/file.1.css"/>
 
@@ -42,29 +43,29 @@
         </label>
       </div>
 
-      <div class="small_button_style block_select button_margin" style="top: 95px; width: 200px;" onclick="create_file_dialog(true)">
+      <div class="small_button_style block_select button_margin" style="top: 95px; width: 180px; left: 10px;" onclick="create_file_dialog(true)">
         <img class="icon" width="20" height="20" src="static/img/new folder.svg">
         <p>create folder</p>
       </div>
 
-      <div class="small_button_style block_select button_margin" style="top: 131px; width: 200px;" onclick="create_file_dialog()">
+      <div class="small_button_style block_select button_margin" style="top: 138px; width: 180px; left: 10px;" onclick="create_file_dialog()">
         <img class="icon" width="20" height="20" src="static/img/files/file.svg">
         <p>create file</p>
       </div>
 
       <label for="fileElem">
-        <div class="small_button_style block_select button_margin" style="top: 181px; width: 200px;">
+        <div class="small_button_style block_select button_margin" style="top: 181px; width: 180px; left: 10px;">
           <img class="icon" width="20" height="20" src="static/img/upload.svg">
           <p>upload file</p>
         </div>
       </label>
 
       <!--терминал-->
-      <div class="terminal_button_style block_select">
+      <div class="terminal_button_style block_select" onclick="open_close_terminal_button()">
         <img class="icon" style="margin: 5px 5px" width="25" height="25" src="static/img/admin/terminal.svg">
         <p style="margin: -30px 40px">terminal</p>
         <p style="margin: 24px 40px;" class="terminal_button_style_online">0 is online</p>
-        <img class="icon" style="position:absolute; right: 10px; top: 10px; rotate: -90deg" width="10" height="10" src="static/img/triangle.svg">
+        <img class="icon" id="terminal_button_triangle" style="position:absolute; right: 10px; top: 10px; rotate: -90deg" width="10" height="10" src="static/img/triangle.svg">
       </div>
 
       <!--информация о диске-->
@@ -320,6 +321,10 @@
 
     <div id="path_select_list_div" class="path_select_list_div" style="display: none">
       <ul id="path_list" style="position: absolute; top: -14px;"></ul>
+    </div>
+
+    <div id="terminal_list_div" class="terminal_list_div" style="display: none">
+
     </div>
 
     <!--кнопка для открытия настроек-->
