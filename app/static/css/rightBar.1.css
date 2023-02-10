@@ -68,35 +68,22 @@
 
 .file_download_button {
   position: absolute;
-  left: 0px;
-  top: 243px;
-  width: 150px;
-  height: 35px;
-  border-bottom: 1px solid var(--main-border-color);
-  border-right: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
-  cursor: pointer;
-}
-
-.file_download_button:hover {
-  background-color: var(--hover-color);
+  left: 5px;
+  top: 248px;
+  width: 140px;
 }
 
 .file_delete_button {
   position: absolute;
-  left: 151px;
-  top: 243px;
-  width: 149px;
-  height: 35px;
-  border-bottom: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
+  right: 5px;
+  top: 248px;
+  width: 140px;
   cursor: pointer;
 }
 
 .file_delete_button:hover {
-  background-color: var(--main-red-color);
+  /* background-color: var(--main-red-color); */
+
 }
 
 .file_info_div {
@@ -104,7 +91,7 @@
   left: 0px;
   top: 142px;
   width: 300px;
-  height: 100px;
+  height: 150px;
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 }
@@ -385,7 +372,7 @@
   top: 80px;
   width: 300px;
   /*height: 150px;*/
-  height: 100px;
+  height: 208px;
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
@@ -393,92 +380,47 @@
 
 .file_list_download_button {
   position: absolute;
-  left: 0px;
-  /*top: 210px;*/
+  left: 5px;
   top: 159px;
-  width: 150px;
-  height: 35px;
-  border-top: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-  border-right: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
+  width: 140px;
   cursor: pointer;
-}
-
-.file_list_download_button:hover {
-  background-color: var(--hover-color);
 }
 
 .file_list_delete_button {
   position: absolute;
-  left: 151px;
-  /*top: 210px;*/
+  right: 5px;
   top: 159px;
-  width: 149px;
-  height: 35px;
-  border-top: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
+  width: 140px;
   cursor: pointer;
 }
 
 .file_list_delete_button:hover {
-  background-color: var(--main-red-color);
-}
+  /* background-color: var(--main-red-color); */
 
-/**/
+}
 
 .file_list_paste_button {
   position: absolute;
-  left: 0px;
-  top: 160px;
-  width: 150px;
-  height: 35px;
-  border-right: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
+  left: 5px;
+  top: 165px;
+  width: 140px;
   cursor: pointer;
-}
-
-.file_list_paste_button:hover {
-  background-color: var(--hover-color);
-}
-
-.file_list_copy_button {
-  position: absolute;
-  left: 150px;
-  top: 232px;
-  width: 150px;
-  height: 35px;
-  border-left: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
-  cursor: pointer;
-}
-
-.file_list_copy_button:hover {
-  background-color: var(--hover-color);
 }
 
 .file_list_cut_button {
   position: absolute;
-  left: 150px;
-  top: 196px;
-  width: 149px;
-  height: 35px;
-  border-left: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
+  right: 5px;
+  top: 202px;
+  width: 140px;
   cursor: pointer;
 }
 
-.file_list_cut_button:hover {
-  background-color: var(--hover-color);
+.file_list_copy_button {
+  position: absolute;
+  right: 5px;
+  top: 244px;
+  width: 140px;
+  cursor: pointer;
 }
 
 /* выгрузка */

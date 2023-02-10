@@ -18,6 +18,7 @@
 
   --top-red_color: #450C0F;
   --main-red-color:  #450C0F;
+  --hover-red-color:  #6E262B;
 
   --top-input-color: #2F363D;
   --main-input-color: #2F363D;
@@ -59,6 +60,7 @@
 
   --top-red_color: #450C0F;
   --main-red-color:  #FDB8C0;
+  --hover-red-color:  #D6A5A5;
 
   --top-input-color: #FFFFFF;
   --main-input-color: #FFFFFF;
@@ -219,6 +221,24 @@ body {
 .div_ver p {
   opacity: .6;
 }
+
+/*----------------------------------------------------------------------------*/
+
+.round_button {
+  height: 35px;
+
+  border-radius: 8px;
+  border: 1px solid var(--main-border-color);
+  background-color: var(--hover-color);
+
+  cursor: pointer;
+}
+
+.round_button:hover {
+  border: 1px solid var(--main-hover-border-color);
+}
+
+/*----------------------------------------------------------------------------*/
 
 /* rotate animation */
 .anim_rotate {

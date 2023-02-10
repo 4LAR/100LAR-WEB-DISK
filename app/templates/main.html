@@ -29,14 +29,14 @@
     <div class="leftBar">
 
       <!---->
-      <div style="position: absolute; left: 10px; top: 55px">
+      <div style="position: absolute; left: 20px; top: 55px">
         <input type="checkbox" class="custom-checkbox" id="checkbox_draw_type_list" name="checkbox_draw_type_list" value="yes" onchange="switch_draw_type('list', this)" checked>
         <label for="checkbox_draw_type_list">
           <img class="icon" width="30" height="30" src="static/img/file list.svg">
         </label>
       </div>
 
-      <div style="position: absolute; left: 80px; top: 55px">
+      <div style="position: absolute; left: 90px; top: 55px">
         <input type="checkbox" class="custom-checkbox" id="checkbox_draw_type_grid" name="checkbox_draw_type_grid" value="yes" onchange="switch_draw_type('grid', this)">
         <label for="checkbox_draw_type_grid">
           <img class="icon" width="30" height="30" src="static/img/file table.svg">
@@ -127,14 +127,14 @@
 
         <!--кнопка скачивания-->
         <a id="file_download_button" href="" download="test">
-          <div class="file_download_button block_select button_margin">
+          <div class="round_button file_download_button block_select button_margin">
             <img class="icon" width="20" height="20" src="static/img/download.svg">
             <p>download</p>
           </div>
         </a>
 
         <!--кнопка удаления файла-->
-        <div id="file_delete_button" class="file_delete_button block_select button_margin">
+        <div id="file_delete_button" class="round_button file_delete_button block_select button_margin">
           <img class="icon" width="20" height="20" src="static/img/trash.svg">
           <p>delete</p>
         </div>
@@ -210,27 +210,26 @@
 
         <!--кнопка для скачивания выбранных файлов-->
         <a id="file_list_download_button" href="" download="test">
-          <div class="file_list_download_button block_select button_margin">
+          <div class="round_button file_list_download_button block_select button_margin">
             <img class="icon" width="20" height="20" src="static/img/download.svg">
             <p>download</p>
           </div>
         </a>
 
         <!--кнопка для удаления выбранных файлов-->
-        <div id="file_list_delete_button" class="file_list_delete_button block_select button_margin" onclick="delete_file_dialog()">
+        <div id="file_list_delete_button" class="round_button file_list_delete_button block_select button_margin" onclick="delete_file_dialog()">
           <img class="icon" width="20" height="20" src="static/img/trash.svg">
           <p>delete</p>
         </div>
 
-
         <!--кнопка для копирования выбранных файлов-->
-        <div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" onclick="copy_file_buf()">
+        <div id="file_list_copy_button" class="round_button file_list_copy_button block_select button_margin" onclick="copy_file_buf()">
           <img class="icon" width="20" height="20" src="static/img/copy.svg">
           <p>copy</p>
         </div>
 
         <!--кнопка для копирования выбранных файлов-->
-        <div id="file_list_cut_button" class="file_list_cut_button block_select button_margin" onclick="copy_file_buf(true)">
+        <div id="file_list_cut_button" class="round_button file_list_cut_button block_select button_margin" onclick="copy_file_buf(true)">
           <img class="icon" width="20" height="20" src="static/img/cut.svg">
           <p>move</p>
         </div>
@@ -241,7 +240,7 @@
       <div id="copy_or_paste_block" style="display: none">
 
         <!--количество выбранных файлов-->
-        <div class="file_list_info_div" style="height: 78px">
+        <div class="file_list_info_div" style="height: 128px">
           <p id="cop_info" style="margin: 0px 0px;" align="center"></p>
           <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/files/file.svg">
           <p id="cop_file_list_files" style="position: absolute; left: 40px; top: 3px;">Files: None</p>
@@ -250,7 +249,7 @@
         </div>
 
         <!--кнопка для вставки выбранных файлов-->
-        <div id="file_list_paste_button" class="file_list_paste_button block_select button_margin" style="border-right: 1px solid var(--main-border-color);" onclick="paste_files()">
+        <div id="file_list_paste_button" class="round_button file_list_paste_button block_select button_margin" onclick="paste_files()">
           <img class="icon" width="20" height="20" src="static/img/copy.svg">
           <p>paste</p>
         </div>
@@ -360,7 +359,7 @@
       <h3 style="position: absolute; top: 40px; left: 110px;" align="right">This path is read-only.</h3>
       <p style="position: absolute; top: 70px; left: 50px;" align="right"></p>
 
-      <div class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;" onclick="close_readonly_dialog()">
+      <div class="round_button dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;" onclick="close_readonly_dialog()">
         <p style="margin: 5px 40px">ok</p>
       </div>
     </div>
@@ -378,7 +377,7 @@
       <h3 style="position: absolute; top: 40px; left: 110px;" align="right">There is no disk space to modify the file.</h3>
       <p style="position: absolute; top: 70px; left: 50px;" align="right">Delete unnecessary files or ask the administrator to increase the limit.</p>
 
-      <div class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;" onclick="close_no_place_dialog()">
+      <div class="round_button dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;" onclick="close_no_place_dialog()">
         <p style="margin: 5px 40px">ok</p>
       </div>
     </div>
@@ -395,7 +394,7 @@
       <p style="position: absolute; left: 10px; top: 40px">Delete file list:</p>
       <textarea id="delete_file_list" class="input_style fileDescription scroll_style" style="position: absolute; top: 40px; left: 125px; width: 460px; height: 140px;" readonly></textarea>
 
-      <div id="delete_file_button" class="red_dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+      <div id="delete_file_button" class="round_button red_dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
         <p style="margin: 5px 28px">delete</p>
       </div>
     </div>
@@ -414,7 +413,7 @@
         <input id="create_fileName_input" class="input_style create_fileName_input" style="" type=text placeholder="file name" onkeypress="return create_file_enter(event)">
       </div>
 
-      <div id="create_file_button" class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+      <div id="create_file_button" class="round_button dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
         <p style="margin: 5px 28px">create</p>
       </div>
     </div>
