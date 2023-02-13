@@ -224,6 +224,24 @@ body {
 
 /*----------------------------------------------------------------------------*/
 
+.svg_red {
+  filter: invert(29%) sepia(91%) saturate(1754%) hue-rotate(333deg) brightness(85%) contrast(95%);
+}
+
+.svg_green {
+  filter: invert(55%) sepia(16%) saturate(2129%) hue-rotate(81deg) brightness(92%) contrast(81%);
+}
+
+.svg_orage {
+  filter: invert(76%) sepia(21%) saturate(5599%) hue-rotate(6deg) brightness(96%) contrast(93%);
+}
+
+.svg_white {
+  filter: invert(95%) sepia(7%) saturate(163%) hue-rotate(175deg) brightness(94%) contrast(83%);
+}
+
+/*----------------------------------------------------------------------------*/
+
 .round_button {
   height: 35px;
 
