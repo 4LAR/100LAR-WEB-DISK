@@ -157,8 +157,8 @@ function append_back_dir() {
       if (draw_type == 'list') {
         li.innerHTML = `
           <div class="file" onclick="back_dir()">
-            <img class="icon" style="margin: 7px 40px" width="25" height="25" src="static/img/files/folder.svg">
-            <p style="margin: -25px 70px">...</p>
+            <img class="icon" style="margin: 7px 50px" width="25" height="25" src="static/img/files/folder.svg">
+            <p style="margin: -25px 80px">...</p>
           </div>
         `;
       } else {
@@ -347,11 +347,11 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 
       if (type == 'dir') {
         file_info = `
-          <p style="margin: -29px 70px;">${name}</p
+          <p style="margin: -29px 80px;">${name}</p
         `;
       } else {
         file_info = `
-          <p style="margin: -29px 70px" class="file_name">${name}</p>
+          <p style="margin: -29px 80px" class="file_name">${name}</p>
           <p style="margin: 8px 110px" align="right">${date}</p>
           <p style="margin: -30px 10px" align="right">${size}</p>
         `;
@@ -377,9 +377,11 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 
     // checkBox
     var str = `
-      <div style="position: absolute; margin: 10px 12px">
-        <input type="checkbox" class="custom-checkbox checkBox_file" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
-        <label for="checkbox_file_${name}"></label>
+      <div class="file_checkbox_bg">
+        <div style="position: absolute; margin: 10px 12px">
+          <input type="checkbox" class="custom-checkbox checkBox_file" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
+          <label for="checkbox_file_${name}"></label>
+        </div>
       </div>
     `
 
@@ -387,7 +389,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       // директория
       str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="forward_dir('${name}')">
-          <img class="icon" style="margin: 7px 40px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
+          <img class="icon" style="margin: 7px 50px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
       `;
@@ -397,7 +399,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 
        str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
-          <img class="icon" style="margin: 7px 40px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
+          <img class="icon" style="margin: 7px 50px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
       `;

@@ -256,6 +256,20 @@ body {
   border: 1px solid var(--main-hover-border-color);
 }
 
+.top_round_button {
+  height: 35px;
+
+  border-radius: 8px;
+  border: 1px solid var(--top-border-color);
+  background-color: var(--top-hover-color);
+
+  cursor: pointer;
+}
+
+.top_round_button:hover {
+  border: 1px solid var(--main-hover-border-color);
+}
+
 /*----------------------------------------------------------------------------*/
 
 /* rotate animation */

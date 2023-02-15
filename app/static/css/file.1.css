@@ -90,3 +90,13 @@
 
   width: calc(100% - 100px);
 }
+
+/**/
+
+.file_checkbox_bg {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: var(--top-color);
+  border-right: 3px solid var(--hover-color);
+}
