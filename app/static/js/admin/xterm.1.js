@@ -24,7 +24,7 @@ term.onData((data) => {
 });
 
 const socket = io.connect("/pty");
-const status = document.getElementById("status");
+const status_terminal = document.getElementById("status");
 
 socket.on("pty-output", function (data) {
   console.log("new output received from server:", data.output);

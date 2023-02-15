@@ -49,7 +49,7 @@
   width: var(--width-left-bar);
   height: 30px;
   border-top: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
+  background-color: var(--hover-color);
 }
 
 .small_button_style {
@@ -109,6 +109,8 @@
   border-top: 1px solid var(--main-border-color);
   background-color: var(--top-color);
 
+  /* border-radius: 8px; */
+
   bottom: 35px;
   left: 0px;
 
@@ -122,4 +124,8 @@
 .terminal_button_style_online {
   font-size: 0.9em;
   color: #959DA5
+}
+
+.terminal_list_div {
+  
 }

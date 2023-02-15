@@ -45,23 +45,15 @@
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+
+  border-radius: 8px 8px 0px 0px;
 }
 
 .file_close_button {
   position: absolute;
-  left: 0px;
+  right: 5px;
   top: 45px;
-  width: 100px;
-  height: 35px;
-  border-bottom: 1px solid var(--main-border-color);
-  border-right: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
   cursor: pointer;
-}
-
-.file_close_button:hover {
-  background-color: var(--hover-color);
 }
 
 /* file info */
@@ -94,6 +86,8 @@
   height: 150px;
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+
+  border-radius: 0 0 8px 8px;
 }
 
 .file_info_div p {
@@ -376,6 +370,8 @@
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+
+  border-radius: 8px;
 }
 
 .file_list_download_button {

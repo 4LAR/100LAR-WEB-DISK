@@ -2,7 +2,7 @@
 .file_list {
   position: absolute;
   left: var(--width-left-bar);
-  top: 30px;
+  top: 32px;
   right: 0px;
 
 }

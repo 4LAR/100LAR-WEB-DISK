@@ -4,7 +4,6 @@ var open_close_user_bool = false;
 function open_close_user_button(close_bool=false) {
   if (!close_bool) {
     open_close_path_button(true);
-    open_close_terminal_button(true);
     open_close_user_bool = !open_close_user_bool;
   } else open_close_user_bool = false;
 
@@ -24,7 +23,6 @@ var open_close_path_bool = false;
 function open_close_path_button(close_bool=false) {
   if (!close_bool) {
     open_close_user_button(true);
-    open_close_terminal_button(true);
     open_close_path_bool = !open_close_path_bool;
   } else open_close_path_bool = false;
   document.getElementById("background_black").style.display = (open_close_path_bool)? "block": "none";
@@ -42,15 +40,9 @@ function open_close_path_button(close_bool=false) {
 var open_close_terminal_bool = false;
 function open_close_terminal_button(close_bool=false) {
   if (!close_bool) {
-    open_close_user_button(true);
-    open_close_path_button(true);
     open_close_terminal_bool = !open_close_terminal_bool;
   } else open_close_terminal_bool = false;
-  document.getElementById("background_black").style.display = (open_close_terminal_bool)? "block": "none";
-  document.getElementById("terminal_list_div").style.display = (open_close_terminal_bool)? "block": "none";
   document.getElementById("terminal_button_triangle").style.transform = (open_close_terminal_bool)? "rotate(180deg)": "rotate(0deg)";
-  document.getElementById("terminal_button_triangle").style.zindex = (open_close_terminal_bool)? "999999": "0";
-
 }
 
 //
