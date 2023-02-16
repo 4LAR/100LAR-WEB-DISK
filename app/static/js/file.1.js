@@ -156,6 +156,7 @@ function append_back_dir() {
     } else {
       if (draw_type == 'list') {
         li.innerHTML = `
+          <div class="file_checkbox_bg"></div>
           <div class="file" onclick="back_dir()">
             <img class="icon" style="margin: 7px 50px" width="25" height="25" src="static/img/files/folder.svg">
             <p style="margin: -25px 80px">...</p>
@@ -173,6 +174,45 @@ function append_back_dir() {
     // добавляем кнопка в список
     ul.appendChild(li);
   }
+}
+
+function append_path_info() {
+  var ul = document.getElementById("file_list");
+
+  // создаём кнопку перехода в верхнюю директорию
+  var li = document.createElement("li");
+
+  if (mobile) {
+    li.innerHTML = `
+      <div class="file">
+        <!-- <img class="icon" style="margin: 5px 50px" width="35" height="35" src="static/img/files/folder.svg"> -->
+
+      </div>
+    `;
+
+  } else {
+    if (draw_type == 'list') {
+      li.innerHTML = `
+        <div class="file_delimiter_bg">
+
+        </div>
+        <div class="file_pathInfo">
+
+          <!-- <img class="icon" style="margin: 7px 50px" width="25" height="25" src="static/img/files/folder.svg"> -->
+          <!-- <p style="margin: -25px 80px">...</p> -->
+        </div>
+      `;
+    } else {
+      li.innerHTML = `
+        <div class="file_grid">
+          <!-- <img class="icon" style="margin: 7px 40px" width="40" height="40" src="static/img/files/folder.svg"> -->
+          <!-- <p style="margin: -35px 90px">...</p> -->
+        </div>
+      `;
+    }
+  }
+  // добавляем кнопка в список
+  ul.appendChild(li);
 }
 
 const SORT_BY_TYPE = [
@@ -272,6 +312,7 @@ function get_files() {
               append_file(file['type'], file['name'], file['size'], dir_str + '/' + file['name'], file['time'], file['type_mime']);
             }
           }
+          append_path_info();
         }
 
       }
@@ -377,12 +418,12 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 
     // checkBox
     var str = `
-      <div class="file_checkbox_bg">
+      <label for="checkbox_file_${name}"><div class="file_checkbox_bg">
         <div style="position: absolute; margin: 10px 12px">
           <input type="checkbox" class="custom-checkbox checkBox_file" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
           <label for="checkbox_file_${name}"></label>
         </div>
-      </div>
+      </div></label>
     `
 
     if (type == 'dir') {

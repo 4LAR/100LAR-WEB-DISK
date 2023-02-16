@@ -43,6 +43,7 @@ function open_close_terminal_button(close_bool=false) {
     open_close_terminal_bool = !open_close_terminal_bool;
   } else open_close_terminal_bool = false;
   document.getElementById("terminal_button_triangle").style.transform = (open_close_terminal_bool)? "rotate(180deg)": "rotate(0deg)";
+  document.getElementById("terminal_list_div").style.display = (open_close_terminal_bool)? "block": "none";
 }
 
 //

@@ -41,6 +41,12 @@
 
   --preview-bg: #000;
 
+  --fileList-checkbox-color: #1D2125;
+  --fileList-checkbox-delimiter-color: #2F363D;
+  --fileList-delimiter-color: #171A1D;
+
+  --terminal-list-bg: #22272C;
+
 }
 
 [data-theme = "light"] {

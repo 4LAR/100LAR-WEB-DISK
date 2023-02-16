@@ -101,31 +101,3 @@
 .button_exit_style:hover {
   background-color: var(--top-red_color);
 }
-
-.terminal_button_style {
-  position: absolute;
-  width: 200px;
-  height: 45px;
-  border-top: 1px solid var(--main-border-color);
-  background-color: var(--top-color);
-
-  /* border-radius: 8px; */
-
-  bottom: 35px;
-  left: 0px;
-
-  cursor: pointer;
-}
-
-.terminal_button_style:hover {
-  background-color: var(--hover-color);
-}
-
-.terminal_button_style_online {
-  font-size: 0.9em;
-  color: #959DA5
-}
-
-.terminal_list_div {
-  
-}

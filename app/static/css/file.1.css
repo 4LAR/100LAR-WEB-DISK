@@ -97,6 +97,22 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  background-color: var(--top-color);
-  border-right: 3px solid var(--hover-color);
+  background-color: var(--fileList-checkbox-color);
+  border-right: 3px solid var(--fileList-checkbox-delimiter-color);
+  cursor: pointer;
+}
+
+.file_pathInfo {
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--fileList-checkbox-color);
+  height: 20px;
+  width: 100%;
+}
+
+.file_delimiter_bg {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  background-color: var(--fileList-delimiter-color);
+  border-right: 3px solid var(--fileList-checkbox-delimiter-color);
 }
