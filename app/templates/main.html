@@ -61,14 +61,14 @@
       </label>
 
       <!--терминал-->
-      <div class="terminal_button_style block_select" onclick="open_close_terminal_button()">
+      <div class="terminal_button_style block_select">
         <img class="icon" style="margin: 5px 5px" width="25" height="25" src="static/img/admin/terminal.svg">
         <p style="margin: -30px 40px">terminal</p>
-        <p style="margin: 24px 40px;" class="terminal_button_style_online">0 is online</p>
-        <img class="icon" id="terminal_button_triangle" style="position:absolute; right: 15px; top: 15px; rotate: 0deg" width="10" height="10" src="static/img/triangle.svg">
+        <p style="margin: 24px 40px;" class="terminal_button_style_online">0 elements</p>
+        <img class="icon" style="position:absolute; right: 15px; top: 15px; cursor: pointer" width="15" height="15" src="static/img/add.svg">
       </div>
 
-      <div id="terminal_list_div" class="terminal_list_div_scroll scroll_style" style="display: none;">
+      <div id="terminal_list_div" class="terminal_list_div_scroll scroll_style">
         <div class="terminal_list_div">
           <ul id="terminal_list"></ul>
         </div>

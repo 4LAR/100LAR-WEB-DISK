@@ -37,20 +37,9 @@ function open_close_path_button(close_bool=false) {
 }
 
 //
-var open_close_terminal_bool = false;
-function open_close_terminal_button(close_bool=false) {
-  if (!close_bool) {
-    open_close_terminal_bool = !open_close_terminal_bool;
-  } else open_close_terminal_bool = false;
-  document.getElementById("terminal_button_triangle").style.transform = (open_close_terminal_bool)? "rotate(180deg)": "rotate(0deg)";
-  document.getElementById("terminal_list_div").style.display = (open_close_terminal_bool)? "block": "none";
-}
-
-//
 function close_user() {
   open_close_user_button(true);
   open_close_path_button(true);
-  open_close_terminal_button(true);
 }
 
 //
