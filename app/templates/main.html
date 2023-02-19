@@ -95,26 +95,6 @@
 
       <!--информация о выбранном файле-->
       <div id="file_info_block" style="display: none">
-        <!--редактирование-->
-        <div id="file_activity_edit_button" class="file_activity_button block_select button_margin" style="width: 80px; display: none" onclick="()">
-          <img class="icon" width="20" height="20" src="static/img/activity/edit.svg">
-          <p>edit</p>
-        </div>
-
-        <!--распаковка-->
-        <div id="file_activity_unpack_button" class="file_activity_button block_select button_margin" style="width: 100px; display: none" onclick="activity_unpack_file()">
-          <img class="icon" width="20" height="20" src="static/img/activity/unzip.svg">
-          <p>unpack</p>
-        </div>
-
-        <!--просмотр-->
-        <a id="file_activity_view_button_href" target="_blank">
-          <div id="file_activity_view_button" class="file_activity_button block_select button_margin" style="width: 80px; display: none" onclick="()">
-            <img class="icon" width="20" height="20" src="static/img/activity/see.svg">
-            <p>view</p>
-          </div>
-        </a>
-
         <!--иконка и имя файла-->
         <div class="file_ico_name_div">
           <img id="file_icon" class="icon" style="margin: 10px 10px" width="40" height="40" src="static/img/files/file.svg">
@@ -144,14 +124,7 @@
           <p>delete</p>
         </div>
 
-        <!--продпросмотр фотографии-->
-        <div id="file_activity_view">
-          <div class="preview_info">
-            <div style="position: absolute; margin: -7px 12px">
-              <input type="checkbox" class="custom-checkbox" id="checkbox_preview_image" name="checkbox_preview_image" value="yes" onchange="load_preview()">
-              <label for="checkbox_preview_image"><p>show preview</p></label>
-            </div>
-          </div>
+        <div id="file_activity_view" class="activity_container">
 
           <div class="preview_image" id="preview_image_div">
             <img id="preview_image" class="preview_image_image" width="300px" src="" onclick="image_fullscreen()"/>
@@ -191,6 +164,39 @@
             <input id="preview_audio_name" class="preview_audio_name" style="left: 80px; right: 40px; margin-top: 4px;" type=text placeholder="file name" onkeypress="" readonly>
             <input type="range" id="preview_audio_volume" style="width: 70px; position: absolute; right: -4px; bottom: 5px" name="cowbell" min="0" max="100" value="50" step="1" oninput="set_volume_audio(this.value)" onchange="set_volume_audio(this.value)">
             <input type="range" id="preview_audio_input_duration" style="position: absolute; left: 45px; right: 75px; bottom: 5px" name="cowbell" min="0" max="100" value="0" step="1" onchange="set_duration_audio(this.value)" onmouseover="audio_duration_hover = true" onmouseout="audio_duration_hover = false">
+          </div>
+
+          <!-- редактирование (text) -->
+          <div id="file_activity_edit_button" class="round_button file_activity_button block_select button_margin" style="width: 140px; display: none" onclick="()">
+            <img class="icon" width="20" height="20" src="static/img/activity/edit.svg">
+            <p>open editor</p>
+          </div>
+
+          <!-- распаковка (zip) -->
+          <div id="file_activity_unpack_button" class="round_button file_activity_button block_select button_margin" style="width: 140px; display: none" onclick="activity_unpack_file()">
+            <img class="icon" width="20" height="20" src="static/img/activity/unzip.svg">
+            <p>unpack</p>
+          </div>
+
+          <!-- просмотр (pdf) -->
+          <a id="file_activity_view_button_href" target="_blank">
+            <div id="file_activity_view_button" class="round_button file_activity_button block_select button_margin" style="width: 140px; display: none" onclick="()">
+              <img class="icon" width="20" height="20" src="static/img/activity/see.svg">
+              <p>view</p>
+            </div>
+          </a>
+
+          <!-- открытие оригинала (photo) -->
+          <div id="file_activity_original_button" class="round_button file_activity_button block_select button_margin" style="width: 140px; display: none" onclick="()">
+            <img class="icon" width="20" height="20" src="static/img/activity/see.svg">
+            <p>open original</p>
+          </div>
+
+          <div id="preview_info" class="preview_info">
+            <div style="position: absolute; margin: -7px 12px">
+              <input type="checkbox" class="custom-checkbox" id="checkbox_preview_image" name="checkbox_preview_image" value="yes" onchange="load_preview()">
+              <label for="checkbox_preview_image"><p>show preview</p></label>
+            </div>
           </div>
 
         </div>
@@ -346,6 +352,20 @@
     <div id="dialog_bg" class="dialog_backgound"></div>
 
     <!--диалоговые окна-->
+
+    <!-- создание терминала -->
+    <div id="dialog_create_terminal_file" class="dialog_style">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_create_terminal_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <div id="delete_file_button" class="round_button dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+        <p style="margin: 5px 28px">create</p>
+      </div>
+    </div>
 
     <!-- только для чтения -->
     <div id="dialog_readonly" class="dialog_style" style="height: 160px;">

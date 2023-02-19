@@ -258,6 +258,10 @@ body {
   cursor: pointer;
 }
 
+.round_button p {
+  white-space: nowrap;
+}
+
 .round_button:hover {
   border: 1px solid var(--main-hover-border-color);
 }

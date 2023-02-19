@@ -475,6 +475,11 @@ function load_preview() {
       openModal('file_activity_view');
       load_preview_audio();
       break;
+
+    case 'text':
+      openModal('file_activity_view');
+      // load_preview_audio();
+      break;
   }
 }
 
@@ -560,6 +565,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   closeModal('file_activity_unpack_button');
   closeModal('file_activity_edit_button');
   closeModal('file_activity_view_button');
+  closeModal('file_activity_original_button');
   closeModal('file_activity_view');
 
   if (mobile) closeModal('checkbox_preview_image_div');
@@ -575,21 +581,26 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
 
   switch (type) {
     case 'archive':
+      openModal('file_activity_view');
       openModal('file_activity_unpack_button');
       break;
 
     case 'text file':
+      openModal('file_activity_view');
       openModal('file_activity_edit_button');
       document.getElementById('file_activity_edit_button').onclick = function(){openInNewTab(`/editor?path=${path}&dir=${dir_str}&file=${name}`)};
       break;
 
     case 'pdf':
+      openModal('file_activity_view');
       openModal('file_activity_view_button');
       document.getElementById('file_activity_view_button_href').href = url_file;
       break;
 
     case 'image':
       openModal('file_activity_view');
+      openModal('file_activity_original_button');
+      document.getElementById('file_activity_original_button').onclick = function(){openInNewTab(`/download?path=${path}&dir=${dir_str}&file=${name}`)};
       if (mobile) openModal('checkbox_preview_image_div');
       load_preview_image();
       break;
@@ -903,6 +914,22 @@ if (localStorage.getItem('draw_type') == null) {
 
 if (!mobile)
   switch_draw_type(localStorage.getItem('draw_type'), {"checked": true});
+
+/* Создание терминала */
+var create_terminal_bool = false;
+function create_terminal_dialog() {
+  create_terminal_bool = true;
+
+  openModal('dialog_bg');
+  openModal('dialog_create_terminal_file');
+}
+
+function close_create_terminal_dialog() {
+  create_terminal_bool = false;
+
+  closeModal('dialog_bg');
+  closeModal('dialog_create_terminal_file');
+}
 
 /* Уведомление о том что путь только для чтения */
 var readonly_path_bool = false;

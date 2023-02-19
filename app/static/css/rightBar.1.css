@@ -97,17 +97,23 @@
 .preview_image {
   position: absolute;
   left: 0px;
-  top: 350px;
+  top: 0px;
   width: 300px;
 
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+  border-radius: 8px;
+
 
   cursor: pointer;
 }
 
 .preview_image_image {
-  border-top: 1px solid var(--main-border-color);
+  /* border-top: 1px solid var(--main-border-color); */
+  margin-top: 50px;
+  width: 95%;
+  margin-left: 2.5%;
+  border-radius: 8px;
 }
 
 .preview_image_fullscreen {
@@ -153,12 +159,8 @@
   top: 0px;
   height: 25px;
   width: 100%;
-
-  /* border-bottom: 1px solid var(--main-border-color); */
   border-bottom: 1px solid var(--main-border-color);
-
   background-color: var(--bg-color);
-
   color: var(--main-font-color);
 }
 
@@ -290,15 +292,9 @@
 
 .preview_info {
   position: absolute;
-  left: 0px;
-  top: 315px;
-  height: 35px;
-  width: 300px;
-
-  border-top: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-
-  background-color: var(--bg-color);
+  right: 0px;
+  top: 8px;
+  width: 150px;
 }
 
 .preview_display_type {
@@ -308,29 +304,17 @@
   height: 25px;
   width: 300px;
 
-  /* border-bottom: 1px solid var(--main-border-color); */
-  border-top: 1px solid var(--main-border-color);
-
-  background-color: var(--bg-color);
-
   color: var(--main-font-color);
 }
 
 .preview_rendering_selector {
-  /* width: 140px; */
   height: 25px;
-  border-right: 1px solid var(--main-border-color);
-  border-left: 1px solid var(--main-border-color);
-  border-top: none;
-  border-bottom: none;
+  border: none;
   background-color: var(--bg-color);
-
   cursor: pointer;
   color: var(--main-font-color);
-
   border-radius: none;
   clip-path: None;
-
 }
 
 .preview_rendering_selector:focus {
@@ -343,21 +327,23 @@
 
 /* list files */
 
-.file_activity_button {
+.activity_container {
   position: absolute;
-  right: 0px;
-  top: 45px;
-  width: 140px;
-  height: 35px;
+  left: 0px;
+  top: 310px;
+  width: 300px;
+  height: 50px;
+  border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
-  border-left: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
 
-  cursor: pointer;
+  border-radius: 8px;
 }
 
-.file_activity_button:hover {
-  background-color: var(--hover-color);
+.file_activity_button {
+  position: absolute;
+  left: 5px;
+  top: 7px;
 }
 
 .file_list_info_div {
