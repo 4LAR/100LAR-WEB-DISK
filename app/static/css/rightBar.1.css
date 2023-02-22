@@ -104,7 +104,6 @@
   background-color: var(--bg-color);
   border-radius: 8px;
 
-
   cursor: pointer;
 }
 
@@ -218,16 +217,27 @@
 .preview_video {
   position: absolute;
   left: 0px;
-  top: 350px;
+  top: 0px;
   width: 300px;
+
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.preview_video_player {
+  margin-top: 50px;
+  width: 95%;
+  margin-left: 2.5%;
+  border-radius: 8px;
 }
 
 .preview_video_controls {
+  margin-top: 2px;
   height: 25px;
   width: var(--width-right-bar);
-  border-top: 1px solid var(--main-border-color);
 }
 
 .preview_video img {
@@ -256,13 +266,14 @@
 .preview_audio {
   position: absolute;
   left: 0px;
-  top: 350px;
+  top: 0px;
   width: 300px;
 
-  border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
-
   background-color: var(--bg-color);
+  border-radius: 8px;
+
+  cursor: pointer;
 }
 
 .preview_audio_name {
