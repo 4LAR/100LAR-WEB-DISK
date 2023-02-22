@@ -94,6 +94,36 @@
   margin: 0px 10px;
 }
 
+/*----------------------------------------------------------------------------*/
+.preview_text {
+  /* position: fixed; */
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  /* top: 350px; */
+  height: 400px;
+  width: 300px;
+  /* bottom: 10px; */
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  cursor: default;
+}
+
+.preview_text_textarea {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 45px;
+  height: 340px;
+  background-color: var(--main-input-color);
+  resize: none;
+  white-space: pre;
+  cursor: default;
+}
+
+/*----------------------------------------------------------------------------*/
+
 .preview_image {
   position: absolute;
   left: 0px;
@@ -263,6 +293,8 @@
   display: block;
 }
 
+/*----------------------------------------------------------------------------*/
+
 .preview_audio {
   position: absolute;
   left: 0px;
@@ -301,6 +333,8 @@
   filter: invert(50%);
 }
 
+/*----------------------------------------------------------------------------*/
+
 .preview_info {
   position: absolute;
   right: 0px;
@@ -335,6 +369,8 @@
 .preview_rendering_selector:hover {
   background-color: var(--hover-color);
 }
+
+/*----------------------------------------------------------------------------*/
 
 /* list files */
 

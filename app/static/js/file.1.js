@@ -459,7 +459,6 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 function load_preview() {
   document.getElementById("preview_video").pause();
   document.getElementById("preview_audio").pause();
-  console.log(type_file)
   switch (type_file) {
     case 'image':
       openModal('file_activity_view');
@@ -476,11 +475,21 @@ function load_preview() {
       load_preview_audio();
       break;
 
-    case 'text':
+    case 'text file':
       openModal('file_activity_view');
-      // load_preview_audio();
+      load_preview_text();
       break;
   }
+}
+
+function load_preview_text() {
+  if (document.getElementById("checkbox_preview_image").checked) {
+    openModal('preview_text_div');
+    load_text(url_file, selected_file_name);
+  } else {
+    closeModal('preview_text_div');
+  }
+  localStorage.setItem('preview_image', document.getElementById("checkbox_preview_image").checked);
 }
 
 function load_preview_image() {
@@ -570,6 +579,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
 
   if (mobile) closeModal('checkbox_preview_image_div');
 
+  closeModal('preview_text_div');
   closeModal('preview_image_div');
   closeModal('preview_video_div');
   closeModal('preview_audio_div');
@@ -589,6 +599,8 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
       openModal('file_activity_view');
       openModal('file_activity_edit_button');
       document.getElementById('file_activity_edit_button').onclick = function(){openInNewTab(`/editor?path=${path}&dir=${dir_str}&file=${name}`)};
+      if (mobile) openModal('checkbox_preview_image_div');
+      load_preview_text();
       break;
 
     case 'pdf':

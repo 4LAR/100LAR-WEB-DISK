@@ -186,6 +186,11 @@ body {
 
 }
 
+.input_style:active, .input_style:hover, .input_style:focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
 .background_black {
   position: fixed;
   left: 0px;

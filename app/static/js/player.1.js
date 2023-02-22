@@ -1,4 +1,17 @@
 
+/* TEXT */
+function load_text(url, name) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', url);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      document.getElementById('preview_text_textarea').value = xhr.responseText.toString();
+    }
+  };
+  xhr.send();
+}
+
 /* AUDIO */
 const audio_id = "preview_audio";
 const audio_name_id = "preview_audio_name";
