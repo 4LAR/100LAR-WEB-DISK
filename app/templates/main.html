@@ -10,7 +10,7 @@
     <link rel="stylesheet" href = "static/css/leftBar.1.css"/>
     <link rel="stylesheet" href = "static/css/rightBar.1.css"/>
     <link rel="stylesheet" href = "static/css/path_select.1.css"/>
-    <link rel="stylesheet" href = "static/css/terminal.1.css"/>
+    <link rel="stylesheet" href = "static/css/apps.1.css"/>
 
     <link rel="stylesheet" href = "static/css/file.1.css"/>
 
@@ -61,16 +61,16 @@
       </label>
 
       <!--терминал-->
-      <div class="terminal_button_style block_select">
-        <img class="icon" style="margin: 5px 5px" width="25" height="25" src="static/img/admin/terminal.svg">
-        <p style="margin: -30px 40px">terminal</p>
-        <p style="margin: 24px 40px;" class="terminal_button_style_online">0 elements</p>
-        <img class="icon" style="position:absolute; right: 15px; top: 15px; cursor: pointer" width="15" height="15" src="static/img/add.svg">
+      <div class="apps_button_style block_select">
+        <img class="icon" style="margin: 6px 6px" width="30" height="30" src="static/img/apps.svg">
+        <p style="margin: -40px 44px">apps</p>
+        <p style="margin: 36px 44px;" class="apps_button_style_online">0 elements</p>
+        <img class="icon" style="position:absolute; right: 15px; top: 15px; cursor: pointer" width="15" height="15" src="static/img/add.svg" onclick="create_apps_dialog()">
       </div>
 
-      <div id="terminal_list_div" class="terminal_list_div_scroll scroll_style">
-        <div class="terminal_list_div">
-          <ul id="terminal_list"></ul>
+      <div id="apps_list_div" class="apps_list_div_scroll scroll_style">
+        <div class="apps_list_div">
+          <ul id="apps_list"></ul>
         </div>
       </div>
 
@@ -358,16 +358,20 @@
 
     <!--диалоговые окна-->
 
-    <!-- создание терминала -->
-    <div id="dialog_create_terminal_file" class="dialog_style">
+    <!-- создание приложения -->
+    <div id="dialog_create_apps" class="dialog_style" style="height: 350px;">
       <div class="dialog_top_name">
-        <div class="dialog_close_button block_select button_margin" onclick="close_create_terminal_dialog()">
+        <div class="dialog_close_button block_select button_margin" onclick="close_create_apps_dialog()">
           <img class="icon" width="20" height="20" src="static/img/cross.svg">
           <p>close</p>
         </div>
       </div>
 
-      <div id="delete_file_button" class="round_button dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+      <div class="apps_buttons_container">
+        <ul id="apps_buttons"></ul>
+      </div>
+
+      <div class="round_button dialog_button block_select" style="right: 10px; bottom: 10px; width: 100px;">
         <p style="margin: 5px 28px">create</p>
       </div>
     </div>
@@ -511,6 +515,6 @@
   <script type="text/javascript" src="static/js/upload_file.1.js"></script>
   <script type="text/javascript" src="static/js/player.1.js"></script>
   <script type="text/javascript" src="static/js/file.1.js"></script>
-  <script type="text/javascript" src="static/js/terminal.1.js"></script>
+  <script type="text/javascript" src="static/js/apps.1.js"></script>
 
 </html>
