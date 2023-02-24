@@ -51,7 +51,7 @@ for (let i = 0; i < 5; i++)
 
 var apps_dialog_bool = false;
 function create_apps_dialog() {
-  no_place_file_bool = true;
+  apps_dialog_bool = true;
 
   openModal('dialog_bg');
   openModal('dialog_create_apps');
@@ -68,8 +68,27 @@ function close_create_apps_dialog() {
 
 var selected_app_id = -1;
 var apps_buttons = [
-  ['bash', 'admin/terminal.svg'],
-  ['server', 'server.svg']
+  ['bash', 'admin/terminal.svg',
+    `<div>
+      <p style="position: absolute; top: -5px; left: 5px;">Thread name:</p>
+      <input id="app_name_input" class="input_style dialog_input" style="position: absolute; left: 10px; top: 25px; right: 10px; max-width: 260px;" type=text placeholder="name" onkeypress="">
+
+      <p style="position: absolute; top: 60px; left: 5px;">Start path:</p>
+      <input id="app_name_input" class="input_style dialog_input" style="position: absolute; left: 10px; top: 90px; right: 10px; max-width: 260px;" type=text placeholder="path" onkeypress="">
+    </div>`
+  ],
+  ['server', 'server.svg',
+    `<div>
+      <p style="position: absolute; top: -5px; left: 5px;">Thread name:</p>
+      <input id="app_name_input" class="input_style dialog_input" style="position: absolute; left: 10px; top: 25px; right: 10px; max-width: 260px;" type=text placeholder="name" onkeypress="">
+
+      <p style="position: absolute; top: 60px; left: 5px;">Path to file:</p>
+      <input id="app_name_input" class="input_style dialog_input" style="position: absolute; left: 10px; top: 90px; right: 10px; max-width: 260px;" type=text placeholder="path" onkeypress="">
+
+      <p style="position: absolute; top: 125px; left: 5px;">Aarguments: </p>
+      <input id="app_name_input" class="input_style dialog_input" style="position: absolute; left: 10px; top: 155px; right: 10px; max-width: 260px;" type=text placeholder="path" onkeypress="">
+    </div>`
+  ]
 ];
 
 function append_to_apps_buttons() {
@@ -90,6 +109,7 @@ function select_app_button(id) {
     document.getElementById(`app_button_${selected_app_id}`).classList.replace('app_button_selected', 'app_button');
 
   document.getElementById(`app_button_${id}`).classList.replace('app_button', 'app_button_selected');
+  document.getElementById(`apps_main_div`).innerHTML = apps_buttons[id][2];
   selected_app_id = id;
 }
 

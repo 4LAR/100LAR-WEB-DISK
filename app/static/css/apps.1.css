@@ -125,3 +125,14 @@
   background-color: var(--bg-color);
   border: 1px solid var(--bg-color);
 }
+
+/*----------------------------------------------------------------------------*/
+
+.apps_main_div {
+  position: absolute;
+  left: 201px;
+  top: 36px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: 0 0 8px 0;
+}
