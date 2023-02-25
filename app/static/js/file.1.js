@@ -927,22 +927,6 @@ if (localStorage.getItem('draw_type') == null) {
 if (!mobile)
   switch_draw_type(localStorage.getItem('draw_type'), {"checked": true});
 
-/* Создание терминала */
-var create_terminal_bool = false;
-function create_terminal_dialog() {
-  create_terminal_bool = true;
-
-  openModal('dialog_bg');
-  openModal('dialog_create_terminal_file');
-}
-
-function close_create_terminal_dialog() {
-  create_terminal_bool = false;
-
-  closeModal('dialog_bg');
-  closeModal('dialog_create_terminal_file');
-}
-
 /* Уведомление о том что путь только для чтения */
 var readonly_path_bool = false;
 function readonly_dialog() {

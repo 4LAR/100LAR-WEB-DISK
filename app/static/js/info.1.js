@@ -87,12 +87,8 @@ document.addEventListener('keydown', function(event){
       image_fullscreen();
     } else if (video_fullscreen) {
       full_screen();
-    } else if (delete_file_bool) {
-      close_delete_file_dialog();
-    } else if (create_file_bool) {
-      close_create_file_dialog();
-    } else if (apps_dialog_bool) {
-      close_create_apps_dialog();
+    } else if (close_dialogs()) {
+
     } else if (open_close_user_bool || open_close_path_bool) {
       close_user();
     } else {
@@ -102,6 +98,22 @@ document.addEventListener('keydown', function(event){
   }
 
 });
+
+//
+function close_dialogs() {
+  if (delete_file_bool) {
+    close_delete_file_dialog();
+  } else if (create_file_bool) {
+    close_create_file_dialog();
+  } else if (apps_dialog_bool) {
+    close_create_apps_dialog();
+  } else if (readonly_path_bool) {
+    close_readonly_dialog();
+  } else if (no_place_file_bool) {
+    close_no_place_dialog();
+  } else return false;
+  return true;
+}
 
 //
 function set_size_str(str, to_size) {
