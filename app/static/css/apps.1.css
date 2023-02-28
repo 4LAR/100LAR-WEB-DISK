@@ -136,3 +136,19 @@
   bottom: 0px;
   border-radius: 0 0 8px 0;
 }
+
+
+/*----------------------------------------------------------------------------*/
+
+.main_app {
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  left: calc(var(--width-left-bar) + 1px);
+  width: 700px;
+  height: 450px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--main-border-color);
+  border-left: none;
+  border-radius: 0 8px 0 0;
+}
