@@ -3,6 +3,8 @@ const COLOR_RED = "D73A49";
 const COLOR_ORANGE = "DBAB09";
 const COLOR_GREEN = "28A745";
 
+var apps_count = 0;
+
 function append_apps_to_list(id, name, type, status) {
   var dot_color = "";
   var image = ""
@@ -39,13 +41,21 @@ function append_apps_to_list(id, name, type, status) {
       <p class="apps_list_dot" style="color: #${dot_color}">•</p>
     </div>`
   );
+
+  apps_count++;
+  document.getElementById('apps_count').innerHTML = `${apps_count} elements`;
 }
 
-for (let i = 0; i < 5; i++)
+function read_apps_list() {
+  apps_count = 0;
+  for (let i = 0; i < 5; i++)
   append_apps_to_list(0, 'server #' + i, 'server', getRandomInt(1, 3));
 
-for (let i = 0; i < 5; i++)
-  append_apps_to_list(0, 'apps #' + i, 'bash', 3);
+  for (let i = 0; i < 5; i++)
+  append_apps_to_list(0, 'bash #' + i, 'bash', 3);
+}
+
+read_apps_list();
 
 /*----------------------------------------------------------------------------*/
 
