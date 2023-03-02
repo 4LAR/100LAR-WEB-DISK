@@ -33,7 +33,7 @@ function append_apps_to_list(id, name, type, status) {
 
   append_to_ul(
     'apps_list',
-    `<div class="apps_list_element">
+    `<div class="apps_list_element" onclick="main_app_dialog()">
       <img class="icon apps_list_icon" width="20" height="20" src="static/img/${image}">
       <img class="icon apps_list_delete" width="20" height="20" src="static/img/trash.svg">
       <p class="apps_list_name">${name}</p>
@@ -59,6 +59,7 @@ read_apps_list();
 
 /*----------------------------------------------------------------------------*/
 
+// создание приложения
 var apps_dialog_bool = false;
 function create_apps_dialog() {
   apps_dialog_bool = true;
@@ -72,6 +73,22 @@ function close_create_apps_dialog() {
 
   closeModal('dialog_bg');
   closeModal('dialog_create_apps');
+}
+
+// открытие приложения
+var main_app_dialog_bool = false;
+function main_app_dialog() {
+  main_app_dialog_bool = true;
+
+  openModal('dialog_bg');
+  openModal('dialog_main_app');
+}
+
+function close_main_app_dialog() {
+  main_app_dialog_bool = false;
+
+  closeModal('dialog_bg');
+  closeModal('dialog_main_app');
 }
 
 /*----------------------------------------------------------------------------*/
@@ -124,3 +141,8 @@ function select_app_button(id) {
 }
 
 append_to_apps_buttons();
+
+/*----------------------------------------------------------------------------*/
+
+// document.getElementById("app_script").innerHTML = "alert(123)"
+// document.getElementById("app_script").innerHTML = "console.log(567)"

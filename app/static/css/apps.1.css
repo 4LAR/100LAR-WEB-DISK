@@ -137,18 +137,18 @@
   border-radius: 0 0 8px 0;
 }
 
-
 /*----------------------------------------------------------------------------*/
 
-.main_app {
+.main_app_dialog {
+  position: absolute;
   display: none;
-  position: fixed;
-  bottom: 0px;
-  left: calc(var(--width-left-bar) + 1px);
-  width: 700px;
-  height: 450px;
+
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+
   background-color: var(--bg-color);
+  border-radius: 8px;
   border: 1px solid var(--main-border-color);
-  border-left: none;
-  border-radius: 0 8px 0 0;
 }

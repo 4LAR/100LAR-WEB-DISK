@@ -355,10 +355,20 @@
     </div>
 
     <!--окно приложения-->
-    <div id="main_app" class="main_app"></div>
     <div id="dialog_bg" class="dialog_backgound" onclick="close_dialogs()"></div>
 
     <!--диалоговые окна-->
+
+    <!-- окно приложения -->
+    <div id="dialog_main_app" class="main_app_dialog" style="">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_main_app_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+    </div>
 
     <!-- создание приложения -->
     <div id="dialog_create_apps" class="dialog_style" style="height: 350px;">
@@ -509,6 +519,8 @@
     var mobile = false;
 
   </script>
+
+  <!-- <script id="app_script" type="text/javascript"></script> -->
 
   <script type="text/javascript" src="static/js/main.1.js"></script>
 

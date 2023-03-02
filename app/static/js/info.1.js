@@ -111,6 +111,8 @@ function close_dialogs() {
     close_readonly_dialog();
   } else if (no_place_file_bool) {
     close_no_place_dialog();
+  } else if (main_app_dialog_bool) {
+    close_main_app_dialog();
   } else return false;
   return true;
 }
