@@ -18,6 +18,8 @@
     <link rel="stylesheet" href = "static/css/range.1.css"/>
     <link rel="stylesheet" href = "static/css/dialog.1.css"/>
 
+    <link rel="stylesheet" href="https://unpkg.com/xterm@4.11.0/css/xterm.css"/>
+
   </head>
 
   <body class="scroll_style" ondragstart="return false;" ondrop="return false;">
@@ -368,6 +370,10 @@
         </div>
       </div>
 
+      <div id="main_app" class="main_app">
+        <iframe id="main_app_frame" class="main_app_frame" style="width: 100%; height: 100%;"></iframe>
+      </div>
+
     </div>
 
     <!-- создание приложения -->
@@ -520,7 +526,12 @@
 
   </script>
 
-  <!-- <script id="app_script" type="text/javascript"></script> -->
+  <!-- xterm -->
+  <script src="https://unpkg.com/xterm@4.11.0/lib/xterm.js"></script>
+  <script src="https://unpkg.com/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.js"></script>
+  <script src="https://unpkg.com/xterm-addon-web-links@0.4.0/lib/xterm-addon-web-links.js"></script>
+  <script src="https://unpkg.com/xterm-addon-search@0.8.0/lib/xterm-addon-search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 
   <script type="text/javascript" src="static/js/main.1.js"></script>
 

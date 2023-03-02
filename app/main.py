@@ -63,6 +63,7 @@ from memory_profiler import memory_usage
 start_time = datetime.datetime.now()
 
 # импортируем py файлы
+from dict_json import *
 from log import *
 from get_time import *
 from settings import *
@@ -70,6 +71,7 @@ from users import *
 from file import *
 from history import *
 from terminal import *
+from extensions import *
 
 settings = settings()
 
@@ -95,6 +97,7 @@ userBase = UserBase(
 )
 
 terminal = Terminal()
+extensions = Extensions()
 
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
 WTF_CSRF_ENABLED = True
@@ -1070,6 +1073,18 @@ def log_request_info():
     except Exception as e:
         #logging.print(e, 3, comment='[ERROR REQUEST] ')
         pass
+
+#####################################################
+# приложения
+@app.route('/get_apps', methods=['GET' , 'POST'])
+@login_required
+def get_apps():
+    return {"apps": extensions.get()}
+
+@app.route('/app', methods=['GET' , 'POST'])
+@login_required
+def custom_app():
+    return request.args.get("id", "")
 
 #####################################################
 # соккеты

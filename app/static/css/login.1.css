@@ -57,6 +57,8 @@
     background-color: var(--bg-color);
     border-top: 1px solid var(--main-border-color);
     border-bottom: 1px solid var(--main-border-color);
+
+    border-radius: 8px;
   }
 
   .login_name_container {
@@ -131,6 +133,8 @@
     background-color: var(--bg-color);
     border-top: 1px solid var(--main-border-color);
     border-bottom: 1px solid var(--main-border-color);
+
+    border-radius: 8px;
   }
 
   .login_name_container {
@@ -159,21 +163,12 @@
   }
 }
 
-
-
 .login_button {
   position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: 150px;
-  height: 35px;
-  border-top: 1px solid var(--main-border-color);
-  border-right: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
+  left: 10px;
+  bottom: 7px;
+  width: 130px;
+  height: 30px;
 
   cursor: pointer;
-}
-
-.login_button:hover {
-  background-color: var(--hover-color);
 }
