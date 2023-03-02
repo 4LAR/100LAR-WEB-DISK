@@ -27,8 +27,8 @@
           <input id="login_input" class="input_style login_input" style="top: 20px;" type=text placeholder="login">
           <input id="password_input" class="input_style login_input" style="top: 60px;" type=password placeholder="password" onkeypress="return login_enter(event)">
 
-          <div class="login_button block_select" onclick="login()">
-            <p style="margin: 8px 50px">login</p>
+          <div class="round_button login_button block_select" onclick="login()">
+            <p style="margin: 4px 45px">login</p>
           </div>
 
           <div style="position: absolute; bottom: -5px; right: 20px;">
@@ -39,7 +39,7 @@
         </div>
 
         <div id="loading_login" style="display: none">
-          <div style="position: absolute; width: 100%; height: 100%; background-color: #000; opacity: .2;"></div>
+          <div style="position: absolute; width: 100%; height: 100%; background-color: #000; opacity: .2; border-radius: 8px;"></div>
           <div style="position: absolute;">
             <img id="refresh" class="icon anim_rotate" style="position: absolute; left: 10px; top: 10px;" width="30" height="30" src="static/img/admin/refresh.svg">
             <p style="margin: 10px 50px; font-size: 20px;">Login...</p>
