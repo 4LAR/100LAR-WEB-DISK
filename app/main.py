@@ -1084,7 +1084,8 @@ def get_apps():
 @app.route('/app', methods=['GET' , 'POST'])
 @login_required
 def custom_app():
-    return request.args.get("id", "")
+    # return request.args.get("id", "")
+    return extensions.get()[int(request.args.get("id", ""))]['main_html']
 
 #####################################################
 # соккеты

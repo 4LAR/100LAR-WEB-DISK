@@ -25,13 +25,13 @@ function append_apps_to_list(id, name, type, status) {
       break;
   }
 
-  image = apps_buttons[type][1];
-  type_name = apps_buttons[type][0];
+  image = apps_buttons[type]['ico'];
+  type_name = apps_buttons[type]['name'];
 
   append_to_ul(
     'apps_list',
     `<div class="apps_list_element" onclick="open_app(${type})">
-      <img class="icon apps_list_icon" width="20" height="20" src="static/img/${image}">
+      <image class="icon apps_list_icon" width="20" height="20" src="data:image/svg+xml;base64,${image} ">
       <img class="icon apps_list_delete" width="20" height="20" src="static/img/trash.svg">
       <p class="apps_list_name">${name}</p>
       <p class="apps_list_type">${type_name}</p>
@@ -98,6 +98,7 @@ function get_apps() {
     if (xhr.status === 200) {
       apps_buttons = JSON.parse(xhr.responseText.toString())["apps"];
       append_to_apps_buttons();
+      append_apps_to_list(0, 'test', 0, 0);
     }
   };
   xhr.send()
