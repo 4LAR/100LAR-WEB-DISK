@@ -20,7 +20,7 @@
 
   background-color: var(--left-color)/*var(--bg-color)*/;
 
-  border-right: 1px solid var(--top-border-color);
+  border-right: 1px solid var(--main-border-color);
 }
 
 .disk_space {

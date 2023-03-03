@@ -60,6 +60,7 @@
   --bg-color: #FFFFFF;
   --top-color: #1D2125;
   --right-color: #FFFFFF;
+  --left-color: #FFFFFF;
 
   --top-hover-color: #2F363D;
   --hover-color: #EBEEF1;
@@ -83,6 +84,10 @@
   --selected-file-color: #E4E7EB;
 
   --preview-bg: #fff;
+
+  --fileList-checkbox-color: #FFFFFF;
+  --fileList-checkbox-delimiter-color: #E1E4E8;
+  --fileList-delimiter-color: #DBEDFF;
 
 }
 
