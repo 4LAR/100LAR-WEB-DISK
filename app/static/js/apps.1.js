@@ -122,7 +122,7 @@ function select_app_button(id) {
     document.getElementById(`app_button_${selected_app_id}`).classList.replace('app_button_selected', 'app_button');
 
   document.getElementById(`app_button_${id}`).classList.replace('app_button', 'app_button_selected');
-  document.getElementById(`apps_main_div`).innerHTML = apps_buttons[id]['create_html'];
+  document.getElementById(`apps_main_div`).innerHTML = apps_buttons[id]['welcome_html'];
   selected_app_id = id;
 }
 

@@ -1,9 +1,9 @@
 {
   "name": "bash",
   "ico": "app.svg",
-  "create_html": "create_app.html",
+  "welcome_html": "welcome_app.html",
   "main_html": "app.html",
   "css": ["app.css"],
-  "use_main_stylesheet": true,
-  "script": ["app.js"]
+  "script": ["app.js"],
+  "executable": "app.py"
 }

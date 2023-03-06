@@ -1,6 +1,7 @@
 
 import os
 import base64
+import imp
 from dict_json import *
 
 def image_to_base64(path_to_file):
@@ -8,6 +9,9 @@ def image_to_base64(path_to_file):
         b64_string = base64.b64encode(img_file.read())
 
     return b64_string
+
+def get_methods(class_object):
+    return [method for method in dir(class_object) if (method[0:2] != '__')]
 
 class Extensions():
     def __init__(self):
@@ -29,12 +33,19 @@ class Extensions():
                     "name": settings_json["name"],
                     "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
                     "main_html": self.generate_html(self.path + dir + "/", settings_json),
-                    "create_html": self.read_create_html(self.path + dir + "/" + settings_json["create_html"])
+                    "welcome_html": self.read_welcome_html(self.path + dir + "/" + settings_json["welcome_html"]),
+                    "executable": self.load_executable(self.path + dir + "/" + settings_json["executable"])
                 })
             except Exception as e:
                 print(e)
 
-    def read_create_html(self, path):
+    def load_executable(self, path):
+        f = open(path, "r")
+        test_class = imp.load_module('app', f, path, ('.py', 'r', 1))
+        f.close()
+        return test_class.app
+
+    def read_welcome_html(self, path):
         html_str = ''
 
         with open(path, "r", encoding='utf-8') as fh:
