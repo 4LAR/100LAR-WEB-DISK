@@ -97,7 +97,6 @@ userBase = UserBase(
 )
 
 terminal = Terminal()
-extensions = Extensions()
 
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
 WTF_CSRF_ENABLED = True
@@ -116,12 +115,11 @@ app.debug = settings.options['Flask']['debug']
 socketio = SocketIO(app)
 
 codemirror = CodeMirror(app)
+extensions = Extensions(app, socketio)
 
 login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)
-
-socketio = SocketIO(app)
 
 #####################################################
 # константы
@@ -1103,7 +1101,7 @@ def read_and_forward_pty_output():
                 )
                 socketio.emit("pty-output", {"output": output}, namespace="/pty")
 
-@socketio.on("pty-input", namespace="/pty")
+@socketio.on("ptyInput", namespace="/pty")
 def pty_input(data):
     terminal.input(data)
     pass
@@ -1114,7 +1112,6 @@ def resize(data):
 
 @socketio.on("connect", namespace="/pty")
 def connect():
-    print(123)
     if terminal.create():
         socketio.start_background_task(target=read_and_forward_pty_output)
         pass
