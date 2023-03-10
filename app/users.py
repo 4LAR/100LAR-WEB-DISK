@@ -33,6 +33,7 @@ class UserBase():
 
         self.last_id = 0
 
+        self.users_apps = {}
         self.users_dict = {}
         self.users_dict_static = {
             0: {

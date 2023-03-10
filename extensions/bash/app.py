@@ -4,15 +4,20 @@
 # iol - циклически отправляющий сокет
 
 from flask_socketio import SocketIO
+from flask_login import current_user
+import functools
+
 import os
 import sys
 
 from terminal import *
 
 class app():
-    def __init__(self, socketio):
+    def __init__(self, socketio, path):
         self.socketio = socketio
         self.terminal = Terminal()
+
+        self.status = 0
 
     def io_ptyInput(self, data):
         self.terminal.input(data)
@@ -23,9 +28,6 @@ class app():
     def io_connect(self, data):
         if self.terminal.create():
             self.socketio.start_background_task(target=self.iol_loop)
-            # pass
-        else:
-            return
 
     def iol_loop(self):
         max_read_bytes = 1024 * 20

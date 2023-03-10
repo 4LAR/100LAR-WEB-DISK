@@ -10,10 +10,10 @@ import shlex
 import sys
 
 class Terminal:
-    def __init__(self):
+    def __init__(self, cmd = ["bash"]):
         self.fd = None
         self.child_pid = None
-        self.cmd = ["bash"]
+        self.cmd = cmd
 
     def set_winsize(self, row, col, xpix=0, ypix=0):
         if (self.fd):

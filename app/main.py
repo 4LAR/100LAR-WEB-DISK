@@ -113,9 +113,10 @@ app.config.from_object(__name__)
 app.config['SECRET_KEY'] = settings.options['Flask']['secret_key']
 app.debug = settings.options['Flask']['debug']
 socketio = SocketIO(app)
+socketio.init_app(app, cors_allowed_origins="*")
 
 codemirror = CodeMirror(app)
-extensions = Extensions(app, socketio)
+extensions = Extensions(app, userBase, socketio)
 
 login_manager = LoginManager()
 login_manager.login_view = "login"
@@ -1079,11 +1080,34 @@ def log_request_info():
 def get_apps():
     return {"apps": extensions.get()}
 
+@app.route('/get_my_apps', methods=['GET' , 'POST'])
+@login_required
+def get_my_apps():
+    return {"apps": extensions.get_my_apps(int(current_user.id))}
+
+@app.route('/append_app', methods=['GET' , 'POST'])
+@login_required
+def append_app():
+    data = request.args.get("data", "")
+    app_id = request.args.get("app_id", "")
+    extensions.append_app(int(current_user.id), app_id, json.loads(data))
+
+    return OK
+
+@app.route('/delete_app', methods=['GET' , 'POST'])
+@login_required
+def delete_app():
+    id = request.args.get("id", "")
+    extensions.delete_app(int(current_user.id), int(id))
+
+    return OK
+
 @app.route('/app', methods=['GET' , 'POST'])
 @login_required
 def custom_app():
-    # return request.args.get("id", "")
-    return extensions.get()[int(request.args.get("id", ""))]['main_html']
+    id = request.args.get("id", "")
+    app_dict = extensions.get()[request.args.get("app_id", "")]
+    return extensions.generate_html(id, app_dict)
 
 #####################################################
 # соккеты
@@ -1112,6 +1136,7 @@ def resize(data):
 
 @socketio.on("connect", namespace="/pty")
 def connect():
+    print(current_user.is_authenticated)
     if terminal.create():
         socketio.start_background_task(target=read_and_forward_pty_output)
         pass
