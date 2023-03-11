@@ -73,6 +73,4 @@ function customKeyEventHandler(e) {
 
 const wait_ms = 50;
 
-window.onresize = function () {
-  debounce(fitToscreen, wait_ms);
-};
+window.onresize = debounce(fitToscreen, wait_ms);

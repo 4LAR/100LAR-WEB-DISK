@@ -1,6 +1,7 @@
 
 import pty
 import os
+import signal
 import subprocess
 import select
 import termios
@@ -13,6 +14,7 @@ class Terminal:
     def __init__(self, cmd = ["bash"]):
         self.fd = None
         self.child_pid = None
+        self.process = None
         self.cmd = cmd
 
     def set_winsize(self, row, col, xpix=0, ypix=0):
@@ -24,19 +26,21 @@ class Terminal:
         if self.fd:
             os.write(self.fd, data["input"].encode())
 
+    def close(self):
+        os.close(self.fd)
+
     def create(self):
         if self.child_pid:
             return False
 
         (child_pid, fd) = pty.fork()
-
-        if (self.child_pid == 0):
-            subprocess.run(self.cmd)
+        if (child_pid == 0):
+            self.process = subprocess.run(self.cmd)
 
         else:
             self.fd = fd
             self.child_pid = child_pid
 
-            self.set_winsize(fd, 50, 50)
+            self.set_winsize(50, 50)
 
         return True

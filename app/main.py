@@ -1136,7 +1136,6 @@ def resize(data):
 
 @socketio.on("connect", namespace="/pty")
 def connect():
-    print(current_user.is_authenticated)
     if terminal.create():
         socketio.start_background_task(target=read_and_forward_pty_output)
         pass

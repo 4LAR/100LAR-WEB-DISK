@@ -50,6 +50,7 @@ class Extensions():
         return True
 
     def delete_app(self, user_id, id):
+        self.userBase.users_apps[user_id][id]['executable'].close()
         self.userBase.users_apps[user_id].pop(id)
 
     def get_my_apps(self, user_id):
