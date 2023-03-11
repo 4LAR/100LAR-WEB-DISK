@@ -81,13 +81,16 @@
   --top-checkBox-color: #999999;
   --main-checkBox-color: #595959;
 
+  --scroll-color: #CCCCCC;
+  --scroll-bg-color: #fff;
+
   --selected-file-color: #E4E7EB;
 
   --preview-bg: #fff;
 
   --fileList-checkbox-color: #FFFFFF;
   --fileList-checkbox-delimiter-color: #E1E4E8;
-  --fileList-delimiter-color: #DBEDFF;
+  --fileList-delimiter-color: #FFFFFF;
 
 }
 

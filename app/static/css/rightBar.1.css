@@ -96,14 +96,15 @@
 
 /*----------------------------------------------------------------------------*/
 .preview_text {
-  /* position: fixed; */
-  position: absolute;
+  position: fixed;
+  /* position: absolute; */
   right: 0px;
-  top: 0px;
-  /* top: 350px; */
-  height: 400px;
+  /* top: 0px; */
+  top: 350px;
+  /* height: 400px; */
+  max-height: 400px;
   width: 300px;
-  /* bottom: 10px; */
+  bottom: 10px;
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
   border-radius: 8px;
@@ -114,8 +115,9 @@
   position: absolute;
   left: 5px;
   right: 5px;
-  top: 45px;
-  height: 340px;
+  /* top: 45px; */
+  top: 5px;
+  height: calc(100% - 20px);
   background-color: var(--main-input-color);
   resize: none;
   white-space: pre;
