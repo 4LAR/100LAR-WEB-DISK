@@ -25,12 +25,12 @@
 
 .disk_space {
   position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: var(--width-left-bar);
+  left: 3px;
+  bottom: 3px;
+  right: 3px;
   height: 5px;
-  border-top: 1px solid var(--main-border-color);
   background-color: var(--top-color);
+  border-radius: 3px;
 }
 
 .disk_space_progress {
@@ -40,14 +40,15 @@
   width: 40px;
   height: 5px;
   background-color: #999999;
+  border-radius: 3px;
 }
 
 .disk_info {
   position: absolute;
   left: 0px;
-  bottom: 5px;
+  bottom: 0px;
   width: var(--width-left-bar);
-  height: 30px;
+  height: 35px;
   border-top: 1px solid var(--main-border-color);
   background-color: var(--hover-color);
 }
