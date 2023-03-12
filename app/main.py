@@ -1107,7 +1107,7 @@ def delete_app():
 def custom_app():
     id = request.args.get("id", "")
     app_dict = extensions.get()[request.args.get("app_id", "")]
-    return extensions.generate_html(id, app_dict)
+    return extensions.generate_html(id, int(current_user.id), app_dict)
 
 #####################################################
 # соккеты

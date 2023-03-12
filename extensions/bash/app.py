@@ -13,9 +13,10 @@ import sys
 from terminal import *
 
 class app():
-    def __init__(self, socketio, path):
+    def __init__(self, socketio, app_namespace, path):
         self.socketio = socketio
-        self.terminal = Terminal()
+        self.app_namespace = app_namespace
+        self.terminal = Terminal(cmd=['python3'])
 
         self.status = 0
         self.run_thread = False
@@ -39,7 +40,7 @@ class app():
 
     def io_connect(self, data):
         for el in self.history:
-            self.socketio.emit("pty-output", {"output": el}, namespace="/bash")
+            self.socketio.emit("pty-output", {"output": el}, namespace=self.app_namespace)
         return
 
     def close(self):
@@ -60,7 +61,7 @@ class app():
                             errors="ignore"
                         )
                         self.append_history(output)
-                        self.socketio.emit("pty-output", {"output": output}, namespace="/bash")
+                        self.socketio.emit("pty-output", {"output": output}, namespace=self.app_namespace)
             except:
                 pass
 

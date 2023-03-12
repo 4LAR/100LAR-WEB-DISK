@@ -31,7 +31,6 @@ class Extensions():
         self.apps = {}
 
         self.read()
-        # self.append_app(0, "bash", {"name": "test", "path": ""})
 
     def append_app(self, user_id, app_id, data):
         if not (user_id in self.userBase.users_apps):
@@ -39,13 +38,19 @@ class Extensions():
 
         app_name = data.pop("name")
 
-        executable = self.apps[app_id]['executable'](self.socketio, **data)
-
+        app_namespace = "/App_%s_%s" % (user_id, app_name)
+        executable = self.apps[app_id]['executable'](self.socketio, app_namespace, **data)
         self.userBase.users_apps[user_id].append({
             "name": app_name,
             "app_id": app_id,
-            "executable": executable
+            "executable": executable,
+            "app_namespace": app_namespace
         })
+
+        for method in self.apps[app_id]['executable_methods']:
+            method_split = method.split("_")
+            if (method_split[0] == 'io'):
+                self.socketio.on_event(method_split[1], lambda data, method=getattr(executable, method), user_id=user_id: self.socket_wrapper(data, method, user_id), namespace=app_namespace)
 
         return True
 
@@ -91,23 +96,17 @@ class Extensions():
             try:
                 settings_json = read_dict(self.path + dir + "/appinfo")
                 executable, args = self.load_executable(self.path + dir + "/" + settings_json["executable"])
-                self.generate_sockets(executable, settings_json)
                 self.apps[settings_json["name"]] = {
                     "name": settings_json["name"],
                     "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
                     "main_html": self.read_html(self.path + dir + "/", settings_json),
                     "welcome_html": self.read_welcome_html(self.path + dir + "/" + settings_json["welcome_html"], settings_json),
                     "executable": executable,
-                    "executable_args": args
+                    "executable_args": args,
+                    "executable_methods": get_methods(executable)
                 }
             except Exception as e:
                 print("Extensions: ", e)
-
-    def generate_sockets(self, obj, settings_json):
-        for method in get_methods(obj):
-            method_split = method.split("_")
-            if (method_split[0] == 'io'):
-                self.socketio.on_event(method_split[1], lambda data, method=method: self.socket_wrapper(data, method), namespace='/%s' % settings_json["name"])
 
     def load_executable(self, path):
         f = open(path, "r")
@@ -115,7 +114,7 @@ class Extensions():
         f.close()
 
         args_list = list(test_class.app.__init__.__code__.co_varnames)
-        args_list = [x for x in args_list if (not x in ['self', 'socketio'])]
+        args_list = [x for x in args_list if (not x in ['self', 'socketio', 'app_namespace'])]
         args_list.append('name')
 
         return test_class.app, args_list
@@ -147,8 +146,9 @@ class Extensions():
 
         return {"css": style_str, "script": script_str, "html": main_html_str}
 
-    def generate_html(self, id, settings_json):
-        script_str = '<script type="text/javascript">var current_app_id = %s;\n' % str(id)
+    def generate_html(self, id, user_id, settings_json):
+        user_app = self.userBase.users_apps[user_id][int(id)]
+        script_str = '<script type="text/javascript">const current_app_id = %s; const current_namespace = "%s";\n' % (str(id), user_app['app_namespace'])
         script_str += settings_json['main_html']['script']
         script_str += "</script>";
 
@@ -157,12 +157,9 @@ class Extensions():
         return main_html_str
 
     # --------------------------------------------------------------------------
-
-    def socket_wrapper(self, data, method):
+    def socket_wrapper(self, data, method, user_id):
         try:
-            app_id = int(request.args.get('app_id'))
-            if (self.userBase.users_apps[int(current_user.id)][app_id]):
-                getattr(self.userBase.users_apps[int(current_user.id)][app_id]["executable"], method)(data)
+            if (user_id == int(current_user.id)):
+                method(data)
         except Exception as e:
-            # print("WARNING", e)
-            pass
+            print("WARNING", e)

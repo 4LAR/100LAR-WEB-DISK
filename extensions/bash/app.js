@@ -21,7 +21,8 @@ term.onData((data) => {
   socket.emit("ptyInput", { input: data });
 });
 
-const socket = io.connect("/bash", {query: {app_id: current_app_id}});
+// const socket = io.connect("/bash", {query: {app_id: current_app_id}});
+const socket = io.connect(current_namespace);
 
 socket.on("pty-output", function (data) {
   term.write(data.output);
