@@ -16,7 +16,7 @@ class app():
     def __init__(self, socketio, app_namespace, path):
         self.socketio = socketio
         self.app_namespace = app_namespace
-        self.terminal = Terminal(cmd=['python3'])
+        self.terminal = Terminal(cmd=['bash'])
 
         self.status = 0
         self.run_thread = False

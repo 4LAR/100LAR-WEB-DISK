@@ -2,6 +2,10 @@ const term = new Terminal({
   cursorBlink: true,
   macOptionIsMeta: true,
   scrollback: true,
+  // theme: {
+  //   foreground: "black",
+  //   background: "white"
+  // }
 });
 
 term.attachCustomKeyEventHandler(customKeyEventHandler);

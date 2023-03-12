@@ -46,7 +46,7 @@
     top: 80px;
     right: 0px;
 
-    height: 150px;
+    height: 130px;
     width: 400px;
 
     background-color: var(--bg-color);
@@ -117,7 +117,7 @@
     top: 80px;
     right: 0px;
 
-    height: 150px;
+    height: 130px;
     width: 100%;
 
     background-color: var(--bg-color);
@@ -156,7 +156,7 @@
 .login_button {
   position: absolute;
   left: 10px;
-  bottom: 7px;
+  bottom: 10px;
   width: 130px;
   height: 30px;
 

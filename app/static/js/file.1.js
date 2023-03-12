@@ -113,18 +113,20 @@ function update_dir() {
     }
 
   // изменение цвета кнопки (назад)
-  if (back_dir_history.length <= 0) {
-    document.getElementById("go_back").style.filter = "invert(30%)";
-  } else {
-    document.getElementById("go_back").style.filter = "invert(60%)";
-  }
+  if (!mobile)
+    if (back_dir_history.length <= 0) {
+      document.getElementById("go_back").style.filter = "invert(30%)";
+    } else {
+      document.getElementById("go_back").style.filter = "invert(60%)";
+    }
 
   // изменение цвета кнопки (вперёд)
-  if (forward_dir_history.length <= 0) {
-    document.getElementById("go_forward").style.filter = "invert(30%)";
-  } else {
-    document.getElementById("go_forward").style.filter = "invert(60%)";
-  }
+  if (!mobile)
+    if (forward_dir_history.length <= 0) {
+      document.getElementById("go_forward").style.filter = "invert(30%)";
+    } else {
+      document.getElementById("go_forward").style.filter = "invert(60%)";
+    }
 
   // получаем информацию о пользователе
   get_info();
@@ -182,32 +184,15 @@ function append_path_info() {
   // создаём кнопку перехода в верхнюю директорию
   var li = document.createElement("li");
 
-  if (mobile) {
-    li.innerHTML = `
-      <div class="file">
-        <!-- <img class="icon" style="margin: 5px 50px" width="35" height="35" src="static/img/files/folder.svg"> -->
-
-      </div>
-    `;
-
-  } else {
+  if (!mobile) {
     if (draw_type == 'list') {
       li.innerHTML = `
-        <div class="file_delimiter_bg">
-
-        </div>
-        <div class="file_pathInfo">
-
-          <!-- <img class="icon" style="margin: 7px 50px" width="25" height="25" src="static/img/files/folder.svg"> -->
-          <!-- <p style="margin: -25px 80px">...</p> -->
-        </div>
+        <div class="file_delimiter_bg"></div>
+        <div class="file_pathInfo"></div>
       `;
     } else {
       li.innerHTML = `
-        <div class="file_grid">
-          <!-- <img class="icon" style="margin: 7px 40px" width="40" height="40" src="static/img/files/folder.svg"> -->
-          <!-- <p style="margin: -35px 90px">...</p> -->
-        </div>
+        <div class="file_grid"></div>
       `;
     }
   }
@@ -357,26 +342,27 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
     image_size = 35;
 
     var str = `
-      <div style="position: absolute; margin: 10px 12px">
-        <input type="checkbox" class="custom-checkbox custom-checkbox-mobile" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
-        <label for="checkbox_file_${name}"></label>
-      </div>
+      <label for="checkbox_file_${name}"><div class="file_checkbox_bg">
+        <div style="position: absolute; margin: 10px 10px">
+          <input type="checkbox" class="custom-checkbox custom-checkbox-mobile" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
+          <label for="checkbox_file_${name}"></label>
+        </div>
+      </div></label>
     `
     if (type == 'dir') {
       // директория
       str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="forward_dir('${name}')">
-          <img class="icon" style="margin: 5px 50px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
+          <img class="icon" style="margin: 5px 55px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
       `;
 
     } else {
       // файл
-
        str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
-          <img class="icon" style="margin: 5px 50px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
+          <img class="icon" style="margin: 5px 55px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
       `;

@@ -12,32 +12,19 @@
   border-top: 1px solid var(--top-border-color);
 }
 
-.move_buttons {
-  position: fixed;
-  right: 0px;
-  bottom: 0px;
-  height: 45px;
-
-  width: 175px;
-
-  background-color: var(--top-color);
-
-  border-top: 1px solid var(--top-border-color);
-  border-left: 1px solid var(--top-border-color);
-}
-
 .add_button_div {
   position: fixed;
-  right: 0px;
+  right: 10px;
   bottom: 45px;
   height: 45px;
 
   width: 50px;
+  height: 50px;
 
   background-color: var(--top-color);
 
-  border-top: 1px solid var(--top-border-color);
-  border-left: 1px solid var(--top-border-color);
+  border: 1px solid var(--top-border-color);
+  border-radius: 25px;
 }
 
 .disk_info {
@@ -46,12 +33,12 @@
 
 .disk_space {
   position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: calc(100% - 175px);
-  height: 3px;
-  border-top: 1px solid var(--top-border-color);
-  background-color: var(--top-color);
+  left: 5px;
+  bottom: 2px;
+  right: 5px;
+  height: 5px;
+  background-color: var(--top-border-color);
+  border-radius: 3px;
 }
 
 .disk_space_progress {
@@ -59,6 +46,7 @@
   left: 0px;
   bottom: 0px;
   width: 40px;
-  height: 3px;
+  height: 5px;
   background-color: #999999;
+  border-radius: 3px;
 }

@@ -1,15 +1,11 @@
 
 .file_list {
-    position: fixed;
-
-    left: 0px;
-    right: 0px;
-
-    top: 30px;
-    bottom: 30px;
-
-    overflow-y: scroll;
-
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 30px;
+  bottom: 30px;
+  overflow-y: scroll;
 }
 
 .file_selected {
@@ -18,7 +14,6 @@
 
 .file {
   border-bottom: 1px solid var(--main-border-color);
-
   height: 45px;
   width: 100%;
 }
@@ -28,4 +23,28 @@
   text-overflow: ellipsis;
   overflow:hidden;
   width: calc(100% - 100px);
+}
+
+.file_checkbox_bg {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background-color: var(--fileList-checkbox-color);
+  border-right: 3px solid var(--fileList-checkbox-delimiter-color);
+  cursor: pointer;
+}
+
+.file_pathInfo {
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--fileList-checkbox-color);
+  height: 20px;
+  width: 100%;
+}
+
+.file_delimiter_bg {
+  position: absolute;
+  width: 45px;
+  height: 20px;
+  background-color: var(--fileList-delimiter-color);
+  border-right: 3px solid var(--fileList-checkbox-delimiter-color);
 }
