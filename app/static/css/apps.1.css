@@ -148,7 +148,7 @@
 /*----------------------------------------------------------------------------*/
 
 .main_app_dialog {
-  position: absolute;
+  position: fixed;
   display: none;
 
   top: 10%;

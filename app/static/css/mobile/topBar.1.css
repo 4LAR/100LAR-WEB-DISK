@@ -1,29 +1,22 @@
 
 .topBar {
   position: fixed;
-
   top: 0px;
   left: 0px;
   height: 45px;
   width: 100%;
-
   background-color: var(--top-color);
-
-  border-bottom: 1px solid var(--top-border-color);
+  border-bottom: 2px solid var(--top-border-color);
 }
 
 .user_button {
   position: fixed;
   background-color: var(--top-color);
-
   top: 0px;
   left: 0px;
-  /* width: var(--width-left-bar); */
   width: 50%;
   height: 45px;
-
   border-right: 1px solid var(--top-border-color);
-
   cursor: pointer;
 }
 
@@ -35,45 +28,33 @@
 .path_select_button {
   position: fixed;
   background-color: var(--top-color);
-
   top: 0px;
   right: 0px;
-  /* width: var(--width-left-bar); */
   width: 50%;
   height: 45px;
-
-  /* border-left: 1px solid var(--top-border-color); */
-
   cursor: pointer;
 }
 
 .leftBar_user {
   display: none;
   position: fixed;
-
   top: 0px;
   left: 0px;
   bottom: 0px;
-
   border-right: 1px solid var(--top-border-color);
   background-color: var(--top-color);
-
   width: 50%;
 }
 
 .small_button_left_style {
   position: absolute;
   height: 35px;
-
   width: 100%;
-
   left: 0px;
-
   border-top: 1px solid var(--top-border-color);
   border-bottom: 1px solid var(--top-border-color);
   border-right: 1px solid var(--top-border-color);
   background-color: var(--top-color);
-
   cursor: pointer;
 }
 
@@ -87,10 +68,8 @@
   height: 35px;
   border-top: 1px solid var(--top-border-color);
   background-color: var(--top-color);
-
   bottom: 0px;
   left: 0px;
-
   cursor: pointer;
 }
 
@@ -100,8 +79,6 @@
 
 .path_select_list_div {
   position: fixed;
-  /*background-color: var(--top-color);*/
-
   top: 46px;
   bottom: 0px;
   right: 0px;
@@ -113,10 +90,8 @@
   border-bottom: 1px solid var(--top-border-color);
   border-left: 1px solid var(--top-border-color);
   border-right: 1px solid var(--top-border-color);
-
   width: 100%;
   height: 45px;
-
   cursor: pointer;
 }
 

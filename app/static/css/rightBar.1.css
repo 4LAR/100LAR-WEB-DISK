@@ -45,7 +45,6 @@
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
-
   border-radius: 8px 8px 0px 0px;
 }
 
@@ -57,7 +56,6 @@
 }
 
 /* file info */
-
 .file_download_button {
   position: absolute;
   left: 5px;
@@ -71,11 +69,6 @@
   top: 248px;
   width: 140px;
   cursor: pointer;
-}
-
-.file_delete_button:hover {
-  /* background-color: var(--main-red-color); */
-
 }
 
 .file_info_div {
@@ -97,11 +90,8 @@
 /*----------------------------------------------------------------------------*/
 .preview_text {
   position: fixed;
-  /* position: absolute; */
   right: 0px;
-  /* top: 0px; */
   top: 350px;
-  /* height: 400px; */
   max-height: 400px;
   width: 300px;
   bottom: 10px;
@@ -115,7 +105,6 @@
   position: absolute;
   left: 5px;
   right: 5px;
-  /* top: 45px; */
   top: 5px;
   height: calc(100% - 20px);
   background-color: var(--main-input-color);

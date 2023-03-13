@@ -2,15 +2,11 @@
   .dialog_style {
     position: absolute;
     display: none;
-
     left: 50%;
     top: 20%;
-
     width: 600px;
     height: 200px;
-
     margin: 0px -300px;
-
     background-color: var(--bg-color);
     border-radius: 8px;
     border: 1px solid var(--main-border-color);
@@ -21,15 +17,11 @@
   .dialog_style {
     position: absolute;
     display: none;
-
     left: 50%;
     top: 20%;
-
     width: 80%;
     height: 200px;
-
     margin: 0px -40%;
-
     background-color: var(--bg-color);
     border-radius: 8px;
     border: 1px solid var(--main-border-color);
@@ -39,25 +31,20 @@
 .dialog_backgound {
   position: fixed;
   display: none;
-
   left: 0px;
   top: 0px;
   width: 100%;
   height: 100%;
-
   background-color: #000;
   opacity: .5;
 }
 
 .dialog_top_name {
   position: absolute;
-
   top: 0px;
   left: 0px;
-
   height: 35px;
   width: 100%;
-
   border-bottom: 1px solid var(--main-border-color);
 }
 
@@ -70,7 +57,6 @@
   height: 35px;
   border-left: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
-
   cursor: pointer;
 }
 
@@ -80,13 +66,10 @@
 
 .dialog_info {
   position: absolute;
-
   top: 35px;
   left: 0px;
-
   height: 60px;
   width: 100%;
-
   border-bottom: 1px solid var(--main-border-color);
 }
 
@@ -96,12 +79,9 @@
 
 .create_fileName_input {
   position: absolute;
-
   left: 60px;
   right: 20px;
   top: 10px;
-  /* width: 500px; */
-
   background-color: var(--main-input-color);
 }
 

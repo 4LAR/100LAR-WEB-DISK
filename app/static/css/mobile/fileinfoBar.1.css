@@ -1,37 +1,30 @@
 
 .rightBar {
   position: fixed;
-
-  bottom: 0px;
+  top: 0px;
   left: 0px;
-  height: 250px;
+  height: 100%;
   width: 100%;
-
-  background-color: var(--right-color)/*var(--bg-color)*/;
-
+  background-color: var(--right-color);
   border-top: 1px solid var(--main-border-color);
+  z-index: 2;
 }
 
 .rightBar_select_files {
   position: fixed;
-
   bottom: 0px;
   left: 0px;
   height: 250px;
   width: 100%;
-
-  background-color: var(--right-color)/*var(--bg-color)*/;
-
+  background-color: var(--right-color);
   border-top: 1px solid var(--main-border-color);
 }
 
 .fileName_input {
   position: absolute;
-
   left: 60px;
   top: 10px;
   right: 10px;
-
   background-color: var(--main-input-color);
 }
 
@@ -48,55 +41,25 @@
 
 .file_close_button {
   position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100px;
-  height: 35px;
-  border-bottom: 1px solid var(--main-border-color);
-  border-right: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
+  right: 5px;
+  top: 45px;
   cursor: pointer;
-}
-
-.file_close_button:hover {
-  background-color: var(--hover-color);
 }
 
 /* file info */
-
 .file_download_button {
   position: absolute;
-  left: 0px;
-  top: 198px;
-  width: 50%;
-  height: 35px;
-  border-bottom: 1px solid var(--main-border-color);
-  border-right: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
-  cursor: pointer;
-}
-
-.file_download_button:hover {
-  background-color: var(--hover-color);
+  right: 5px;
+  bottom: 10px;
+  width: 140px;
 }
 
 .file_delete_button {
   position: absolute;
-  left: 50%;
-  top: 198px;
-  width: 50%;
-  height: 35px;
-  border-bottom: 1px solid var(--main-border-color);
-  border-left: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
+  right: 155px;
+  bottom: 10px;
+  width: 140px;
   cursor: pointer;
-}
-
-.file_delete_button:hover {
-  background-color: var(--main-red-color);
 }
 
 .file_info_div {
@@ -104,9 +67,10 @@
   left: 0px;
   top: 97px;
   width: 100%;
-  height: 100px;
+  height: 105px;
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+  border-radius: 0 0 8px 8px;
 }
 
 .file_info_div p {
@@ -116,11 +80,8 @@
 .preview_image {
   position: absolute;
   left: 0px;
-  /* height: calc(100% - 250px - 25px - 45px ); */
   bottom: calc(250px + 25px);
   width: 100%;
-
-  /*border-top: 1px solid var(--main-border-color);*/
   border-bottom: 1px solid var(--main-border-color);
   border-top: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
@@ -140,9 +101,7 @@
   height: 25px;
   width: 100%;
   border-top: 1px solid var(--main-border-color);
-
   background-color: var(--bg-color);
-
   color: var(--main-font-color);
 }
 
@@ -153,10 +112,8 @@
   border-top: none;
   border-bottom: none;
   background-color: var(--bg-color);
-
   cursor: pointer;
   color: var(--main-font-color);
-
   border-radius: none;
   clip-path: None;
 
@@ -170,10 +127,8 @@
   position: fixed;
   top: 0px;
   left: 0px;
-
   width: 100%;
   height: 100%;
-
   background-color: #000;
 }
 
@@ -192,10 +147,8 @@
 
 .preview_video_fullscreen_controls {
   position: fixed;
-
   bottom: 0px;
   left: 0px;
-
   height: 25px;
   width: 100%;
   border-top: 1px solid var(--main-border-color);
@@ -206,8 +159,6 @@
   left: 0px;
   bottom: 250px;
   width: 100%;
-
-  /*border-top: 1px solid var(--main-border-color);*/
   border-bottom: 1px solid var(--main-border-color);
   border-top: 1px solid var(--main-border-color);
   background-color: #000;
@@ -242,12 +193,9 @@
   left: 0px;
   bottom: 250px;
   width: 100%;
-
-  /*border-top: 1px solid var(--main-border-color);*/
   border-bottom: 1px solid var(--main-border-color);
   border-top: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
-
   cursor: pointer;
 }
 
@@ -255,11 +203,8 @@
   position: absolute;
   color: var(--main-font-color);
   border: 1px solid var(--bg-color);
-  /*background-color: #0D1117;*/
   background-color: var(--bg-color);
-
   font-size: 14px;
-
   padding: 12px 10px;
   margin: 8px 0;
   border-radius: 5px;
@@ -279,18 +224,14 @@
 .preview_info {
   position: absolute;
   right: 0px;
-  /* top: 315px; */
   height: 35px;
   width: 150px;
-
   border-left: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
-
   background-color: var(--bg-color);
 }
 
 /* list files */
-
 .file_activity_button {
   position: absolute;
   right: 0px;
@@ -313,7 +254,6 @@
   left: 0px;
   top: 35px;
   width: 100%;
-  /*height: 50%;*/
   height: 100px;
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
@@ -323,7 +263,6 @@
 .file_list_download_button {
   position: absolute;
   left: 0px;
-  /*top: 210px;*/
   top: 114px;
   width: 50%;
   height: 35px;
@@ -342,7 +281,6 @@
 .file_list_delete_button {
   position: absolute;
   left: 50%;
-  /*top: 210px;*/
   top: 114px;
   width: 50%;
   height: 35px;
@@ -359,7 +297,6 @@
 }
 
 /**/
-
 .file_list_paste_button {
   position: absolute;
   left: 0px;
@@ -369,7 +306,6 @@
   border-right: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
-
   cursor: pointer;
 }
 
@@ -386,7 +322,6 @@
   border-left: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
-
   cursor: pointer;
 }
 
@@ -403,7 +338,6 @@
   border-left: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
-
   cursor: pointer;
 }
 
@@ -413,11 +347,8 @@
 
 .fileDescription {
   position: absolute;
-
   resize: none;
-
   background-color: var(--right-color);
-
 }
 
 /* выгрузка */
