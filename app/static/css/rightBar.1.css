@@ -88,6 +88,7 @@
 }
 
 /*----------------------------------------------------------------------------*/
+
 .preview_text {
   position: fixed;
   right: 0px;
@@ -111,6 +112,32 @@
   resize: none;
   white-space: pre;
   cursor: default;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.preview_pdf {
+  position: fixed;
+  right: 0px;
+  top: 350px;
+  max-height: 400px;
+  width: 300px;
+  bottom: 10px;
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  cursor: default;
+}
+
+.preview_pdf_iframe {
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  width: calc(100% - 15px);
+  height: calc(100% - 20px);
+  cursor: default;
+  border: none;
+  border-radius: 8px;
 }
 
 /*----------------------------------------------------------------------------*/

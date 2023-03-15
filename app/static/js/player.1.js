@@ -1,4 +1,9 @@
 
+/* PDF */
+function load_pdf(url, name) {
+  document.getElementById('preview_pdf_iframe').src = `${url}#toolbar=0`;
+}
+
 /* TEXT */
 function load_text(url, name) {
   var xhr = new XMLHttpRequest();

@@ -53,9 +53,6 @@ import io
 # тип файлов
 import magic
 
-#xterm
-# пусто
-
 # для получения информации и системе и сервере
 import psutil
 from memory_profiler import memory_usage
@@ -177,7 +174,6 @@ def check_size_list(current_user, path, dir, files=[]):
                     user_path + dir + '/' + f[0]
                 )
 
-        print(files_size)
         return (busy + files_size <= user_size)
 
     else:
@@ -871,7 +867,13 @@ def downlaod():
         file = request.args.get("file", "")
         files = request.args.get("files", "")
 
+        # preview_flag = get_bool(request.args.get("preview", "false"))
+        # preview_type = request.args.get("preview_type", "")
+
         user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
+
+        # if (preview_flag):
+        #     return ERROR
 
         if len(file) > 0:
             str_log = '%s download file (%s)' % (current_user.username, user_path + dir + '/' + file)
@@ -944,8 +946,6 @@ def delete():
                 files_list = json.loads(files)['files']
                 files_list_log = []
 
-                print(files_list)
-
                 for file in files_list:
                     if file[1] == 'dir':
                         shutil.rmtree(user_path + dir + '/' + file[0])
@@ -987,7 +987,6 @@ def copy_files():
             if (cut_bool or check_size_list(current_user, path, dir, files_list)):
                 # цикл по файлам
                 for f in files_list:
-                    print(user_path + dir + '/' + f[0])
                     if cut_bool:
                         # перемещаем
                         shutil.move(
@@ -1041,7 +1040,6 @@ def upload_file_disk():
     if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
         if check_size(current_user, path, size):
             f.seek(0, os.SEEK_SET)
-            print(userBase.get_user_info(current_user.id))
             user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
             f.save(user_path + dir + '/' + file)
 
