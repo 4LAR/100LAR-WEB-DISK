@@ -37,12 +37,13 @@
   border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+  border-radius: 8px 8px 0 0;
 }
 
 .file_close_button {
   position: absolute;
-  right: 5px;
-  top: 45px;
+  right: 0px;
+  top: -5px;
   cursor: pointer;
 }
 
@@ -52,6 +53,7 @@
   right: 5px;
   bottom: 10px;
   width: 140px;
+  z-index: 3;
 }
 
 .file_delete_button {
@@ -60,6 +62,7 @@
   bottom: 10px;
   width: 140px;
   cursor: pointer;
+  z-index: 3;
 }
 
 .file_info_div {
@@ -80,47 +83,49 @@
 .preview_image {
   position: absolute;
   left: 0px;
-  bottom: calc(250px + 25px);
+  top: 0px;
   width: 100%;
   border-bottom: 1px solid var(--main-border-color);
-  border-top: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+  border-radius: 8px;
+
+  cursor: pointer;
 }
 
-.preview_image_mobile_move {
-  position: absolute;
-  top: 0px;
-  width: 30%;
-  height: 100%;
+.preview_image_image {
+  /* border-top: 1px solid var(--main-border-color); */
+  margin-top: 50px;
+  width: 95%;
+  margin-left: 2.5%;
+  border-radius: 8px;
 }
 
 .preview_display_type {
-  position: absolute;
+  position: relative;
   left: 0px;
-  bottom: -25px;
+  top: 0px;
   height: 25px;
-  width: 100%;
-  border-top: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
+  width: 300px;
+
   color: var(--main-font-color);
 }
 
 .preview_rendering_selector {
   height: 25px;
-  border-right: 1px solid var(--main-border-color);
-  border-left: 1px solid var(--main-border-color);
-  border-top: none;
-  border-bottom: none;
+  border: none;
   background-color: var(--bg-color);
   cursor: pointer;
   color: var(--main-font-color);
   border-radius: none;
   clip-path: None;
-
 }
 
 .preview_rendering_selector:focus {
   outline: none;
+}
+
+.preview_rendering_selector:hover {
+  background-color: var(--hover-color);
 }
 
 .preview_video_fullscreen {
@@ -221,32 +226,60 @@
   filter: invert(50%);
 }
 
+/*----------------------------------------------------------------------------*/
+
+.preview_text {
+  position: fixed;
+  right: 0px;
+  top: 250px;
+  max-height: 400px;
+  width: 100%;
+  bottom: 55px;
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  cursor: default;
+}
+
+.preview_text_textarea {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 5px;
+  height: calc(100% - 20px);
+  background-color: var(--main-input-color);
+  resize: none;
+  white-space: pre;
+  cursor: default;
+}
+
+/*----------------------------------------------------------------------------*/
+
 .preview_info {
   position: absolute;
   right: 0px;
-  height: 35px;
+  top: 8px;
   width: 150px;
-  border-left: 1px solid var(--main-border-color);
+}
+
+.activity_container {
+  position: absolute;
+  left: 0px;
+  top: 210px;
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid var(--main-border-color);
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+
+  border-radius: 8px;
 }
 
 /* list files */
 .file_activity_button {
   position: absolute;
-  right: 0px;
-  top: 0px;
-  width: 140px;
-  height: 35px;
-  border-bottom: 1px solid var(--main-border-color);
-  border-left: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
-  cursor: pointer;
-}
-
-.file_activity_button:hover {
-  background-color: var(--hover-color);
+  left: 5px;
+  top: 7px;
 }
 
 .file_list_info_div {

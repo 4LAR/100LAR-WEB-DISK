@@ -10,6 +10,7 @@
     background-color: var(--bg-color);
     border-radius: 8px;
     border: 1px solid var(--main-border-color);
+    z-index: 4;
   }
 }
 
@@ -25,6 +26,7 @@
     background-color: var(--bg-color);
     border-radius: 8px;
     border: 1px solid var(--main-border-color);
+    z-index: 4;
   }
 }
 
