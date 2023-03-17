@@ -162,20 +162,26 @@
 .preview_video {
   position: absolute;
   left: 0px;
-  bottom: 250px;
+  top: 0px;
   width: 100%;
   border-bottom: 1px solid var(--main-border-color);
-  border-top: 1px solid var(--main-border-color);
-  background-color: #000;
-
+  background-color: var(--bg-color);
+  border-radius: 8px;
   cursor: pointer;
 }
 
+.preview_video_player {
+  margin-top: 50px;
+  width: 95%;
+  margin-left: 2.5%;
+  border-radius: 8px;
+}
+
 .preview_video_controls {
+  margin-top: 5px;
   height: 25px;
   width: 100%;
-  border-top: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
+  border-radius: 8px;
 }
 
 .preview_video img {
@@ -196,11 +202,11 @@
 .preview_audio {
   position: absolute;
   left: 0px;
-  bottom: 250px;
+  top: 0px;
   width: 100%;
   border-bottom: 1px solid var(--main-border-color);
-  border-top: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+  border-radius: 8px;
   cursor: pointer;
 }
 

@@ -133,8 +133,8 @@
   position: absolute;
   left: 5px;
   top: 10px;
-  width: calc(100% - 15px);
-  height: calc(100% - 20px);
+  width: calc(100% - 10px);
+  height: calc(100% - 18px);
   cursor: default;
   border: none;
   border-radius: 8px;
@@ -267,11 +267,9 @@
   left: 0px;
   top: 0px;
   width: 300px;
-
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
   border-radius: 8px;
-
   cursor: pointer;
 }
 
@@ -318,11 +316,9 @@
   left: 0px;
   top: 0px;
   width: 300px;
-
   border-bottom: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
   border-radius: 8px;
-
   cursor: pointer;
 }
 
