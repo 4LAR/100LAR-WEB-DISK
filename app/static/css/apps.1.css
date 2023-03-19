@@ -136,6 +136,16 @@
 
 /*----------------------------------------------------------------------------*/
 
+
+/* .apps_main_iframe {
+  position: absolute;
+  left: 201px;
+  top: 36px;
+  width: calc(100% - 205px);
+  height: calc(100% - 40px);
+  border: none;
+  border-radius: 0 0 8px 0;
+} */
 .apps_main_div {
   position: absolute;
   left: 201px;
@@ -143,6 +153,11 @@
   right: 0px;
   bottom: 0px;
   border-radius: 0 0 8px 0;
+}
+
+.apps_main_div * {
+  margin-top: 0px;
+  margin-bottom: 4px;
 }
 
 /*----------------------------------------------------------------------------*/

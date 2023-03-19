@@ -1,5 +1,5 @@
 
-VERSION = '2.1.0 (not stable)'
+VERSION = '2.2.0 (not stable)'
 
 import requests
 import configparser

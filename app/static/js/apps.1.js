@@ -178,12 +178,49 @@ function append_to_apps_buttons() {
   }
 }
 
+function generate_create_layout(dict, root=true) {
+  var html_div = '';
+  if (root) {
+    dict.unshift({
+      "type": "row",
+      "text": "App name:",
+      "elements": [
+        {
+          "type": "input",
+          "arg": "name",
+          "placeholder": "app name",
+          "value": "My app",
+          "must_be_filled": true
+        }
+      ]
+    })
+  }
+  for (el of dict) {
+    switch (el['type']) {
+      case ('label'): {
+        html_div += `<p style="margin-left: 10px;">${el['text']}</p>`
+        break;
+      }
+      case ('row'): {
+        html_div += `<p style="margin-left: 5px;">${el['text']}</p>`;
+        html_div += generate_create_layout(el['elements'], false);
+        break;
+      }
+      case ('input'): {
+        html_div += `<input id="${APP_NAMESPACE}${el['arg']}" class="input_style dialog_input" style="left: 10px; width: 90%; max-width: 260px;" type=text placeholder="${el['placeholder']}" value="${el['value']}">`;
+        break;
+      }
+    }
+  }
+  return html_div
+}
+
 function select_app_button(id) {
   if (selected_app_id != "")
     document.getElementById(`app_button_${selected_app_id}`).classList.replace('app_button_selected', 'app_button');
 
   document.getElementById(`app_button_${id}`).classList.replace('app_button', 'app_button_selected');
-  document.getElementById(`apps_main_div`).innerHTML = apps_buttons[id]['welcome_html'];
+  document.getElementById(`apps_main_div`).innerHTML = generate_create_layout(apps_buttons[id]['create_layout']);
   selected_app_id = id;
 }
 

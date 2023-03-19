@@ -1,9 +1,31 @@
 {
+  "type": "application",
   "name": "bash",
   "ico": "app.svg",
-  "welcome_html": "welcome_app.html",
-  "main_html": "app.html",
+  "html": "app.html",
   "css": ["app.css"],
   "script": ["app.js"],
-  "executable": "app.py"
+  "executable": "app.py",
+  "create_layout": [
+    {
+      "type": "row",
+      "text": "Start path:",
+      "elements": [
+        {
+          "type": "select",
+          "arg": "disk",
+          "options": "disks"
+        }, {
+          "type": "input",
+          "arg": "path",
+          "placeholder": "path",
+          "value": "/",
+          "must_be_filled": true
+        }
+      ]
+    }, {
+      "type": "label",
+      "text": "This bash terminal will be runned on subprocess."
+    }
+  ]
 }

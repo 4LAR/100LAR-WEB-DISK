@@ -80,8 +80,8 @@ class Extensions():
             apps_dict[app] = {
                 "name": self.apps[app]['name'],
                 "ico": self.apps[app]['ico'],
-                "main_html": self.apps[app]['main_html'],
-                "welcome_html": self.apps[app]['welcome_html'],
+                "html": self.apps[app]['html'],
+                "create_layout": self.apps[app]['create_layout'],
                 "executable_args": self.apps[app]['executable_args']
             }
         return apps_dict
@@ -95,16 +95,17 @@ class Extensions():
         for dir in folders:
             try:
                 settings_json = read_dict(self.path + dir + "/appinfo")
-                executable, args = self.load_executable(self.path + dir + "/" + settings_json["executable"])
-                self.apps[settings_json["name"]] = {
-                    "name": settings_json["name"],
-                    "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
-                    "main_html": self.read_html(self.path + dir + "/", settings_json),
-                    "welcome_html": self.read_welcome_html(self.path + dir + "/" + settings_json["welcome_html"], settings_json),
-                    "executable": executable,
-                    "executable_args": args,
-                    "executable_methods": get_methods(executable)
-                }
+                if (settings_json["type"] == 'application'):
+                    executable, args = self.load_executable(self.path + dir + "/" + settings_json["executable"])
+                    self.apps[settings_json["name"]] = {
+                        "name": settings_json["name"],
+                        "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
+                        "html": self.read_html(self.path + dir + "/", settings_json),
+                        "create_layout": settings_json["create_layout"],#self.read_welcome_html(self.path + dir + "/" + settings_json["welcome_html"], settings_json),
+                        "executable": executable,
+                        "executable_args": args,
+                        "executable_methods": get_methods(executable)
+                    }
             except Exception as e:
                 print("Extensions: ", e)
 
@@ -141,7 +142,7 @@ class Extensions():
                 script_str += fh.read()
 
         main_html_str = ''
-        with open(path + settings_json['main_html'], "r", encoding='utf-8') as fh:
+        with open(path + settings_json['html'], "r", encoding='utf-8') as fh:
             main_html_str += fh.read()
 
         return {"css": style_str, "script": script_str, "html": main_html_str}
@@ -149,10 +150,10 @@ class Extensions():
     def generate_html(self, id, user_id, settings_json):
         user_app = self.userBase.users_apps[user_id][int(id)]
         script_str = '<script type="text/javascript">const current_app_id = %s; const current_namespace = "%s";\n' % (str(id), user_app['app_namespace'])
-        script_str += settings_json['main_html']['script']
+        script_str += settings_json['html']['script']
         script_str += "</script>";
 
-        main_html_str = settings_json['main_html']['html'].format(name=settings_json['name'], style=settings_json['main_html']['css'], script=script_str)
+        main_html_str = settings_json['html']['html'].format(name=settings_json['name'], style=settings_json['html']['css'], script=script_str)
 
         return main_html_str
 
