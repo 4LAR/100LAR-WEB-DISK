@@ -12,20 +12,25 @@
       "text": "Start path:",
       "elements": [
         {
-          "type": "select",
-          "arg": "disk",
-          "options": "disks"
-        }, {
+          "type": "path",
+          "arg": "path"
+        }
+      ]
+    }, {
+      "type": "row",
+      "text": "CMD:",
+      "elements": [
+        {
           "type": "input",
-          "arg": "path",
-          "placeholder": "path",
-          "value": "/",
-          "must_be_filled": true
+          "arg": "cmd",
+          "placeholder": "command",
+          "value": "bash",
+          "must_be_filled": false
         }
       ]
     }, {
       "type": "label",
-      "text": "This bash terminal will be runned on subprocess."
+      "text": "This bash terminal will be runned in subprocess."
     }
   ]
 }

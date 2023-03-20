@@ -1088,9 +1088,12 @@ def get_my_apps():
 def append_app():
     data = request.args.get("data", "")
     app_id = request.args.get("app_id", "")
-    extensions.append_app(int(current_user.id), app_id, json.loads(data))
+    status, data = extensions.append_app(int(current_user.id), app_id, json.loads(data))
+    if status:
+        return OK
 
-    return OK
+    else:
+        return data
 
 @app.route('/delete_app', methods=['GET' , 'POST'])
 @login_required

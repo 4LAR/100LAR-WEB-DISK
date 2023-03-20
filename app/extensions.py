@@ -32,11 +32,59 @@ class Extensions():
 
         self.read()
 
+    def get_layout_args_settings(self, layout_arr):
+        data = {}
+        for app in layout_arr:
+            if (app['type'] == "label"):
+                pass
+
+            elif (app['type'] == "path"):
+                data[app['arg']] = {
+                    "type": app['type']
+                }
+
+            elif (app['type'] == "row"):
+                data = {**data, **self.get_layout_args_settings(app['elements'])}
+
+            else:
+                data[app['arg']] = {
+                    "type": app['type'],
+                    "must_be_filled": app['must_be_filled']
+                }
+
+        return data
+
+    def check_data(self, app_id, user_id, data):
+        checked_data = {}
+        user_info = self.userBase.get_user_info(user_id)
+        for el in data:
+            data_value = data[el]['value']
+            if (self.apps[app_id]['layout_args_settings'][el]['type'] == 'path'):
+            # if (data[el]['type'] == 'path'):
+                data_value_splited = data_value.split(":")
+                path = user_info['path'][int(data_value_splited[0])]['path'] + "/" + data_value_splited[1]
+                if os.path.exists(path):
+                    checked_data[el] = path
+                else:
+                    return el, False
+
+            else:
+                if ((self.apps[app_id]['layout_args_settings'][el]['must_be_filled'] and len(data_value) > 0) or not (self.apps[app_id]['layout_args_settings'][el]['must_be_filled'])):
+                    checked_data[el] = data_value
+                else:
+                    return el, False
+
+        return checked_data, True
+
     def append_app(self, user_id, app_id, data):
         if not (user_id in self.userBase.users_apps):
             self.userBase.users_apps[user_id] = []
 
-        app_name = data.pop("name")
+        app_name = data.pop("name")['value']
+
+        data, status = self.check_data(app_id, user_id, data)
+        if (not status):
+            return status, data
 
         app_namespace = "/App_%s_%s" % (user_id, app_name)
         executable = self.apps[app_id]['executable'](self.socketio, app_namespace, **data)
@@ -52,7 +100,7 @@ class Extensions():
             if (method_split[0] == 'io'):
                 self.socketio.on_event(method_split[1], lambda data, method=getattr(executable, method), user_id=user_id: self.socket_wrapper(data, method, user_id), namespace=app_namespace)
 
-        return True
+        return True, None
 
     def delete_app(self, user_id, id):
         self.userBase.users_apps[user_id][id]['executable'].close()
@@ -102,6 +150,7 @@ class Extensions():
                         "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
                         "html": self.read_html(self.path + dir + "/", settings_json),
                         "create_layout": settings_json["create_layout"],#self.read_welcome_html(self.path + dir + "/" + settings_json["welcome_html"], settings_json),
+                        "layout_args_settings": self.get_layout_args_settings(settings_json["create_layout"]),
                         "executable": executable,
                         "executable_args": args,
                         "executable_methods": get_methods(executable)

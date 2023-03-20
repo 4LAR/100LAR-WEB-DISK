@@ -13,10 +13,13 @@ import sys
 from terminal import *
 
 class app():
-    def __init__(self, socketio, app_namespace, path):
+    def __init__(self, socketio, app_namespace, path, cmd):
         self.socketio = socketio
         self.app_namespace = app_namespace
-        self.terminal = Terminal(cmd=['bash'])
+        self.terminal = Terminal(
+            cmd=[cmd],
+            cwd=path
+        )
 
         self.status = 0
         self.run_thread = False

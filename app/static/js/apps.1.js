@@ -85,19 +85,19 @@ function close_main_app_dialog() {
 
 // создание приложения
 function append_app() {
-  var data = new Object();
-  var args_list = apps_buttons[selected_app_id]['executable_args'];
-  for (let i = 0; i < args_list.length; i++) {
-    data[args_list[i]] = document.getElementById(`${APP_NAMESPACE}${selected_app_id}_${args_list[i]}`).value;
-  }
+  var data = get_values_from_create_layout(apps_buttons[selected_app_id]['create_layout']);
 
   var xhr = new XMLHttpRequest();
   xhr.open('POST', `/append_app?app_id=${selected_app_id}&data=${JSON.stringify(data)}`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      close_create_apps_dialog();
-      get_apps();
+      if (xhr.responseText.toString() === 'ok') {
+        close_create_apps_dialog();
+        get_apps();
+      } else {
+        console.log(xhr.responseText.toString());
+      }
     }
   };
   xhr.send();
@@ -178,6 +178,39 @@ function append_to_apps_buttons() {
   }
 }
 
+function get_values_from_create_layout(dict, root=true) {
+  var data = new Object();
+  if (root) {
+    data['name'] = document.getElementById(`${APP_NAMESPACE}name`).value;
+  }
+
+  for (el of dict) {
+    if (!["label", "row"].includes(el['type']))
+      data[el['arg']] = {
+        // "type": el['type'],
+        "value": undefined}
+        ;
+    switch (el['type']) {
+      case ('path'): {
+        data[el['arg']]["value"] = document.getElementById(`${APP_NAMESPACE}${el['arg']}_select`).value + ":" + document.getElementById(`${APP_NAMESPACE}${el['arg']}_input`).value;
+        break;
+      }
+      case ('row'): {
+        data = Object.assign(data, get_values_from_create_layout(el['elements'], false));
+        break;
+      }
+      case ('label'):
+        break;
+
+      default: {
+        data[el['arg']]["value"] = document.getElementById(`${APP_NAMESPACE}${el['arg']}`).value;
+      }
+    }
+
+  }
+  return data
+}
+
 function generate_create_layout(dict, root=true) {
   var html_div = '';
   if (root) {
@@ -208,6 +241,24 @@ function generate_create_layout(dict, root=true) {
       }
       case ('input'): {
         html_div += `<input id="${APP_NAMESPACE}${el['arg']}" class="input_style dialog_input" style="left: 10px; width: 90%; max-width: 260px;" type=text placeholder="${el['placeholder']}" value="${el['value']}">`;
+        break;
+      }
+      case ('select'): {
+        var select_options = "";
+        for (option of el['options']) {
+          select_options += `<option value="${option}">${option}</option>`;
+        }
+        html_div += `<select class="round_selector" id="${APP_NAMESPACE}${el['arg']}" style="left: 10px; width: 90%; max-width: 260px;">${select_options}</select>`;
+        break;
+      }
+      case ('path'): {
+        var select_options = "";
+        for (let i = 0; i < info_json['path'].length; i++) {
+          if (!info_json['path'][i]['readonly'])
+            select_options += `<option value="${i}">${info_json['path'][i]['name']}</option>`;
+        }
+        html_div += `<div class="apps_path_div"><select class="round_selector" id="${APP_NAMESPACE}${el['arg']}_select" style="left: 10px; width: 80px;">${select_options}</select>`;
+        html_div += `<input id="${APP_NAMESPACE}${el['arg']}_input" class="input_style dialog_input" style="position: absolute; left: 95px; right: 5%; max-width: 175px;" type=text placeholder="direcory" value="/"></div>`
         break;
       }
     }

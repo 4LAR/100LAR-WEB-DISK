@@ -11,11 +11,12 @@ import shlex
 import sys
 
 class Terminal:
-    def __init__(self, cmd = ["bash"]):
+    def __init__(self, cmd = ["bash"], cwd=None):
         self.fd = None
         self.child_pid = None
         self.process = None
         self.cmd = cmd
+        self.cwd = cwd
 
     def set_winsize(self, row, col, xpix=0, ypix=0):
         if (self.fd):
@@ -35,7 +36,7 @@ class Terminal:
 
         (child_pid, fd) = pty.fork()
         if (child_pid == 0):
-            self.process = subprocess.run(self.cmd)
+            self.process = subprocess.run(self.cmd, cwd=self.cwd)
 
         else:
             self.fd = fd
