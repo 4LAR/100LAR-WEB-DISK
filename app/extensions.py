@@ -60,7 +60,6 @@ class Extensions():
         for el in data:
             data_value = data[el]['value']
             if (self.apps[app_id]['layout_args_settings'][el]['type'] == 'path'):
-            # if (data[el]['type'] == 'path'):
                 data_value_splited = data_value.split(":")
                 path = user_info['path'][int(data_value_splited[0])]['path'] + "/" + data_value_splited[1]
                 if os.path.exists(path):
@@ -76,11 +75,20 @@ class Extensions():
 
         return checked_data, True
 
+    def check_user_app_names(self, user_id, name):
+        for app in self.userBase.users_apps[user_id]:
+            if (app['name'] == name):
+                return False
+
+        return True
+
     def append_app(self, user_id, app_id, data):
         if not (user_id in self.userBase.users_apps):
             self.userBase.users_apps[user_id] = []
 
         app_name = data.pop("name")['value']
+        if (len(app_name) == 0 or not self.check_user_app_names(user_id, app_name)):
+            return False, 'name'
 
         data, status = self.check_data(app_id, user_id, data)
         if (not status):

@@ -63,6 +63,22 @@ function close_create_apps_dialog() {
   closeModal('dialog_create_apps');
 }
 
+// удаление приложения
+var delete_app_dialog_bool = false;
+function delete_app_dialog() {
+  delete_app_dialog_bool = true;
+
+  openModal('dialog_bg');
+  openModal('dialog_delete_app');
+}
+
+function close_delete_app_dialog() {
+  delete_app_dialog_bool = false;
+
+  closeModal('dialog_bg');
+  closeModal('dialog_delete_app');
+}
+
 // открытие приложения
 var main_app_dialog_bool = false;
 function main_app_dialog() {
@@ -84,6 +100,7 @@ function close_main_app_dialog() {
 /*----------------------------------------------------------------------------*/
 
 // создание приложения
+// var data_args = {};
 function append_app() {
   var data = get_values_from_create_layout(apps_buttons[selected_app_id]['create_layout']);
 
@@ -92,11 +109,24 @@ function append_app() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
+      console.log(data);
       if (xhr.responseText.toString() === 'ok') {
         close_create_apps_dialog();
+        document.getElementById(`apps_main_div`).innerHTML = ``;
         get_apps();
       } else {
-        console.log(xhr.responseText.toString());
+        for (const [key, value] of Object.entries(data)) {
+          if (value['type'] === 'path') {
+            document.getElementById(`${APP_NAMESPACE}${key}_select`).classList.replace('app_input_error', 'app_input_ok');
+            document.getElementById(`${APP_NAMESPACE}${key}_input`).classList.replace('app_input_error', 'app_input_ok');
+          } else document.getElementById(`${APP_NAMESPACE}${key}`).classList.replace('app_input_error', 'app_input_ok');
+        }
+        var arg = xhr.responseText.toString()
+        // console.log(xhr.responseText.toString());
+        if (data[arg]['type'] === 'path') {
+          document.getElementById(`${APP_NAMESPACE}${arg}_select`).classList.replace('app_input_ok', 'app_input_error');
+          document.getElementById(`${APP_NAMESPACE}${arg}_input`).classList.replace('app_input_ok', 'app_input_error');
+        } else document.getElementById(`${APP_NAMESPACE}${arg}`).classList.replace('app_input_ok', 'app_input_error');
       }
     }
   };
@@ -160,6 +190,20 @@ function append_to_apps_buttons() {
   clear_ul('apps_buttons');
   var apps_count = 0;
   for (app_name in apps_buttons) {
+    console.log(apps_buttons[app_name]);
+    apps_buttons[app_name]['create_layout'].unshift({
+      "type": "row",
+      "text": "App name:",
+      "elements": [
+        {
+          "type": "input",
+          "arg": "name",
+          "placeholder": "app name",
+          "value": "My app",
+          "must_be_filled": true
+        }
+      ]
+    })
     if (first_app.length < 1) first_app = app_name;
     append_to_ul(
       'apps_buttons',
@@ -187,9 +231,9 @@ function get_values_from_create_layout(dict, root=true) {
   for (el of dict) {
     if (!["label", "row"].includes(el['type']))
       data[el['arg']] = {
-        // "type": el['type'],
-        "value": undefined}
-        ;
+        "type": el['type'],
+        "value": undefined
+      };
     switch (el['type']) {
       case ('path'): {
         data[el['arg']]["value"] = document.getElementById(`${APP_NAMESPACE}${el['arg']}_select`).value + ":" + document.getElementById(`${APP_NAMESPACE}${el['arg']}_input`).value;
@@ -213,21 +257,6 @@ function get_values_from_create_layout(dict, root=true) {
 
 function generate_create_layout(dict, root=true) {
   var html_div = '';
-  if (root) {
-    dict.unshift({
-      "type": "row",
-      "text": "App name:",
-      "elements": [
-        {
-          "type": "input",
-          "arg": "name",
-          "placeholder": "app name",
-          "value": "My app",
-          "must_be_filled": true
-        }
-      ]
-    })
-  }
   for (el of dict) {
     switch (el['type']) {
       case ('label'): {
@@ -240,7 +269,7 @@ function generate_create_layout(dict, root=true) {
         break;
       }
       case ('input'): {
-        html_div += `<input id="${APP_NAMESPACE}${el['arg']}" class="input_style dialog_input" style="left: 10px; width: 90%; max-width: 260px;" type=text placeholder="${el['placeholder']}" value="${el['value']}">`;
+        html_div += `<input id="${APP_NAMESPACE}${el['arg']}" class="app_input_ok input_style dialog_input" style="left: 10px; width: 90%; max-width: 260px;" type=text placeholder="${el['placeholder']}" value="${el['value']}">`;
         break;
       }
       case ('select'): {
@@ -248,7 +277,7 @@ function generate_create_layout(dict, root=true) {
         for (option of el['options']) {
           select_options += `<option value="${option}">${option}</option>`;
         }
-        html_div += `<select class="round_selector" id="${APP_NAMESPACE}${el['arg']}" style="left: 10px; width: 90%; max-width: 260px;">${select_options}</select>`;
+        html_div += `<select class="app_input_ok round_selector" id="${APP_NAMESPACE}${el['arg']}" style="left: 10px; width: 90%; max-width: 260px;">${select_options}</select>`;
         break;
       }
       case ('path'): {
@@ -257,8 +286,8 @@ function generate_create_layout(dict, root=true) {
           if (!info_json['path'][i]['readonly'])
             select_options += `<option value="${i}">${info_json['path'][i]['name']}</option>`;
         }
-        html_div += `<div class="apps_path_div"><select class="round_selector" id="${APP_NAMESPACE}${el['arg']}_select" style="left: 10px; width: 80px;">${select_options}</select>`;
-        html_div += `<input id="${APP_NAMESPACE}${el['arg']}_input" class="input_style dialog_input" style="position: absolute; left: 95px; right: 5%; max-width: 175px;" type=text placeholder="direcory" value="/"></div>`
+        html_div += `<div class="apps_path_div"><select class="app_input_ok round_selector" id="${APP_NAMESPACE}${el['arg']}_select" style="left: 10px; width: 80px;">${select_options}</select>`;
+        html_div += `<input id="${APP_NAMESPACE}${el['arg']}_input" class="app_input_ok input_style dialog_input" style="position: absolute; left: 95px; right: 5%; max-width: 175px;" type=text placeholder="direcory" value="/"></div>`
         break;
       }
     }
@@ -282,8 +311,14 @@ get_apps();
 function open_app(id) {
   selected_app_id_iframe = id;
   document.getElementById('main_app_frame').src = `/app?app_id=${my_apps[id]['app_id']}&id=${id}`;
+  document.getElementById('app_new_window_button').onclick = function(){open_app_in_new_tab(id)};
 
   main_app_dialog();
+}
+
+function open_app_in_new_tab(id) {
+  close_main_app_dialog();
+  openInNewTab(`/app?app_id=${my_apps[id]['app_id']}&id=${id}`);
 }
 
 document.getElementById('main_app_frame').onload = function() {

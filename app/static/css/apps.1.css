@@ -26,8 +26,6 @@
   top: 297px;
   bottom: 35px;
   width: var(--width-left-bar);
-  /* background-color: var(--hover-color); */
-  /* background-color: var(--apps-list-bg); */
   overflow-y: scroll;
   overflow-x: hidden;
   direction: rtl;
@@ -56,7 +54,6 @@
   height: 40px;
   padding: 0px;
   border-bottom: 1px solid var(--main-border-color);
-  /* margin-top: -14px; */
 }
 
 .apps_list_element:hover {
@@ -136,16 +133,6 @@
 
 /*----------------------------------------------------------------------------*/
 
-
-/* .apps_main_iframe {
-  position: absolute;
-  left: 201px;
-  top: 36px;
-  width: calc(100% - 205px);
-  height: calc(100% - 40px);
-  border: none;
-  border-radius: 0 0 8px 0;
-} */
 .apps_main_div {
   position: absolute;
   left: 201px;
@@ -176,6 +163,26 @@
   border: 1px solid var(--main-border-color);
 }
 
+.dialog_new_window_button {
+  position: absolute;
+  right: 101px;
+  top: 0px;
+  width: 150px;
+  height: 35px;
+  border-left: 1px solid var(--main-border-color);
+  border-right: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+  cursor: pointer;
+}
+
+.dialog_new_window_button {
+  white-space: nowrap;
+}
+
+.dialog_new_window_button:hover {
+  background-color: var(--hover-color);
+}
+
 .main_app {
   position: absolute;
   top: 36px;
@@ -198,4 +205,12 @@
 
 .apps_path_div * {
   margin-bottom: 0;
+}
+
+.app_input_ok {
+
+}
+
+.app_input_error {
+  border: 1px solid #D73A49;
 }

@@ -376,6 +376,10 @@
           <img class="icon" width="20" height="20" src="static/img/cross.svg">
           <p>close</p>
         </div>
+        <div id="app_new_window_button" class="dialog_new_window_button block_select button_margin" style="right: 100px;" onclick="">
+          <img class="icon" width="20" height="20" src="static/img/new-window.svg">
+          <p>open in new tab</p>
+        </div>
       </div>
 
       <div id="main_app" class="main_app">
@@ -401,6 +405,22 @@
 
       <div class="round_button dialog_button block_select" style="right: 10px; bottom: 10px; width: 100px;" onclick="append_app()">
         <p style="margin: 5px 28px">create</p>
+      </div>
+    </div>
+
+    <!-- удаление приложения -->
+    <div id="dialog_delete_app" class="dialog_style" style="height: 160px;">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_delete_app_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <p style="position: absolute; top: 30px; font-size: 1.1em; left: 0px; width: 100%; text-align: center;">Do you really want to delete this app?</p>
+
+      <div id="delete_app_button" class="round_button red_dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
+        <p style="margin: 5px 28px">delete</p>
       </div>
     </div>
 
