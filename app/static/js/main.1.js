@@ -24,10 +24,7 @@ function openModal(modalId) {
 function checkModal(modalId) {
   try {
     var modal = document.getElementById(modalId);
-    if (modal.style.display == "block")
-      return true;
-    else
-      return false;
+    return (modal.style.display == "block")
 
   } catch {
     return false;
@@ -158,4 +155,19 @@ function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max + 1);
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+//
+function debounce(func, wait_ms) {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait_ms);
+  };
+}
+
+//
+function compare_str(str1, str2) {
+  return (str1 === str2.slice(0, str1.length));
 }

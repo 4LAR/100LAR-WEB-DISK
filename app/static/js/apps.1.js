@@ -160,8 +160,12 @@ function get_my_apps() {
       }
       if (apps_count > 0) {
         closeModal("apps_empty_message");
+        openModal("app_search_div");
+        openModal("apps_list_div");
       } else {
         openModal("apps_empty_message");
+        closeModal("app_search_div");
+        closeModal("apps_list_div");
       }
       document.getElementById('apps_count').innerHTML = `${apps_count} elements`;
     }
@@ -302,6 +306,21 @@ function select_app_button(id) {
 }
 
 get_apps();
+
+/*----------------------------------------------------------------------------*/
+
+function search_app_input() {
+  search_app(document.getElementById(`app_search_input`).value);
+}
+
+function search_app(name) {
+  clear_ul('apps_list');
+  for (let i = 0; i < my_apps.length; i++) {
+    if (compare_str(name, my_apps[i]["name"]) || (name == "")) {
+      append_apps_to_list(i, my_apps[i]["name"], my_apps[i]["app_id"], my_apps[i]["status"]);
+    }
+  }
+}
 
 /*----------------------------------------------------------------------------*/
 

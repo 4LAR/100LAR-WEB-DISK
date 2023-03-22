@@ -47,6 +47,8 @@
 
   --terminal-list-bg: #22272C;
 
+  --color-hide-font: #959DA5;
+
 }
 
 [data-theme = "light"] {
@@ -91,6 +93,8 @@
   --fileList-checkbox-color: #FFFFFF;
   --fileList-checkbox-delimiter-color: #E1E4E8;
   --fileList-delimiter-color: #FFFFFF;
+
+  --color-hide-font: #6A737D;
 
 }
 

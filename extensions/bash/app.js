@@ -46,15 +46,6 @@ function fitToscreen() {
   socket.emit("resize", dims);
 }
 
-function debounce(func, wait_ms) {
-  let timeout;
-  return function (...args) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait_ms);
-  };
-}
-
 function customKeyEventHandler(e) {
   if (e.type !== "keydown") {
     return true;

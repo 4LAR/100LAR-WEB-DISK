@@ -70,11 +70,14 @@
           <img class="icon" style="position:absolute; right: 15px; top: 15px; cursor: pointer" width="15" height="15" src="static/img/add.svg" onclick="create_apps_dialog()">
         </div>
 
+        <div id="app_search_div" class="app_search_div">
+          <input id="app_search_input" class="input_style" type=text placeholder="filter" oninput="debounce(search_app_input, 50)()">
+        </div>
+        <div id="apps_empty_message" class="apps_empty_message">
+          <p>Application list is empty</p>
+        </div>
         <div id="apps_list_div" class="apps_list_div_scroll scroll_style">
           <div class="apps_list_div">
-            <div id="apps_empty_message" class="apps_empty_message">
-              <p>Application list is empty</p>
-            </div>
             <ul id="apps_list"></ul>
           </div>
         </div>
