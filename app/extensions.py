@@ -83,6 +83,9 @@ class Extensions():
         return True
 
     def append_app(self, user_id, app_id, data):
+        if not ((self.userBase.users_dict_static[user_id]['status'] in self.apps[app]["status_required"]) or len(self.apps[app]["status_required"]) == 0):
+            return False, 'status required'
+
         if not (user_id in self.userBase.users_apps):
             self.userBase.users_apps[user_id] = []
 
@@ -130,16 +133,17 @@ class Extensions():
         else:
             return {}
 
-    def get(self):
+    def get(self, user_id):
         apps_dict = {}
         for app in self.apps:
-            apps_dict[app] = {
-                "name": self.apps[app]['name'],
-                "ico": self.apps[app]['ico'],
-                "html": self.apps[app]['html'],
-                "create_layout": self.apps[app]['create_layout'],
-                "executable_args": self.apps[app]['executable_args']
-            }
+            if ((self.userBase.users_dict_static[user_id]['status'] in self.apps[app]["status_required"]) or len(self.apps[app]["status_required"]) == 0):
+                apps_dict[app] = {
+                    "name": self.apps[app]['name'],
+                    "ico": self.apps[app]['ico'],
+                    "html": self.apps[app]['html'],
+                    "create_layout": self.apps[app]['create_layout'],
+                    "executable_args": self.apps[app]['executable_args']
+                }
         return apps_dict
 
     def get_all(self):
@@ -156,6 +160,7 @@ class Extensions():
                     self.apps[settings_json["name"]] = {
                         "name": settings_json["name"],
                         "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
+                        "status_required": settings_json["status_required"],
                         "html": self.read_html(self.path + dir + "/", settings_json),
                         "create_layout": settings_json["create_layout"],#self.read_welcome_html(self.path + dir + "/" + settings_json["welcome_html"], settings_json),
                         "layout_args_settings": self.get_layout_args_settings(settings_json["create_layout"]),

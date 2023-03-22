@@ -1076,7 +1076,7 @@ def log_request_info():
 @app.route('/get_apps', methods=['GET' , 'POST'])
 @login_required
 def get_apps():
-    return {"apps": extensions.get()}
+    return {"apps": extensions.get(current_user.id)}
 
 @app.route('/get_my_apps', methods=['GET' , 'POST'])
 @login_required

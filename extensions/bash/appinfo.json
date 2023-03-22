@@ -1,6 +1,7 @@
 {
   "type": "application",
   "name": "bash",
+  "status_required": ["admin"],
   "ico": "app.svg",
   "html": "app.html",
   "css": ["app.css"],
