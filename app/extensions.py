@@ -83,7 +83,7 @@ class Extensions():
         return True
 
     def append_app(self, user_id, app_id, data):
-        if not ((self.userBase.users_dict_static[user_id]['status'] in self.apps[app]["status_required"]) or len(self.apps[app]["status_required"]) == 0):
+        if not ((self.userBase.users_dict_static[str(user_id)]['status'] in self.apps[app_id]["status_required"]) or len(self.apps[app_id]["status_required"]) == 0):
             return False, 'status required'
 
         if not (user_id in self.userBase.users_apps):
@@ -136,7 +136,7 @@ class Extensions():
     def get(self, user_id):
         apps_dict = {}
         for app in self.apps:
-            if ((self.userBase.users_dict_static[user_id]['status'] in self.apps[app]["status_required"]) or len(self.apps[app]["status_required"]) == 0):
+            if ((self.userBase.users_dict_static[str(user_id)]['status'] in self.apps[app]["status_required"]) or len(self.apps[app]["status_required"]) == 0):
                 apps_dict[app] = {
                     "name": self.apps[app]['name'],
                     "ico": self.apps[app]['ico'],

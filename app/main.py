@@ -1107,7 +1107,7 @@ def delete_app():
 @login_required
 def custom_app():
     id = request.args.get("id", "")
-    app_dict = extensions.get()[request.args.get("app_id", "")]
+    app_dict = extensions.get(current_user.id)[request.args.get("app_id", "")]
     return extensions.generate_html(id, int(current_user.id), app_dict)
 
 #####################################################

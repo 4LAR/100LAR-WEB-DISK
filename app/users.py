@@ -36,7 +36,7 @@ class UserBase():
         self.users_apps = {}
         self.users_dict = {}
         self.users_dict_static = {
-            0: {
+            "0": {
                 "username": "admin",
                 "status": "admin",
                 "password": "12345678",
