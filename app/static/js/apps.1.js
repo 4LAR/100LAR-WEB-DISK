@@ -36,7 +36,7 @@ function append_apps_to_list(id, name, type, status) {
     'apps_list',
     `<div class="apps_list_element block_select">
       <image class="icon apps_list_icon" width="20" height="20" src="data:image/svg+xml;base64,${image} ">
-      <img class="icon apps_list_delete" width="20" height="20" src="static/img/trash.svg" onclick="delete_app(${id})">
+      <img class="icon apps_list_delete" width="20" height="20" src="static/img/trash.svg" onclick="delete_app_dialog(${id}, '${name}')">
       <p class="apps_list_name">${name}</p>
       <p class="apps_list_type">${type_name}</p>
       <p class="apps_list_dot" style="color: #${dot_color}">•</p>
@@ -65,9 +65,10 @@ function close_create_apps_dialog() {
 
 // удаление приложения
 var delete_app_dialog_bool = false;
-function delete_app_dialog() {
+function delete_app_dialog(id, name) {
   delete_app_dialog_bool = true;
-
+  document.getElementById('delete_app_button').onclick = function(){delete_app(id)};
+  document.getElementById('delete_app_name').innerHTML = `&lt;&lt;${name}&gt;&gt;`;
   openModal('dialog_bg');
   openModal('dialog_delete_app');
 }
@@ -100,7 +101,6 @@ function close_main_app_dialog() {
 /*----------------------------------------------------------------------------*/
 
 // создание приложения
-// var data_args = {};
 function append_app() {
   var data = get_values_from_create_layout(apps_buttons[selected_app_id]['create_layout']);
 
@@ -109,7 +109,6 @@ function append_app() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      console.log(data);
       if (xhr.responseText.toString() === 'ok') {
         close_create_apps_dialog();
         document.getElementById(`apps_main_div`).innerHTML = ``;
@@ -122,7 +121,6 @@ function append_app() {
           } else document.getElementById(`${APP_NAMESPACE}${key}`).classList.replace('app_input_error', 'app_input_ok');
         }
         var arg = xhr.responseText.toString()
-        // console.log(xhr.responseText.toString());
         if (data[arg]['type'] === 'path') {
           document.getElementById(`${APP_NAMESPACE}${arg}_select`).classList.replace('app_input_ok', 'app_input_error');
           document.getElementById(`${APP_NAMESPACE}${arg}_input`).classList.replace('app_input_ok', 'app_input_error');
@@ -140,7 +138,7 @@ function delete_app(app_id) {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      close_create_apps_dialog();
+      close_delete_app_dialog();
       get_apps();
     }
   };
@@ -190,7 +188,6 @@ function append_to_apps_buttons() {
   clear_ul('apps_buttons');
   var apps_count = 0;
   for (app_name in apps_buttons) {
-    console.log(apps_buttons[app_name]);
     apps_buttons[app_name]['create_layout'].unshift({
       "type": "row",
       "text": "App name:",
