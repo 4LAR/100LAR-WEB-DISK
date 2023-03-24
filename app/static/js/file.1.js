@@ -336,6 +336,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
     } else {
       file_info = `
         <p style="margin: -38px 100px">${name}</p>
+        <p style="position: absolute; margin: 32px 100px; color: var(--color-hide-font);">${size}</p>
       `;
     }
 

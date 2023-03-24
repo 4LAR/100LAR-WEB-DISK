@@ -23,23 +23,25 @@
       <ul id="file_list" style="overflow-x:hidden;"></ul>
     </div>
 
+    <div class="add_button_div">
+      <img id="" class="icon path_buttons block_select button_margin" style="margin: 10px;" width="30" height="30" src="static/img/add.svg" onclick="open_file_add()">
+    </div>
+
     <div class="bottomBar">
-
-      <!--информация о диске-->
-      <div class="disk_info">
-        <img class="icon_topBar" style="margin: 3px 5px" width="18" height="18" src="static/img/dvd-disk.svg">
-        <p id="disk_converted" class="top_bar_font_color" style="margin: -25px 28px">Loading...</p>
-      </div>
-
-      <!--информация о диске в виде прогресс бара-->
-      <div class="disk_space" id="disk_space_div">
-        <div id="disk_space_progress" class="disk_space_progress"></div>
-      </div>
-
-      <div class="add_button_div">
-        <img id="" class="icon_topBar path_buttons block_select button_margin" style="margin: 7px;" width="35" height="35" src="static/img/add.svg" onclick="open_file_add()">
-      </div>
-
+      <ul class="horizontal_menu">
+        <li>
+          <img id="" class="icon block_select" src="static/img/apps.svg">
+          <p>Apps</p>
+        </li>
+        <li>
+          <img id="" class="icon block_select" src="static/img/files/folder.svg">
+          <p>Files</p>
+        </li>
+        <li>
+          <img id="" class="icon block_select" src="static/img/user.svg">
+          <p>Profile</p>
+        </li>
+      </ul>
     </div>
 
     <div id="file_info_bar_background_black" class="background_black" style="display: none" onclick="close_rightBar()"></div>

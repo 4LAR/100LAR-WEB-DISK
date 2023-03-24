@@ -4,26 +4,25 @@
 
   bottom: 0px;
   left: 0px;
-  height: 25px;
+  height: 50px;
   width: 100%;
 
-  background-color: var(--top-color);
-
-  border-top: 1px solid var(--top-border-color);
+  background-color: var(--hover-color);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 .add_button_div {
   position: fixed;
   right: 10px;
-  bottom: 45px;
+  bottom: 65px;
   height: 45px;
 
   width: 50px;
   height: 50px;
 
-  background-color: var(--top-color);
+  background-color: var(--hover-color);
 
-  border: 1px solid var(--top-border-color);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
   border-radius: 25px;
 }
 
@@ -35,7 +34,7 @@
   position: absolute;
   left: 28px;
   bottom: 2px;
-  right: 5px;
+  right: 90px;
   height: 5px;
   background-color: var(--top-border-color);
   border-radius: 3px;
@@ -49,4 +48,27 @@
   height: 5px;
   background-color: #999999;
   border-radius: 3px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.horizontal_menu {
+  margin: 0;
+  list-style-type: none;
+  text-align: center;
+}
+
+.horizontal_menu li {
+  display: inline-block;
+  width: 30%;
+}
+
+.horizontal_menu img {
+  margin: 5px;
+  width: 26;
+  height: 26;
+}
+
+.horizontal_menu p {
+  margin: -8px 0;
 }
