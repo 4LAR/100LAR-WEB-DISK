@@ -72,3 +72,11 @@
 .horizontal_menu p {
   margin: -8px 0;
 }
+
+.menu_button_selected img {
+  filter: invert(24%) sepia(63%) saturate(2576%) hue-rotate(199deg) brightness(96%) contrast(104%);
+}
+
+.menu_button_selected p {
+  color: #005CC5;
+}

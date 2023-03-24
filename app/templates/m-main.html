@@ -19,27 +19,43 @@
   <body class="scroll_style">
     <input id="path" class="" style="display: none" type=text placeholder="Path" onkeypress="">
 
-    <div id="file_list_div" class="file_list">
-      <ul id="file_list" style="overflow-x:hidden;"></ul>
+    <div id="page_apps" style="display: none;">
+      <p>Apps</p>
     </div>
 
-    <div class="add_button_div">
-      <img id="" class="icon path_buttons block_select button_margin" style="margin: 10px;" width="30" height="30" src="static/img/add.svg" onclick="open_file_add()">
+    <div id="page_files" style="display: none;">
+      <div id="file_list_div" class="file_list">
+        <ul id="file_list" style="overflow-x:hidden;"></ul>
+      </div>
+
+      <div class="add_button_div">
+        <img id="" class="icon path_buttons block_select button_margin" style="margin: 10px;" width="30" height="30" src="static/img/add.svg" onclick="open_file_add()">
+      </div>
+    </div>
+
+    <div id="page_profile" style="display: none;">
+      <p>profile</p>
     </div>
 
     <div class="bottomBar">
       <ul class="horizontal_menu">
         <li>
-          <img id="" class="icon block_select" src="static/img/apps.svg">
-          <p>Apps</p>
+          <div id="page_button_apps" onclick="open_page('apps')" class="block_select menu_button">
+            <img id="" class="icon block_select" src="static/img/apps.svg">
+            <p>Apps</p>
+          </div>
         </li>
         <li>
-          <img id="" class="icon block_select" src="static/img/files/folder.svg">
-          <p>Files</p>
+          <div id="page_button_files" onclick="open_page('files')" class="block_select menu_button">
+            <img class="icon block_select" src="static/img/files/folder.svg">
+            <p>Files</p>
+          </div>
         </li>
         <li>
-          <img id="" class="icon block_select" src="static/img/user.svg">
-          <p>Profile</p>
+          <div id="page_button_profile" onclick="open_page('profile')" class="block_select menu_button">
+            <img class="icon block_select" src="static/img/user.svg">
+            <p>Profile</p>
+          </div>
         </li>
       </ul>
     </div>
@@ -276,50 +292,7 @@
       <ul id="path_list" style="position: absolute; top: -14px; width: 100%"></ul>
     </div>
 
-    <div id="leftBar_user" class="leftBar_user" style="display: none">
 
-      <div id="admin_panel" class="small_button_left_style block_select button_margin" style="top: 45px; display: none" onclick="openInNewTab('admin')">
-        <img class="icon_topBar" width="20" height="20" src="static/img/admin/dashboard.svg">
-        <p class="top_bar_font_color">admin panel</p>
-      </div>
-
-      <div id="other_options" style="position: absolute; top: 42px; width: 100%;">
-        <p class="top_bar_font_color" style="position: absolute; left: 8px; top: 0px;">Theme</p>
-
-        <div style="position: absolute; top: 20px; left: 15px;">
-          <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
-          <label for="lightThame_chekcbox"><p class="top_bar_font_color">Light theme</p></label>
-        </div>
-
-      </div>
-
-      <!--версия-->
-      <div class="div_ver" style="position: absolute; left: 0px; bottom: 30px; width: var(--width-left-bar)" align="left">
-        <p style="margin: 10px 10px"><a href="javascript:open_git_releases()">ver: {{ version }}</a></p>
-      </div>
-
-      <!--кнопка для выхода из аккаунта-->
-      <div class="button_exit_style block_select button_margin" onclick="logout()">
-        <img class="icon_topBar" width="20" height="20" src="static/img/logout.svg">
-        <p class="top_bar_font_color">logout</p>
-      </div>
-    </div>
-
-    <div class="topBar">
-      <div id="path_select_button" class="path_select_button block_select button_margin" onclick="open_close_path_button()">
-        <img class="icon_topBar" style="margin: 10px 15px" width="25" height="25" src="static/img/dvd-disk.svg">
-        <p class="top_bar_font_color" id="path_status_size" style="position: absolute; margin: -42px 45px; color: #959DA5">1Gb</p>
-        <p class="top_bar_font_color" id="path_name" style="position: absolute; margin: -28px 45px">home</p>
-        <img id="path_select_button_triangle" class="icon_topBar" style="position:absolute; right: 10px; top: 10px" width="10" height="10" src="static/img/triangle.svg">
-      </div>
-
-      <div id="user_button" class="user_button block_select button_margin" onclick="open_close_user_button()">
-        <img class="icon_topBar" style="margin: 0px 15px" width="25" height="25" src="static/img/user.svg">
-        <p class="top_bar_font_color" id="user_status" style="margin: -22px 45px; color: #959DA5">user</p>
-        <p class="top_bar_font_color" id="user_name" style="margin: 15px 45px">100LAR</p>
-        <img id="user_button_triangle" class="icon_topBar" style="position:absolute; right: 10px; top: 10px" width="10" height="10" src="static/img/triangle.svg">
-      </div>
-    </div>
 
     <div id="dialog_bg" class="dialog_backgound" onclick="close_dialogs()"></div>
 
@@ -422,6 +395,7 @@
   </script>
 
   <script type="text/javascript" src="static/js/main.1.js"></script>
+  <script type="text/javascript" src="static/js/mobile/pages.1.js"></script>
 
   <script type="text/javascript" src="static/js/theme.1.js"></script>
 
