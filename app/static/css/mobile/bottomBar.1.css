@@ -31,12 +31,13 @@
 }
 
 .disk_space {
+  display: none;
   position: absolute;
-  left: 28px;
+  left: 5px;
   bottom: 2px;
-  right: 90px;
+  right: 5px;
   height: 5px;
-  background-color: var(--top-border-color);
+  background-color: var(--bg-color);
   border-radius: 3px;
 }
 
@@ -79,4 +80,22 @@
 
 .menu_button_selected p {
   color: #005CC5;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.addFileMenu {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 140px;
+  background-color: var(--bg-color);
+  border-radius: 8px 8px 0 0;
+  z-index: 4;
+}
+
+.addFileMenu_button {
+  position: absolute;
+  background-color: var(--hover-color);
 }

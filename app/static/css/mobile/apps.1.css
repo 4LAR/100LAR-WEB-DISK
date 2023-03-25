@@ -1,0 +1,234 @@
+.apps_button_style {
+  position: absolute;
+  width: 100%;
+  height: 45px;
+  border-top: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+  background-color: var(--hover-color);
+
+  top: 0px;
+  left: 0px;
+}
+
+.apps_button_style:hover {
+  background-color: var(--hover-color);
+}
+
+.apps_button_style_online {
+  font-size: 0.9em;
+  color: #959DA5
+}
+
+.apps_list_div_scroll {
+  position: absolute;
+  left: 0px;
+  top: 77px;
+  bottom: 40px;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.apps_list_div {
+  width: 100%;
+  direction: ltr;
+}
+
+.apps_list_div ul {
+  margin: 0px;
+}
+
+.app_search_div {
+  position: absolute;
+  top: 46px;
+  left: 0px;
+  right: 0px;
+  height: 30px;
+  border-bottom: 1px solid var(--main-border-color);
+}
+
+.app_search_div input {
+  position: absolute;
+  margin: 2px 0px;
+  height: 26px;
+  left: 5px;
+  right: 5px;
+  background-color: var(--main-input-color);
+}
+
+.apps_empty_message {
+  position: absolute;
+  top: 90px;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.apps_empty_message p {
+  margin: 5px 15px;
+}
+
+.apps_list_element {
+  width: 100%;
+  height: 40px;
+  padding: 0px;
+  border-bottom: 1px solid var(--main-border-color);
+}
+
+.apps_list_element:hover {
+  background-color: var(--hover-color);
+}
+
+.apps_list_delete {
+  display: none;
+  position: absolute;
+  left: 10px;
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+.apps_list_icon {
+  display: block;
+  position: absolute;
+  left: 10px;
+  margin: 10px 0px;
+}
+
+.apps_list_dot {
+  position: absolute;
+  font-size: 2em;
+  right: 10px;
+  margin-top: -3px;
+}
+
+.apps_list_name {
+  position: absolute;
+  left: 40px;
+  margin: 15px 0px;
+}
+
+.apps_list_type {
+  position: absolute;
+  left: 40px;
+  margin: 0px 0px;
+  color: var(--color-hide-font);
+}
+
+.apps_list_element:hover .apps_list_delete {
+  display: block;
+}
+
+.apps_list_element:hover .apps_list_icon {
+  display: none;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.apps_buttons_container {
+  position: absolute;
+  left: 0px;
+  top: 36px;
+
+  width: 200px;
+  bottom: 0px;
+
+  border-right: 1px solid var(--main-border-color);
+}
+
+.app_button_selected {
+  margin-top: 5px;
+  margin-left: 5%;
+  width: 90%;
+  background-color: var(--hover-color);
+  border: 1px solid var(--bg-color);
+}
+
+.app_button {
+  margin-top: 5px;
+  margin-left: 5%;
+  width: 90%;
+  background-color: var(--bg-color);
+  border: 1px solid var(--bg-color);
+}
+
+/*----------------------------------------------------------------------------*/
+
+.apps_main_div {
+  position: absolute;
+  left: 201px;
+  top: 36px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: 0 0 8px 0;
+}
+
+.apps_main_div * {
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.main_app_dialog {
+  position: fixed;
+  display: none;
+
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+
+  background-color: var(--bg-color);
+  z-index: 4;
+}
+
+.dialog_new_window_button {
+  position: absolute;
+  right: 101px;
+  top: 0px;
+  width: 150px;
+  height: 35px;
+  border-left: 1px solid var(--main-border-color);
+  border-right: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+  cursor: pointer;
+}
+
+.dialog_new_window_button {
+  white-space: nowrap;
+}
+
+.dialog_new_window_button:hover {
+  background-color: var(--hover-color);
+}
+
+.main_app {
+  position: absolute;
+  top: 36px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.main_app_frame {
+  border: none;
+}
+
+/*----------------------------------------------------------------------------*/
+.apps_path_div {
+  white-space: nowrap;
+  width: 90%;
+}
+
+.apps_path_div * {
+  margin-bottom: 0;
+}
+
+.app_input_ok {
+
+}
+
+.app_input_error {
+  border: 1px solid #D73A49;
+}

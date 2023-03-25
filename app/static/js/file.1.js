@@ -692,6 +692,14 @@ function open_right_bar() {
   openModal('rightBar');
 }
 
+function open_selected_files_div() {
+  openModal("selected_files_div");
+}
+
+function close_selected_files_div() {
+  closeModal("selected_files_div");
+}
+
 var list_checked_file = [];
 
 // выделение файла
@@ -700,7 +708,9 @@ function checkBox_file(e, name, type) {
   if (list_checked_file.length == 0 && selected_file_name.length > 0)
     document.getElementById(selected_file_name).classList.remove('file_selected');
 
-  open_right_bar();
+  if (mobile) open_selected_files_div();
+  else open_right_bar();
+
   closeModal('file_info_block');
   if (mobile) closeModal('addFileMenu');
   openModal('file_list_block');
@@ -752,7 +762,8 @@ function checkBox_file(e, name, type) {
     document.getElementById("file_list_download_button").downlaod = 'files.zip';
 
   } else {
-    close_rightBar();
+    if (mobile) close_selected_files_div();
+    else close_rightBar();
 
   }
 
@@ -901,12 +912,13 @@ function rename_file() {
 
 //
 function open_file_add() {
-  open_right_bar();
-  closeModal('file_info_block');
-  closeModal('file_list_block');
-  closeModal('copy_or_paste_block');
-
+  openModal("background_black_create_file");
   openModal('addFileMenu');
+}
+
+function close_file_add() {
+  closeModal("background_black_create_file");
+  closeModal('addFileMenu');
 }
 
 /*-----------------отображение------------------------*/

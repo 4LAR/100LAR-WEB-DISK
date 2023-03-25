@@ -2,6 +2,9 @@
 //
 var open_close_user_bool = false;
 function open_close_user_button(close_bool=false) {
+  if (mobile)
+    return
+    
   if (!close_bool) {
     open_close_path_button(true);
     open_close_user_bool = !open_close_user_bool;
@@ -22,7 +25,7 @@ function open_close_user_button(close_bool=false) {
 var open_close_path_bool = false;
 function open_close_path_button(close_bool=false) {
   if (!close_bool) {
-    open_close_user_button(true);
+    if (!mobile) open_close_user_button(true);
     open_close_path_bool = !open_close_path_bool;
   } else open_close_path_bool = false;
   document.getElementById("background_black").style.display = (open_close_path_bool)? "block": "none";

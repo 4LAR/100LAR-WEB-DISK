@@ -11,12 +11,12 @@
 
 .user_button {
   position: fixed;
-  background-color: var(--top-color);
+  background-color: var(--hover-color);
   top: 0px;
   left: 0px;
-  width: 50%;
+  right: 0px;
   height: 45px;
-  border-right: 1px solid var(--top-border-color);
+  border: 1px solid var(--main-border-color);
   cursor: pointer;
 }
 
@@ -27,10 +27,11 @@
 
 .path_select_button {
   position: fixed;
-  background-color: var(--top-color);
+  background-color: var(--hover-color);
+  border-bottom: 1px solid var(--main-border-color);
   top: 0px;
-  right: 0px;
-  width: 50%;
+  left: 0px;
+  width: 100%;
   height: 45px;
   cursor: pointer;
 }
@@ -62,39 +63,32 @@
   background-color: var(--top-hover-color);
 }
 
-.button_exit_style {
-  position: absolute;
-  width: 100%;
-  height: 35px;
-  border-top: 1px solid var(--top-border-color);
-  background-color: var(--top-color);
-  bottom: 0px;
-  left: 0px;
-  cursor: pointer;
-}
-
-.button_exit_style:hover {
-  background-color: var(--top-red_color);
-}
-
 .path_select_list_div {
   position: fixed;
   top: 46px;
-  bottom: 0px;
+  /* bottom: 0px; */
   right: 0px;
-  width: 50%;
+  width: 100%;
 }
 
 .path_list_element {
-  background-color: var(--top-color);
-  border-bottom: 1px solid var(--top-border-color);
-  border-left: 1px solid var(--top-border-color);
-  border-right: 1px solid var(--top-border-color);
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--main-border-color);
+  border-left: 1px solid var(--main-border-color);
+  border-right: 1px solid var(--main-border-color);
   width: 100%;
   height: 45px;
   cursor: pointer;
 }
 
-.path_list_element:hover {
-  background-color: var(--top-hover-color);
+/*----------------------------------------------------------------------------*/
+
+.selected_files_div {
+  position: fixed;
+  top: 46px;
+  left: 0px;
+  right: 0px;
+  height: 40px;
+  border-radius: 0 0 8px 8px;
+  background-color: var(--hover-color);
 }
