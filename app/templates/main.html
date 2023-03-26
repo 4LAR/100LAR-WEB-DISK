@@ -328,11 +328,11 @@
       </div>
 
       <div id="other_options" style="position: absolute; top: 42px; width: 100%;">
-        <p class="top_bar_font_color" style="position: absolute; left: 8px; top: 0px;">Theme</p>
+        <p style="position: absolute; left: 8px; top: 0px;">Theme</p>
 
         <div style="position: absolute; top: 20px; left: 15px;">
           <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
-          <label for="lightThame_chekcbox"><p class="top_bar_font_color">Light theme</p></label>
+          <label for="lightThame_chekcbox"><p>Light theme</p></label>
         </div>
 
       </div>
@@ -355,7 +355,7 @@
 
     <!--кнопка для открытия настроек-->
     <div id="user_button" class="user_button_no_selected_color user_button block_select button_margin" onclick="open_close_user_button()">
-      <img class="icon_topBar" style="margin: 0px 15px" width="25" height="25" src="static/img/user.svg">
+      <img id="user_avatar" class="icon_topBar" style="margin: 0px 15px" width="25" height="25" src="static/img/user.svg">
       <p class="top_bar_font_color" id="user_status" style="margin: -22px 45px; color: #959DA5; font-size: 1em">user</p>
       <p class="top_bar_font_color" id="user_name" style="margin: 15px 45px">100LAR</p>
       <img id="user_button_triangle" class="icon_topBar" style="position:absolute; right: 10px; top: 10px" width="10" height="10" src="static/img/triangle.svg">
@@ -363,7 +363,7 @@
 
     <!--кнопка для выбора диска-->
     <div id="path_select_button" class="path_select_button path_select_button_no_selected_color block_select button_margin" onclick="open_close_path_button()">
-      <img class="icon_topBar" style="margin: 10px 15px" width="25" height="25" src="static/img/dvd-disk.svg">
+      <img id="disk_image" class="icon_topBar" style="margin: 10px 15px" width="25" height="25" src="static/img/dvd-disk.svg">
       <p class="top_bar_font_color" id="path_status_size" style="position: absolute; margin: -42px 45px; color: #959DA5">1Gb</p>
       <p class="top_bar_font_color" id="path_name" style="position: absolute; margin: -28px 45px">home</p>
       <img id="path_select_button_triangle" class="icon_topBar" style="position:absolute; right: 10px; top: 10px" width="10" height="10" src="static/img/triangle.svg">
