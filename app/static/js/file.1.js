@@ -150,7 +150,7 @@ function append_back_dir() {
     if (mobile) {
       li.innerHTML = `
         <div class="file" onclick="back_dir()">
-          <img class="icon" style="margin: 5px 50px" width="35" height="35" src="static/img/files/folder.svg">
+          <img class="${(colored_file_icons)? "folder_filter": ""} icon" style="margin: 5px 50px" width="35" height="35" src="static/img/files/folder.svg">
           <p style="margin: -38px 100px">...</p>
         </div>
       `;
@@ -160,14 +160,14 @@ function append_back_dir() {
         li.innerHTML = `
           <div class="file_checkbox_bg"></div>
           <div class="file" onclick="back_dir()">
-            <img class="icon" style="margin: 7px 50px" width="25" height="25" src="static/img/files/folder.svg">
+            <img class="${(colored_file_icons)? "folder_filter": ""} icon" style="margin: 7px 50px" width="25" height="25" src="static/img/files/folder.svg">
             <p style="margin: -25px 80px">...</p>
           </div>
         `;
       } else {
         li.innerHTML = `
           <div class="file_grid" onclick="back_dir()">
-            <img class="icon" style="margin: 7px 40px" width="40" height="40" src="static/img/files/folder.svg">
+            <img class="${(colored_file_icons)? "folder_filter": ""} icon" style="margin: 7px 40px" width="40" height="40" src="static/img/files/folder.svg">
             <p style="margin: -35px 90px">...</p>
           </div>
         `;
@@ -316,6 +316,43 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
   var ul = document.getElementById("file_list");
   var li = document.createElement("li");
 
+  var color_class = "";
+  if (colored_file_icons) {
+    switch (type) {
+      case 'archive':
+        color_class = "archive_filter";
+        break;
+
+      case 'audio':
+        color_class = "media_filter";
+        break;
+
+      case 'image':
+        color_class = "media_filter";
+        break;
+
+      case 'pdf':
+        color_class = "media_filter";
+        break;
+
+      case 'video':
+        color_class = "media_filter";
+        break;
+
+      case 'text file':
+        color_class = "text_filter";
+        break;
+
+      case 'file':
+        color_class = "text_filter";
+        break;
+
+      case 'dir':
+        color_class = "folder_filter";
+        break;
+    }
+  }
+
   if (type === 'audio') {
     audio_list.push([type, name, size, path_s, date, mime, `/download?path=${path}&dir=${dir_str}&file=${name}`]);
   } else if (type === 'image') {
@@ -354,7 +391,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       // директория
       str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="forward_dir('${name}')">
-          <img class="icon" style="margin: 5px 55px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
+          <img class="${color_class} icon" style="margin: 5px 55px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
       `;
@@ -363,7 +400,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       // файл
        str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
-          <img class="icon" style="margin: 5px 55px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
+          <img class="${color_class} icon" style="margin: 5px 55px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
       `;
@@ -417,7 +454,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       // директория
       str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="forward_dir('${name}')">
-          <img class="icon" style="margin: 7px 50px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
+          <img class="${color_class} icon" style="margin: 7px 50px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
       `;
@@ -427,7 +464,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 
        str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
-          <img class="icon" style="margin: 7px 50px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
+          <img class="${color_class} icon" style="margin: 7px 50px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
       `;

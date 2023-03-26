@@ -1,15 +1,16 @@
 var currentTheme = localStorage.getItem('theme');
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+var colored_file_icons = false;
 
 //
 function checkThame() {
   currentTheme = localStorage.getItem('theme');
+  colored_file_icons = str_to_bool(localStorage.getItem('colored_file_icons'));
+  document.getElementById('file_icons_chekcbox').checked = colored_file_icons;
+
   document.documentElement.setAttribute('data-theme', currentTheme);
 
   try {
-    /*document.getElementById('darkThame_chekcbox').checked = false;
-    document.getElementById('lightThame_chekcbox').checked = false;
-    document.getElementById('systemThame_chekcbox').checked = false;*/
     switch (currentTheme) {
       case 'dark':
         document.getElementById('lightThame_chekcbox').checked = false;
@@ -60,6 +61,12 @@ function checkBox_thame(e) {
     darkThame();
   }
 
+}
+
+function checkBox_file_icons(e) {
+  localStorage.setItem('colored_file_icons', e.checked);
+  update_dir();
+  checkThame();
 }
 
 checkThame();
