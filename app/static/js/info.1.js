@@ -52,6 +52,7 @@ function get_info() {
       document.getElementById('path_status_size').innerHTML = info_json['path'][path]['size_converted'];
       document.getElementById('path_name').innerHTML = info_json['path'][path]['name'];
 
+      get_apps();
     }
   };
   xhr.send()

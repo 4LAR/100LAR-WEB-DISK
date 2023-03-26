@@ -320,8 +320,6 @@ function select_app_button(id) {
   selected_app_id = id;
 }
 
-get_apps();
-
 /*----------------------------------------------------------------------------*/
 
 function search_app_input() {

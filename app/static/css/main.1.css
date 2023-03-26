@@ -335,6 +335,24 @@ body {
 
 /*----------------------------------------------------------------------------*/
 
+.folder_filter {
+  filter: invert(66%) sepia(17%) saturate(883%) hue-rotate(357deg) brightness(95%) contrast(96%);
+}
+
+.media_filter {
+  filter: invert(64%) sepia(8%) saturate(6627%) hue-rotate(213deg) brightness(104%) contrast(88%);
+}
+
+.archive_filter {
+  filter: invert(69%) sepia(16%) saturate(5260%) hue-rotate(308deg) brightness(98%) contrast(99%);
+}
+
+.text_filter {
+  filter: invert(60%) sepia(93%) saturate(445%) hue-rotate(184deg) brightness(101%) contrast(101%);
+}
+
+/*----------------------------------------------------------------------------*/
+
 /* rotate animation */
 .anim_rotate {
   -webkit-animation:spin 4s linear infinite;
