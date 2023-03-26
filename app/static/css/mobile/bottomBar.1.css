@@ -83,19 +83,3 @@
 }
 
 /*----------------------------------------------------------------------------*/
-
-.addFileMenu {
-  position: fixed;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  height: 140px;
-  background-color: var(--bg-color);
-  border-radius: 8px 8px 0 0;
-  z-index: 4;
-}
-
-.addFileMenu_button {
-  position: absolute;
-  background-color: var(--hover-color);
-}

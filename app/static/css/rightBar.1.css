@@ -407,65 +407,6 @@
   top: 7px;
 }
 
-.file_list_info_div {
-  position: absolute;
-  left: 0px;
-  top: 80px;
-  width: 300px;
-  /*height: 150px;*/
-  height: 208px;
-  border-top: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
-  border-radius: 8px;
-}
-
-.file_list_download_button {
-  position: absolute;
-  left: 5px;
-  top: 159px;
-  width: 140px;
-  cursor: pointer;
-}
-
-.file_list_delete_button {
-  position: absolute;
-  right: 5px;
-  top: 159px;
-  width: 140px;
-  cursor: pointer;
-}
-
-.file_list_delete_button:hover {
-  /* background-color: var(--main-red-color); */
-
-}
-
-.file_list_paste_button {
-  position: absolute;
-  left: 5px;
-  top: 165px;
-  width: 140px;
-  cursor: pointer;
-}
-
-.file_list_cut_button {
-  position: absolute;
-  right: 5px;
-  top: 202px;
-  width: 140px;
-  cursor: pointer;
-}
-
-.file_list_copy_button {
-  position: absolute;
-  right: 5px;
-  top: 244px;
-  width: 140px;
-  cursor: pointer;
-}
-
 /* выгрузка */
 .upload_bg {
   position: absolute;

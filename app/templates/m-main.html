@@ -66,43 +66,42 @@
         <!--информация о выбранных файлах и каталогах-->
         <div id="file_list_block" style="display: none">
           <div id="file_select_all_button" class="file_activity_button block_select button_margin" onclick="all_files_checkBox()">
-            <img class="icon" width="20" height="20" src="static/img/select all.svg">
-            <p>select all</p>
+            <div style="position: absolute; margin: 0px 5px">
+              <input type="checkbox" class="custom-checkbox custom-checkbox-mobile" id="checkbox_select_all" name="checkbox_select_all">
+              <label for="checkbox_select_all"></label>
+            </div>
           </div>
 
           <!--количество выбранных файлов-->
           <div class="file_list_info_div">
-            <p style="margin: 0px 0px;" align="center">Selected elements</p>
-            <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/files/file.svg">
-            <p id="file_list_files" style="position: absolute; left: 40px; top: 3px;">Files: None</p>
-            <img class="icon" style="position: absolute; top: 47px; left: 10px;" width="25" height="25" src="static/img/files/folder.svg">
-            <p id="file_list_folders" style="position: absolute; left: 40px; top: 37px;">Folders: None</p>
+            <p id="file_list_files_folders" style="position: absolute; left: 40px; top: -3px;">Selected: 0</p>
+          </div>
+
+          <!--кнопка для закрытия-->
+          <div id="file_list_delete_button" class="file_list_close_button block_select button_margin" onclick="undo_files_checkBox(); close_selected_files_div();">
+            <img class="icon" width="30" height="30" src="static/img/cross.svg">
           </div>
 
           <!--кнопка для скачивания выбранных файлов-->
           <a id="file_list_download_button" href="" download="test">
             <div class="file_list_download_button block_select button_margin">
               <img class="icon" width="20" height="20" src="static/img/download.svg">
-              <p>download</p>
             </div>
           </a>
 
           <!--кнопка для удаления выбранных файлов-->
           <div id="file_list_delete_button" class="file_list_delete_button block_select button_margin" onclick="delete_file_dialog()">
             <img class="icon" width="20" height="20" src="static/img/trash.svg">
-            <p>delete</p>
           </div>
 
           <!--кнопка для копирования выбранных файлов-->
           <div id="file_list_copy_button" class="file_list_copy_button block_select button_margin" onclick="copy_file_buf()">
             <img class="icon" width="20" height="20" src="static/img/copy.svg">
-            <p>copy</p>
           </div>
 
           <!--кнопка для копирования выбранных файлов-->
           <div id="file_list_cut_button" class="file_list_cut_button block_select button_margin" onclick="copy_file_buf(true)">
             <img class="icon" width="20" height="20" src="static/img/cut.svg">
-            <p>move</p>
           </div>
 
         </div>
@@ -111,16 +110,17 @@
         <div id="copy_or_paste_block" style="display: none">
 
           <!--количество выбранных файлов-->
-          <div class="file_list_info_div" style="height: 78px">
-            <p id="cop_info" style="margin: 0px 0px;" align="center"></p>
-            <img class="icon" style="position: absolute; top: 10px; left: 10px;" width="25" height="25" src="static/img/files/file.svg">
-            <p id="cop_file_list_files" style="position: absolute; left: 40px; top: 3px;">Files: None</p>
-            <img class="icon" style="position: absolute; top: 47px; left: 10px;" width="25" height="25" src="static/img/files/folder.svg">
-            <p id="cop_file_list_folders" style="position: absolute; left: 40px; top: 37px;">Folders: None</p>
+          <div class="file_list_info_div">
+            <p id="cop_file_list_files_folders" style="position: absolute; left: 5px; top: -3px;">Selected: 0</p>
+          </div>
+
+          <!--кнопка для закрытия-->
+          <div id="file_list_delete_button" class="file_list_close_button block_select button_margin" onclick="undo_files_checkBox(); close_selected_files_div();">
+            <img class="icon" width="30" height="30" src="static/img/cross.svg">
           </div>
 
           <!--кнопка для вставки выбранных файлов-->
-          <div id="file_list_paste_button" class="file_list_paste_button block_select button_margin" style="border-right: 1px solid var(--main-border-color);" onclick="paste_files()">
+          <div id="file_list_paste_button" class="file_list_paste_button block_select button_margin" onclick="paste_files()">
             <img class="icon" width="20" height="20" src="static/img/copy.svg">
             <p>paste</p>
           </div>
@@ -383,16 +383,23 @@
           <img class="icon" width="20" height="20" src="static/img/cross.svg">
           <p>close</p>
         </div>
+
+        <div id="create_apps_back_dialog" class="dialog_back_button block_select" onclick="create_apps_dialog()" style="display: block;">
+          <img class="icon" width="12" height="12" style="position: absolute; left: 10px; top: 10px; transform: rotate(90deg);" src="static/img/triangle.svg">
+          <p style="position: absolute; left: 40px; top: -7px;">back</p>
+        </div>
       </div>
 
-      <div class="apps_buttons_container">
+      <div id="apps_page_1" class="apps_buttons_container">
         <ul id="apps_buttons"></ul>
       </div>
 
-      <div id="apps_main_div" class="apps_main_div"></div>
+      <div id="apps_page_2" style="display: none;">
+        <div id="apps_main_div" class="apps_main_div"></div>
 
-      <div class="round_button dialog_button block_select" style="right: 10px; bottom: 10px; width: 100px;" onclick="append_app()">
-        <p style="margin: 5px 28px">create</p>
+        <div class="round_button dialog_button block_select" style="right: 10px; bottom: 10px; width: 100px;" onclick="append_app()">
+          <p style="margin: 5px 28px">create</p>
+        </div>
       </div>
     </div>
 

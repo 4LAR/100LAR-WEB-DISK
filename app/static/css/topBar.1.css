@@ -67,3 +67,86 @@
   position: relative;
   top: 10px;
 }
+
+/*----------------------------------------------------------------------------*/
+
+.round_button_file_list {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.round_button_file_list:hover {
+  background-color: var(--bg-color);
+}
+
+.selected_files_div {
+  position: fixed;
+  top: 46px;
+  left: var(--width-left-bar);
+  right: 0px;
+  height: 40px;
+  background-color: var(--hover-color);
+}
+
+.file_list_info_div {
+  position: absolute;
+  left: 30px;
+  top: 0px;
+  width: 100%;
+}
+
+.file_list_close_button {
+  position: absolute;
+  right: 0px;
+  top: -2px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.file_list_download_button {
+  position: absolute;
+  right: 40px;
+  top: 3px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.file_list_delete_button {
+  position: absolute;
+  right: 145px;
+  top: 3px;
+  height: 35px;
+  cursor: pointer;
+}
+
+/**/
+.file_list_paste_button {
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  height: 35px;
+  width: 90px;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.file_list_paste_button:hover {
+  background-color: var(--bg-color);
+}
+
+.file_list_copy_button {
+  position: absolute;
+  right: 75px;
+  top: 3px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.file_list_cut_button {
+  position: absolute;
+  right: 110px;
+  top: 3px;
+  height: 35px;
+  cursor: pointer;
+}

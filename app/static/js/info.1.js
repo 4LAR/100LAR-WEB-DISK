@@ -93,6 +93,7 @@ document.addEventListener('keydown', function(event){
       close_user();
     } else {
       close_rightBar();
+      close_selected_files_div();
     }
 
   }

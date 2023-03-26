@@ -57,6 +57,22 @@
   background-color: var(--hover-color);
 }
 
+.dialog_back_button {
+  border-radius: 4px 0px 0px 0px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100px;
+  height: 35px;
+  border-right: 1px solid var(--main-border-color);
+  background-color: var(--bg-color);
+  cursor: pointer;
+}
+
+.dialog_back_button:hover {
+  background-color: var(--hover-color);
+}
+
 .dialog_info {
   position: absolute;
 

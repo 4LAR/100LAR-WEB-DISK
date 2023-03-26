@@ -659,12 +659,14 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
 
 // закрытие страницы информации о файле
 var right_bar_bool = false;
-function close_rightBar() {
+function close_rightBar(for_select=false) {
   right_bar_bool = false;
-  undo_files_checkBox();
+  if (!for_select) {
+    undo_files_checkBox();
 
-  if (selected_file_name.length > 0)
-    document.getElementById(selected_file_name).classList.remove('file_selected');
+    if (selected_file_name.length > 0)
+      document.getElementById(selected_file_name).classList.remove('file_selected');
+  }
 
   if (!uploading_bool)
     closeModal('rightBar');
@@ -693,11 +695,18 @@ function open_right_bar() {
 }
 
 function open_selected_files_div() {
+  close_rightBar(true);
   openModal("selected_files_div");
+  closeModal('file_list_block');
+  closeModal('copy_or_paste_block');
+  if (mobile) document.getElementById("file_list_div").style.top = "70px";
+  else document.getElementById("file_list_div").style.top = "70px";
 }
 
 function close_selected_files_div() {
   closeModal("selected_files_div");
+  if (mobile) document.getElementById("file_list_div").style.top = "30px";
+  else document.getElementById("file_list_div").style.top = "32px";
 }
 
 var list_checked_file = [];
@@ -708,8 +717,7 @@ function checkBox_file(e, name, type) {
   if (list_checked_file.length == 0 && selected_file_name.length > 0)
     document.getElementById(selected_file_name).classList.remove('file_selected');
 
-  if (mobile) open_selected_files_div();
-  else open_right_bar();
+  open_selected_files_div();
 
   closeModal('file_info_block');
   if (mobile) closeModal('addFileMenu');
@@ -723,9 +731,9 @@ function checkBox_file(e, name, type) {
     }
 
   if (ok) {
-    openModal('file_select_all_button');
+    document.getElementById("checkbox_select_all").checked = false;
   } else {
-    closeModal('file_select_all_button');
+    document.getElementById("checkbox_select_all").checked = true;
   }
 
   if (e.checked) {
@@ -755,15 +763,13 @@ function checkBox_file(e, name, type) {
       else
         count_files += 1;
 
-    document.getElementById("file_list_files").innerHTML = 'Files: ' + count_files;
-    document.getElementById("file_list_folders").innerHTML = 'Folders: ' + count_folders;
+    document.getElementById("file_list_files_folders").innerHTML = 'Selected: ' + (count_files + count_folders);
 
     document.getElementById("file_list_download_button").href = `/download?path=${path}&dir=${dir_str}&files=${JSON.stringify({"files": list_checked_file})}`;
     document.getElementById("file_list_download_button").downlaod = 'files.zip';
 
   } else {
-    if (mobile) close_selected_files_div();
-    else close_rightBar();
+    close_selected_files_div();
 
   }
 
@@ -790,9 +796,11 @@ function copy_file_buf(move=false) {
     else
       count_files += 1;
 
-  document.getElementById("cop_info").innerHTML = (move)? 'move elements': 'copy elements';
-  document.getElementById("cop_file_list_files").innerHTML = 'Files: ' + count_files;
-  document.getElementById("cop_file_list_folders").innerHTML = 'Folders: ' + count_folders;
+  // document.getElementById("cop_info").innerHTML = (move)? 'move elements': 'copy elements';
+  // document.getElementById("cop_file_list_files").innerHTML = 'Files: ' + count_files;
+  // document.getElementById("cop_file_list_folders").innerHTML = 'Folders: ' + count_folders;
+
+  document.getElementById("cop_file_list_files_folders").innerHTML = 'Selected: ' + (count_folders + count_files);
 }
 
 function paste_files() {
@@ -801,7 +809,7 @@ function paste_files() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      close_rightBar();
+      close_selected_files_div();
       if (xhr.responseText.toString() === 'NO PLACE') {
         no_place_dialog();
       } else if (xhr.responseText.toString() === 'READ ONLY') {
@@ -815,6 +823,12 @@ function paste_files() {
 
 // выделить все файлы
 function all_files_checkBox() {
+  if (document.getElementById("checkbox_select_all").checked) {
+    close_selected_files_div();
+    undo_files_checkBox();
+    return
+  }
+  document.getElementById("checkbox_select_all").checked = true;
   var ok = false;
   for (let i = 0; i < files_json['files'].length; i++)
     if (document.getElementById("checkbox_file_" + files_json['files'][i]['name']).checked == false) {
@@ -832,9 +846,9 @@ function all_files_checkBox() {
       );
 
     }
-    closeModal('file_select_all_button');
+    // document.getElementById("checkbox_select_all").checked = true;
   } else {
-
+    // document.getElementById("checkbox_select_all").checked = false;
   }
 
 }
@@ -852,7 +866,7 @@ function undo_files_checkBox() {
   } catch {
 
   }
-
+  document.getElementById("checkbox_select_all").checked = false;
 }
 
 // удаление файла

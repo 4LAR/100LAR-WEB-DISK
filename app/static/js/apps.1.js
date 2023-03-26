@@ -54,6 +54,18 @@ function create_apps_dialog() {
 
   openModal('dialog_bg');
   openModal('dialog_create_apps');
+
+  if (mobile) {
+    closeModal("create_apps_back_dialog");
+    closeModal("apps_page_2");
+    openModal("apps_page_1");
+  }
+}
+
+function create_apps_dialog_next_page() {
+  openModal("create_apps_back_dialog");
+  openModal("apps_page_2");
+  closeModal("apps_page_1");
 }
 
 function close_create_apps_dialog() {
@@ -297,6 +309,9 @@ function generate_create_layout(dict, root=true) {
 }
 
 function select_app_button(id) {
+  if (mobile)
+    create_apps_dialog_next_page();
+
   if (selected_app_id != "")
     document.getElementById(`app_button_${selected_app_id}`).classList.replace('app_button_selected', 'app_button');
 

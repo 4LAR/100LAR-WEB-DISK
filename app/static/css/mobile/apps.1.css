@@ -130,7 +130,7 @@
   left: 0px;
   top: 36px;
 
-  width: 200px;
+  width: 100%;
   bottom: 0px;
 
   border-right: 1px solid var(--main-border-color);
@@ -148,7 +148,7 @@
   margin-top: 5px;
   margin-left: 5%;
   width: 90%;
-  background-color: var(--bg-color);
+  background-color: var(--hover-color);
   border: 1px solid var(--bg-color);
 }
 
@@ -156,7 +156,7 @@
 
 .apps_main_div {
   position: absolute;
-  left: 201px;
+  left: 0px;
   top: 36px;
   right: 0px;
   bottom: 0px;
