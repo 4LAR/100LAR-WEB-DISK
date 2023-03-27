@@ -22,7 +22,7 @@
 .apps_list_div_scroll {
   position: absolute;
   left: 0px;
-  top: 77px;
+  top: 79px;
   bottom: 40px;
   width: 100%;
   overflow-y: scroll;
@@ -44,13 +44,13 @@
   top: 46px;
   left: 0px;
   right: 0px;
-  height: 30px;
+  height: 32px;
   border-bottom: 1px solid var(--main-border-color);
 }
 
 .app_search_div input {
   position: absolute;
-  margin: 2px 0px;
+  margin: 3px 0px;
   height: 26px;
   left: 5px;
   right: 5px;
@@ -71,7 +71,7 @@
 
 .apps_list_element {
   width: 100%;
-  height: 40px;
+  height: 45px;
   padding: 0px;
   border-bottom: 1px solid var(--main-border-color);
 }
@@ -81,46 +81,48 @@
 }
 
 .apps_list_delete {
-  display: none;
   position: absolute;
-  left: 10px;
-  margin: 10px 0px;
+  left: 0px;
+  margin: 3px 0px;
   cursor: pointer;
+  width: 40;
+  height: 40;
 }
 
 .apps_list_icon {
   display: block;
   position: absolute;
-  left: 10px;
-  margin: 10px 0px;
+  left: 55px;
+  margin: 7px 0px;
+  width: 30;
+  height: 30;
 }
 
 .apps_list_dot {
   position: absolute;
   font-size: 2em;
   right: 10px;
-  margin-top: -3px;
+  margin-top: 2px;
 }
 
 .apps_list_name {
   position: absolute;
-  left: 40px;
-  margin: 15px 0px;
+  left: 90px;
+  margin: 19px 0px;
 }
 
 .apps_list_type {
   position: absolute;
-  left: 40px;
-  margin: 0px 0px;
+  left: 90px;
+  margin: 4px 0px;
   color: var(--color-hide-font);
 }
 
-.apps_list_element:hover .apps_list_delete {
-  display: block;
-}
-
-.apps_list_element:hover .apps_list_icon {
-  display: none;
+.apps_list_collider {
+  position: absolute;
+  height: 45px;
+  left: 48px;
+  right: 0px;
 }
 
 /*----------------------------------------------------------------------------*/

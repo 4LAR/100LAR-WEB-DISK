@@ -149,8 +149,9 @@ function append_back_dir() {
 
     if (mobile) {
       li.innerHTML = `
+        <div class="file_checkbox_bg"></div>
         <div class="file" onclick="back_dir()">
-          <img class="${(colored_file_icons)? "folder_filter": ""} icon" style="margin: 5px 50px" width="35" height="35" src="static/img/files/folder.svg">
+          <img class="${(colored_file_icons)? "folder_filter": ""} icon" style="margin: 5px 55px" width="35" height="35" src="static/img/files/folder.svg">
           <p style="margin: -38px 100px">...</p>
         </div>
       `;

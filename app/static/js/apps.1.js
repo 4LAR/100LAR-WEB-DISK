@@ -35,12 +35,13 @@ function append_apps_to_list(id, name, type, status) {
   append_to_ul(
     'apps_list',
     `<div class="apps_list_element block_select">
-      <image class="icon apps_list_icon" width="20" height="20" src="data:image/svg+xml;base64,${image} ">
-      <img class="icon apps_list_delete" width="20" height="20" src="static/img/trash.svg" onclick="delete_app_dialog(${id}, '${name}')">
+      ${(mobile)? "<div class=\"file_checkbox_bg\"></div>": ""}
+      <img class="icon apps_list_icon" src="data:image/svg+xml;base64,${image} ">
+      <img class="icon apps_list_delete" src="static/img/cross.svg" onclick="delete_app_dialog(${id}, '${name}')">
       <p class="apps_list_name">${name}</p>
       <p class="apps_list_type">${type_name}</p>
       <p class="apps_list_dot" style="color: #${dot_color}">•</p>
-      <div onclick="open_app(${id})" style="position: absolute; height: 40px; left: 35px; right: 0px;"></div>
+      <div class="apps_list_collider" onclick="open_app(${id})"></div>
     </div>`
   );
 }

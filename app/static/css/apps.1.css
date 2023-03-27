@@ -74,6 +74,11 @@
   border-bottom: 1px solid var(--main-border-color);
 }
 
+.apps_list_element img {
+  width: 25;
+  height: 25;
+}
+
 .apps_list_element:hover {
   background-color: var(--hover-color);
 }
@@ -81,16 +86,16 @@
 .apps_list_delete {
   display: none;
   position: absolute;
-  left: 10px;
-  margin: 10px 0px;
+  left: 7px;
+  margin: 7px 0px;
   cursor: pointer;
 }
 
 .apps_list_icon {
   display: block;
   position: absolute;
-  left: 10px;
-  margin: 10px 0px;
+  left: 7px;
+  margin: 7px 0px;
 }
 
 .apps_list_dot {
@@ -118,7 +123,15 @@
 }
 
 .apps_list_element:hover .apps_list_icon {
-  display: none;
+  /* display: none; */
+  opacity: 0.1;
+}
+
+.apps_list_collider {
+  position: absolute;
+  height: 40px;
+  left: 35px;
+  right: 0px;
 }
 
 /*----------------------------------------------------------------------------*/

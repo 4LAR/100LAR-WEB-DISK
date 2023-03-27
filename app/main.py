@@ -1111,38 +1111,6 @@ def custom_app():
     return extensions.generate_html(id, int(current_user.id), app_dict)
 
 #####################################################
-# соккеты
-
-def read_and_forward_pty_output():
-    max_read_bytes = 1024 * 20
-    while True:
-        socketio.sleep(0.01)
-        if terminal.fd:
-            timeout_sec = 0
-            (data_ready, _, _) = select.select([terminal.fd], [], [], timeout_sec)
-            if data_ready:
-                output = os.read(terminal.fd, max_read_bytes).decode(
-                    errors="ignore"
-                )
-                socketio.emit("pty-output", {"output": output}, namespace="/pty")
-
-@socketio.on("ptyInput", namespace="/pty")
-def pty_input(data):
-    terminal.input(data)
-    pass
-
-@socketio.on("resize", namespace="/pty")
-def resize(data):
-    terminal.set_winsize(data["rows"], data["cols"])
-
-@socketio.on("connect", namespace="/pty")
-def connect():
-    if terminal.create():
-        socketio.start_background_task(target=read_and_forward_pty_output)
-        pass
-    else:
-        return
-#####################################################
 
 logging.create_log()
 print('100LAR-WEB-DISK')
