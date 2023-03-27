@@ -311,6 +311,44 @@ function get_files() {
 
 }
 
+function get_color_by_type(type) {
+  var color_class = "";
+  switch (type) {
+    case 'archive':
+      color_class = "archive_filter";
+      break;
+
+    case 'audio':
+      color_class = "media_filter";
+      break;
+
+    case 'image':
+      color_class = "media_filter";
+      break;
+
+    case 'pdf':
+      color_class = "media_filter";
+      break;
+
+    case 'video':
+      color_class = "media_filter";
+      break;
+
+    case 'text file':
+      color_class = "text_filter";
+      break;
+
+    case 'file':
+      color_class = "text_filter";
+      break;
+
+    case 'dir':
+      color_class = "folder_filter";
+      break;
+  }
+  return color_class;
+}
+
 // добавление файла в список
 function append_file(type, name, size='', path_s='', date='', mime='') {
   var ul = document.getElementById("file_list");
@@ -318,39 +356,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 
   var color_class = "";
   if (colored_file_icons) {
-    switch (type) {
-      case 'archive':
-        color_class = "archive_filter";
-        break;
-
-      case 'audio':
-        color_class = "media_filter";
-        break;
-
-      case 'image':
-        color_class = "media_filter";
-        break;
-
-      case 'pdf':
-        color_class = "media_filter";
-        break;
-
-      case 'video':
-        color_class = "media_filter";
-        break;
-
-      case 'text file':
-        color_class = "text_filter";
-        break;
-
-      case 'file':
-        color_class = "text_filter";
-        break;
-
-      case 'dir':
-        color_class = "folder_filter";
-        break;
-    }
+    color_class = get_color_by_type(type);
   }
 
   if (type === 'audio') {
@@ -676,7 +682,13 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
       break;
   }
 
+  var color_class = "";
+  if (colored_file_icons) {
+    color_class = get_color_by_type(type);
+  }
+
   document.getElementById("file_icon").src = `static/img/files/${type}.svg`;
+  document.getElementById("file_icon").className = `${color_class} icon`
   document.getElementById("fileName_input").value = name;
 
   document.getElementById("file_type").innerHTML = 'type: ' + set_size_str_path(mime, 30);
