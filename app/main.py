@@ -60,15 +60,15 @@ from memory_profiler import memory_usage
 start_time = datetime.datetime.now()
 
 # импортируем py файлы
-from dict_json import *
-from log import *
-from get_time import *
-from settings import *
-from users import *
-from file import *
-from history import *
-from terminal import *
-from extensions import *
+from app.dict_json import *
+from app.log import *
+from app.get_time import *
+from app.settings import *
+from app.users import *
+from app.file import *
+from app.history import *
+from app.terminal import *
+from app.extensions import *
 
 settings = settings()
 
@@ -93,8 +93,6 @@ userBase = UserBase(
     key =       settings.options['Flask']['secret_key']
 )
 
-terminal = Terminal()
-
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
 WTF_CSRF_ENABLED = True
 
@@ -109,7 +107,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = settings.options['Flask']['secret_key']
 app.debug = settings.options['Flask']['debug']
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode=None)
 socketio.init_app(app, cors_allowed_origins="*")
 
 codemirror = CodeMirror(app)
@@ -1113,22 +1111,14 @@ def custom_app():
 #####################################################
 
 logging.create_log()
-print('100LAR-WEB-DISK')
 
-# создаём сервер
-# app.run(
-#     host = settings.options['Flask']['IP'],
-#     port = settings.options['Flask']['PORT'],
-#     debug = settings.options['Flask']['debug'],
-#     threaded = settings.options['Flask']['threaded'],
-#     processes = int(settings.options['Flask']['processes'])
-# )
 
-socketio.run(
-    app,
-    debug=settings.options['Flask']['debug'],
-    port=settings.options['Flask']['PORT'],
-    host=settings.options['Flask']['IP']#,
-    # threaded = settings.options['Flask']['threaded'],
-    # processes = int(settings.options['Flask']['processes'])
-)
+def app_start():
+    socketio.run(
+        app,
+        debug=settings.options['Flask']['debug'],
+        port=settings.options['Flask']['PORT'],
+        host=settings.options['Flask']['IP']#,
+        # threaded = settings.options['Flask']['threaded'],
+        # processes = int(settings.options['Flask']['processes'])
+    )

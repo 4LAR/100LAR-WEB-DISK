@@ -55,6 +55,18 @@
           <hr class="left_bar_hr">
         </th></tr>
         <tr><th>
+          <p class="left_bar_description" align="left">Extensions</p>
+        </th></tr>
+        <tr><th>
+          <div class="left_bar_button_selected" id="left_bar_apps" onclick="open_page('apps')">
+            <img class="icon" width="18" height="18" src="static/img/apps.svg">
+            <p align="left">apps</p>
+          </div>
+        </th></tr>
+        <tr><th>
+          <hr class="left_bar_hr">
+        </th></tr>
+        <tr><th>
           <p class="left_bar_description" align="left">Security</p>
         </th></tr>
         <tr><th>
@@ -69,12 +81,12 @@
             <p align="left">settings</p>
           </div>
         </th></tr>
-        <tr><th>
+        <!-- <tr><th>
           <div class="left_bar_button" id="left_bar_terminal" onclick="open_page('terminal')">
             <img class="icon" width="18" height="18" src="static/img/admin/terminal.svg">
             <p align="left">terminal</p>
           </div>
-        </th></tr>
+        </th></tr> -->
         <tr><th>
           <hr class="left_bar_hr">
         </th></tr>
@@ -241,6 +253,24 @@
       </div>
     </div>
 
+    <div class="main_page" id="apps" style="display: none;">
+      <div class="border border_size">
+        <div class="name_area_border border_size" style="height: 52px">
+          <img class="icon" width="30" height="30" src="static/img/apps.svg">
+          <h2>Apps</h2>
+        </div>
+        <hr class="main_page_hr">
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
+          <p style="margin: -25px 35px">refresh</p>
+        </div>
+      </div>
+
+      <div class="border_size">
+
+      </div>
+    </div>
+
     <!--logs-->
     <div class="main_page" id="logs" style="display: none;">
       <div class="border border_size">
@@ -301,7 +331,7 @@
     </div>
 
     <!--terminal-->
-    <div class="main_page" id="terminal" style="display: none;">
+    <!-- <div class="main_page" id="terminal" style="display: none;">
       <div class="border border_size">
         <div class="name_area_border border_size" style="height: 52px">
           <img class="icon" width="30" height="30" src="static/img/admin/terminal.svg">
@@ -311,10 +341,8 @@
         <p id="terminal_status" style="font-weight: bold; font-size: 16; margin: 10px;">status: connected</p>
       </div>
       <br>
-      <!-- <div class="border border_size" style="background-color: #000; height: 400px;">
-      </div> -->
       <div id="terminal_div"></div>
-    </div>
+    </div> -->
 
     <!--alert-->
     <div id="alert_bg" class="alert_bg"></div>
@@ -340,11 +368,11 @@
   <script type="text/javascript" src="static/js/admin/history.1.js"></script>
 
   <!-- xterm -->
-  <script src="https://unpkg.com/xterm@4.11.0/lib/xterm.js"></script>
+  <!-- <script src="https://unpkg.com/xterm@4.11.0/lib/xterm.js"></script>
   <script src="https://unpkg.com/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.js"></script>
   <script src="https://unpkg.com/xterm-addon-web-links@0.4.0/lib/xterm-addon-web-links.js"></script>
   <script src="https://unpkg.com/xterm-addon-search@0.8.0/lib/xterm-addon-search.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-  <script type="text/javascript" src="static/js/admin/xterm.1.js"></script>
+  <script type="text/javascript" src="static/js/admin/xterm.1.js"></script> -->
 
 </html>

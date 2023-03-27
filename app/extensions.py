@@ -4,7 +4,7 @@ import base64
 import imp
 import copy
 
-from dict_json import *
+from app.dict_json import *
 
 from flask_socketio import SocketIO
 from flask import request

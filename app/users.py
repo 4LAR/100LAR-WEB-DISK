@@ -3,7 +3,7 @@ import os
 import json
 import copy
 from flask_login import UserMixin
-from dict_json import *
+from app.dict_json import *
 
 #
 class User(UserMixin):

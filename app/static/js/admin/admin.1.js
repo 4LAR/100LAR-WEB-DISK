@@ -6,6 +6,7 @@ var page_names = [
     'history',
     'users',
     'templates',
+    'apps',
     'logs',
     'settings',
     'terminal'
