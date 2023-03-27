@@ -87,6 +87,7 @@
   right: 0px;
   height: 40px;
   background-color: var(--hover-color);
+  border-bottom: 1px solid var(--main-border-color);
 }
 
 .file_list_info_div {

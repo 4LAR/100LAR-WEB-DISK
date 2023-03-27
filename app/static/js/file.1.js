@@ -700,6 +700,7 @@ function close_rightBar(for_select=false) {
   right_bar_bool = false;
   if (!for_select) {
     undo_files_checkBox();
+    close_selected_files_div();
 
     if (selected_file_name.length > 0)
       document.getElementById(selected_file_name).classList.remove('file_selected');
