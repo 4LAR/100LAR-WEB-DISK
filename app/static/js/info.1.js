@@ -115,6 +115,8 @@ function close_dialogs() {
     close_no_place_dialog();
   } else if (main_app_dialog_bool) {
     close_main_app_dialog();
+  } else if (delete_app_dialog_bool) {
+    close_delete_app_dialog();
   } else return false;
   return true;
 }

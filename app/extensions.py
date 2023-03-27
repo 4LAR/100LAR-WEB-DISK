@@ -114,8 +114,11 @@ class Extensions():
         return True, None
 
     def delete_app(self, user_id, id):
+        app_name = self.userBase.users_apps[user_id][id]['name']
         self.userBase.users_apps[user_id][id]['executable'].close()
         self.userBase.users_apps[user_id].pop(id)
+
+        return app_name
 
     def get_my_apps(self, user_id):
         if (user_id in self.userBase.users_apps):

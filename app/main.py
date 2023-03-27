@@ -1086,18 +1086,26 @@ def get_my_apps():
 def append_app():
     data = request.args.get("data", "")
     app_id = request.args.get("app_id", "")
-    status, data = extensions.append_app(int(current_user.id), app_id, json.loads(data))
+    status, out_data = extensions.append_app(int(current_user.id), app_id, json.loads(data))
     if status:
+        str_log = '%s create app with name "%s"' % (current_user.username, json.loads(data)['name']['value'])
+        history.add(8, str_log)
+        logging.print(str_log, print_bool=False, comment='[HISTORY] ')
+
         return OK
 
     else:
-        return data
+        return out_data
 
 @app.route('/delete_app', methods=['GET' , 'POST'])
 @login_required
 def delete_app():
     id = request.args.get("id", "")
-    extensions.delete_app(int(current_user.id), int(id))
+    app_name = extensions.delete_app(int(current_user.id), int(id))
+
+    str_log = '%s delete app with id "%s"' % (current_user.username, app_name)
+    history.add(9, str_log)
+    logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
     return OK
 

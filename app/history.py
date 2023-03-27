@@ -21,6 +21,8 @@ class History():
         # 5 - создание
         # 6 - Удаление
         # 7 - изменение
+        # 8 - создание приложения
+        # 9 - удаление приложения
 
         if self.use_bool:
             self.history.append([type, text, self.time.get_all_now(' | ')])
