@@ -328,16 +328,28 @@
       </div>
 
       <div id="other_options" style="position: absolute; top: 42px; width: 100%;">
-        <p style="position: absolute; left: 8px; top: 0px;">Theme</p>
+        <p class="settings_name">Interface</p>
 
-        <div style="position: absolute; top: 20px; left: 15px;">
+        <div class="settings_element">
           <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
           <label for="lightThame_chekcbox"><p>Light theme</p></label>
         </div>
 
-        <div style="position: absolute; top: 50px; left: 15px;">
+        <div class="settings_element">
           <input type="checkbox" class="custom-checkbox top_checkBox" id="file_icons_chekcbox" name="file_icons_chekcbox" value="yes" onchange="checkBox_file_icons(this)">
           <label for="file_icons_chekcbox"><p>Colored file icons (experemental)</p></label>
+        </div>
+
+        <p class="settings_name">User</p>
+
+        <div id="" class="settings_element_button small_button_style block_select button_margin" style="" onclick="()">
+          <img class="icon" width="20" height="20" src="static/img/user.svg">
+          <p>change login</p>
+        </div>
+
+        <div id="" class="settings_element_button small_button_style block_select button_margin" onclick="()">
+          <img class="icon" width="20" height="20" src="static/img/admin/login.svg">
+          <p>change password</p>
         </div>
 
       </div>
