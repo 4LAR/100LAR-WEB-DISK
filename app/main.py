@@ -120,6 +120,8 @@ login_manager.init_app(app)
 #####################################################
 # константы
 
+FILE_NAME_BACK_LIST = ("/", "\\", ":", "*", "?", "<", ">", "|")
+
 ERROR = 'ERROR'
 OK = 'ok'
 NO_PLACE = 'NO PLACE'
@@ -128,6 +130,8 @@ ERROR_DIR = 'ERROR DIR'
 ERROR_LOGIN = 'ERROR LOGIN'
 NO_ADMIN = 'NO ADMIN'
 READ_ONLY = 'READ ONLY'
+ERROR_NAME = 'ERROR NAME'
+ALREADY_EXISTS = 'ALREADY EXISTS'
 
 #####################################################
 
@@ -667,9 +671,6 @@ def files():
         dir = request.args.get("dir", "")
 
         if (not '..' in dir):
-
-            #dir = dir.replace('/', '"/"')
-
             user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
             files = os.listdir(user_path + dir)
@@ -696,7 +697,6 @@ def files():
                             files_list[i]['type'] = 'dir'
 
                         else:
-                            #magic.from_file(file_path, mime=True)
                             mime = magic.from_buffer(open(file_path, "rb").read(2048), mime=True)
 
                             if mime.split('/')[1] in ['zip', 'x-rar']:
@@ -752,7 +752,18 @@ def create_file():
     file = request.args.get("file", "")
     hello_data = request.args.get("hello", "HELLO WORLD")
 
+    if len(file) < 1:
+        return ERROR_NAME
+
+    for s in file:
+        if s in FILE_NAME_BACK_LIST:
+            return ERROR_NAME
+
     user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
+
+    if os.path.exists(user_path + dir + '/' + file):
+        return ALREADY_EXISTS
+
     if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
         if check_size(current_user, path, utf8len(hello_data)):
             f = open(user_path + dir + '/' + file, 'w')
@@ -779,7 +790,17 @@ def create_folder():
     dir = request.args.get("dir", "")
     file = request.args.get("folder_name", "")
 
+    if len(file) < 1:
+        return ERROR_NAME
+
+    for s in file:
+        if s in FILE_NAME_BACK_LIST:
+            return ERROR_NAME
+
     user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
+
+    if os.path.exists(user_path + dir + '/' + file):
+        return ALREADY_EXISTS
 
     if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
         os.mkdir(user_path + dir + '/' + file)
@@ -825,7 +846,6 @@ def unpack():
 
         if not userBase.get_user_info(current_user.id)['path'][int(path)]['readonly']:
             dir_name = file.split('.')[0]
-            #os.mkdir(user_path + dir + '/' + dir_name)
 
             # Узнаём суммарный размер файлов в архиве
             f = zipfile.ZipFile(user_path + dir + '/' + file, 'r')

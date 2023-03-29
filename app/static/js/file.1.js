@@ -1082,14 +1082,18 @@ function create_file_dialog(folder=false) {
   create_file_bool = true;
 
   if (folder) {
-    document.getElementById("create_file_image").src = "static/img/files/folder.svg"
+    document.getElementById("create_file_image").src = "static/img/files/folder.svg";
+    document.getElementById("create_file_image").className = `${(colored_file_icons)? "folder_filter": ""} icon`;
     document.getElementById("create_file_button").onclick = function(){create_file(true)};
     document.getElementById("create_fileName_input").placeholder = 'New directory name';
   } else {
-    document.getElementById("create_file_image").src = "static/img/files/file.svg"
+    document.getElementById("create_file_image").src = "static/img/files/file.svg";
+    document.getElementById("create_file_image").className = `${(colored_file_icons)? "text_filter": ""} icon`;
     document.getElementById("create_file_button").onclick = function(){create_file()};
     document.getElementById("create_fileName_input").placeholder = 'New file name';
   }
+  document.getElementById(`create_fileName_input`).classList.replace('app_input_error', 'app_input_ok');
+  document.getElementById("create_fileName_input").value = "";
 
   openModal('dialog_bg');
   openModal('dialog_create_file');
@@ -1118,17 +1122,26 @@ function create_file(folder=false) {
     xhr.open('POST', `/create_file?path=${path}&dir=${dir_str}&file=${file_name.value}`);
   }
 
-  file_name.value = '';
-
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      close_create_file_dialog();
+      var close_dialog = true;
       if (xhr.responseText.toString() === 'NO PLACE') {
         no_place_dialog();
       } else if (xhr.responseText.toString() === 'READ ONLY') {
         readonly_dialog();
+      } else if (xhr.responseText.toString() === 'ERROR NAME') {
+        document.getElementById(`create_fileName_input`).classList.replace('app_input_ok', 'app_input_error');
+        close_dialog = false;
+      } else if (xhr.responseText.toString() === 'ALREADY EXISTS') {
+        document.getElementById(`create_fileName_input`).classList.replace('app_input_ok', 'app_input_error');
+        close_dialog = false;
       } else update_dir();
+
+      if (close_dialog) {
+        close_create_file_dialog();
+        file_name.value = '';
+      }
 
     }
   };

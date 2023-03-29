@@ -329,27 +329,29 @@
 
       <div id="other_options" style="position: absolute; top: 42px; width: 100%;">
         <p class="settings_name">Interface</p>
-
         <div class="settings_element">
           <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
           <label for="lightThame_chekcbox"><p>Light theme</p></label>
         </div>
-
         <div class="settings_element">
           <input type="checkbox" class="custom-checkbox top_checkBox" id="file_icons_chekcbox" name="file_icons_chekcbox" value="yes" onchange="checkBox_file_icons(this)">
           <label for="file_icons_chekcbox"><p>Colored file icons (experemental)</p></label>
         </div>
 
         <p class="settings_name">User</p>
-
         <div id="" class="settings_element_button small_button_style block_select button_margin" style="" onclick="()">
           <img class="icon" width="20" height="20" src="static/img/user.svg">
           <p>change login</p>
         </div>
-
         <div id="" class="settings_element_button small_button_style block_select button_margin" onclick="()">
           <img class="icon" width="20" height="20" src="static/img/admin/login.svg">
           <p>change password</p>
+        </div>
+
+        <p class="settings_name">Other</p>
+        <div class="settings_element">
+          <input type="checkbox" class="custom-checkbox top_checkBox" id="save_in_server_chekcbox" name="save_in_server_chekcbox" value="yes" onchange="(this)">
+          <label for="save_in_server_chekcbox"><p>Save settings in server</p></label>
         </div>
 
       </div>
@@ -504,7 +506,7 @@
     </div>
 
     <!-- Создание файлов и директорий -->
-    <div id="dialog_create_file" class="dialog_style">
+    <div id="dialog_create_file" class="dialog_style" style="height: 180px;">
       <div class="dialog_top_name">
         <div class="dialog_close_button block_select button_margin" onclick="close_create_file_dialog()">
           <img class="icon" width="20" height="20" src="static/img/cross.svg">
@@ -514,7 +516,11 @@
 
       <div class="dialog_info">
         <img class="icon" id="create_file_image" style="position: absolute; left: 10px; top: 10px;" width="40" height="40" src="">
-        <input id="create_fileName_input" class="input_style create_fileName_input" style="" type=text placeholder="file name" onkeypress="return create_file_enter(event)">
+        <input id="create_fileName_input" class="app_input_ok input_style create_fileName_input" type=text placeholder="file name" onkeypress="return create_file_enter(event)" autocomplete="off">
+      </div>
+
+      <div style="position: absolute; top: 90px; left: 0px; right: 0px; text-align: center;">
+        <p style="width: 100%;">Object name must not be empty and contain extraneous characters ( / \ : * ? < > | ).</p>
       </div>
 
       <div id="create_file_button" class="round_button dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
