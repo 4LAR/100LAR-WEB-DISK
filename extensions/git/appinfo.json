@@ -1,0 +1,11 @@
+{
+  "type": "application",
+  "name": "git",
+  "status_required": ["admin", "programmer"],
+  "ico": "app.svg",
+  "html": "app.html",
+  "css": ["app.css"],
+  "script": ["app.js"],
+  "executable": "app.py",
+  "create_layout": []
+}

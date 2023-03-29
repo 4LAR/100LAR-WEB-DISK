@@ -50,9 +50,12 @@
 }
 
 .app_search_div input {
-  margin: 2px 5px;
+  margin: 2px 3px;
+  position: absolute;
   height: 26px;
   background-color: var(--main-input-color);
+  width: calc(var(--width-left-bar) - 6px);
+
 }
 
 .apps_empty_message {
