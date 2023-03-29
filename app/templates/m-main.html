@@ -492,7 +492,11 @@
 
       <div class="dialog_info">
         <img class="icon" id="create_file_image" style="position: absolute; left: 10px; top: 10px;" width="40" height="40" src="">
-        <input id="create_fileName_input" class="input_style create_fileName_input" style="" type=text placeholder="file name" onkeypress="return create_file_enter(event)">
+        <input id="create_fileName_input" class="app_input_ok input_style create_fileName_input" type=text placeholder="file name" onkeypress="return create_file_enter(event)" autocomplete="off">
+      </div>
+
+      <div style="position: absolute; top: 90px; left: 0px; right: 0px; text-align: center;">
+        <p style="width: 100%;">Object name must not be empty and contain extraneous characters ( / \ : * ? < > | ).</p>
       </div>
 
       <div id="create_file_button" class="dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;">
