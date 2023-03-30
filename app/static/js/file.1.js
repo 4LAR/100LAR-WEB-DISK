@@ -102,7 +102,7 @@ function parse_dir_enter(e) {
 }
 
 // обновление кнопок передвижения и пути
-function update_dir() {
+function update_dir(onload_function=undefined) {
   dir_str = '';
   // генерируем строку из пути (массива)
   for (let i = 0; i < dir.length; i++)
@@ -132,7 +132,7 @@ function update_dir() {
   get_info();
 
   // и после список файлов
-  get_files();
+  get_files(onload_function);
 
   // прописываем путь
   document.getElementById("path").value = '/' + dir_str;
@@ -228,7 +228,7 @@ function sort_files(files_list) {
 
 // получение всех файлов от сервера в текущей директории
 var read_files_bool = false;
-function get_files() {
+function get_files(onload_function=undefined) {
   selected_file_name = "";
   if (!read_files_bool) {
     read_files_bool = true;
@@ -290,7 +290,7 @@ function get_files() {
           image_list = [];
 
           // добавляем файлы в список
-          for (let i = 0; i < files_json['files'].length; i++){
+          for (let i = 0; i < files_json['files'].length; i++) {
             file = files_json['files'][i]
             if (file['type'] == 'dir') {
               append_file(file['type'], file['name']);
@@ -299,6 +299,9 @@ function get_files() {
             }
           }
           append_path_info();
+          if (onload_function != undefined) {
+            onload_function();
+          }
         }
 
       }
@@ -620,6 +623,8 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   selected_file_dir = dir_str;
   type_file = type;
 
+  document.getElementById(`fileName_input`).classList.replace('app_input_error', 'app_input_ok');
+
   closeModal('file_activity_unpack_button');
   closeModal('file_activity_edit_button');
   closeModal('file_activity_view_button');
@@ -705,6 +710,18 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
   openModal('file_info_block');
   closeModal('file_list_block');
   if (mobile) closeModal('addFileMenu');
+}
+
+//
+function open_fileInfo_by_name(name) {
+  for (let i = 0; i < files_json['files'].length; i++) {
+    file = files_json['files'][i];
+    if (name === file['name'] && file['type'] !== 'dir') {
+      open_fileInfo(file['name'], file['type'], file['size'], dir_str + '/' + file['name'], file['time'], file['type_mime']);
+      break;
+    }
+
+  }
 }
 
 // закрытие страницы информации о файле
@@ -847,10 +864,6 @@ function copy_file_buf(move=false) {
     else
       count_files += 1;
 
-  // document.getElementById("cop_info").innerHTML = (move)? 'move elements': 'copy elements';
-  // document.getElementById("cop_file_list_files").innerHTML = 'Files: ' + count_files;
-  // document.getElementById("cop_file_list_folders").innerHTML = 'Folders: ' + count_folders;
-
   document.getElementById("cop_file_list_files_folders").innerHTML = 'Selected: ' + (count_folders + count_files);
 }
 
@@ -966,8 +979,13 @@ function rename_file() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
       if (xhr.status === 200) {
-        selected_file_name = new_file_name;
-        update_dir();
+        if (xhr.responseText.toString() === 'ALREADY EXISTS') {
+          document.getElementById(`fileName_input`).classList.replace('app_input_ok', 'app_input_error');
+        } else {
+          selected_file_name = new_file_name;
+          document.getElementById(`fileName_input`).classList.replace('app_input_error', 'app_input_ok');
+          update_dir(function(){open_fileInfo_by_name(new_file_name)});
+        }
       }
     };
     xhr.send();

@@ -825,6 +825,9 @@ def rename():
 
     user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
 
+    if os.path.exists(user_path + dir + '/' + new_file):
+        return ALREADY_EXISTS
+
     os.rename(user_path + dir + '/' + file, user_path + dir + '/' + new_file)
 
     str_log = '%s rename file (%s to %s)' % (current_user.username, user_path + dir + '/' + file, user_path + dir + '/' + new_file)
