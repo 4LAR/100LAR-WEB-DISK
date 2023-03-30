@@ -4,34 +4,9 @@
   left: var(--width-left-bar);
   top: 32px;
   right: 0px;
-
 }
 
-@media (min-width: 900px) {
-  .file_list_grid {
-    grid-template-columns: repeat(2, 50%);
-  }
-}
-
-@media (min-width: 1200px) {
-  .file_list_grid {
-    grid-template-columns: repeat(3, 33.3%);
-  }
-}
-
-@media (min-width: 1500px) {
-  .file_list_grid {
-    grid-template-columns: repeat(4, 25%);
-  }
-}
-
-.file_list_grid {
-  display: grid;
-  /*grid-template-columns: repeat(4, 25%);*/
-  /*grid-gap: 10px;*/
-}
-
-/**/
+/*----------------------------------------------------------------------------*/
 
 .file_selected {
   background-color: var(--selected-file-color);
@@ -39,13 +14,14 @@
 
 .file {
   border-bottom: 1px solid var(--main-border-color);
-
   height: 40px;
   width: 100%;
 }
 
-.checkBox_file {
-
+.file img {
+  width: 25;
+  height: 25;
+  margin: 7px 50px;
 }
 
 .checkBox_file:hover ~ .file {
@@ -68,14 +44,30 @@
   width: calc(100% - 330px);
 }
 
-/**/
+/*----------------------------------------------------------------------------*/
+
+.file_list_grid {
+  display: grid;
+  grid-gap: 5px;
+  /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
+}
 
 .file_grid {
-  height: 55px;
+  height: 100px;
   width: 100%;
+  border-radius: 8px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-top: 10px;
+}
 
-  border-right: 1px solid var(--main-border-color);
-  border-bottom: 1px solid var(--main-border-color);
+.file_grid img {
+  display: block;
+  width: 60;
+  height: 60;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .file_grid:hover {
@@ -86,12 +78,16 @@
 .file_name_grid {
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow:hidden;
-
-  width: calc(100% - 100px);
+  overflow: hidden;
+  text-align: center;
+  width: calc(90%);
+  margin: 10px 0px;
+  white-space: nowrap;
+  margin-top: 10px;
+  margin-left: 5%;
 }
 
-/**/
+/*----------------------------------------------------------------------------*/
 
 .file_checkbox_bg {
   position: absolute;

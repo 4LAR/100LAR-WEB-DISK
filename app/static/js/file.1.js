@@ -168,8 +168,8 @@ function append_back_dir() {
       } else {
         li.innerHTML = `
           <div class="file_grid" onclick="back_dir()">
-            <img class="${(colored_file_icons)? "folder_filter": ""} icon" style="margin: 7px 40px" width="40" height="40" src="static/img/files/folder.svg">
-            <p style="margin: -35px 90px">...</p>
+            <img class="${(colored_file_icons)? "folder_filter": ""} icon" width="40" height="40" src="static/img/files/folder.svg">
+            <p class="file_name_grid">...</p>
           </div>
         `;
       }
@@ -298,7 +298,8 @@ function get_files(onload_function=undefined) {
               append_file(file['type'], file['name'], file['size'], dir_str + '/' + file['name'], file['time'], file['type_mime']);
             }
           }
-          append_path_info();
+          if (draw_type == 'list')
+            append_path_info();
           if (onload_function != undefined) {
             onload_function();
           }
@@ -432,27 +433,22 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
         `;
       }
 
-      image_size = 25;
-
     } else if (draw_type == 'grid') {
       draw_type_class = 'file_grid';
       if (type == 'dir') {
         file_info = `
-          <p style="margin: -35px 90px; white-space: nowrap;" class="file_name_grid">${name}</p>
+          <p class="file_name_grid">${name}</p>
         `;
       } else {
         file_info = `
-          <p style="margin: -35px 90px; white-space: nowrap;" class="file_name_grid">${name}</p>
-
+          <p class="file_name_grid">${name}</p>
         `;
       }
-
-      image_size = 40;
     }
 
     // checkBox
     var str = `
-      <label for="checkbox_file_${name}"><div class="file_checkbox_bg">
+      <label for="checkbox_file_${name}"><div class="${(draw_type == 'list')? 'file_checkbox_bg': ''}">
         <div style="position: absolute; margin: 10px 12px">
           <input type="checkbox" class="custom-checkbox checkBox_file" id="checkbox_file_${name}" name="${name}" value="yes" onchange="checkBox_file(this, '${name}', '${type}')">
           <label for="checkbox_file_${name}"></label>
@@ -464,7 +460,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       // директория
       str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="forward_dir('${name}')">
-          <img class="${color_class} icon" style="margin: 7px 50px" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
+          <img class="${color_class} icon" width="${image_size}" height="${image_size}" src="static/img/files/folder.svg">
           ${file_info}
         </div>
       `;
@@ -474,7 +470,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
 
        str += `
         <div class="${draw_type_class} block_select" id="${name}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
-          <img class="${color_class} icon" style="margin: 7px 50px" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
+          <img class="${color_class} icon" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
       `;
