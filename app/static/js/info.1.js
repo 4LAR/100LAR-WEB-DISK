@@ -117,6 +117,10 @@ function close_dialogs() {
     close_main_app_dialog();
   } else if (delete_app_dialog_bool) {
     close_delete_app_dialog();
+  } else if (change_password_bool) {
+    close_change_password_dialog();
+  } else if (change_login_bool) {
+    close_change_login_dialog();
   } else return false;
   return true;
 }

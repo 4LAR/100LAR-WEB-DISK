@@ -117,10 +117,11 @@ login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)
 
-#####################################################
+################################################################################
 # константы
 
 FILE_NAME_BACK_LIST = ("/", "\\", ":", "*", "?", "<", ">", "|")
+USERNAME_WHITE_LIST = ("qwertyuiopasdfghjklzxcvbnm1234567890")
 
 ERROR = 'ERROR'
 OK = 'ok'
@@ -128,12 +129,14 @@ NO_PLACE = 'NO PLACE'
 EMPTY = 'EMPTY'
 ERROR_DIR = 'ERROR DIR'
 ERROR_LOGIN = 'ERROR LOGIN'
+ERROR_PASSWD = 'ERROR PASSWD'
+ERROR_PASSWD_LENGTH = 'ERROR PASSWD LENGTH'
 NO_ADMIN = 'NO ADMIN'
 READ_ONLY = 'READ ONLY'
 ERROR_NAME = 'ERROR NAME'
 ALREADY_EXISTS = 'ALREADY EXISTS'
 
-#####################################################
+################################################################################
 
 #
 def reboot():
@@ -185,7 +188,7 @@ def check_size_list(current_user, path, dir, files=[]):
 def utf8len(s):
     return len(s.encode('utf-8'))
 
-#####################################################
+################################################################################
 
 # Запросы
 @app.route('/')
@@ -213,7 +216,7 @@ def main_m():
         version = VERSION
     )
 
-#####################################################
+################################################################################
 
 @app.route('/admin')
 @login_required
@@ -536,11 +539,10 @@ def delete_all_logs():
     else:
         return NO_ADMIN
 
-#####################################################
+################################################################################
 
 class EditorForm(FlaskForm):
     source_code = CodeMirrorField(
-        #language = 'text/x-csrc',
         config = {
             'lineNumbers': 'true'
         }
@@ -615,7 +617,7 @@ def save_file():
         logging.print('/save: ' + str(e), 3, comment='[ERROR] ')
         return ERROR
 
-#####################################################
+################################################################################
 
 @login_manager.user_loader
 def load_user(userid):
@@ -647,6 +649,63 @@ def logout():
     logging.print(str_log, print_bool=False, comment='[HISTORY] ')
     logout_user()
     return OK
+
+################################################################################
+
+@app.route("/change_login", methods=['GET' , 'POST'])
+@login_required
+def change_login():
+    new_name = request.args.get("name", "")
+    old_name = current_user.username
+
+    if (len(new_name) < 1):
+        return ERROR_LOGIN
+
+    for symbol in new_name.lower():
+        if not (symbol in USERNAME_WHITE_LIST):
+            return ERROR_LOGIN
+
+    for id in userBase.users_dict_static:
+        if (new_name == userBase.users_dict_static[id]['username']):
+            return ERROR_LOGIN
+
+    userBase.users_dict_static[current_user.id]['username'] = new_name
+
+    userBase.reload(current_user.id)
+    userBase.update_users()
+    userBase.save()
+
+    str_log = '%s update login: %s' % (old_name, new_name)
+    history.add(10, str_log)
+    logging.print(str_log, print_bool=True, comment='[HISTORY] ')
+
+    return OK
+
+@app.route("/change_password", methods=['GET' , 'POST'])
+@login_required
+def change_password():
+    old_password = request.args.get("old", "")
+    new_password = request.args.get("new", "")
+
+    if (len(new_password) < 4):
+        return ERROR_PASSWD_LENGTH
+
+    if (old_password == userBase.users_dict_static[current_user.id]['password']):
+        userBase.users_dict_static[current_user.id]['password'] = new_password
+    else:
+        return ERROR_PASSWD
+
+    userBase.reload(current_user.id)
+    userBase.update_users()
+    userBase.save()
+
+    str_log = '%s update password' % (current_user.username)
+    history.add(11, str_log)
+    logging.print(str_log, print_bool=True, comment='[HISTORY] ')
+
+    return OK
+
+################################################################################
 
 #
 @app.route("/info", methods=['GET' , 'POST'])
@@ -1092,7 +1151,7 @@ def log_request_info():
         #logging.print(e, 3, comment='[ERROR REQUEST] ')
         pass
 
-#####################################################
+################################################################################
 # приложения
 @app.route('/get_apps', methods=['GET' , 'POST'])
 @login_required
@@ -1139,10 +1198,9 @@ def custom_app():
     app_dict = extensions.get(current_user.id)[request.args.get("app_id", "")]
     return extensions.generate_html(id, int(current_user.id), app_dict)
 
-#####################################################
+################################################################################
 
 logging.create_log()
-
 
 def app_start():
     socketio.run(

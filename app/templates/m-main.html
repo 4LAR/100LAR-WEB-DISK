@@ -140,23 +140,37 @@
         <img class="icon" width="20" height="20" style="position: absolute; right: 5px; top: 5px;" src="static/img/logout.svg" onclick="logout()">
       </div>
 
-      <div id="admin_panel" class="round_button block_select button_margin" style="position: absolute; top: 55px; display: none" onclick="openInNewTab('admin')">
+      <div id="admin_panel" class="round_button block_select button_margin" style="position: absolute; top: 55px; margin-left: 10px; display: none" onclick="openInNewTab('admin')">
         <img class="icon" width="20" height="20" src="static/img/admin/dashboard.svg">
         <p>admin panel</p>
       </div>
 
-      <div id="other_options" style="position: absolute; top: 42px;">
-        <p style="position: absolute; left: 8px; top: 0px;">Theme</p>
-
-        <div style="position: absolute; top: 20px; left: 15px;">
+      <div id="other_options" style="position: absolute; top: 42px">
+        <p class="settings_name">Interface</p>
+        <div class="settings_element">
           <input type="checkbox" class="custom-checkbox top_checkBox" id="lightThame_chekcbox" name="lightThame_chekcbox" value="yes" onchange="checkBox_thame(this)">
-          <label for="lightThame_chekcbox"><p style="white-space: nowrap;">Light theme</p></label>
+          <label for="lightThame_chekcbox"><p>Light theme</p></label>
+        </div>
+        <div class="settings_element">
+          <input type="checkbox" class="custom-checkbox top_checkBox" id="file_icons_chekcbox" name="file_icons_chekcbox" value="yes" onchange="checkBox_file_icons(this)">
+          <label for="file_icons_chekcbox"><p>Colored file icons (experemental)</p></label>
         </div>
 
-        <div style="position: absolute; top: 50px; left: 15px;">
-          <input type="checkbox" class="custom-checkbox top_checkBox" id="file_icons_chekcbox" name="file_icons_chekcbox" value="yes" onchange="checkBox_file_icons(this)">
-          <label for="file_icons_chekcbox"><p style="white-space: nowrap;">Colored file icons (experemental)</p></label>
+        <p class="settings_name">User</p>
+        <div id="" class="settings_element_button round_button block_select button_margin" style="" onclick="change_login_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/user.svg">
+          <p>change login</p>
         </div>
+        <div id="" class="settings_element_button round_button block_select button_margin" onclick="change_password_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/admin/login.svg">
+          <p>change password</p>
+        </div>
+
+        <!-- <p class="settings_name">Other</p>
+        <div class="settings_element">
+          <input type="checkbox" class="custom-checkbox top_checkBox" id="save_in_server_chekcbox" name="save_in_server_chekcbox" value="yes" onchange="(this)">
+          <label for="save_in_server_chekcbox"><p>Save settings in server</p></label>
+        </div> -->
 
       </div>
 
@@ -361,6 +375,66 @@
     <div id="dialog_bg" class="dialog_backgound" onclick="close_dialogs()"></div>
 
     <!--диалоговые окна-->
+
+    <!-- Изменение логина -->
+    <div id="dialog_change_login" class="dialog_style" style="height: 200px;">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_change_login_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <div class="dialog_info">
+        <img class="icon" style="position: absolute; left: 10px; top: 10px;" width="40" height="40" src="static/img/user.svg">
+        <input id="new_login_input" class="app_input_ok input_style create_fileName_input" type=text placeholder="new login" autocomplete="off">
+      </div>
+
+      <div style="position: absolute; top: 90px; left: 0px; right: 0px; text-align: center;">
+        <p style="width: 100%;">The login can only be made up of Latin alphabet characters and numbers.</p>
+      </div>
+
+      <div class="round_button dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;" onclick="change_login()">
+        <p style="margin: 5px 28px">change</p>
+      </div>
+    </div>
+
+    <!-- Изменение пароля -->
+    <div id="dialog_change_password" class="dialog_style" style="height: 245px;">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="close_change_password_dialog()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
+      </div>
+
+      <div id="old_pass_div" class="app_input_ok input_text" style="left: 15px; top: 45px; right: 15px;">
+        <p>current:</p>
+        <input id="old_pass_input" style="left: 60px;" class="input_style create_fileName_input" type=password placeholder="..." autocomplete="off">
+      </div>
+
+      <div id="new_pass_div" class="app_input_ok input_text" style="left: 15px; top: 90px; right: 15px;">
+        <p>new:</p>
+        <input id="new_pass_input" style="left: 60px;" class="input_style create_fileName_input" type=password placeholder="..." autocomplete="off">
+      </div>
+
+      <div id="new_pass_repeat_div" class="app_input_ok input_text" style="left: 15px; top: 125px; right: 15px;">
+        <p>repeat:</p>
+        <input id="new_pass_repeat_input" style="left: 60px;" class="input_style create_fileName_input" type=password placeholder="..." autocomplete="off">
+      </div>
+
+      <div style="position: absolute; top: 150px; left: 0px; right: 0px; text-align: center;">
+        <p style="width: 100%;">The length of the new password must be at least 4 characters</p>
+      </div>
+
+      <!-- <div style="position: absolute; top: 160px; left: 0px; right: 0px; text-align: center;">
+        <p style="width: 100%;">After changing the password, you will need to re-log in to your account</p>
+      </div> -->
+
+      <div class="round_button dialog_button block_select" style="left: 10px; bottom: 10px; width: 100px;" onclick="change_password()">
+        <p style="margin: 5px 28px">change</p>
+      </div>
+    </div>
 
     <!-- окно приложения -->
     <div id="dialog_main_app" class="main_app_dialog" style="">

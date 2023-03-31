@@ -23,6 +23,8 @@ class History():
         # 7 - изменение
         # 8 - создание приложения
         # 9 - удаление приложения
+        # 10 - изменение логинга
+        # 11 - изменение пароля
 
         if self.use_bool:
             self.history.append([type, text, self.time.get_all_now(' | ')])

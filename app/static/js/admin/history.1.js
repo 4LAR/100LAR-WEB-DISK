@@ -9,6 +9,8 @@ var history_types = [
   ['edit', 'admin/edit.svg'],
   ['create app', 'apps.svg'],
   ['delete app', 'apps.svg'],
+  ['change login', 'user.svg'],
+  ['change password', 'admin/login.svg'],
 ]
 
 var history_json = {};

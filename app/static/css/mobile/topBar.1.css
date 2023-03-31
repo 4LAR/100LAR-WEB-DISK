@@ -91,3 +91,32 @@
   border-radius: 0 0 8px 8px;
   background-color: var(--hover-color);
 }
+
+/*----------------------------------------------------------------------------*/
+
+.settings_name {
+  margin: 0px 8px;
+  padding-top: 10px;
+  padding-bottom: 8px;
+  height: 15px;
+}
+
+.settings_element {
+  margin: 0px 15px;
+  padding-top: 0px;
+  padding-bottom: 8px;
+}
+
+.settings_element * {
+  margin: 0px;
+}
+
+.settings_element_button {
+  position: relative;
+  margin: 0px 10px;
+  margin-bottom: 5px;
+  padding-top: 0px;
+  padding-bottom: 8px;
+  height: 25px;
+  width: calc(var(--width-left-bar) - 20px);
+}
