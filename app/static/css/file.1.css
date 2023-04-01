@@ -105,6 +105,10 @@
   width: 100%;
 }
 
+.file_pathInfo p {
+  color: var(--color-hide-font);
+}
+
 .file_delimiter_bg {
   position: absolute;
   width: 40px;

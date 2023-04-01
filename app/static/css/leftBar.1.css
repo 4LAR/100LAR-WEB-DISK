@@ -90,7 +90,7 @@
   width: 200px;
   height: 35px;
   border-top: 1px solid var(--top-border-color);
-  background-color: var(--left-color);
+  background-color: var(--hover-color);
 
   bottom: 0px;
   left: 0px;

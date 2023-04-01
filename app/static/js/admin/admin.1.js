@@ -59,23 +59,6 @@ function get_server_info() {
       settings_json = info_json['settings'];
       generate_settingslist();
 
-      //TIME
-      document.getElementById("server_time_running").innerHTML = `${info_json['server_time_running']}`;
-
-      //RAM
-      document.getElementById("server_program_memory").innerHTML = `Disk: ${convert_size(info_json['program_memory'])}`;
-      document.getElementById("server_used_memory").innerHTML = `Other: ${convert_size(info_json['used_memory'] - info_json['program_memory'])}`;
-      document.getElementById("server_total_memory").innerHTML = `Total: ${convert_size(info_json['total_memory'])}`;
-
-      program_memory = (100 / info_json['total_memory']) * info_json['program_memory'];
-      used_memory = (100 / info_json['total_memory']) * info_json['used_memory'];
-
-      set_progressbar('ram_memory_usage', [used_memory, program_memory], 2);
-
-      //CPU
-      document.getElementById("server_cpu_usage").innerHTML = `Usage: ${info_json['cpu_usage']}%`;
-      set_progressbar('cpu_usage', info_json['cpu_usage']);
-
       //WARNINGS
       clear_ul('warnings_list');
       if (info_json['warnings'].length > 0) {
@@ -126,6 +109,26 @@ function open_alert_clear_error_list() {
   `, 130);
 }
 
+const socket = io.connect("/system_info");
+
+socket.on("info", function (data) {
+  set_progressbar(`cpu_usage`, data['cpu_usage']);
+  document.getElementById("server_cpu_usage").innerHTML = `Usage: ${data['cpu_usage']}%`;
+
+  //TIME
+  document.getElementById("server_time_running").innerHTML = `${data['server_time_running']}`;
+
+  //RAM
+  document.getElementById("server_program_memory").innerHTML = `Disk: ${convert_size(data['program_memory'])}`;
+  document.getElementById("server_used_memory").innerHTML = `Other: ${convert_size(data['used_memory'] - data['program_memory'])}`;
+  document.getElementById("server_total_memory").innerHTML = `Total: ${convert_size(data['total_memory'])}`;
+
+  program_memory = (100 / data['total_memory']) * data['program_memory'];
+  used_memory = (100 / data['total_memory']) * data['used_memory'];
+
+  set_progressbar('ram_memory_usage', [used_memory, program_memory], 2);
+
+});
 
 get_server_info();
 

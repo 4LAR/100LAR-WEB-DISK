@@ -81,7 +81,8 @@ var lang_dict = {
   'python': ['py'],
   'text/x-csrc': ['c', 'h'],
   'text/x-c++src': ['cpp', 'hpp'],
-  'text/x-java': ['class', 'java']
+  'text/x-java': ['class', 'java'],
+  'text/x-common-lisp': ['lisp']
 }
 
 function check_lang(file_name) {

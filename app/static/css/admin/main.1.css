@@ -77,6 +77,10 @@ body {
   display: block;
   border-collapse: collapse;
 
+  margin-top: 0px;
+  padding-top: 0;
+  padding-bottom: 0;
+
 }
 
 .progress_bar_state {

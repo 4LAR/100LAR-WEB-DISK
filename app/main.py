@@ -93,7 +93,7 @@ userBase = UserBase(
     key =       settings.options['Flask']['secret_key']
 )
 
-CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike"]
+CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike", "commonlisp"]
 WTF_CSRF_ENABLED = True
 
 CODEMIRROR_THEMES = [
@@ -228,6 +228,28 @@ def admin():
         return NO_ADMIN
 
 ############DASHBOARD
+
+system_info_background_task_flag = False
+def system_info_background_task():
+    info = {}
+    while True:
+        # socketio.sleep(0.5)
+        memory = psutil.virtual_memory()
+        info['cpu_usage'] = psutil.cpu_percent(interval=1)
+        # info['cpu_usage'] = psutil.cpu_percent(percpu=True, interval=0.5)
+        info['total_memory'] = memory.total
+        info['used_memory'] = memory.used
+        info['program_memory'] = (memory_usage()[0] * 1024 * 1024)
+        info['server_time_running'] = str(datetime.datetime.now() - start_time).split('.')[0]
+        socketio.emit("info", info, namespace="/system_info")
+
+socketio.start_background_task(target=system_info_background_task)
+
+@socketio.on("connect", namespace="/system_info")
+@login_required
+def connect_info():
+    return
+
 # вывод информации о сервере
 @app.route('/system_info', methods=['GET' , 'POST'])
 @login_required
@@ -235,13 +257,7 @@ def system_info():
     if (current_user.panel):
         info = {}
 
-        memory = psutil.virtual_memory()
-
-        info['cpu_usage'] = psutil.cpu_percent()
-        info['total_memory'] = memory.total
-        info['used_memory'] = memory.used
-        info['program_memory'] = (memory_usage()[0] * 1024 * 1024)
-        info['server_time_running'] = str(datetime.datetime.now() - start_time).split('.')[0]
+        info['cpu_count'] = os.cpu_count()
         info['settings'] = settings.options
         info['warnings'] = logging.warning_list
 

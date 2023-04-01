@@ -179,7 +179,7 @@ function append_back_dir() {
   }
 }
 
-function append_path_info() {
+function append_path_info(count_elements) {
   var ul = document.getElementById("file_list");
 
   // создаём кнопку перехода в верхнюю директорию
@@ -189,7 +189,9 @@ function append_path_info() {
     if (draw_type == 'list') {
       li.innerHTML = `
         <div class="file_delimiter_bg"></div>
-        <div class="file_pathInfo"></div>
+        <div class="file_pathInfo">
+          <p style="position: absolute; margin: 0px 0px; right: 10px;">elements: ${count_elements}</p>
+        </div>
       `;
     } else {
       li.innerHTML = `
@@ -299,7 +301,7 @@ function get_files(onload_function=undefined) {
             }
           }
           if (draw_type == 'list')
-            append_path_info();
+            append_path_info(files_json['files'].length);
           if (onload_function != undefined) {
             onload_function();
           }
