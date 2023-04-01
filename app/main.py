@@ -233,9 +233,9 @@ system_info_background_task_flag = False
 def system_info_background_task():
     info = {}
     while True:
-        # socketio.sleep(0.5)
+        socketio.sleep(1)
         memory = psutil.virtual_memory()
-        info['cpu_usage'] = psutil.cpu_percent(interval=1)
+        info['cpu_usage'] = psutil.cpu_percent()
         # info['cpu_usage'] = psutil.cpu_percent(percpu=True, interval=0.5)
         info['total_memory'] = memory.total
         info['used_memory'] = memory.used
