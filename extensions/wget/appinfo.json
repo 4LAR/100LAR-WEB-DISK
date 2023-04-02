@@ -1,0 +1,46 @@
+{
+  "type": "application",
+  "name": "wget",
+  "status_required": [],
+  "ico": "app.svg",
+  "html": "app.html",
+  "css": ["app.css"],
+  "script": ["app.js"],
+  "executable": "app.py",
+  "create_layout": [
+    {
+      "type": "row",
+      "text": "Link:",
+      "elements": [
+        {
+          "type": "input",
+          "arg": "link",
+          "placeholder": "link",
+          "value": "",
+          "must_be_filled": true
+        }
+      ]
+    }, {
+      "type": "row",
+      "text": "File name:",
+      "elements": [
+        {
+          "type": "input",
+          "arg": "file_name",
+          "placeholder": "file name",
+          "value": "",
+          "must_be_filled": true
+        }
+      ]
+    }, {
+      "type": "row",
+      "text": "Path to save:",
+      "elements": [
+        {
+          "type": "path",
+          "arg": "path"
+        }
+      ]
+    }
+  ]
+}
