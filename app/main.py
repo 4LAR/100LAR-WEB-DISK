@@ -39,6 +39,8 @@ from flask_codemirror import CodeMirror
 from flask_codemirror.fields import CodeMirrorField
 from flask_wtf import FlaskForm
 
+from flask_commonmark import Commonmark
+
 # время
 import time
 import datetime
@@ -107,8 +109,10 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = settings.options['Flask']['secret_key']
 app.debug = settings.options['Flask']['debug']
-socketio = SocketIO(app, async_mode=None)
+socketio = SocketIO(app, async_mode="threading")
 socketio.init_app(app, cors_allowed_origins="*")
+
+cm = Commonmark(app)
 
 codemirror = CodeMirror(app)
 extensions = Extensions(app, userBase, socketio)
@@ -1213,6 +1217,12 @@ def custom_app():
     id = request.args.get("id", "")
     app_dict = extensions.get(current_user.id)[request.args.get("app_id", "")]
     return extensions.generate_html(id, int(current_user.id), app_dict)
+
+@app.route("/commonmark", methods=['GET' , 'POST'])
+@login_required
+def display_commonmark():
+    mycm = request.json['code']
+    return render_template_string("{{mycm|commonmark}}", mycm=mycm)
 
 ################################################################################
 
