@@ -10,7 +10,7 @@ import functools
 import os
 import sys
 
-from app.terminal import *
+from disk.terminal import *
 
 class app():
     def __init__(self, socketio, app_namespace, path, cmd):

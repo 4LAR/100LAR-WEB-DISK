@@ -16,13 +16,10 @@
 
   .login_class {
     position:absolute;
-
     background-color: var(--right-color);
     border: 1px solid var(--main-border-color);
-
     right: 0px;
     top: 0px;
-
     height: 100%;
     width: 400px;
 
@@ -41,33 +38,24 @@
 
   .login_container {
     position: absolute;
-
-    /*top: 121px;*/
     top: 80px;
     right: 0px;
-
     height: 130px;
     width: 400px;
-
     background-color: var(--bg-color);
     border-top: 1px solid var(--main-border-color);
     border-bottom: 1px solid var(--main-border-color);
-
     border-radius: 8px;
   }
 
   .login_name_container {
     position: absolute;
-
     top: 80px;
     right: 0px;
-
     height: 40px;
     width: 400px;
-
     background-color: var(--bg-color);
     border-top: 1px solid var(--main-border-color);
-
   }
 
   .login_input {
@@ -82,6 +70,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .info_div {
+    display: block;
+  }
+
   .info_class {
     display: none;
   }
@@ -161,4 +153,21 @@
   height: 30px;
 
   cursor: pointer;
+}
+
+
+.info_div {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 399px;
+  margin: 0px;
+}
+
+.info_div iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+  margin: 0px;
 }

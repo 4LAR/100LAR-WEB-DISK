@@ -3,7 +3,7 @@ import os
 import json
 import copy
 from flask_login import UserMixin
-from app.dict_json import *
+from disk.dict_json import *
 
 #
 class User(UserMixin):
@@ -25,10 +25,10 @@ class User(UserMixin):
 
 #
 class UserBase():
-    def __init__(self, path='users', key='secret_key'):
+    def __init__(self, path='', file_name='users', key='secret_key'):
         #
 
-        self.path = 'users'
+        self.path = path + file_name
         self.key = key
 
         self.last_id = 0

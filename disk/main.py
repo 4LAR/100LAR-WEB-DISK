@@ -62,15 +62,15 @@ from memory_profiler import memory_usage
 start_time = datetime.datetime.now()
 
 # импортируем py файлы
-from app.dict_json import *
-from app.log import *
-from app.get_time import *
-from app.settings import *
-from app.users import *
-from app.file import *
-from app.history import *
-from app.terminal import *
-from app.extensions import *
+from disk.dict_json import *
+from disk.log import *
+from disk.get_time import *
+from disk.settings import *
+from disk.users import *
+from disk.file import *
+from disk.history import *
+from disk.terminal import *
+from disk.extensions import *
 
 settings = settings()
 
@@ -92,8 +92,13 @@ history.time = time_now
 
 userBase = UserBase(
     path =      settings.options['Base']['path'],
+    file_name = settings.options['Base']['file_name'],
     key =       settings.options['Flask']['secret_key']
 )
+
+entry_string = ""
+if settings.options['Entry']['use']:
+    entry_string = open(settings.options['Entry']['source']).read()
 
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike", "commonlisp"]
 WTF_CSRF_ENABLED = True
@@ -219,6 +224,14 @@ def main_m():
         'm-main.html',
         version = VERSION
     )
+
+@app.route('/entry')
+def entry():
+    if (settings.options['Entry']['use']):
+        return render_template_string(entry_string)
+
+    else:
+        return 'about:blank'
 
 ################################################################################
 

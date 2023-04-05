@@ -35,7 +35,21 @@ class settings():
                 'use': True
             },
             'Base': {
-                'path': 'users'
+                'path': '',
+                'file_name': 'users'
+            },
+            'Extensions': {
+                'use': True,
+                'path': 'extensions'
+            },
+            'Preview': {
+                'max_text_file_length': 100,
+                'max_pics_resolution_width': 1280,
+                'max_pics_resolution_height': 720
+            },
+            'Entry': {
+                'use': True,
+                'source': 'entry.html'
             }
         }
 
