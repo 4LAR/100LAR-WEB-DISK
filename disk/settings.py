@@ -22,8 +22,8 @@ class settings():
                 'PORT': 80,
                 'debug': False,
                 'secret_key': random_string(4),
-                'threaded': True,
-                'processes': 1
+                'waitress': True,
+                'threads': 1
             },
             'Logs': {
                 'path': 'logs/',

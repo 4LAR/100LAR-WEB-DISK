@@ -1242,11 +1242,19 @@ def display_commonmark():
 logging.create_log()
 
 def app_start():
-    socketio.run(
-        app,
-        debug=settings.options['Flask']['debug'],
-        port=settings.options['Flask']['PORT'],
-        host=settings.options['Flask']['IP']#,
-        # threaded = settings.options['Flask']['threaded'],
-        # processes = int(settings.options['Flask']['processes'])
-    )
+    if settings.options['Flask']['waitress']:
+        from waitress import serve
+        serve(
+            app,
+            host=settings.options['Flask']['IP'],
+            port=settings.options['Flask']['PORT'],
+            threads=int(settings.options['Flask']['threads'])
+        )
+
+    else:
+        socketio.run(
+            app,
+            debug=settings.options['Flask']['debug'],
+            port=settings.options['Flask']['PORT'],
+            host=settings.options['Flask']['IP']
+        )
