@@ -59,6 +59,11 @@ function get_server_info() {
       settings_json = info_json['settings'];
       generate_settingslist();
 
+      //REBOOT
+      // if (info_json['BUILT_IN_SERVER']) {
+      //   openModal('reboot_button');
+      // }
+
       //WARNINGS
       clear_ul('warnings_list');
       if (info_json['warnings'].length > 0) {

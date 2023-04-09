@@ -10,48 +10,52 @@ def random_string(size):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(size))
 
 class settings():
-    def __init__(self):
+    def __init__(self, path="settings.ini", options=None):
 
-        self.path = 'settings.ini'
+        self.path = path
 
         self.error_promt = 'SETTINGS: '
 
-        self.options = {
-            'Flask': {
-                'IP': '0.0.0.0',
-                'PORT': 80,
-                'debug': False,
-                'secret_key': random_string(4),
-                'waitress': True,
-                'threads': 1
-            },
-            'Logs': {
-                'path': 'logs/',
-                'save_logs': True,
-                'timedelta': 3
-            },
-            'History': {
-                'length': 100,
-                'use': True
-            },
-            'Base': {
-                'path': '',
-                'file_name': 'users'
-            },
-            'Extensions': {
-                'use': True,
-                'path': 'extensions'
-            },
-            'Preview': {
-                'max_text_file_length': 100,
-                'max_pics_resolution_width': 1280,
-                'max_pics_resolution_height': 720
-            },
-            'Entry': {
-                'use': True,
-                'source': 'entry.html'
+        if (options):
+            self.options = options
+            
+        else:
+            self.options = {
+                'Flask': {
+                    'IP': '0.0.0.0',
+                    'PORT': 80,
+                    'debug': False,
+                    'secret_key': random_string(4),
+                    'waitress': True,
+                    'threads': 1
+                },
+                'Logs': {
+                    'path': 'logs/',
+                    'save_logs': True,
+                    'timedelta': 3
+                },
+                'History': {
+                    'length': 100,
+                    'use': True
+                },
+                'Base': {
+                    'path': '',
+                    'file_name': 'users'
+                },
+                'Extensions': {
+                    'use': True,
+                    'path': 'extensions'
+                },
+                'Preview': {
+                    'max_text_file_length': 100,
+                    'max_pics_resolution_width': 1280,
+                    'max_pics_resolution_height': 720
+                },
+                'Entry': {
+                    'use': True,
+                    'source': 'entry.html'
+                }
             }
-        }
 
         self.read_settings()
 

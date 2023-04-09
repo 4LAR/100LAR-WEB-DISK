@@ -1,0 +1,20 @@
+{
+  "type": "application",
+  "name": "openai",
+  "status_required": [],
+  "ico": "app.svg",
+  "html": "app.html",
+  "css": ["app.css"],
+  "script": ["app.js"],
+  "executable": "app.py",
+  "create_layout": [],
+  "config": {
+    "api_key": "",
+    "model": "gpt-3.5-turbo",
+    "temperature": 0.9,
+    "n_choices": 1,
+    "max_tokens": 3000,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.6
+  }
+}

@@ -5,3 +5,4 @@ settings.ini
 users.json
 start.sh
 start.bat
+*.ini

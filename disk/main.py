@@ -126,6 +126,8 @@ login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)
 
+BUILT_IN_SERVER = False
+
 ################################################################################
 # константы
 
@@ -277,6 +279,7 @@ def system_info():
         info['cpu_count'] = os.cpu_count()
         info['settings'] = settings.options
         info['warnings'] = logging.warning_list
+        info['BUILT_IN_SERVER'] = BUILT_IN_SERVER
 
         return info
 
@@ -1243,6 +1246,7 @@ logging.create_log()
 
 def app_start():
     if settings.options['Flask']['waitress']:
+        BUILT_IN_SERVER = True
         from waitress import serve
         serve(
             app,

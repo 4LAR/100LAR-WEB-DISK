@@ -13,12 +13,12 @@ import sys
 from disk.terminal import *
 
 class app():
-    def __init__(self, socketio, app_namespace, path, cmd):
-        self.socketio = socketio
-        self.app_namespace = app_namespace
+    def __init__(self, **kwargs):
+        self.socketio = kwargs['socketio']
+        self.app_namespace = kwargs['app_namespace']
         self.terminal = Terminal(
-            cmd=[cmd],
-            cwd=path
+            cmd=[kwargs['cmd']],
+            cwd=kwargs['path']
         )
 
         self.status = 0

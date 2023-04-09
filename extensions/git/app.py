@@ -9,9 +9,9 @@ import os
 import sys
 
 class app():
-    def __init__(self, socketio, app_namespace):
-        self.socketio = socketio
-        self.app_namespace = app_namespace
+    def __init__(self, **kwargs):
+        self.socketio = kwargs['socketio']
+        self.app_namespace = kwargs['app_namespace']
         self.status = 2
 
     def io_connect(self, data):

@@ -6,14 +6,14 @@ import os
 import sys
 
 class app():
-    def __init__(self, socketio, app_namespace, link, file_name, path):
-        self.socketio = socketio
-        self.app_namespace = app_namespace
+    def __init__(self, **kwargs):
+        self.socketio = kwargs['socketio']
+        self.app_namespace = kwargs['app_namespace']
         self.status = 2
 
-        self.link = links
-        self.file_name = file_name
-        self.path = path
+        self.link = kwargs['link']
+        self.file_name = kwargs['file_name']
+        self.path = kwargs['path']
 
     def io_connect(self, data):
         return

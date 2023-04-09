@@ -5,6 +5,7 @@ import imp
 import copy
 
 from disk.dict_json import *
+from disk.settings import *
 
 from flask_socketio import SocketIO
 from flask import request
@@ -98,7 +99,12 @@ class Extensions():
             return status, data
 
         app_namespace = "/App_%s_%s" % (user_id, app_name)
-        executable = self.apps[app_id]['executable'](self.socketio, app_namespace, **data)
+
+        data['config'] = self.apps[app_id]['config']
+        data['app'] = self.app
+        data['socketio'] = self.socketio
+        data['app_namespace'] = app_namespace
+        executable = self.apps[app_id]['executable'](**data)
         self.userBase.users_apps[user_id].append({
             "name": app_name,
             "app_id": app_id,
@@ -159,17 +165,22 @@ class Extensions():
             try:
                 settings_json = read_dict(self.path + dir + "/appinfo")
                 if (settings_json["type"] == 'application'):
+                    config = {"Extension": settings_json['config']}
+                    config = settings(self.path + dir + "/config.ini", config).options['Extension']
+
                     executable, args = self.load_executable(self.path + dir + "/" + settings_json["executable"])
                     self.apps[settings_json["name"]] = {
                         "name": settings_json["name"],
                         "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
                         "status_required": settings_json["status_required"],
                         "html": self.read_html(self.path + dir + "/", settings_json),
-                        "create_layout": settings_json["create_layout"],#self.read_welcome_html(self.path + dir + "/" + settings_json["welcome_html"], settings_json),
+                        "create_layout": settings_json["create_layout"],
                         "layout_args_settings": self.get_layout_args_settings(settings_json["create_layout"]),
                         "executable": executable,
                         "executable_args": args,
-                        "executable_methods": get_methods(executable)
+                        "executable_methods": get_methods(executable),
+                        "app_path": self.path + dir + "/",
+                        "config": config
                     }
             except Exception as e:
                 print("Extensions: ", e)

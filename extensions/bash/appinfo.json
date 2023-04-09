@@ -33,5 +33,6 @@
       "type": "label",
       "text": "This bash terminal will be runned in subprocess."
     }
-  ]
+  ],
+  "config": {}
 }
