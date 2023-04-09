@@ -176,3 +176,8 @@ function compare_str(str1, str2) {
 function str_to_bool(str) {
   return (String(str).toLowerCase() === 'true');
 }
+
+//
+function reverse_checkBox(id) {
+  document.getElementById(id).checked = !document.getElementById(id).checked;
+}

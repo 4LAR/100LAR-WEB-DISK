@@ -8,8 +8,7 @@ var page_names = [
     'templates',
     'apps',
     'logs',
-    'settings',
-    'terminal'
+    'settings'
   ];
 
 //

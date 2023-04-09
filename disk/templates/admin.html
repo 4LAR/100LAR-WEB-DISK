@@ -213,13 +213,9 @@
           <h2>Users</h2>
         </div>
         <hr class="main_page_hr">
-        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="get_users()">
-          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
-          <p style="margin: -25px 35px">refresh</p>
-        </div>
-        <div class="main_page_button block_select" style="width: 130px; margin: 10px; right: 0px; top: 54px; position: absolute;" onclick="add_new_user()">
+        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="add_new_user()">
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/add.svg">
-          <p style="margin: -27px 35px">add user</p>
+          <p style="margin: -25px 35px; white-space: nowrap">add user</p>
         </div>
       </div>
       <br>
@@ -236,13 +232,9 @@
           <h2>Templates</h2>
         </div>
         <hr class="main_page_hr">
-        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="get_templates()">
-          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
-          <p style="margin: -25px 35px">refresh</p>
-        </div>
-        <div class="main_page_button block_select" style="width: 160px; margin: 10px; right: 0px; top: 54px; position: absolute;" onclick="add_new_template()">
-          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/add.svg">
-          <p style="margin: -25px 35px">add template</p>
+        <div class="main_page_button block_select" style="width: 130px; margin: 10px" onclick="add_new_template()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/add.svg">
+          <p style="margin: -25px 35px; white-space: nowrap;">add template</p>
         </div>
       </div>
 
@@ -260,14 +252,18 @@
           <h2>Apps</h2>
         </div>
         <hr class="main_page_hr">
-        <div class="main_page_button block_select" style="width: 100px; margin: 10px" onclick="()">
+        <div class="main_page_button block_select" style="width: 130px; margin: 10px" onclick="reload_apps()">
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/refresh.svg">
-          <p style="margin: -25px 35px">refresh</p>
+          <p style="margin: -25px 35px; white-space: nowrap;">reload apps</p>
+        </div>
+        <div class="main_page_button block_select" style="width: 130px; margin: 10px; right: 0px; top: 54px; position: absolute;" onclick="save_all_apps_settings()">
+          <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/save.svg">
+          <p style="margin: -25px 35px; white-space: nowrap;">save settings</p>
         </div>
       </div>
 
       <div class="border_size">
-
+        <ul id="appslist" class="path_list_grid"></ul>
       </div>
     </div>
 
@@ -312,9 +308,9 @@
         </div> -->
 
         <!-- width: 155px; margin: 10px; right: 0px; top: 54px; position: absolute; -->
-        <div class="main_page_button" style="width: 155px; margin: 10px" onclick="save_settings()">
+        <div class="main_page_button" style="width: 130px; margin: 10px" onclick="save_settings()">
           <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/admin/save.svg">
-          <p style="margin: -25px 35px">save settings</p>
+          <p style="margin: -25px 35px; white-space: nowrap;">save settings</p>
         </div>
       </div>
       <br>
@@ -366,6 +362,7 @@
   <script type="text/javascript" src="static/js/admin/admin.1.js"></script>
   <script type="text/javascript" src="static/js/admin/users.1.js"></script>
   <script type="text/javascript" src="static/js/admin/templates.1.js"></script>
+  <script type="text/javascript" src="static/js/admin/extensions.1.js"></script>
   <script type="text/javascript" src="static/js/admin/settings.1.js"></script>
   <script type="text/javascript" src="static/js/admin/logs.1.js"></script>
   <script type="text/javascript" src="static/js/admin/history.1.js"></script>

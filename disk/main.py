@@ -120,7 +120,7 @@ socketio.init_app(app, cors_allowed_origins="*")
 cm = Commonmark(app)
 
 codemirror = CodeMirror(app)
-extensions = Extensions(app, userBase, socketio)
+extensions = Extensions(app, userBase, socketio, logging)
 
 login_manager = LoginManager()
 login_manager.login_view = "login"
@@ -485,6 +485,38 @@ def delete_user():
 
         logging.print('delete user: %s' % (user_name), print_bool=True, comment='[ADMIN] ')
 
+        return OK
+    else:
+        return NO_ADMIN
+
+############Extensions
+# получить список приложений
+@app.route('/get_all_apps', methods=['GET', 'POST'])
+@login_required
+def get_all_apps():
+    if (current_user.panel):
+        return {"apps": extensions.get_admin()}
+    else:
+        return NO_ADMIN
+
+# установить настройки для приложения
+@app.route('/app_set_config', methods=['POST'])
+@login_required
+def app_set_config():
+    if (current_user.panel):
+        app_id = request.args.get("app_id", "")
+        config = json.loads(request.args.get("config", ""))["config"]
+        extensions.set_config_for_app(app_id, config)
+        return OK
+    else:
+        return NO_ADMIN
+
+# перезапустить приложения
+@app.route('/reload_apps', methods=['POST'])
+@login_required
+def reload_apps():
+    if (current_user.panel):
+        extensions.read()
         return OK
     else:
         return NO_ADMIN

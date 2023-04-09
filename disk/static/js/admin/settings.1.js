@@ -32,7 +32,7 @@ function generate_settingslist() {
       if (typeof(settings_json[section][parameter]) === "boolean") {
         checked = (settings_json[section][parameter])? 'checked': '';
         append_to_ul(section_ul, `
-          <div style="margin: -10px 10px; height: 50px;">
+          <div style="margin-top: -10; margin-left: 10; height: 45px;">
             <input type="checkbox" class="custom-checkbox" id="${name_parametr}" name="${name_parametr}" value="yes" onchange="switch_draw_type('list', this)" ${checked}>
             <label for="${name_parametr}">
               <p style="font-weight: normal;">${parameter}</p>

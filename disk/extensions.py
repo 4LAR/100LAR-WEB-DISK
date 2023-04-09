@@ -3,6 +3,7 @@ import os
 import base64
 import imp
 import copy
+import sys
 
 from disk.dict_json import *
 from disk.settings import *
@@ -21,15 +22,17 @@ def get_methods(class_object):
     return [method for method in dir(class_object) if (method[0:2] != '__')]
 
 class Extensions():
-    def __init__(self, app, userBase, socketio):
+    def __init__(self, app, userBase, socketio, logging):
         self.app = app
         self.socketio = socketio
         self.userBase = userBase
+        self.logging = logging
 
         self.namespace = "createApp_"
 
         self.path = "extensions/"
         self.apps = {}
+        self.apps_admin = {}
 
         self.read()
 
@@ -158,6 +161,15 @@ class Extensions():
     def get_all(self):
         return self.apps
 
+    def get_admin(self):
+        return self.apps_admin
+
+    def set_config_for_app(self, app_id, config):
+        path = self.apps_admin[app_id]['app_path']
+        config_class = settings(path + "config.ini", {"Extension": self.apps_admin[app_id]["config"]})
+        config_class.options['Extension'] = config
+        config_class.save_settings()
+
     def read(self):
         self.apps = {}
         folders = [e for e in os.listdir(self.path) if os.path.isdir(self.path + e)]
@@ -166,24 +178,33 @@ class Extensions():
                 settings_json = read_dict(self.path + dir + "/appinfo")
                 if (settings_json["type"] == 'application'):
                     config = {"Extension": settings_json['config']}
+                    config['Extension']['status_required'] = ', '.join(settings_json["status_required"])
+                    config['Extension']['use'] = True
                     config = settings(self.path + dir + "/config.ini", config).options['Extension']
+                    if (config['use']):
+                        executable, args = self.load_executable(self.path + dir + "/" + settings_json["executable"])
+                        self.apps[settings_json["name"]] = {
+                            "name": settings_json["name"],
+                            "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
+                            "html": self.read_html(self.path + dir + "/", settings_json),
+                            "create_layout": settings_json["create_layout"],
+                            "layout_args_settings": self.get_layout_args_settings(settings_json["create_layout"]),
+                            "executable": executable,
+                            "executable_args": args,
+                            "executable_methods": get_methods(executable),
+                            "app_path": self.path + dir + "/",
+                            "config": config,
+                            "status_required": [status.replace(" ", "") for status in config['status_required'].split(",")]
+                        }
 
-                    executable, args = self.load_executable(self.path + dir + "/" + settings_json["executable"])
-                    self.apps[settings_json["name"]] = {
+                    self.apps_admin[settings_json["name"]] = {
                         "name": settings_json["name"],
                         "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
-                        "status_required": settings_json["status_required"],
-                        "html": self.read_html(self.path + dir + "/", settings_json),
-                        "create_layout": settings_json["create_layout"],
-                        "layout_args_settings": self.get_layout_args_settings(settings_json["create_layout"]),
-                        "executable": executable,
-                        "executable_args": args,
-                        "executable_methods": get_methods(executable),
                         "app_path": self.path + dir + "/",
                         "config": config
                     }
             except Exception as e:
-                print("Extensions: ", e)
+                print("Extensions:", e)
 
     def load_executable(self, path):
         f = open(path, "r")

@@ -85,6 +85,10 @@
   border-bottom: 1px solid var(--main-border-color);
 }
 
+.dialog_input {
+  background-color: var(--main-input-color);
+}
+
 .create_fileName_input {
   position: absolute;
 
