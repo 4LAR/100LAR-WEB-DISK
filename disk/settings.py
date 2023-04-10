@@ -18,7 +18,7 @@ class settings():
 
         if (options):
             self.options = options
-            
+
         else:
             self.options = {
                 'Flask': {
@@ -48,12 +48,11 @@ class settings():
                 },
                 'Preview': {
                     'max_text_file_length': 100,
-                    'max_pics_resolution_width': 1280,
-                    'max_pics_resolution_height': 720
+                    'max_pics_width': 1280
                 },
                 'Entry': {
-                    'use': True,
-                    'source': 'entry.html'
+                    'type': "none",
+                    'source': ""
                 }
             }
 

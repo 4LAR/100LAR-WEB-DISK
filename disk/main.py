@@ -97,7 +97,7 @@ userBase = UserBase(
 )
 
 entry_string = ""
-if settings.options['Entry']['use']:
+if settings.options['Entry']['type'] == "html":
     entry_string = open(settings.options['Entry']['source']).read()
 
 CODEMIRROR_LANGUAGES = ['python', 'yaml', 'htmlembedded', "clike", "commonlisp"]
@@ -229,8 +229,11 @@ def main_m():
 
 @app.route('/entry')
 def entry():
-    if (settings.options['Entry']['use']):
+    if (settings.options['Entry']['type'] == "html"):
         return render_template_string(entry_string)
+
+    elif (settings.options['Entry']['type'] == "page"):
+        return redirect(settings.options['Entry']['source'])
 
     else:
         return 'about:blank'
