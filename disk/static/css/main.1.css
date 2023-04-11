@@ -102,7 +102,7 @@ p {
   color: var(--main-font-color); /* Цвет текста */
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, th, td {
   /*color: #C1C2BF; /* Цвет текста */
   color: var(--main-font-color);
 }

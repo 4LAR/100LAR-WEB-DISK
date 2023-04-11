@@ -39,7 +39,7 @@ from flask_codemirror import CodeMirror
 from flask_codemirror.fields import CodeMirrorField
 from flask_wtf import FlaskForm
 
-from flask_commonmark import Commonmark
+import markdown
 
 # время
 import time
@@ -1272,8 +1272,9 @@ def custom_app():
 @app.route("/commonmark", methods=['GET' , 'POST'])
 @login_required
 def display_commonmark():
-    mycm = request.json['code']
-    return render_template_string("{{mycm|commonmark}}", mycm=mycm)
+    md_text = request.json['code']
+    return render_template_string(markdown.markdown(md_text, extensions=['markdown.extensions.tables', 'markdown.extensions.fenced_code']))
+
 
 ################################################################################
 

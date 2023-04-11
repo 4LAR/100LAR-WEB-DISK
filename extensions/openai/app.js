@@ -41,7 +41,8 @@ socket.on("output", function (data) {
   if (data.output.role == 'user') {
     append(data.output.content, true);
   } else {
-    append(data.output.content, false);
+    // append(data.output.content, false);
+    get_render(data.output.content);
   }
   scroll_to_bottom("messages_div");
 });
@@ -60,7 +61,8 @@ function get_render(data) {
   xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      append(dxhr.responseText.toString(), false);
+      console.log(xhr.responseText.toString());
+      append(xhr.responseText.toString(), false);
     }
   };
   xhr.send(JSON.stringify({"code": data}))
