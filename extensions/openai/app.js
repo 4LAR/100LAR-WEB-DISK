@@ -57,7 +57,7 @@ function send_event(e) {
 function get_render(data) {
   var formData = new FormData;
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/commonmark`);
+  xhr.open('POST', `/markdown`);
   xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
   xhr.onload = function () {
     if (xhr.status === 200) {

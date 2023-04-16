@@ -117,8 +117,6 @@ app.debug = settings.options['Flask']['debug']
 socketio = SocketIO(app, async_mode="threading")
 socketio.init_app(app, cors_allowed_origins="*")
 
-cm = Commonmark(app)
-
 codemirror = CodeMirror(app)
 extensions = Extensions(app, userBase, socketio, logging)
 
@@ -1269,9 +1267,9 @@ def custom_app():
     app_dict = extensions.get(current_user.id)[request.args.get("app_id", "")]
     return extensions.generate_html(id, int(current_user.id), app_dict)
 
-@app.route("/commonmark", methods=['GET' , 'POST'])
+@app.route("/markdown", methods=['GET' , 'POST'])
 @login_required
-def display_commonmark():
+def display_markdown():
     md_text = request.json['code']
     return render_template_string(markdown.markdown(md_text, extensions=['markdown.extensions.tables', 'markdown.extensions.fenced_code']))
 
