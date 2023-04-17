@@ -37,7 +37,6 @@ function scroll_to_bottom(id) {
 }
 
 socket.on("output", function (data) {
-  console.log(data);
   if (data.output.role == 'user') {
     append(data.output.content, true);
   } else {
