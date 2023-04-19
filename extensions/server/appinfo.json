@@ -2,6 +2,7 @@
   "type": "application",
   "name": "server",
   "status_required": ["admin", "programmer"],
+  "cached": true,
   "ico": "app.svg",
   "html": "app.html",
   "css": ["app.css"],

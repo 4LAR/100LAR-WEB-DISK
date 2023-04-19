@@ -2,6 +2,7 @@
   "type": "application",
   "name": "openai",
   "status_required": [],
+  "cached": true,
   "ico": "app.svg",
   "html": "app.html",
   "css": ["app.css"],

@@ -2,6 +2,7 @@
   "type": "application",
   "name": "wget",
   "status_required": [],
+  "cached": false,
   "ico": "app.svg",
   "html": "app.html",
   "css": ["app.css"],

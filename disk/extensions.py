@@ -188,6 +188,7 @@ class Extensions():
                             "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
                             "html": self.read_html(self.path + dir + "/", settings_json),
                             "create_layout": settings_json["create_layout"],
+                            "cached": settings_json["cached"],
                             "layout_args_settings": self.get_layout_args_settings(settings_json["create_layout"]),
                             "executable": executable,
                             "executable_args": args,
