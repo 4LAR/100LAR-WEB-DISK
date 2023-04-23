@@ -5,6 +5,8 @@ import imp
 import copy
 import sys
 
+from pathlib import Path
+
 from disk.dict_json import *
 from disk.settings import *
 
@@ -35,6 +37,11 @@ class Extensions():
         self.apps_admin = {}
 
         self.read()
+        self.cache()
+
+    def cache(self):
+        if not (Path(self.path + "/.cache").is_dir()):
+            os.mkdir(self.path + "/.cache")
 
     def get_layout_args_settings(self, layout_arr):
         data = {}
@@ -175,6 +182,9 @@ class Extensions():
         folders = [e for e in os.listdir(self.path) if os.path.isdir(self.path + e)]
         for dir in folders:
             try:
+                if dir == ".cache":
+                    continue
+                    
                 settings_json = read_dict(self.path + dir + "/appinfo")
                 if (settings_json["type"] == 'application'):
                     config = {"Extension": settings_json['config']}
