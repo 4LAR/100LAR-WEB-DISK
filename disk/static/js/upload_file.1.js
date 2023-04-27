@@ -179,8 +179,6 @@ function uploadFile(files, count = 0) {
       xhr.open('post', `upload_file?path=${path}&dir=${dir_str + files[count][1]}&file=${file.name}`, true);
       xhr.upload.onprogress = function(event) {
         set_upload_bar((100 / event.total) * event.loaded);
-        //document.getElementById("upload_bar").max = event.total;
-        //document.getElementById("upload_bar").value = event.loaded;
       }
       xhr.upload.onload = function() {
         uploadFile(files, ++count);
@@ -188,7 +186,6 @@ function uploadFile(files, count = 0) {
       }
     if (count == (files.length - 1))
       xhr.onload = function() {
-        // console.log(xhr.responseText.toString())
         if (xhr.responseText.toString() === 'NO PLACE') {
           no_place_dialog();
 
@@ -206,6 +203,57 @@ function uploadFile(files, count = 0) {
       }
       xhr.send(form);
     });
+  } else {
+    uploading_bool = false;
+    closeModal('file_upload_block');
+    if (!right_bar_bool) {
+      close_rightBar();
+    }
+    update_dir();
+  }
+}
+
+/*----------------------------------------------------------------------------*/
+function uploadFileNODD(files, count = 0) {
+  openModal('rightBar');
+
+  if (count < files.length) {
+    uploading_bool = true;
+    openModal('file_upload_block');
+    var file = files[count];
+    document.getElementById("upload_file_count").innerHTML = `Upload ${files.length - count} files...`;
+    document.getElementById("upload_file_name").innerHTML = file.name;
+
+    form = new FormData();
+    var xhr = new XMLHttpRequest();
+    form.append("file", file);
+    xhr.open('post', `upload_file?path=${path}&dir=${dir_str}&file=${file.name}`, true);
+    xhr.upload.onprogress = function(event) {
+      set_upload_bar((100 / event.total) * event.loaded);
+    }
+    xhr.upload.onload = function() {
+      uploadFileNODD(files, ++count);
+
+    }
+  if (count == (files.length - 1))
+    xhr.onload = function() {
+      if (xhr.responseText.toString() === 'NO PLACE') {
+        no_place_dialog();
+
+      } else if (xhr.responseText.toString() === 'READ ONLY') {
+        readonly_dialog();
+      }
+
+      uploading_bool = false;
+      closeModal('file_upload_block');
+      if (!right_bar_bool) {
+        close_rightBar();
+      }
+      update_dir();
+
+    }
+    xhr.send(form);
+
   } else {
     uploading_bool = false;
     closeModal('file_upload_block');
