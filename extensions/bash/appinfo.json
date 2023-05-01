@@ -2,7 +2,7 @@
   "type": "application",
   "name": "bash",
   "status_required": ["admin", "programmer"],
-  "cached": false,
+  "cached": true,
   "ico": "app.svg",
   "html": "app.html",
   "css": ["app.css"],

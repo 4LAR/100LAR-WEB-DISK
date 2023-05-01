@@ -14,6 +14,8 @@ from flask_socketio import SocketIO
 from flask import request
 from flask_login import current_user
 
+CACHE_FILE_NAME = "/cache"
+
 def image_to_base64(path_to_file):
     with open(path_to_file, "rb") as img_file:
         b64_string = base64.b64encode(img_file.read())
@@ -22,6 +24,65 @@ def image_to_base64(path_to_file):
 
 def get_methods(class_object):
     return [method for method in dir(class_object) if (method[0:2] != '__')]
+
+def read_folders(path):
+    return [e for e in os.listdir(path) if os.path.isdir(path + e)]
+
+class Extensions_cache():
+    def __init__(self, app_path, user_id, app_config, save=False):
+        self.app_path = app_path
+        self.user_id = str(user_id)
+        self.args = app_config['args']
+        self.data = app_config['data']
+
+        if save:
+            self.save()
+
+    def update_data(self, data):
+        self.data = data
+        self.save()
+
+    def get_data(self):
+        return self.data
+
+    def delete(self):
+        if not os.path.exists(self.app_path + CACHE_FILE_NAME + ".json"):
+            return
+
+        cache_json = read_dict(self.app_path + CACHE_FILE_NAME)
+        if self.user_id in cache_json:
+            for i in range(len(cache_json[self.user_id])):
+                if cache_json[self.user_id][i]['args']['name'] == self.args['name']:
+                    cache_json[self.user_id].pop(i)
+                    break
+
+        save_dict(cache_json, self.app_path + CACHE_FILE_NAME)
+
+    def save(self):
+        if not os.path.exists(self.app_path + CACHE_FILE_NAME + ".json"):
+            save_dict({}, self.app_path + CACHE_FILE_NAME)
+
+        cache_json = read_dict(self.app_path + CACHE_FILE_NAME)
+        if self.user_id in cache_json:
+            for i in range(len(cache_json[self.user_id])):
+                if cache_json[self.user_id][i]['args']['name'] == self.args['name']:
+                    cache_json[self.user_id][i]['data'] = self.data
+                    break
+
+            else:
+                cache_json[self.user_id].append({
+                    "args": self.args,
+                    "data": self.data
+                })
+
+        else:
+            cache_json[self.user_id] = [{
+                "args": self.args,
+                "data": self.data
+            }]
+
+
+        save_dict(cache_json, self.app_path + CACHE_FILE_NAME)
 
 class Extensions():
     def __init__(self, app, userBase, socketio, logging):
@@ -37,11 +98,26 @@ class Extensions():
         self.apps_admin = {}
 
         self.read()
-        self.cache()
 
-    def cache(self):
-        if not (Path(self.path + "/.cache").is_dir()):
-            os.mkdir(self.path + "/.cache")
+    def read_cache(self, app_path):
+        if not os.path.exists(app_path + CACHE_FILE_NAME + ".json"):
+            return {}
+
+        cache_json = read_dict(app_path + CACHE_FILE_NAME)
+        for user in cache_json:
+            for i in range(len(cache_json[user])):
+                try:
+                    cache_json[user][i] = Extensions_cache(app_path, user, cache_json[user][i])
+
+                except Exception as e:
+                    print("Extensions cache:", e)
+                    cache_json = {}
+
+        return cache_json
+
+    def create_app_by_cache(self, user_id, app_id, cache):
+        args = {**cache.args, "cache": cache}
+        self.append_app(user_id, app_id, args)
 
     def get_layout_args_settings(self, layout_arr):
         data = {}
@@ -94,19 +170,26 @@ class Extensions():
         return True
 
     def append_app(self, user_id, app_id, data):
-        if not ((self.userBase.users_dict_static[str(user_id)]['status'] in self.apps[app_id]["status_required"]) or len(self.apps[app_id]["status_required"][0]) == 0):
-            return False, 'status required'
+        if not (int(user_id) in self.userBase.users_apps):
+            self.userBase.users_apps[int(user_id)] = []
 
-        if not (user_id in self.userBase.users_apps):
-            self.userBase.users_apps[user_id] = []
+        if not 'cache' in data:
+            if not ((self.userBase.users_dict_static[str(user_id)]['status'] in self.apps[app_id]["status_required"]) or len(self.apps[app_id]["status_required"][0]) == 0):
+                return False, 'status required'
 
-        app_name = data.pop("name")['value']
-        if (len(app_name) == 0 or not self.check_user_app_names(user_id, app_name)):
-            return False, 'name'
+            app_name = data.pop("name")['value']
+            if (len(app_name) == 0 or not self.check_user_app_names(user_id, app_name)):
+                return False, 'name'
 
-        data, status = self.check_data(app_id, user_id, data)
-        if (not status):
-            return status, data
+            data, status = self.check_data(app_id, user_id, data)
+            if (not status):
+                return status, data
+
+        else:
+            app_name = data.pop("name")
+
+        data_for_cache = data.copy()
+        data_for_cache["name"] = app_name
 
         app_namespace = "/App_%s_%s" % (user_id, app_name)
 
@@ -114,24 +197,32 @@ class Extensions():
         data['app'] = self.app
         data['socketio'] = self.socketio
         data['app_namespace'] = app_namespace
+        if not('cache' in data):
+            data['cache'] = Extensions_cache(self.apps[app_id]['app_path'], user_id, {"args": data_for_cache, "data": {}}, True)
+
         executable = self.apps[app_id]['executable'](**data)
-        self.userBase.users_apps[user_id].append({
+
+        self.userBase.users_apps[int(user_id)].append({
             "name": app_name,
             "app_id": app_id,
             "executable": executable,
-            "app_namespace": app_namespace
+            "app_namespace": app_namespace,
+            "cache": data['cache']
         })
 
         for method in self.apps[app_id]['executable_methods']:
             method_split = method.split("_")
             if (method_split[0] == 'io'):
-                self.socketio.on_event(method_split[1], lambda data, method=getattr(executable, method), user_id=user_id: self.socket_wrapper(data, method, user_id), namespace=app_namespace)
+                self.socketio.on_event(method_split[1], lambda data, method=getattr(executable, method), user_id=int(user_id): self.socket_wrapper(data, method, user_id), namespace=app_namespace)
 
         return True, None
 
     def delete_app(self, user_id, id):
         app_name = self.userBase.users_apps[user_id][id]['name']
-        self.userBase.users_apps[user_id][id]['executable'].close()
+        if "close" in dir(self.userBase.users_apps[user_id][id]['executable']):
+            self.userBase.users_apps[user_id][id]['executable'].close()
+
+        self.userBase.users_apps[user_id][id]['cache'].delete()
         self.userBase.users_apps[user_id].pop(id)
 
         return app_name
@@ -179,12 +270,9 @@ class Extensions():
 
     def read(self):
         self.apps = {}
-        folders = [e for e in os.listdir(self.path) if os.path.isdir(self.path + e)]
+        folders = read_folders(self.path)
         for dir in folders:
             try:
-                if dir == ".cache":
-                    continue
-                    
                 settings_json = read_dict(self.path + dir + "/appinfo")
                 if (settings_json["type"] == 'application'):
                     config = {"Extension": settings_json['config']}
@@ -198,15 +286,22 @@ class Extensions():
                             "ico": image_to_base64(self.path + dir + "/" + settings_json["ico"]).decode("utf-8"),
                             "html": self.read_html(self.path + dir + "/", settings_json),
                             "create_layout": settings_json["create_layout"],
-                            "cached": settings_json["cached"],
                             "layout_args_settings": self.get_layout_args_settings(settings_json["create_layout"]),
                             "executable": executable,
                             "executable_args": args,
                             "executable_methods": get_methods(executable),
                             "app_path": self.path + dir + "/",
                             "config": config,
-                            "status_required": [status.replace(" ", "") for status in config['status_required'].split(",")]
+                            "status_required": [status.replace(" ", "") for status in config['status_required'].split(",")],
+                            "cached": settings_json["cached"]
                         }
+
+                        if settings_json["cached"]:
+                            if os.path.exists(self.path + dir + "/" + CACHE_FILE_NAME + ".json"):
+                                cache = self.read_cache(self.path + dir + "/")
+                                for user in cache:
+                                    for i in range(len(cache[user])):
+                                        self.create_app_by_cache(user, settings_json["name"], cache[user][i])
 
                     self.apps_admin[settings_json["name"]] = {
                         "name": settings_json["name"],

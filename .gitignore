@@ -6,3 +6,4 @@ users.json
 start.sh
 start.bat
 *.ini
+extensions/*/cache.json

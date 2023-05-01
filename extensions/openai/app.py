@@ -11,8 +11,12 @@ class app():
         self.socketio = kwargs['socketio']
         self.app_namespace = kwargs['app_namespace']
         self.status = 0
-
+        self.cache = kwargs['cache']
         self.history = []
+        if "history" in self.cache.get_data():
+            print(self.cache.get_data())
+            self.history = self.cache.get_data()["history"]
+
         self.max_rows = 50
 
         self.config = kwargs['config']
@@ -26,6 +30,8 @@ class app():
 
         if (len(self.history) > self.max_rows):
             self.history.pop(0)
+
+        self.cache.update_data({"history": self.history})
 
     def io_connect(self, data):
         for el in self.history:
