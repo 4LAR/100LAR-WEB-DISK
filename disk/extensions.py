@@ -29,9 +29,10 @@ def read_folders(path):
     return [e for e in os.listdir(path) if os.path.isdir(path + e)]
 
 class Extensions_cache():
-    def __init__(self, app_path, user_id, app_config, save=False):
+    def __init__(self, app_path, user_id, app_config, use=True, save=False):
         self.app_path = app_path
         self.user_id = str(user_id)
+        self.use = use
         self.args = app_config['args']
         self.data = app_config['data']
 
@@ -59,30 +60,31 @@ class Extensions_cache():
         save_dict(cache_json, self.app_path + CACHE_FILE_NAME)
 
     def save(self):
-        if not os.path.exists(self.app_path + CACHE_FILE_NAME + ".json"):
-            save_dict({}, self.app_path + CACHE_FILE_NAME)
+        if self.use:
+            if not os.path.exists(self.app_path + CACHE_FILE_NAME + ".json"):
+                save_dict({}, self.app_path + CACHE_FILE_NAME)
 
-        cache_json = read_dict(self.app_path + CACHE_FILE_NAME)
-        if self.user_id in cache_json:
-            for i in range(len(cache_json[self.user_id])):
-                if cache_json[self.user_id][i]['args']['name'] == self.args['name']:
-                    cache_json[self.user_id][i]['data'] = self.data
-                    break
+            cache_json = read_dict(self.app_path + CACHE_FILE_NAME)
+            if self.user_id in cache_json:
+                for i in range(len(cache_json[self.user_id])):
+                    if cache_json[self.user_id][i]['args']['name'] == self.args['name']:
+                        cache_json[self.user_id][i]['data'] = self.data
+                        break
+
+                else:
+                    cache_json[self.user_id].append({
+                        "args": self.args,
+                        "data": self.data
+                    })
 
             else:
-                cache_json[self.user_id].append({
+                cache_json[self.user_id] = [{
                     "args": self.args,
                     "data": self.data
-                })
-
-        else:
-            cache_json[self.user_id] = [{
-                "args": self.args,
-                "data": self.data
-            }]
+                }]
 
 
-        save_dict(cache_json, self.app_path + CACHE_FILE_NAME)
+            save_dict(cache_json, self.app_path + CACHE_FILE_NAME)
 
 class Extensions():
     def __init__(self, app, userBase, socketio, logging):
@@ -107,7 +109,7 @@ class Extensions():
         for user in cache_json:
             for i in range(len(cache_json[user])):
                 try:
-                    cache_json[user][i] = Extensions_cache(app_path, user, cache_json[user][i])
+                    cache_json[user][i] = Extensions_cache(app_path, user, cache_json[user][i], use=True)
 
                 except Exception as e:
                     print("Extensions cache:", e)
@@ -198,7 +200,7 @@ class Extensions():
         data['socketio'] = self.socketio
         data['app_namespace'] = app_namespace
         if not('cache' in data):
-            data['cache'] = Extensions_cache(self.apps[app_id]['app_path'], user_id, {"args": data_for_cache, "data": {}}, True)
+            data['cache'] = Extensions_cache(self.apps[app_id]['app_path'], user_id, {"args": data_for_cache, "data": {}}, use=self.apps[app_id]['cached'], save=True)
 
         executable = self.apps[app_id]['executable'](**data)
 
