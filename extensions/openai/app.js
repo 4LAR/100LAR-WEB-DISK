@@ -36,12 +36,23 @@ function scroll_to_bottom(id) {
   objDiv.scrollTop = objDiv.scrollHeight;
 }
 
-socket.on("output", function (data) {
+socket.on("history", async function (data) {
+  for (const el of data.output) {
+    if (el.role == 'user') {
+      await append(el.content, true);
+    } else {
+      // append(data.output.content, false);
+      await get_render(el.content);
+    }
+  }
+  scroll_to_bottom("messages_div");
+});
+
+socket.on("output", async function (data) {
   if (data.output.role == 'user') {
-    append(data.output.content, true);
+    await append(data.output.content, true);
   } else {
-    // append(data.output.content, false);
-    get_render(data.output.content);
+    await get_render(data.output.content);
   }
   scroll_to_bottom("messages_div");
 });
@@ -53,16 +64,17 @@ function send_event(e) {
   }
 }
 
-function get_render(data) {
-  var formData = new FormData;
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/markdown`);
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      console.log(xhr.responseText.toString());
-      append(xhr.responseText.toString(), false);
-    }
-  };
-  xhr.send(JSON.stringify({"code": data}))
+async function get_render(data) {
+  let response = await fetch(`/markdown`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"code": data})
+  });
+  if (response.ok) {
+    await append(await response.text(), false);
+  }
+  return;
 }

@@ -12,30 +12,53 @@ class app():
         self.app_namespace = kwargs['app_namespace']
         self.status = 0
         self.cache = kwargs['cache']
+
+        self.all_history = []
         self.history = []
         if "history" in self.cache.get_data():
-            print(self.cache.get_data())
-            self.history = self.cache.get_data()["history"]
-
-        self.max_rows = 50
+            self.all_history = self.cache.get_data()["history"]
 
         self.config = kwargs['config']
         openai.api_key = kwargs['config']['api_key']
 
+        self.convert_history()
+
+    def get_tokens(self, arr=None):
+        arr = arr if arr else self.history
+        count_tokens = 0
+        for el in arr:
+            count_tokens += len(el['content'])
+
+        return count_tokens
+
+    def convert_history(self):
+        for i in range(len(self.all_history)-1, -1, -1):
+            data = self.all_history[i]
+
+            if (self.get_tokens(self.history + [data]) >= self.config['max_tokens']):
+                break
+
+            self.history.append(data)
+
+
     def append_history(self, data, role):
+        self.all_history.append({
+            "role": role,
+            "content": data
+        })
+
         self.history.append({
             "role": role,
             "content": data
         })
 
-        if (len(self.history) > self.max_rows):
+        while ((self.get_tokens() >= self.config['max_tokens']) and (self.history.len > 0)):
             self.history.pop(0)
 
-        self.cache.update_data({"history": self.history})
+        self.cache.update_data({"history": self.all_history})
 
     def io_connect(self, data):
-        for el in self.history:
-            self.socketio.emit("output", {"output": el}, namespace=self.app_namespace)
+        self.socketio.emit("history", {"output": self.all_history}, namespace=self.app_namespace)
         return
 
     def io_message(self, data):
