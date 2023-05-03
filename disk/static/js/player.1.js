@@ -7,7 +7,7 @@ function load_pdf(url, name) {
 /* TEXT */
 function load_text(url, name) {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', url);
+  xhr.open('POST', url + `&preview=True&preview_type=text`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   xhr.onload = function () {
     if (xhr.status === 200) {

@@ -132,6 +132,8 @@ BUILT_IN_SERVER = False
 FILE_NAME_BACK_LIST = ("/", "\\", ":", "*", "?", "<", ">", "|")
 USERNAME_WHITE_LIST = ("qwertyuiopasdfghjklzxcvbnm1234567890")
 
+MAX_SIZE_READ_FILE = 2048
+
 ERROR = 'ERROR'
 OK = 'ok'
 NO_PLACE = 'NO PLACE'
@@ -147,18 +149,18 @@ ALREADY_EXISTS = 'ALREADY EXISTS'
 
 ################################################################################
 
-#
+# перезагрузка сервера
 def reboot():
     logging.print('Server rebooting', 0, comment='[SERVER] ')
     os.execv(sys.executable, ['python3'] + sys.argv)
     exit()
 
-#
+# остановка сервера
 def shutdown():
     logging.print('Server shutdown', 0, comment='[SERVER] ')
     exit()
 
-#
+# получить вес файла
 def check_size(current_user, path, file_size):
 
     busy = get_size(userBase.get_user_info(current_user.id)['path'][int(path)]['path'])
@@ -169,7 +171,7 @@ def check_size(current_user, path, file_size):
     else:
         return True
 
-#
+# получить вкс вес списка файлов
 def check_size_list(current_user, path, dir, files=[]):
     files_size = 0
 
@@ -193,9 +195,17 @@ def check_size_list(current_user, path, dir, files=[]):
     else:
         return True
 
-#
+# получить вес строки
 def utf8len(s):
     return len(s.encode('utf-8'))
+
+# прочитать определённое количество символов в файле
+def read_file_with_len(file_name, count):
+    f = open(file_name, "r", encoding='utf-8')
+    result = f.read(count)
+    f.close()
+
+    return result
 
 ################################################################################
 
@@ -1016,13 +1026,16 @@ def downlaod():
         file = request.args.get("file", "")
         files = request.args.get("files", "")
 
-        # preview_flag = get_bool(request.args.get("preview", "false"))
-        # preview_type = request.args.get("preview_type", "")
+        preview_flag = get_bool(request.args.get("preview", "false"))
+        preview_type = request.args.get("preview_type", "")
 
         user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
+        if preview_flag:
+            if preview_type == "text":
+                return read_file_with_len(user_path + dir + '/' + file, MAX_SIZE_READ_FILE)
 
-        # if (preview_flag):
-        #     return ERROR
+            else:
+                return ERROR
 
         if len(file) > 0:
             str_log = '%s download file (%s)' % (current_user.username, user_path + dir + '/' + file)
