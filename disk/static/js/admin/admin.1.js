@@ -36,7 +36,7 @@ function open_alert(html, height = 200, big=false) {
   document.getElementById("alert_div").innerHTML = html;
   if (big) {
     document.getElementById("alert").className = "big_alert";
-    document.getElementById("alert").style.height = "none";
+    document.getElementById("alert").style.height = "80%";
   } else {
     document.getElementById("alert").className = "alert";
     document.getElementById("alert").style.height = height + "px";
