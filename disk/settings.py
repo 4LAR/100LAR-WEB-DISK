@@ -47,7 +47,7 @@ class settings():
                     'path': 'extensions'
                 },
                 'Preview': {
-                    'max_text_file_length': 100,
+                    'max_text_file_weight': 2048,
                     'max_pics_width': 1280
                 },
                 'Entry': {

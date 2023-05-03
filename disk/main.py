@@ -1032,7 +1032,7 @@ def downlaod():
         user_path = userBase.get_user_info(current_user.id)['path'][int(path)]['path']
         if preview_flag:
             if preview_type == "text":
-                return read_file_with_len(user_path + dir + '/' + file, MAX_SIZE_READ_FILE)
+                return read_file_with_len(user_path + dir + '/' + file, settings.options['Preview']['max_text_file_weight'])
 
             else:
                 return ERROR
