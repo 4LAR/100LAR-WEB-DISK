@@ -1239,7 +1239,7 @@ def append_app():
     app_id = request.args.get("app_id", "")
     status, out_data = extensions.append_app(int(current_user.id), app_id, json.loads(data))
     if status:
-        str_log = '%s create app with name "%s"' % (current_user.username, json.loads(data)['name']['value'])
+        str_log = '%s create app with name "%s:%s"' % (current_user.username, app_id, json.loads(data)['name']['value'])
         history.add(8, str_log)
         logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 

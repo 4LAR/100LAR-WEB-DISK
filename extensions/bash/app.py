@@ -9,6 +9,7 @@ import functools
 
 import os
 import sys
+import psutil
 
 from disk.terminal import *
 
@@ -35,6 +36,15 @@ class app():
         if (len(self.history) > self.max_rows):
             self.history.pop(0)
 
+    def get_usage(self):
+        p = psutil.Process(self.terminal.child_pid)
+        data = {
+            "cpu_usage": p.cpu_percent(),
+            "cwd": p.cwd(),
+            "memory": p.memory_info()
+        }
+        print(data)
+
     def io_ptyInput(self, data):
         self.terminal.input(data)
 
@@ -55,6 +65,7 @@ class app():
         self.run_thread = True
         while self.run_thread:
             self.socketio.sleep(0.01)
+            # self.get_usage()
             try:
                 if self.terminal.fd:
                     timeout_sec = 0

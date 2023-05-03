@@ -60,6 +60,18 @@ function generate_users() {
   }
 }
 
+function see_password(name) {
+  var el = document.getElementById(`users_info_${name}_password`);
+  var img = document.getElementById(`users_info_${name}_password_img`);
+  if (el.type == 'password') {
+    el.type = 'text';
+    img.src = "static/img/admin/unsee.svg";
+  } else {
+    el.type = 'password';
+    img.src = "static/img/admin/see.svg";
+  }
+}
+
 //Внутренности юзер блока, вызывается при открытии юзера вместе с open_close_user
 function generate_details(name, username, status, password, panel) {
   details_block = document.getElementById('users_info_' + name);
@@ -71,7 +83,10 @@ function generate_details(name, username, status, password, panel) {
         <p style="font-size: 18; font-weight: normal">Status</p><br>
         <input id="users_info_${name}_status" type=text class="input_border" value="${status}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
         <p style="font-size: 18; font-weight: normal">Password</p><br>
-        <input id="users_info_${name}_password" type=text class="input_border" value="${password}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
+        <label style="display : flex">
+          <input id="users_info_${name}_password" type=password class="input_border" value="${password}" style="margin-left: 14px; margin-top: -3px; width: 80%;"><br>
+          <img onclick="see_password('${name}')" id="users_info_${name}_password_img" style="margin: -5px 0px; cursor: pointer;" class="icon" width="25" height="25" src="static/img/admin/see.svg">
+        </label>
         <input id="users_info_${name}_panel" type=checkbox class="custom-checkbox" style="position: relative; margin: 10 -5 15 5;" ${(panel)? 'checked': ''}>
         <label for="users_info_${name}_panel">
           <p style="font-weight: normal; font-size: 18">Panel</p>
