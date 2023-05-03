@@ -32,9 +32,15 @@ function open_page(page_name) {
 }
 
 //---ALERTS------------------------------------------------------
-function open_alert(html, height = 200) {
+function open_alert(html, height = 200, big=false) {
   document.getElementById("alert_div").innerHTML = html;
-  document.getElementById("alert").style.height = height + "px";
+  if (big) {
+    document.getElementById("alert").className = "big_alert";
+    document.getElementById("alert").style.height = "none";
+  } else {
+    document.getElementById("alert").className = "alert";
+    document.getElementById("alert").style.height = height + "px";
+  }
 
   openModal('alert_bg');
   openModal('alert');

@@ -164,6 +164,20 @@ body {
     border-radius: 5px;
     border: 1px solid #30363D;
   }
+
+  .big_alert {
+    position: fixed;
+    display: none;
+
+    left: 10%;
+    right: 10%;
+    top: 10%;
+    bottom: 10%;
+
+    background-color: #161B22;
+    border-radius: 5px;
+    border: 1px solid #30363D;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -180,6 +194,19 @@ body {
 
     background-color: #161B22;
     border-radius: 5px;
+    border: 1px solid #30363D;
+  }
+
+  .big_alert {
+    position: fixed;
+    display: none;
+
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+
+    background-color: #161B22;
     border: 1px solid #30363D;
   }
 
@@ -212,4 +239,23 @@ body {
 
 .alert_close_button:hover {
   background-color: #21262D;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.scroll_style::-webkit-scrollbar {
+  /* ширина */
+  width: 5px;
+  height: 5px;
+}
+
+.scroll_style::-webkit-scrollbar-track {
+  /* фон */
+  background: #0D1117;
+}
+
+.scroll_style::-webkit-scrollbar-thumb {
+  /* цвет ползунка */
+  background-color: #C1C2BF;
+  border-radius: 2px;
 }

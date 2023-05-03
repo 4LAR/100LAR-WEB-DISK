@@ -153,9 +153,36 @@
   margin: 0px 15px;
 }
 
+.log_view {
+  position: relative;
+  margin-right: 8px;
+
+  cursor: pointer;
+}
+
+.view_log_textarea {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 36px;
+  height: calc(100% - 36px);
+  background-color: #0D1117;
+  resize: none;
+  white-space: pre;
+  cursor: default;
+  border: none;
+  border-radius: 0 0 5px 5px;
+  color: #C1C2BF;
+}
+
+.view_log_textarea:active, .view_log_textarea:hover, .view_log_textarea:focus {
+  outline: 0;
+  outline-offset: 0;
+}
+
 .log_download {
   position: relative;
-  margin: 0px 20px;
+  margin-right: 20px;
 
   cursor: pointer;
 }

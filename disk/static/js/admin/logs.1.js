@@ -35,6 +35,7 @@ function append_logs(name, end=false) {
       <a href="read_current_log?name=${name}" download="${name}">
         <img align="right" class="icon log_download" width="20" height="20" src="static/img/download.svg">
       </a>
+      <img align="right" class="icon log_view" width="20" height="20" src="static/img/admin/see.svg" onclick="view_log('${name}')">
     </div>
   `;
 
@@ -71,4 +72,15 @@ function open_alert_delete_all_logs() {
       <p style="margin: -25px 35px">delete</p>
     </div>
   `, 150);
+}
+
+//
+async function view_log(name) {
+  let response = await fetch(`/read_current_log?name=${name}`, {
+    method: 'POST'
+  });
+
+  if (response.ok) {
+    open_alert(`<textarea class="view_log_textarea scroll_style" readonly>${await response.text()}</textarea>`, undefined, true);
+  }
 }
