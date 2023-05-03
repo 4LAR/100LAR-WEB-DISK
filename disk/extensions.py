@@ -149,6 +149,9 @@ class Extensions():
         for el in data:
             data_value = data[el]['value']
             if (self.apps[app_id]['layout_args_settings'][el]['type'] == 'path'):
+                if ('..' in data_value):
+                    return el, False
+
                 data_value_splited = data_value.split(":")
                 path = user_info['path'][int(data_value_splited[0])]['path'] + "/" + data_value_splited[1]
                 if os.path.exists(path):
