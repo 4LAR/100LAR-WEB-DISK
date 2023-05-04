@@ -9,6 +9,9 @@ var files_json = {}
 var url_file = "";
 var type_file = "";
 
+var sort_type = get_localStorage("sort_type", "type");
+var sort_order = (get_localStorage("sort_order", "false") == "true")? true: false;
+
 //
 function set_path(path_id) {
   path = path_id;
@@ -190,6 +193,21 @@ function append_path_info(count_elements) {
       li.innerHTML = `
         <div class="file_delimiter_bg"></div>
         <div class="file_pathInfo">
+          <label for="" style="position: absolute; margin: -1px 60px;">
+            Sort by
+            <select onchange="sort_files_event()" class="file_sort_selector" id="file_sort_selector_type" style="margin: 0px 5px">
+              <option value="type">type</option>
+              <option value="name">name</option>
+              <option value="date">date</option>
+              <option value="size">size</option>
+            </select>
+          </label>
+          <label for="" style="position: absolute; margin: 2px 170px;">
+            <select onchange="sort_files_event()" class="file_sort_selector" id="file_sort_selector_order" style="margin: 0px 5px">
+              <option value="descending">in descending order</option>
+              <option value="ascending">in ascending order</option>
+            </select>
+          </label>
           <p style="position: absolute; margin: 0px 0px; right: 10px;">elements: ${count_elements}</p>
         </div>
       `;
@@ -201,6 +219,11 @@ function append_path_info(count_elements) {
   }
   // добавляем кнопка в список
   ul.appendChild(li);
+
+  if (!mobile) {
+    selectElement("file_sort_selector_type", sort_type);
+    selectElement("file_sort_selector_order", (sort_order)? 'descending': 'ascending');
+  }
 }
 
 const SORT_BY_TYPE = [
@@ -214,16 +237,57 @@ const SORT_BY_TYPE = [
   'file'
 ];
 
+// event смены типа сортировки
+function sort_files_event(e) {
+  let type = document.getElementById("file_sort_selector_type").value;
+  let order = document.getElementById("file_sort_selector_order").value;
+  console.log(type, order);
+  sort_type = type;
+  sort_order = (order == 'descending')? true: false;
+  localStorage.setItem('sort_type', sort_type);
+  localStorage.setItem('sort_order', sort_order);
+  get_files();
+}
+
 // функция сортирующая файлы по типу
-function sort_files(files_list) {
+function sort_files(files_list, sort_type="type", reversed=false) {
   var new_files_list = [];
 
-  for (let i = 0; i < SORT_BY_TYPE.length; i++)
-    for (let j = 0; j < files_list.length; j++) {
-      if (SORT_BY_TYPE[i] == files_list[j]['type'])
-        new_files_list.push(files_list[j]);
+  switch (sort_type) {
+    case "type":
+      for (let i = 0; i < SORT_BY_TYPE.length; i++)
+        for (let j = 0; j < files_list.length; j++) {
+          if (SORT_BY_TYPE[i] == files_list[j]['type'])
+            new_files_list.push(files_list[j]);
+        }
+      break;
 
-    }
+    case "name":
+      new_files_list = files_list.sort(function (a, b) {
+        return a['name'] - b['name'];
+      })
+      break;
+
+    case "date":
+      new_files_list = files_list.sort(function (a, b) {
+        if (a['type'] == 'dir') return -1;
+        if (b['type'] == 'dir') return 1;
+        return string_to_date(b['time']) - string_to_date(a['time']);
+      })
+      break;
+
+    case "size":
+      new_files_list = files_list.sort(function (a, b) {
+        if (a['type'] == 'dir') return -1;
+        if (b['type'] == 'dir') return 1;
+        return convert_size_to_b(Math.floor(b['size'].split(" ")[0]), size_name.indexOf(b['size'].split(" ")[1])) - convert_size_to_b(Math.floor(a['size'].split(" ")[0]), size_name.indexOf(a['size'].split(" ")[1]));
+      })
+      break;
+  }
+
+
+
+  if (reversed) new_files_list = new_files_list.reverse()
 
   return new_files_list;
 }
@@ -286,7 +350,7 @@ function get_files(onload_function=undefined) {
           files_json = JSON.parse(xhr.responseText.toString());
 
           // сортировка файлов по типу
-          files_json['files'] = sort_files(files_json['files']);
+          files_json['files'] = sort_files(files_json['files'], sort_type, sort_order);
 
           audio_list = [];
           image_list = [];

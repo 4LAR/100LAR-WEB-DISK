@@ -181,3 +181,12 @@ function str_to_bool(str) {
 function reverse_checkBox(id) {
   document.getElementById(id).checked = !document.getElementById(id).checked;
 }
+
+// hh:mm::ss DD::MM:YYYY
+function string_to_date(date_str) {
+  var arr = date_str.split(" ");
+  var time = arr[0].split(":");
+  var date = arr[1].split("-");
+  // (year, month, date, hours, minutes, seconds, ms)
+  return new Date(date[2], date[1], date[0], time[0], time[1], time[2]);
+}
