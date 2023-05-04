@@ -300,6 +300,10 @@ function get_files(onload_function=undefined) {
     read_files_bool = true;
     undo_files_checkBox();
 
+    if (!checkModal('copy_or_paste_block')) {
+      close_selected_files_div();
+    }
+
     if (checkModal('file_list_block')) {
       closeModal('rightBar');
       closeModal('file_list_block');
