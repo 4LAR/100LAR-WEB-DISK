@@ -286,21 +286,6 @@
 
       </div>
 
-      <!--индикация состояния загрузки файла-->
-      <div id="file_upload_block" style="display: none">
-        <!---->
-        <div class="file_upload_info">
-          <img class="icon anim_rotate" style="position: absolute; right: 8px; top: 8px;" width="35" height="35" src="static/img/dvd-disk.svg">
-          <p id="upload_file_count" style="margin: 10px 10px;">Upload 0 files...</p>
-          <h3 id="upload_file_name" style="margin: 10px 10px;">test.txt</h3>
-        </div>
-
-        <!--информация о диске в виде прогресс бара-->
-        <div class="upload_bg">
-          <div id="upload_progress" class="upload_progress"></div>
-        </div>
-      </div>
-
     </div>
 
     <div class="topBar">
@@ -389,9 +374,27 @@
     </div>
 
     <!--окно приложения-->
-    <div id="dialog_bg" class="dialog_backgound" onclick="close_dialogs()"></div>
+    <div id="dialog_bg" class="dialog_backgound" onclick="close_dialogs()" style="display: none"></div>
 
     <!--диалоговые окна-->
+
+    <!-- Загрузка файла -->
+    <div id="dialog_upload" class="dialog_style scroll_style" style="display: none">
+      <ul id="file_upload_ul" class="file_upload_ul"></ul>
+      <!---->
+      <!-- <div class="file_upload_info">
+        <img class="icon anim_rotate" style="position: absolute; right: 10px; top: 0px;" width="45" height="45" src="static/img/dvd-disk.svg">
+        <p id="upload_file_count" style="margin: 10px 10px;">Upload 0 files...</p>
+        <h3 id="upload_file_name" style="margin: 10px 10px;">test.txt</h3>
+      </div> -->
+
+      <!--информация о диске в виде прогресс бара-->
+      <!-- <p style="position: absolute; right: 8px; bottom: 3px; margin: 0px;">100%</p>
+      <div class="upload_bg">
+        <div id="upload_progress" class="upload_progress"></div>
+      </div> -->
+
+    </div>
 
     <!-- Изменение логина -->
     <div id="dialog_change_login" class="dialog_style" style="height: 180px;">
@@ -635,6 +638,13 @@
         <p style="margin: -25px 35px">close</p>
       </div>
 
+    </div>
+
+    <div id="drag_and_drop_div" style="display: none">
+      <div class="dialog_backgound" style="display: block"></div>
+      <div class="drag_and_drop_border">
+        <h1 style="width: 100%; text-align: center;">Drag and drop files here to upload</h1>
+      </div>
     </div>
 
     <input name="fileElem" type="file" id="fileElem" style="display: none;" multiple onchange="uploadFileNODD(this.files)">

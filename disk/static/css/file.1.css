@@ -82,7 +82,6 @@
   text-align: center;
   width: calc(90%);
   margin: 10px 0px;
-  white-space: nowrap;
   margin-top: 10px;
   margin-left: 5%;
 }
@@ -121,7 +120,6 @@
 /*----------------------------------------------------------------------------*/
 
 .file_sort_selector {
-  /* height: 38px; */
   height: 100%;
   border: none;
   background-color: var(--fileList-checkbox-color);
@@ -137,4 +135,25 @@
 
 .file_sort_selector:hover {
   background-color: var(--hover-color);
+}
+
+/*----------------------------------------------------------------------------*/
+
+#drag_and_drop_div {
+  pointer-events: none;
+}
+
+#drag_and_drop_div * {
+  pointer-events: none;
+}
+
+.drag_and_drop_border {
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  bottom: 5%;
+  left: 5%;
+  border: 5px dashed #999999;
+  border-radius: 10px;
+  pointer-events: none;
 }

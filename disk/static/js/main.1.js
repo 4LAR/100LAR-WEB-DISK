@@ -190,3 +190,15 @@ function string_to_date(date_str) {
   // (year, month, date, hours, minutes, seconds, ms)
   return new Date(date[2], date[1], date[0], time[0], time[1], time[2]);
 }
+
+//
+function scroll_to_bottom(id) {
+  var objDiv = document.getElementById(id);
+  objDiv.scrollTop = objDiv.scrollHeight;
+}
+
+//
+function scroll_to_top(id) {
+  var objDiv = document.getElementById(id);
+  objDiv.scrollTop = 0;
+}

@@ -31,11 +31,6 @@ function send() {
   scroll_to_bottom("messages_div");
 }
 
-function scroll_to_bottom(id) {
-  var objDiv = document.getElementById(id);
-  objDiv.scrollTop = objDiv.scrollHeight;
-}
-
 socket.on("history", async function (data) {
   for (const el of data.output) {
     if (el.role == 'user') {

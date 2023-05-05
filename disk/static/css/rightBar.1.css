@@ -409,23 +409,31 @@
 }
 
 /* выгрузка */
+
+#dialog_upload {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 60%;
+}
+
+
+.file_upload_ul {
+  height: 100%;
+}
+
 .upload_bg {
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: var(--width-right-bar);
-  height: 5px;
-  border-top: 1px solid var(--main-border-color);
+  margin-left: 200px;
+  margin-right: 60px;
+  height: 15px;
   background-color: var(--top-color);
+  border-radius: 3px;
 }
 
 .upload_progress {
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
   width: 40px;
-  height: 5px;
+  height: 100%;
   background-color: #999999;
+  border-radius: 3px;
 }
 
 .file_upload_info {
@@ -434,6 +442,25 @@
   bottom: 5px;
   width: var(--width-right-bar);
   height: 80px;
-  border-top: 1px solid var(--main-border-color);
   background-color: var(--bg-color);
+}
+
+.file_upload_el {
+  margin-bottom: 8px;
+}
+
+.file_upload_p {
+  position: absolute;
+  margin: -2px 20px;
+  width: 170px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  direction: rtl;
+}
+
+.file_upload_loading {
+  position: absolute;
+  right: 0px;
+  margin: -2px 20px;
 }

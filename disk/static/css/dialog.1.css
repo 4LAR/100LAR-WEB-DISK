@@ -1,6 +1,6 @@
 @media screen and (min-width: 768px) {
   .dialog_style {
-    position: absolute;
+    position: fixed;
     display: none;
     left: 50%;
     top: 20%;
@@ -16,7 +16,7 @@
 
 @media screen and (max-width: 768px) {
   .dialog_style {
-    position: absolute;
+    position: fixed;
     display: none;
     left: 50%;
     top: 20%;
