@@ -50,6 +50,8 @@ import json
 
 # архивы
 import zipfile
+import rarfile
+
 import io
 
 # тип файлов
@@ -266,7 +268,6 @@ def system_info_background_task():
         socketio.sleep(1)
         memory = psutil.virtual_memory()
         info['cpu_usage'] = psutil.cpu_percent()
-        # info['cpu_usage'] = psutil.cpu_percent(percpu=True, interval=0.5)
         info['total_memory'] = memory.total
         info['used_memory'] = memory.used
         info['program_memory'] = (memory_usage()[0] * 1024 * 1024)
@@ -286,7 +287,6 @@ def connect_info():
 def system_info():
     if (current_user.panel):
         info = {}
-
         info['cpu_count'] = os.cpu_count()
         info['settings'] = settings.options
         info['warnings'] = logging.warning_list
@@ -1033,6 +1033,23 @@ def downlaod():
         if preview_flag:
             if preview_type == "text":
                 return read_file_with_len(user_path + dir + '/' + file, settings.options['Preview']['max_text_file_weight'])
+
+            elif preview_type == "archive":
+                mime = magic.from_buffer(open(user_path + dir + '/' + file, "rb").read(2048), mime=True)
+                archive = None
+                
+                if mime.split("/")[1] == "zip":
+                    archive = zipfile.ZipFile(user_path + dir + '/' + file)
+
+                elif (mime.split("/")[1] == "x-rar"):
+                    archive = rarfile.RarFile(user_path + dir + '/' + file)
+
+                archive_files = archive.namelist()
+                if len(archive_files) <= settings.options['Preview']['max_files_in_archive']:
+                    return {"archive": archive_files}
+
+                else:
+                    return ERROR
 
             else:
                 return ERROR

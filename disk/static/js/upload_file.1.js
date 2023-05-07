@@ -50,7 +50,6 @@ async function process_dir(item, dir="/") {
         create_directory(entry.name, dir);
         await process_dir(entry, dir + entry.name + "/");
       } else {
-        console.log([entry, dir]);
         file_queue_count++;
         uploadFile([entry, dir])
       }
@@ -108,7 +107,7 @@ function uploadFile(files) {
     form.append("file", file);
     xhr.open('post', `upload_file?path=${path}&dir=${dir_str + files[1]}&file=${file.name}`, true);
     xhr.upload.onprogress = function(event) {
-      document.getElementById(`upload_progress_text_${files[1] + file.name}`).scrollIntoView({ block: "end" });
+      document.getElementById(`upload_progress_text_${files[1] + file.name}`).scrollIntoView({ block: "center" });
       document.getElementById(`upload_progress_text_${files[1] + file.name}`).innerHTML = `${Math.ceil((100 / event.total) * event.loaded)}%`;
       set_progressbar(`upload_progress_${files[1] + file.name}`, ((100 / event.total) * event.loaded))
     }
@@ -158,7 +157,7 @@ function uploadFileNODD(files) {
     form.append("file", file);
     xhr.open('post', `upload_file?path=${path}&dir=${dir_str}&file=${file.name}`, true);
     xhr.upload.onprogress = function(event) {
-      document.getElementById(`upload_progress_text_${file.name}`).scrollIntoView({ block: "end" });
+      document.getElementById(`upload_progress_text_${file.name}`).scrollIntoView({ block: "center" });
       document.getElementById(`upload_progress_text_${file.name}`).innerHTML = `${Math.ceil((100 / event.total) * event.loaded)}%`;
       set_progressbar(`upload_progress_${file.name}`, ((100 / event.total) * event.loaded))
     }

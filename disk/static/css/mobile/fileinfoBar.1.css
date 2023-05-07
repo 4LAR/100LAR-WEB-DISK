@@ -261,6 +261,43 @@
 
 /*----------------------------------------------------------------------------*/
 
+.preview_archive {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 5px;
+  height: calc(100% - 34px);
+  background-color: var(--main-input-color);
+  cursor: default;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-top: 0px;
+}
+
+.preview_archive_ul li {
+  margin-bottom: 15px;
+}
+
+.preview_archive_img {
+  width: 30;
+  height: 30;
+}
+
+.preview_archive_p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 35px;
+}
+
+.preview_archive_count_in {
+  position: absolute;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  right: 10px;
+}
+
+/*----------------------------------------------------------------------------*/
+
 .preview_info {
   position: absolute;
   right: 0px;

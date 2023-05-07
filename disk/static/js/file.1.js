@@ -585,7 +585,23 @@ function load_preview() {
         openModal('file_activity_view');
       load_preview_pdf();
       break;
+
+    case 'archive':
+      if (!mobile)
+        openModal('file_activity_view');
+      load_preview_archive();
+      break;
   }
+}
+
+function load_preview_archive() {
+  if (document.getElementById("checkbox_preview_image").checked) {
+    openModal('preview_archive_div');
+    load_archive(url_file, selected_file_name);
+  } else {
+    closeModal('preview_archive_div');
+  }
+  localStorage.setItem('preview_image', document.getElementById("checkbox_preview_image").checked);
 }
 
 function load_preview_pdf() {
@@ -699,6 +715,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
 
   if (mobile) closeModal('checkbox_preview_image_div');
 
+  closeModal('preview_archive_div');
   closeModal('preview_pdf_div');
   closeModal('preview_text_div');
   closeModal('preview_image_div');
@@ -714,6 +731,7 @@ function open_fileInfo(name, type, size, file_path, date, mime, description='') 
     case 'archive':
       openModal('file_activity_view');
       openModal('file_activity_unpack_button');
+      load_preview_archive();
       break;
 
     case 'text file':

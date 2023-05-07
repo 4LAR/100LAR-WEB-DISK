@@ -48,7 +48,8 @@ class settings():
                 },
                 'Preview': {
                     'max_text_file_weight': 2048,
-                    'max_pics_width': 1280
+                    'max_pics_width': 1280,
+                    'max_files_in_archive': 100
                 },
                 'Entry': {
                     'type': "none",

@@ -4,6 +4,66 @@ function load_pdf(url, name) {
   document.getElementById('preview_pdf_iframe').src = `${url}#toolbar=0`;
 }
 
+/* ARCHIVE */
+function load_archive(url, name) {
+  clear_ul("preview_archive_ul");
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', url + `&preview=True&preview_type=archive`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      if (xhr.responseText.toString() == "ERROR") {
+        append_to_ul("preview_archive_ul", `<h2 align="center">file is too large</h2>`);
+        return
+      }
+      archive_files = JSON.parse(xhr.responseText.toString())['archive'];
+      var files_arr = [];
+      for (const el of archive_files) {
+        var splited_el = el.split("/");
+        if (splited_el.length < 2) {
+          files_arr.push({
+            "type": "file",
+            "name": el
+          });
+
+        } else if (el.split("/")[1] == "") {
+          files_arr.push({
+            "type": "folder",
+            "name": el.split("/")[0],
+            "count_in": -1
+          });
+        }
+      }
+
+      for (const el of archive_files) {
+        var splited_el = el.split("/");
+        for (const file of files_arr)
+          if (file['name'] == splited_el[0]) {
+            file['count_in'] += 1;
+            break;
+          }
+      }
+
+      files_arr.sort((a, b) => {
+        if (a['type'] == "folder")
+          return -1;
+        if (b['type'] == "folder")
+          return 1;
+        return 0;
+      });
+
+      for (const el of files_arr) {
+        append_to_ul("preview_archive_ul", `<div class="block_select">
+          ${(el['type'] == "folder")? `<p class="preview_archive_count_in">[ ${el['count_in']} ]</p>`: ""}
+          <img class="preview_archive_img icon ${(el['type'] == "folder")? "folder": "text"}_filter" src="static/img/files/${el['type']}.svg" style="position: absolute">
+          <p class="preview_archive_p">${el['name']}</p>
+        </div>`);
+      }
+    }
+  };
+  xhr.send();
+}
+
 /* TEXT */
 function load_text(url, name) {
   var xhr = new XMLHttpRequest();
