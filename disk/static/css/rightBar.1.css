@@ -193,36 +193,35 @@
 }
 
 .preview_image_image {
-  /* border-top: 1px solid var(--main-border-color); */
   margin-top: 50px;
   width: 95%;
   margin-left: 2.5%;
   border-radius: 8px;
 }
 
-.preview_image_fullscreen {
-  display: none;
-  position: fixed;
-  left: 0px;
-  top: 0px;
-
-  width: 100%;
+.preview_image_fullscreen_image {
+  object-fit: cover;
   height: 100%;
-
-  background-color: var(--preview-bg);
-
-  text-align: center;
+  width: auto;
 }
 
-.preview_image_fullscreen_image {
-  margin-top: 25px;
-  height: calc(100% - 25px);
-
+.full_screen_content {
+  overflow:hidden;
+  position: absolute;
+  top: 36px;
+  left: 0px;
+  height: calc(100% - 36px);
+  width: 100%;
+  border-radius: 0 0 8px 8px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: var(--preview-bg);
 }
 
 .preview_image_fullscreen_move {
-  position: fixed;
-  top: 25px;
+  position: absolute;
+  top: 0px;
   width: 10%;
   height: calc(100% - 25px);
 
@@ -230,7 +229,6 @@
 }
 
 .preview_image_fullscreen_move img {
-  /* filter: invert(80%); */
   opacity: 0;
 }
 
@@ -241,28 +239,16 @@
 .preview_display_type_fullscreen {
   position: absolute;
   left: 0px;
-  top: 0px;
-  height: 25px;
+  top: 6px;
   width: 100%;
-  border-bottom: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
   color: var(--main-font-color);
 }
 
 .preview_image_fullscreen_close_button {
   position: absolute;
-  right: 0px;
-  top: 0px;
-  width: 100px;
-  height: 25px;
-  border-left: 1px solid var(--main-border-color);
-  background-color: var(--bg-color);
-
+  right: 10px;
+  top: 10px;
   cursor: pointer;
-}
-
-.preview_image_fullscreen_close_button:hover {
-  background-color: var(--hover-color);
 }
 
 .preview_video_fullscreen {
@@ -282,16 +268,15 @@
 }
 
 .preview_video_fullscreen_video {
-  position: fixed;
+  position: absolute;
   top: 0px;
   left: 0px;
-  width: 100%;
-  height: calc(100% - 25px);
+  width: auto;
+  height: calc(100% - 26px);
 }
 
 .preview_video_fullscreen_controls {
-  position: fixed;
-
+  position: absolute;
   bottom: 0px;
   left: 0px;
 

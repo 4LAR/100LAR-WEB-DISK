@@ -251,10 +251,12 @@ function full_screen() {
   if (!video_fullscreen) {
     video_fullscreen = true;
     openModal('preview_video_fullscreen_div');
+    openModal('dialog_bg');
 
   } else {
     video_fullscreen = false;
     closeModal('preview_video_fullscreen_div');
+    closeModal('dialog_bg');
 
   }
   set_duration_video(duration);
@@ -307,7 +309,6 @@ var image_fullscreen_bool = false;
 function load_image(url, name) {
   url = url + `&preview=True&preview_type=image`;
   document.getElementById(image_id).src = url;
-  if (!mobile) document.getElementById("preview_image_fullscreen_name").innerHTML = `filename: ${name}`;
   image_name = name;
   preview_image_url = url;
 
@@ -319,19 +320,16 @@ function load_image(url, name) {
   }
 }
 
-document.getElementById(image_id).onload = function (event) {
-  img = document.getElementById(image_id);
-  if (!mobile) document.getElementById("preview_image_fullscreen_info").innerHTML = `size: ${img.naturalWidth}x${img.naturalHeight}px`;
-}
-
 function image_fullscreen() {
   if (image_fullscreen_bool) {
     closeModal('preview_image_fullscreen_div');
+    closeModal("dialog_bg")
 
     image_fullscreen_bool = false;
   } else {
     document.getElementById(image_fullscreen_id).src = preview_image_url;
     openModal('preview_image_fullscreen_div');
+    openModal("dialog_bg")
     image_fullscreen_bool = true;
   }
 }

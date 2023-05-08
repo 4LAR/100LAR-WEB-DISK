@@ -14,7 +14,6 @@ var sort_order = (get_localStorage("sort_order", "false") == "true")? true: fals
 
 //
 function set_color_disk_space(space=0) {
-  console.log(space);
   var svg_class = "icon ";
   if (colored_space_status) {
     if (space >= 70) {
@@ -255,7 +254,6 @@ const SORT_BY_TYPE = [
 function sort_files_event(e) {
   let type = document.getElementById("file_sort_selector_type").value;
   let order = document.getElementById("file_sort_selector_order").value;
-  console.log(type, order);
   sort_type = type;
   sort_order = (order == 'descending')? true: false;
   localStorage.setItem('sort_type', sort_type);

@@ -596,52 +596,60 @@
     </div>
 
     <!--видео в полный экран-->
-    <div id="preview_video_fullscreen_div" class="preview_video_fullscreen" style="display: none">
-      <video id="preview_video_fullscreen" class="preview_video_fullscreen_video" onclick="play_video()"></video>
-      <div class="preview_video_fullscreen_controls">
-        <img id="preview_play_pause_video_fullscreen" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px;" src="static/img/player/play.svg" onclick="play_video()"/>
-        <input type="range" id="preview_video_volume_fullscreen" style="width: 65px; position: absolute; right: 20px; bottom: 8px" name="" min="0" max="100" value="50" step="1" oninput="set_volume_video(this.value)" onchange="set_volume_video(this.value)">
-        <input type="range" id="preview_video_input_duration_fullscreen" style="position: absolute; left: 30px; right: 95px; bottom: 8px" name="" min="0" max="100" value="0" step="0.1" onchange="set_duration_video(this.value)" onmouseover="video_duration_hover = true" onmouseout="video_duration_hover = false" onmousemove="showTooltip_video_duration(event)">
-        <img id="preview_fullscreen_video_fullscreen" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px; right: 0px" src="static/img/player/fullscreen.svg" onclick="full_screen()"/>
-
-        <div class="preview_video_duration_info" id="preview_video_duration_info_fullscreen">
-          <p id="preview_video_duration_info_p_fullscreen"></p>
+    <div id="preview_video_fullscreen_div" class="main_app_dialog block_select" style="display: none">
+      <div class="dialog_top_name">
+        <div class="dialog_close_button block_select button_margin" onclick="full_screen()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
         </div>
       </div>
+      <div class="full_screen_content">
+        <video id="preview_video_fullscreen" class="preview_video_fullscreen_video" onclick="play_video()"></video>
+        <div class="preview_video_fullscreen_controls">
+          <img id="preview_play_pause_video_fullscreen" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px; cursor: pointer;" src="static/img/player/play.svg" onclick="play_video()"/>
+          <input type="range" id="preview_video_volume_fullscreen" style="width: 65px; position: absolute; right: 20px; bottom: 8px" name="" min="0" max="100" value="50" step="1" oninput="set_volume_video(this.value)" onchange="set_volume_video(this.value)">
+          <input type="range" id="preview_video_input_duration_fullscreen" style="position: absolute; left: 30px; right: 95px; bottom: 8px" name="" min="0" max="100" value="0" step="0.1" onchange="set_duration_video(this.value)" onmouseover="video_duration_hover = true" onmouseout="video_duration_hover = false" onmousemove="showTooltip_video_duration(event)">
+          <img id="preview_fullscreen_video_fullscreen" class="icon" width="20" height="20" style="position: absolute; margin: 2px 4px; right: 0px; cursor: pointer;" src="static/img/player/fullscreen.svg" onclick="full_screen()"/>
+
+          <div class="preview_video_duration_info" id="preview_video_duration_info_fullscreen">
+            <p id="preview_video_duration_info_p_fullscreen"></p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!--изображение на полный экран-->
-    <div id="preview_image_fullscreen_div" class="preview_image_fullscreen block_select">
-      <img id="preview_image_fullscreen" class="preview_image_fullscreen_image" src="" />
-
-      <div class="preview_image_fullscreen_move" style="left: 0px" onclick="next_image(true)">
-        <img class="icon" width="100%" height="100%" style="transform: rotate(-180deg)" src="static/img/player/back-image.svg"/>
+    <div id="preview_image_fullscreen_div" class="main_app_dialog block_select">
+      <div class="dialog_top_name">
+        <div class="preview_display_type_fullscreen">
+          <label for="" style="position: absolute; margin: 0px 10px; left: 0px;">
+            Rendering type:
+            <select onchange="preview_image_type(this)" class="preview_rendering_selector" id="preview_image_type_fullscreen" style="margin: 0px 5px">
+              <option value="auto">auto</option>
+              <option value="crisp-edges">crisp-edges</option>
+              <option value="pixelated">pixelated</option>
+              <option value="initial">initial</option>
+              <option value="inherit">inherit</option>
+            </select>
+          </label>
+        </div>
+        <div class="dialog_close_button block_select button_margin" onclick="image_fullscreen()">
+          <img class="icon" width="20" height="20" src="static/img/cross.svg">
+          <p>close</p>
+        </div>
       </div>
+      <div class="full_screen_content">
+        <img id="preview_image_fullscreen" class="preview_image_fullscreen_image" src="" style="" />
 
-      <div class="preview_image_fullscreen_move" style="right: 0px" onclick="next_image()">
-        <img class="icon" width="100%" height="100%" src="static/img/player/back-image.svg"/>
+        <div class="preview_image_fullscreen_move" style="left: 0px" onclick="next_image(true)">
+          <img class="icon" width="100%" height="100%" style="transform: rotate(-180deg)" src="static/img/player/back-image.svg"/>
+        </div>
+
+        <div class="preview_image_fullscreen_move" style="right: 0px" onclick="next_image()">
+          <img class="icon" width="100%" height="100%" src="static/img/player/back-image.svg"/>
+        </div>
       </div>
-
-      <div class="preview_display_type_fullscreen">
-        <label for="" style="position: absolute; margin: 0px 10px; left: 0px;">
-          Rendering type:
-          <select onchange="preview_image_type(this)" class="preview_rendering_selector" id="preview_image_type_fullscreen" style="margin: 0px 5px">
-            <option value="auto">auto</option>
-            <option value="crisp-edges">crisp-edges</option>
-            <option value="pixelated">pixelated</option>
-            <option value="initial">initial</option>
-            <option value="inherit">inherit</option>
-          </select>
-        </label>
-        <p id="preview_image_fullscreen_name" class="allow_select" style="position: absolute; margin: 0px 0px; left: 250px">name</p>
-        <p id="preview_image_fullscreen_info" class="allow_select" style="position: absolute; margin: 0px 0px; right: 250px">width/height</p>
-      </div>
-
-      <div class="preview_image_fullscreen_close_button" onclick="image_fullscreen()" align="left">
-        <img class="icon" width="18" height="18" src="static/img/cross.svg" style="margin: 4px">
-        <p style="margin: -25px 35px">close</p>
-      </div>
-
     </div>
 
     <div id="drag_and_drop_div" style="display: none">
