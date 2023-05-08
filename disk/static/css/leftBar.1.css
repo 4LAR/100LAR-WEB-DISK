@@ -87,19 +87,9 @@
 
 .button_exit_style {
   position: absolute;
-  width: 200px;
-  height: 35px;
-  border-top: 1px solid var(--main-border-color);
-  background-color: var(--hover-color);
-
-  bottom: 0px;
-  left: 0px;
-
-  cursor: pointer;
-}
-
-.button_exit_style:hover {
-  background-color: var(--top-red-color);
+  width: 180px;
+  bottom: 8px;
+  left: 10px;
 }
 
 /*----------------------------------------------------------------------------*/

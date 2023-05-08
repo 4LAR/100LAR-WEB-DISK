@@ -338,23 +338,17 @@
           <p>change password</p>
         </div>
 
-        <!-- <p class="settings_name">Other</p>
-        <div class="settings_element">
-          <input type="checkbox" class="custom-checkbox top_checkBox" id="save_in_server_chekcbox" name="save_in_server_chekcbox" value="yes" onchange="(this)">
-          <label for="save_in_server_chekcbox"><p>Save settings in server</p></label>
-        </div> -->
-
       </div>
 
       <!--версия-->
-      <div class="div_ver" style="position: absolute; left: 0px; bottom: 30px; width: var(--width-left-bar)" align="left">
+      <div class="div_ver" style="position: absolute; left: 0px; bottom: 40px; width: var(--width-left-bar)" align="left">
         <p style="margin: 10px 10px"><a href="javascript:open_git_releases()">ver: {{ version }}</a></p>
       </div>
 
       <!--кнопка для выхода из аккаунта-->
-      <div class="button_exit_style block_select button_margin" onclick="logout()">
-        <img class="icon_topBar" width="20" height="20" src="static/img/logout.svg">
-        <p class="top_bar_font_color">logout</p>
+      <div class="button_exit_style small_button_style block_select button_margin" onclick="logout()">
+        <img class="icon" width="20" height="20" src="static/img/logout.svg">
+        <p>logout</p>
       </div>
     </div>
 
