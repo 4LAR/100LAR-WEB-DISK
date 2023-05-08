@@ -1056,6 +1056,9 @@ def downlaod():
 
             elif preview_type == "image":
                 image_type = file.split(".")[-1]
+                if image_type.lower() in ["svg", "gif"]:
+                    return send_from_directory(user_path + dir, file)
+
                 im = Image.open(user_path + dir + '/' + file)
                 if im.size[0] > settings.options['Preview']['max_pics_width']:
                     im = im.resize((
