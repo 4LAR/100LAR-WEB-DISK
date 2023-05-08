@@ -246,7 +246,7 @@ def entry():
         return redirect(settings.options['Entry']['source'])
 
     else:
-        return 'about:blank'
+        return ''
 
 ################################################################################
 
@@ -1037,7 +1037,7 @@ def downlaod():
             elif preview_type == "archive":
                 mime = magic.from_buffer(open(user_path + dir + '/' + file, "rb").read(2048), mime=True)
                 archive = None
-                
+
                 if mime.split("/")[1] == "zip":
                     archive = zipfile.ZipFile(user_path + dir + '/' + file)
 
