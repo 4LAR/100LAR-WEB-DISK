@@ -52,6 +52,9 @@ import json
 import zipfile
 import rarfile
 
+# для работы с изображениями
+from PIL import Image
+
 import io
 
 # тип файлов
@@ -1050,6 +1053,19 @@ def downlaod():
 
                 else:
                     return ERROR
+
+            elif preview_type == "image":
+                image_type = file.split(".")[-1]
+                im = Image.open(user_path + dir + '/' + file)
+                if im.size[0] > settings.options['Preview']['max_pics_width']:
+                    im = im.resize((
+                        settings.options['Preview']['max_pics_width'],
+                        int((im.size[1] * settings.options['Preview']['max_pics_width'])/(im.size[0]))
+                    ))
+                im_io = io.BytesIO()
+                im.save(im_io, "PNG")
+                im_io.seek(0)
+                return send_file(im_io, mimetype='image/png')
 
             else:
                 return ERROR

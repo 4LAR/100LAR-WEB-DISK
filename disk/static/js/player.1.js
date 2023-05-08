@@ -305,6 +305,7 @@ var image_fullscreen_bool = false;
 
 /* IMAGE */
 function load_image(url, name) {
+  url = url + `&preview=True&preview_type=image`;
   document.getElementById(image_id).src = url;
   if (!mobile) document.getElementById("preview_image_fullscreen_name").innerHTML = `filename: ${name}`;
   image_name = name;
