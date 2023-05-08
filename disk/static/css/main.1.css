@@ -246,7 +246,7 @@ body {
 
 .div_ver a {
   text-decoration: none;
-  color: var(--top-font-color);
+  color: var(--main-font-color);
 }
 
 .div_ver a:hover {
@@ -254,7 +254,7 @@ body {
 }
 
 .div_ver p {
-  opacity: .6;
+  opacity: .9;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -273,6 +273,16 @@ body {
 
 .svg_white {
   filter: invert(95%) sepia(7%) saturate(163%) hue-rotate(175deg) brightness(94%) contrast(83%);
+}
+
+/*----------------------------------------------------------------------------*/
+
+.disk_space_red {
+  filter: invert(28%) sepia(98%) saturate(1449%) hue-rotate(332deg) brightness(93%) contrast(82%);
+}
+
+.disk_space_orange {
+  filter: invert(60%) sepia(99%) saturate(863%) hue-rotate(8deg) brightness(99%) contrast(93%);
 }
 
 /*----------------------------------------------------------------------------*/

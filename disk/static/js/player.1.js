@@ -53,9 +53,10 @@ function load_archive(url, name) {
       });
 
       for (const el of files_arr) {
+        var color = (el['type'] == "folder")? "folder": "text";
         append_to_ul("preview_archive_ul", `<div class="block_select">
           ${(el['type'] == "folder")? `<p class="preview_archive_count_in">[ ${el['count_in']} ]</p>`: ""}
-          <img class="preview_archive_img icon ${(el['type'] == "folder")? "folder": "text"}_filter" src="static/img/files/${el['type']}.svg" style="position: absolute">
+          <img class="preview_archive_img icon ${(colored_file_icons)? color: ""}_filter" src="static/img/files/${el['type']}.svg" style="position: absolute">
           <p class="preview_archive_p">${el['name']}</p>
         </div>`);
       }

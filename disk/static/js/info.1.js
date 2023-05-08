@@ -22,12 +22,16 @@ function get_info() {
       if (info_json['path'][path]['readonly']) {
         document.getElementById('disk_converted').innerHTML = `${info_json['path'][path]['busy_converted']} (read-only)`;
         set_disk_space(100);
+        set_color_disk_space(0);
       } else {
         if (info_json['path'][path]['size'] > 0) {
-          set_disk_space((100/info_json['path'][path]['size']) * info_json['path'][path]['busy']);
+          var space = (100/info_json['path'][path]['size']) * info_json['path'][path]['busy'];
+          set_disk_space(space);
+          set_color_disk_space(space);
           document.getElementById('disk_converted').innerHTML = `${info_json['path'][path]['busy_converted']} / ${info_json['path'][path]['size_converted']}`;
         } else {
           set_disk_space(0);
+          set_color_disk_space(0);
           document.getElementById('disk_converted').innerHTML = `${info_json['path'][path]['busy_converted']}`;
         }
       }

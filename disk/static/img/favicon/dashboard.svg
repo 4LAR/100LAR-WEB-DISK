@@ -1,0 +1,15 @@
+<svg width="256" height="256" xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve">
+ <desc>Created with Fabric.js 1.7.22</desc>
+
+ <g>
+  <title>Layer 1</title>
+  <g transform="translate(128 128) scale(0.72 0.72)" id="svg_1">
+   <g transform="translate(-175.05 -175.05000000000004) scale(3.89 3.89)" stroke=" none" stroke-width="0" stroke-dasharray=" none" stroke-linecap=" butt" stroke-linejoin=" miter" stroke-miterlimit="10" fill=" none" fill-rule=" nonzero" id="svg_2">
+    <path d="m35.813,54.013l-31.299,0c-2.489,0 -4.514,-2.026 -4.514,-4.515l0,-44.984c0,-2.489 2.025,-4.514 4.514,-4.514l31.299,0c2.489,0 4.514,2.025 4.514,4.514l0,44.984c0.001,2.489 -2.024,4.515 -4.514,4.515z" stroke-linecap=" butt" stroke=" none" stroke-dasharray=" none" stroke-linejoin=" miter" stroke-miterlimit="10" fill="#c1c6ca" fill-rule=" nonzero" id="svg_3"/>
+    <path d="m35.813,90l-31.299,0c-2.489,0 -4.514,-2.025 -4.514,-4.515l0,-15.744c0,-2.489 2.025,-4.515 4.514,-4.515l31.299,0c2.489,0 4.514,2.025 4.514,4.515l0,15.744c0.001,2.49 -2.024,4.515 -4.514,4.515z" stroke-linecap=" butt" stroke=" none" stroke-dasharray=" none" stroke-linejoin=" miter" stroke-miterlimit="10" fill="#c1c6ca" fill-rule=" nonzero" id="svg_4"/>
+    <path d="m85.485,90l-31.298,0c-2.489,0 -4.515,-2.025 -4.515,-4.515l0,-44.984c0,-2.489 2.025,-4.514 4.515,-4.514l31.299,0c2.489,0 4.515,2.025 4.515,4.514l0,44.984c-0.001,2.49 -2.026,4.515 -4.516,4.515z" stroke-linecap=" butt" stroke=" none" stroke-dasharray=" none" stroke-linejoin=" miter" stroke-miterlimit="10" fill="#c1c6ca" fill-rule=" nonzero" id="svg_5"/>
+    <path d="m85.485,24.773l-31.298,0c-2.489,0 -4.515,-2.025 -4.515,-4.515l0,-15.744c0,-2.489 2.025,-4.514 4.515,-4.514l31.299,0c2.489,0 4.514,2.025 4.514,4.514l0,15.745c0,2.489 -2.025,4.514 -4.515,4.514z" stroke-linecap=" butt" stroke=" none" stroke-dasharray=" none" stroke-linejoin=" miter" stroke-miterlimit="10" fill="#c1c6ca" fill-rule=" nonzero" id="svg_6"/>
+   </g>
+  </g>
+ </g>
+</svg>

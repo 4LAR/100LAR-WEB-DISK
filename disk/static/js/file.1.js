@@ -13,6 +13,20 @@ var sort_type = get_localStorage("sort_type", "type");
 var sort_order = (get_localStorage("sort_order", "false") == "true")? true: false;
 
 //
+function set_color_disk_space(space=0) {
+  console.log(space);
+  var svg_class = "icon ";
+  if (colored_space_status) {
+    if (space >= 70) {
+      svg_class += "disk_space_red";
+    } else if (space >= 50) {
+      svg_class += "disk_space_orange";
+    }
+  }
+  document.getElementById("disk_space_img").className = svg_class;
+}
+
+//
 function set_path(path_id) {
   path = path_id;
 
