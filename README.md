@@ -87,7 +87,7 @@ It can be configured using a text editor or the inner admin panel.
 |----------------------|-------------|---------------|
 | max_text_file_weight | amount of symbols in preview | 2048          | 
 | max_pics_width       | max image width in preview (if the width of the image is higher than this number, it will be reduced proportionally to it) | 1280          | 
-| max_files_in_archive | max amount of files availiable for preview in an archive | 100           | 
+| max_files_in_archive | max amount of files in an archive for it to be available for preview| 100           | 
 
 ### Entry
 
