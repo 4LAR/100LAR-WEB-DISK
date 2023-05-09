@@ -127,6 +127,8 @@ function close_dialogs() {
     close_change_login_dialog();
   } else if (image_fullscreen_bool) {
     image_fullscreen();
+  } else if (video_fullscreen) {
+    full_screen();
   } else return false;
   return true;
 }

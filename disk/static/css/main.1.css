@@ -278,11 +278,11 @@ body {
 /*----------------------------------------------------------------------------*/
 
 .disk_space_red {
-  filter: invert(28%) sepia(98%) saturate(1449%) hue-rotate(332deg) brightness(93%) contrast(82%);
+  filter: invert(28%) sepia(19%) saturate(5003%) hue-rotate(331deg) brightness(93%) contrast(93%);
 }
 
 .disk_space_orange {
-  filter: invert(60%) sepia(99%) saturate(863%) hue-rotate(8deg) brightness(99%) contrast(93%);
+  filter: invert(68%) sepia(74%) saturate(342%) hue-rotate(349deg) brightness(89%) contrast(93%);
 }
 
 /*----------------------------------------------------------------------------*/
