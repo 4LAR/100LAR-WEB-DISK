@@ -52,7 +52,7 @@ class app():
             "content": data
         })
 
-        while ((self.get_tokens() >= self.config['max_tokens']) and (self.history.len > 0)):
+        while ((self.get_tokens() >= self.config['max_tokens']) and (len(self.history) > 0)):
             self.history.pop(0)
 
         self.cache.update_data({"history": self.all_history})
