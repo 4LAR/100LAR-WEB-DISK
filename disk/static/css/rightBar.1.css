@@ -105,8 +105,8 @@
 .preview_text_textarea {
   position: absolute;
   left: 5px;
-  right: 5px;
   top: 5px;
+  width: calc(100% - 10px);
   height: calc(100% - 20px);
   background-color: var(--main-input-color);
   resize: none;

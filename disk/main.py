@@ -1,5 +1,5 @@
 
-VERSION = '2.2.0 (stable)'
+VERSION = '2.2.1 (dev)'
 
 import requests
 import configparser

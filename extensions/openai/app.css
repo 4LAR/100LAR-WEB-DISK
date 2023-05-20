@@ -19,7 +19,7 @@ pre {
 .message_input {
   position: absolute;
   left: 50px;
-  right: 50px;
+  width: calc(100% - 100px);
   bottom: 5px;
   margin-bottom: 0px;
   background-color: var(--hover-color);

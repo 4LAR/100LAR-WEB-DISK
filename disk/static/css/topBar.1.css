@@ -27,7 +27,7 @@
 .path_input {
   position: absolute;
   left: 510px;
-  right: 5px;
+  width: calc(100% - 515px);
   top: 0px;
   background-color: var(--top-input-color);
 }

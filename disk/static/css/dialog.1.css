@@ -82,7 +82,7 @@
 .create_fileName_input {
   position: absolute;
   left: 60px;
-  right: 20px;
+  width: calc(100% - 80px);
   top: 10px;
   background-color: var(--main-input-color);
 }

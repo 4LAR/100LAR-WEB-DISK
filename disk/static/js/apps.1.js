@@ -301,7 +301,7 @@ function generate_create_layout(dict, root=true) {
             select_options += `<option value="${i}">${info_json['path'][i]['name']}</option>`;
         }
         html_div += `<div class="apps_path_div"><select class="app_input_ok round_selector" id="${APP_NAMESPACE}${el['arg']}_select" style="left: 10px; width: 80px;">${select_options}</select>`;
-        html_div += `<input id="${APP_NAMESPACE}${el['arg']}_input" class="app_input_ok input_style dialog_input" style="position: absolute; left: 95px; right: 5%; max-width: 175px;" type=text placeholder="direcory" value="/"></div>`
+        html_div += `<input id="${APP_NAMESPACE}${el['arg']}_input" class="app_input_ok input_style dialog_input" style="position: absolute; left: 95px; width: calc(100% - calc(95px + 5%)); max-width: 175px;" type=text placeholder="direcory" value="/"></div>`
         break;
       }
     }
