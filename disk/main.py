@@ -88,6 +88,7 @@ logging = Logging(
     path =      settings.options['Logs']['path']
 )
 logging.time = time_now
+logging.create_log()
 
 history = History(
     length = settings.options['History']['length'],
@@ -530,7 +531,7 @@ def app_set_config():
 @login_required
 def reload_apps():
     if (current_user.panel):
-        extensions.read()
+        extensions.read(read_cache=False)
         return OK
     else:
         return NO_ADMIN
@@ -1324,8 +1325,6 @@ def display_markdown():
 
 
 ################################################################################
-
-logging.create_log()
 
 def app_start():
     if settings.options['Flask']['waitress']:

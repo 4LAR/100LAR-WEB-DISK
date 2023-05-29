@@ -273,7 +273,7 @@ class Extensions():
         config_class.options['Extension'] = config
         config_class.save_settings()
 
-    def read(self):
+    def read(self, read_cache=True):
         self.apps = {}
         folders = read_folders(self.path)
         for dir in folders:
@@ -301,7 +301,7 @@ class Extensions():
                             "cached": settings_json["cached"]
                         }
 
-                        if settings_json["cached"]:
+                        if settings_json["cached"] and read_cache:
                             if os.path.exists(self.path + dir + "/" + CACHE_FILE_NAME + ".json"):
                                 cache = self.read_cache(self.path + dir + "/")
                                 for user in cache:
@@ -315,7 +315,8 @@ class Extensions():
                         "config": config
                     }
             except Exception as e:
-                print("Extensions:", e)
+                str_log = "%s cannot be loaded due to an unexpected error: %s" % (settings_json["name"], str(e))
+                self.logging.print(str_log, 3, comment='[ERROR EXTENSION] ')
 
     def load_executable(self, path):
         f = open(path, "r")
