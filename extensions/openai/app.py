@@ -13,13 +13,16 @@ class app():
         self.status = 0
         self.cache = kwargs['cache']
 
+        self.config = kwargs['config']
+        openai.api_key = kwargs['config']['api_key']
+
         self.all_history = []
         self.history = []
         if "history" in self.cache.get_data():
             self.all_history = self.cache.get_data()["history"]
 
-        self.config = kwargs['config']
-        openai.api_key = kwargs['config']['api_key']
+        elif len(kwargs['system_message']) > 0:
+            self.append_history(kwargs['system_message'], "system")
 
         self.convert_history()
 
@@ -42,10 +45,11 @@ class app():
 
 
     def append_history(self, data, role):
-        self.all_history.append({
-            "role": role,
-            "content": data
-        })
+        if role != "system":
+            self.all_history.append({
+                "role": role,
+                "content": data
+            })
 
         self.history.append({
             "role": role,
@@ -62,8 +66,9 @@ class app():
         return
 
     def io_message(self, data):
-        self.append_history(data['text'], "user")
-        self.create_completion(data['text'])
+        if len(data['text']) > 0:
+            self.append_history(data['text'], "user")
+            self.create_completion(data['text'])
 
     def create_completion(self, text):
         response = openai.ChatCompletion.create(

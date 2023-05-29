@@ -21,12 +21,24 @@ function append(text, human) {
   );
 }
 
+function block_write() {
+  openModal("bottom_bar_loading");
+  document.getElementById("input").readOnly = true;
+}
+
+function open_write() {
+  closeModal("bottom_bar_loading");
+  document.getElementById("input").readOnly = false;
+  document.getElementById("input").focus();
+}
+
 function send() {
   var input = document.getElementById("input").value;
   socket.emit("message", { text: input });
 
   append(input, true);
 
+  block_write();
   document.getElementById("input").value = "";
   scroll_to_bottom("messages_div");
 }
@@ -36,10 +48,11 @@ socket.on("history", async function (data) {
     if (el.role == 'user') {
       await append(el.content, true);
     } else {
-      // append(data.output.content, false);
       await get_render(el.content);
     }
   }
+  if ((data.output.length > 0) && (data.output[data.output.length - 1].role === 'user'))
+    block_write();
   scroll_to_bottom("messages_div");
 });
 
@@ -48,6 +61,7 @@ socket.on("output", async function (data) {
     await append(data.output.content, true);
   } else {
     await get_render(data.output.content);
+    open_write();
   }
   scroll_to_bottom("messages_div");
 });

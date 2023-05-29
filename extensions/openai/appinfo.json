@@ -8,7 +8,21 @@
   "css": ["app.css"],
   "script": ["app.js"],
   "executable": "app.py",
-  "create_layout": [],
+  "create_layout": [
+    {
+      "type": "row",
+      "text": "System message:",
+      "elements": [
+        {
+          "type": "input",
+          "arg": "system_message",
+          "placeholder": "...",
+          "value": "",
+          "must_be_filled": false
+        }
+      ]
+    }
+  ],
   "config": {
     "api_key": "",
     "model": "gpt-3.5-turbo",
