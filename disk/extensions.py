@@ -358,7 +358,14 @@ class Extensions():
 
     def generate_html(self, id, user_id, settings_json):
         user_app = self.userBase.users_apps[user_id][int(id)]
-        script_str = '<script type="text/javascript">const current_app_id = %s; const current_namespace = "%s";\n' % (str(id), user_app['app_namespace'])
+        # self.apps[user_app['app_id']]['ico']
+        # document.head.innerHTML += '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64, %s" />';\n
+        script_str = '''
+<script type="text/javascript">
+const current_app_id = %s;
+const current_namespace = "%s";
+document.head.innerHTML += '<link rel="icon" href="/static/img/favicon/app.svg" type="image/svg+xml">';\n
+        ''' % (str(id), user_app['app_namespace'])
         script_str += settings_json['html']['script']
         script_str += "</script>";
 
@@ -372,4 +379,5 @@ class Extensions():
             if (user_id == int(current_user.id)):
                 method(data)
         except Exception as e:
-            print("WARNING", e)
+            str_log = "SOCKETIO WARNING: %s" % (str(e))
+            self.logging.print(str_log, 3, comment='[ERROR EXTENSION] ')

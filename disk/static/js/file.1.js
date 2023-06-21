@@ -166,7 +166,7 @@ function append_back_dir() {
     if (mobile) {
       li.innerHTML = `
         <div class="file_checkbox_bg"></div>
-        <div class="file" onclick="back_dir()">
+        <div class="file block_select" onclick="back_dir()">
           <img class="${(colored_file_icons)? "folder_filter": ""} icon" style="margin: 5px 55px" width="35" height="35" src="static/img/files/folder.svg">
           <p style="margin: -38px 100px">...</p>
         </div>
@@ -176,14 +176,14 @@ function append_back_dir() {
       if (draw_type == 'list') {
         li.innerHTML = `
           <div class="file_checkbox_bg"></div>
-          <div class="file" onclick="back_dir()">
+          <div class="file block_select" onclick="back_dir()">
             <img class="${(colored_file_icons)? "folder_filter": ""} icon" style="margin: 7px 50px" width="25" height="25" src="static/img/files/folder.svg">
             <p style="margin: -25px 80px">...</p>
           </div>
         `;
       } else {
         li.innerHTML = `
-          <div class="file_grid" onclick="back_dir()">
+          <div class="file_grid block_select" onclick="back_dir()">
             <img class="${(colored_file_icons)? "folder_filter": ""} icon" width="40" height="40" src="static/img/files/folder.svg">
             <p class="file_name_grid">...</p>
           </div>
@@ -551,7 +551,7 @@ function append_file(type, name, size='', path_s='', date='', mime='') {
       // файл
 
        str += `
-        <div class="${draw_type_class} block_select" id="${name}" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
+        <div class="${draw_type_class} block_select" id="${name}" ondblclick="" onclick="open_fileInfo('${name}', '${type}', '${size}', '${path_s}', '${date}', '${mime}')">
           <img class="${color_class} icon" width="${image_size}" height="${image_size}" src="static/img/files/${type}.svg">
           ${file_info}
         </div>
