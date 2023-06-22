@@ -47,7 +47,7 @@ async function process_dir(item, dir="/") {
   await directoryReader.readEntries(async function(entries) {
     for (const entry of entries) {
       if (entry.isDirectory) {
-        create_directory(entry.name, dir);
+        await create_directory(entry.name, dir);
         await process_dir(entry, dir + entry.name + "/");
       } else {
         file_queue_count++;
@@ -70,7 +70,7 @@ async function file_handler(items) {
     var entry = await item.webkitGetAsEntry();
     if (entry) {
       if (entry.isDirectory) {
-        create_directory(entry.name, "/");
+        await create_directory(entry.name, "/");
         await process_dir(entry, `/${entry.name}/`);
       } else {
         file_queue_count++;
