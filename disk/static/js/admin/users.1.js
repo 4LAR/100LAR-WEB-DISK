@@ -76,7 +76,7 @@ function see_password(name) {
 function generate_details(name, username, status, password, panel) {
   details_block = document.getElementById('users_info_' + name);
   details_block.innerHTML = `
-    <div class="path_list_grid">
+    <div class="grid">
       <div>
         <p style="font-size: 18; font-weight: normal">Name</p><br>
         <input id="users_info_${name}_name" type=text class="input_border" value="${username}" style="margin-left: 14px; margin-top: -3px; width: 90%"><br>
@@ -105,7 +105,7 @@ function generate_details(name, username, status, password, panel) {
     </div>
 
     <hr class="main_page_hr">
-    <ul id="users_info_${name}_path" class="path_list_grid"></ul>
+    <ul id="users_info_${name}_path" class="grid"></ul>
     <div class="main_page_button block_select" style="width: 130px; margin: 10px; display: inline-block;" onclick="add_new_path('${name}')">
       <img style="margin: 0px 0px" class="icon" width="20" height="20" src="static/img/add.svg">
       <p style="margin: -15px 35px">add path</p>

@@ -16,7 +16,7 @@ function generate_settingslist() {
     append_to_ul(
       'settings_' + ((left)? 'left': 'right'),
       `
-        <div class="border sub_border_size" align="left">
+        <div class="template_border sub_border_size" style="margin-bottom: -8px" align="left">
           <p style="margin: 10px 50px; color: #8B949E; font-weight: normal; white-space: nowrap;">${section}</p>
           <hr class="main_page_hr">
           <ul id="settings_${section}"></ul>

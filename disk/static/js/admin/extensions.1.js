@@ -38,7 +38,7 @@ function append_to_apps(app_json) {
         default:
           settings += `
             <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">${el}</p>
-            <input id="appsettings_${app_json['name']}_${el}" class="input_border" style="left: 10px; width: 90%; margin-top: 0px;" type=text placeholder="..." value="${app_json['config'][el]}">
+            <input id="appsettings_${app_json['name']}_${el}" class="input_border" style="left: 10px; width: calc(100% - 20px); margin-top: 0px;" type=text placeholder="..." value="${app_json['config'][el]}">
           `
       }
   }
@@ -46,7 +46,7 @@ function append_to_apps(app_json) {
   append_to_ul(
     'appslist',
     `
-      <div class="path_list_grid template_border">
+      <div class="template_border sub_border_size">
         <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="reverse_checkBox('appsettings_${app_json['name']}_use')">
           <div style="margin-top: 5; margin-bottom: -20px; margin-left: 10px; height: 50px;">
             <input type="checkbox" class="custom-checkbox" id="appsettings_${app_json['name']}_use" name="appsettings_${app_json['name']}_use" value="yes" ${checked}>
@@ -60,7 +60,7 @@ function append_to_apps(app_json) {
         <p style="position: absolute; margin: 14px 50px; color: #8B949E; font-weight: normal; white-space: nowrap;">${app_json['name']}</p>
         <hr class="main_page_hr">
         <p style="margin: 0px 10px; padding-top: 5px; font-weight: normal;">status_required</p>
-        <input id="appsettings_${app_json['name']}_status_required" class="input_border" style="left: 10px; width: 90%; margin-top: 0px;" type=text placeholder="..." value="${app_json['config']['status_required']}">
+        <input id="appsettings_${app_json['name']}_status_required" class="input_border" style="left: 10px; width: calc(100% - 20px); margin-top: 0px;" type=text placeholder="..." value="${app_json['config']['status_required']}">
         ${(settings.length > 0)? `<hr class="main_page_hr">`: ``}
 
         ${settings}

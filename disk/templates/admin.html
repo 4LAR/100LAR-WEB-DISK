@@ -10,7 +10,7 @@
     <link rel="stylesheet" href = "static/css/admin/main_page.1.css"/>
     <link rel="stylesheet" href = "static/css/admin/checkBox.1.css"/>
 
-    <link rel="stylesheet" href="https://unpkg.com/xterm@4.11.0/css/xterm.css"/>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/xterm@4.11.0/css/xterm.css"/> -->
 
   </head>
 
@@ -113,56 +113,61 @@
           <p style="margin: -25px 35px">refresh</p>
         </div>
       </div>
-      <br>
-      <table class="page_table">
-        <tr>
-          <th align="left">
+      <ul class="grid grid_margin" style="margin-bottom: 0px;">
+        <li>
+          <ul>
             <!-- cpu usage -->
-            <div class="border sub_border_size" style="height: 80px;" align="left">
-              <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/cpu.svg">
-              <p style="position: absolute; margin: 10px 50px; white-space: nowrap; color: #8B949E; font-weight: normal;">CPU usage</p>
-              <div id="cpu_usage_div" class="progress_bar" style="margin: 35px 0px;">
-                <div id="cpu_usage" class="progress_bar_state"></div>
+            <li class="dashboard_el">
+              <div class="border sub_border_size" style="height: 80px;" align="left">
+                <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/cpu.svg">
+                <p style="position: absolute; margin: 10px 50px; white-space: nowrap; color: #8B949E; font-weight: normal;">CPU usage</p>
+                <div id="cpu_usage_div" class="progress_bar" style="margin: 35px 0px;">
+                  <div id="cpu_usage" class="progress_bar_state"></div>
+                </div>
+                <ul class="memory_usage_ul">
+                  <li style="color: #949494;">
+                    <p id="server_cpu_usage" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
+                  </li>
+                </ul>
               </div>
-              <ul class="memory_usage_ul">
-                <li style="color: #949494;">
-                  <p id="server_cpu_usage" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
-                </li>
-              </ul>
-            </div>
-            <br>
+            </li>
             <!-- time running -->
-            <div class="border sub_border_size" style="height: 70px;" align="left">
-              <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/clock.svg">
-              <p style="margin: 10px 50px; width: 100%; color: #8B949E; font-weight: normal;">time running</p>
-              <p id="server_time_running" style="margin: 10px 10px; width: 100%; font-weight: normal;"></p>
-            </div>
-          </th>
-          <th align="right">
-            <!-- memory usage -->
-            <div class="border sub_border_size" style="height: 120px;" align="left">
-              <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/memory.svg">
-              <p style="position: absolute; margin: 10px 50px; white-space: nowrap; color: #8B949E; font-weight: normal;">RAM usage</p>
-              <div id="ram_memory_usage_div" class="progress_bar" style="margin: 35px 0px;">
-                <div id="ram_memory_usage_0" style="background-color: #707070;" class="progress_bar_state"></div>
-                <div id="ram_memory_usage_1" style="margin: -10px 0px;" class="progress_bar_state"></div>
+            <li class="dashboard_el">
+              <div class="border sub_border_size" style="height: 70px;" align="left">
+                <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/clock.svg">
+                <p style="margin: 10px 50px; width: 100%; color: #8B949E; font-weight: normal;">time running</p>
+                <p id="server_time_running" style="margin: 10px 10px; width: 100%; font-weight: normal;"></p>
               </div>
-              <ul class="memory_usage_ul">
-                <li style="color: #949494;">
-                  <p id="server_program_memory" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
-                </li>
-                <li style="color: #707070;">
-                  <p id="server_used_memory" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
-                </li>
-                <li>
-                  <p id="server_total_memory" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
-                </li>
-              </ul>
-            </div>
-          </th>
-        </tr>
-      </table>
-      <br>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <!-- memory usage -->
+            <li class="dashboard_el">
+              <div class="border sub_border_size" style="height: 120px;" align="left">
+                <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/memory.svg">
+                <p style="position: absolute; margin: 10px 50px; white-space: nowrap; color: #8B949E; font-weight: normal;">RAM usage</p>
+                <div id="ram_memory_usage_div" class="progress_bar" style="margin: 35px 0px;">
+                  <div id="ram_memory_usage_0" style="background-color: #707070;" class="progress_bar_state"></div>
+                  <div id="ram_memory_usage_1" style="margin: -10px 0px;" class="progress_bar_state"></div>
+                </div>
+                <ul class="memory_usage_ul">
+                  <li style="color: #949494;">
+                    <p id="server_program_memory" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
+                  </li>
+                  <li style="color: #707070;">
+                    <p id="server_used_memory" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
+                  </li>
+                  <li>
+                    <p id="server_total_memory" style="margin: 0px 0px; width: 100%; font-weight: normal;"></p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
       <div class="border border_size">
         <div class="name_area_border border_size" style="height: 52px">
           <img class="icon" width="30" height="30" src="static/img/admin/warning.svg">
@@ -238,14 +243,12 @@
           <p style="margin: -25px 35px; white-space: nowrap;">add template</p>
         </div>
       </div>
-
       <div class="border_size">
-
-        <ul id="templateslist" class="path_list_grid"></ul>
-
+        <ul id="templateslist" class="grid"></ul>
       </div>
     </div>
 
+    <!--apps-->
     <div class="main_page" id="apps" style="display: none;">
       <div class="border border_size">
         <div class="name_area_border border_size" style="height: 52px">
@@ -264,7 +267,7 @@
       </div>
 
       <div class="border_size">
-        <ul id="appslist" class="path_list_grid"></ul>
+        <ul id="appslist" class="grid grid_margin"></ul>
       </div>
     </div>
 
@@ -314,17 +317,14 @@
           <p style="margin: -25px 35px; white-space: nowrap;">save settings</p>
         </div>
       </div>
-      <br>
-      <table class="page_table">
-        <tr>
-          <th align="left">
-            <ul id="settings_left"></ul>
-          </th>
-          <th align="right">
-            <ul id="settings_right"></ul>
-          </th>
-        </tr>
-      </table>
+      <ul class="grid grid_margin">
+        <li>
+          <ul id="settings_left"></ul>
+        </li>
+        <li>
+          <ul id="settings_right"></ul>
+        </li>
+      </ul>
 
     </div>
 
