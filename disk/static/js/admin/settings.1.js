@@ -1,5 +1,15 @@
 var settings_json = {};
 
+var settings_icons = {
+  "Base": "admin/data base.svg",
+  "Entry": "admin/entry.svg",
+  "Extensions": "apps.svg",
+  "Flask": "server.svg",
+  "History": "admin/history.svg",
+  "Logs": "admin/log.svg",
+  "Preview": "files/image.svg"
+}
+
 function sort_params(parameters_dict) {
 
 }
@@ -17,6 +27,7 @@ function generate_settingslist() {
       'settings_' + ((left)? 'left': 'right'),
       `
         <div class="template_border sub_border_size" style="margin-bottom: -8px" align="left">
+          <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/${settings_icons[section]}">
           <p style="margin: 10px 50px; color: #8B949E; font-weight: normal; white-space: nowrap;">${section}</p>
           <hr class="main_page_hr">
           <ul id="settings_${section}"></ul>
