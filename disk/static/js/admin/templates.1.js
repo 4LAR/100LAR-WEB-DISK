@@ -33,7 +33,7 @@ function generate_templates() {
     append_to_ul(
       'templateslist',
       `
-        <div class="template_border sub_border_size grid_bottom_margin">
+        <div class="template_border sub_border_size">
           <div class="main_page_button block_select" style="width: 100px; margin: 10px; display: inline-block;" onclick="open_alert_delete_template('${name}')">
             <img style="margin: 5px 5px" class="icon" width="20" height="20" src="static/img/trash.svg">
             <p style="margin: -25px 35px; font-weight: normal;">delete</p>
