@@ -15,7 +15,13 @@
   </head>
 
   <body bgcolor = "#0D1117" style="overflow-x:hidden;" class="scroll_style">
-    <div class="left_bar">
+    <div class="menu_bg_div" id="menu_bg_div"></div>
+    <div class="top_bar">
+      <img onclick="open_menu()" class="icon" style="position: absolute; left: 0px; margin: 5px 10px;" width="30" height="30" src="static/img/admin/menu.svg">
+    </div>
+
+    <div class="left_bar" id="left_bar">
+      <img onclick="open_menu()" class="icon close_menu" width="30" height="30" src="static/img/cross.svg">
       <div class="logo">
         <img class="icon logo_img" width="50" height="50" src="static/img/dvd-disk.svg">
         <h2 style="margin: -50px 70px;">DISK</h2>
@@ -82,12 +88,6 @@
             <p align="left">settings</p>
           </div>
         </th></tr>
-        <!-- <tr><th>
-          <div class="left_bar_button" id="left_bar_terminal" onclick="open_page('terminal')">
-            <img class="icon" width="18" height="18" src="static/img/admin/terminal.svg">
-            <p align="left">terminal</p>
-          </div>
-        </th></tr> -->
         <tr><th>
           <hr class="left_bar_hr">
         </th></tr>
@@ -113,9 +113,9 @@
           <p style="margin: -25px 35px">refresh</p>
         </div>
       </div>
-      <ul class="grid grid_margin" style="margin-bottom: 0px;">
+      <ul class="grid" style="margin-bottom: 0px;">
         <li>
-          <ul>
+          <ul class="grid_margin">
             <!-- cpu usage -->
             <li class="dashboard_el">
               <div class="border sub_border_size" style="height: 80px;" align="left">
@@ -135,14 +135,14 @@
             <li class="dashboard_el">
               <div class="border sub_border_size" style="height: 70px;" align="left">
                 <img class="icon" style="position: absolute; margin: 10px;" width="20" height="20" src="static/img/admin/clock.svg">
-                <p style="margin: 10px 50px; width: 100%; color: #8B949E; font-weight: normal;">time running</p>
-                <p id="server_time_running" style="margin: 10px 10px; width: 100%; font-weight: normal;"></p>
+                <p style="margin: 10px 50px; color: #8B949E; font-weight: normal;">time running</p>
+                <p id="server_time_running" style="margin: 10px 10px; font-weight: normal;"></p>
               </div>
             </li>
           </ul>
         </li>
         <li>
-          <ul>
+          <ul class="grid_margin">
             <!-- memory usage -->
             <li class="dashboard_el">
               <div class="border sub_border_size" style="height: 120px;" align="left">

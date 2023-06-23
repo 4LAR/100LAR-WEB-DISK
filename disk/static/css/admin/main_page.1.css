@@ -41,7 +41,7 @@
 @media screen and (max-width: 768px) {
   .main_page {
     position: absolute;
-    top: 550px;
+    top: 50px;
     left: 50%;
     margin: 0 -175px;
   }

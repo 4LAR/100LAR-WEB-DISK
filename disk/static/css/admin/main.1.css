@@ -46,17 +46,10 @@ body {
   filter: invert(60%);
 }
 
-.logo {
-  position: relative;
-  left: 10%;
-  padding-bottom: 0px;
-}
-
 .input_border {
   position: relative;
   color: #C1C2BF;
   border: 1px solid #30363D;
-  /*background-color: #0D1117;*/
   background-color: #010409;
   padding: 12px 10px;
   margin: 8px 0;

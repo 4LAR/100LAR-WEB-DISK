@@ -26,8 +26,26 @@ function open_page(page_name) {
     }
   }
 
-  if (opened) {
+  open_menu(true);
 
+}
+
+var menu_open_flag = false;
+function open_menu(close=false) {
+  if (window.innerWidth >= 768)
+    return
+
+  if (close)
+    menu_open_flag = true;
+
+  menu_open_flag = !menu_open_flag;
+  if (menu_open_flag) {
+    openModal("left_bar");
+    openModal("menu_bg_div");
+
+  } else {
+    closeModal("left_bar");
+    closeModal("menu_bg_div");
   }
 }
 
