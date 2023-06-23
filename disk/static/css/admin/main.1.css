@@ -198,6 +198,7 @@ body {
     right: 0%;
     top: 0%;
     bottom: 0%;
+    z-index: 3;
 
     background-color: #161B22;
     border: 1px solid #30363D;
