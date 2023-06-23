@@ -276,7 +276,13 @@ function sort_files(files_list, sort_type="type", reversed=false) {
 
     case "name":
       new_files_list = files_list.sort(function (a, b) {
-        return a['name'] - b['name'];
+        if (a['name'].toLowerCase() < b['name'].toLowerCase()) {
+          return -1;
+        }
+        if (a['name'].toLowerCase() > b['name'].toLowerCase()) {
+          return 1;
+        }
+        return 0;
       })
       break;
 
