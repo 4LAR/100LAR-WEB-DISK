@@ -69,6 +69,7 @@ function set_disk_space(state = 0) {
 
 set_disk_space(0);
 
+var ctrl_key_flag = false;
 document.addEventListener('keydown', function(event){
   if (event.keyCode === 32) {
     if (video_fullscreen) {
@@ -76,6 +77,8 @@ document.addEventListener('keydown', function(event){
       else pause_video();
     }
   }
+
+  ctrl_key_flag = event.ctrlKey;
 
   if (event.ctrlKey && event.keyCode === 37) {
     go_back_dir_history();

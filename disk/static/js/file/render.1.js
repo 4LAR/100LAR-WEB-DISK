@@ -72,8 +72,7 @@ var selected_file_name = '';
 var selected_file_dir = '';
 // открытие информации о файле
 function open_fileInfo(name, type, size, file_path, date, mime, description='') {
-
-  if (list_checked_file.length > 0) {
+  if (list_checked_file.length > 0 || ctrl_key_flag) {
     var fileCheckBox = document.getElementById("checkbox_file_" + name);
     fileCheckBox.checked = !fileCheckBox.checked;
     checkBox_file(
