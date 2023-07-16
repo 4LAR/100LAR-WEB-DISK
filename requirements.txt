@@ -10,6 +10,6 @@ Pillow==9.5.0
 psutil==5.9.1
 python_magic==0.4.27
 rarfile==4.0
-Requests==2.30.0
+Requests==2.31.0
 termcolor==1.1.0
 waitress==2.1.2
