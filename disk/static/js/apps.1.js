@@ -128,13 +128,13 @@ function append_app() {
         get_apps();
       } else {
         for (const [key, value] of Object.entries(data)) {
-          if (value['type'] === 'path') {
+          if (value['type'] === 'path' || value['type'] === 'memory') {
             document.getElementById(`${APP_NAMESPACE}${key}_select`).classList.replace('app_input_error', 'app_input_ok');
             document.getElementById(`${APP_NAMESPACE}${key}_input`).classList.replace('app_input_error', 'app_input_ok');
           } else document.getElementById(`${APP_NAMESPACE}${key}`).classList.replace('app_input_error', 'app_input_ok');
         }
         var arg = xhr.responseText.toString()
-        if (data[arg]['type'] === 'path') {
+        if (data[arg]['type'] === 'path' || data[arg]['type'] === 'memory') {
           document.getElementById(`${APP_NAMESPACE}${arg}_select`).classList.replace('app_input_ok', 'app_input_error');
           document.getElementById(`${APP_NAMESPACE}${arg}_input`).classList.replace('app_input_ok', 'app_input_error');
         } else document.getElementById(`${APP_NAMESPACE}${arg}`).classList.replace('app_input_ok', 'app_input_error');
@@ -253,6 +253,10 @@ function get_values_from_create_layout(dict, root=true) {
         data[el['arg']]["value"] = document.getElementById(`${APP_NAMESPACE}${el['arg']}_select`).value + ":" + document.getElementById(`${APP_NAMESPACE}${el['arg']}_input`).value;
         break;
       }
+      case ('memory'): {
+        data[el['arg']]["value"] = document.getElementById(`${APP_NAMESPACE}${el['arg']}_select`).value + ":" + document.getElementById(`${APP_NAMESPACE}${el['arg']}_input`).value;
+        break;
+      }
       case ('row'): {
         data = Object.assign(data, get_values_from_create_layout(el['elements'], false));
         break;
@@ -302,6 +306,15 @@ function generate_create_layout(dict, root=true) {
         }
         html_div += `<div class="apps_path_div"><select class="app_input_ok round_selector" id="${APP_NAMESPACE}${el['arg']}_select" style="left: 10px; width: 80px;">${select_options}</select>`;
         html_div += `<input id="${APP_NAMESPACE}${el['arg']}_input" class="app_input_ok input_style dialog_input" style="position: absolute; left: 95px; width: calc(100% - calc(95px + 5%)); max-width: 175px;" type=text placeholder="direcory" value="/"></div>`
+        break;
+      }
+      case ('memory'): {
+        var select_options = "";
+        for (let i = 0; i < size_name.length; i++) {
+          select_options += `<option value="${i}" ${(i == 2)? "selected": ""}>${size_name[i]}</option>`;
+        }
+        html_div += `<div class="apps_path_div"><input id="${APP_NAMESPACE}${el['arg']}_input" class="app_input_ok input_style dialog_input" style="position: absolute; left: 65px; width: calc(100% - calc(65px + 5%)); max-width: 205px;" type=text placeholder="direcory" value="10">`
+        html_div += `<select class="app_input_ok round_selector" id="${APP_NAMESPACE}${el['arg']}_select" style="left: 10px; width: 50px;">${select_options}</select></div>`;
         break;
       }
     }

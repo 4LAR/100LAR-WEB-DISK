@@ -20,6 +20,15 @@
       ]
     }, {
       "type": "row",
+      "text": "Memory limit:",
+      "elements": [
+        {
+          "type": "memory",
+          "arg": "memory_limit"
+        }
+      ]
+    }, {
+      "type": "row",
       "text": "CMD:",
       "elements": [
         {

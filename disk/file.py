@@ -19,5 +19,9 @@ def get_size(start_path = '.'):
             total_size += os.path.getsize(fp)
     return total_size
 
+# конвертирование [size_name] в байты
+def convert_size_to_b(size, name_i=0):
+  return pow(1024, name_i) * size
+
 #print(get_size('/home/stolar/100LAR'))
 #print(convert_size(10737418240))

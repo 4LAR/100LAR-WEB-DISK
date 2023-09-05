@@ -18,8 +18,9 @@ class app():
         self.socketio = kwargs['socketio']
         self.app_namespace = kwargs['app_namespace']
         self.terminal = Terminal(
-            cmd=[kwargs['cmd']],
-            cwd=kwargs['path']
+            cmd=kwargs['cmd'].split(" "),
+            cwd=kwargs['path'],
+            memory_limit=kwargs['memory_limit']
         )
 
         self.status = 0
@@ -78,6 +79,9 @@ class app():
                         self.socketio.emit("pty-output", {"output": output}, namespace=self.app_namespace)
             except:
                 pass
+
+    def io_ping(self, data):
+        self.socketio.emit("pong", namespace=self.app_namespace)
 
     def version(self):
         return "0.0.1"

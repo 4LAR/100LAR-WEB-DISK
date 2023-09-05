@@ -70,3 +70,24 @@ function customKeyEventHandler(e) {
 const wait_ms = 50;
 
 window.onresize = debounce(fitToscreen, wait_ms);
+
+/******************************************************************************/
+
+var ping_pong_times = [];
+var start_time;
+window.setInterval(function() {
+  start_time = (new Date).getTime();
+  socket.emit('ping');
+}, 1000);
+
+socket.on('pong', function() {
+  var latency = (new Date).getTime() - start_time;
+  ping_pong_times.push(latency);
+  ping_pong_times = ping_pong_times.slice(-30);
+  var sum = 0;
+  for (var i = 0; i < ping_pong_times.length; i++)
+    sum += ping_pong_times[i];
+
+  var ping = Math.round(10 * sum / ping_pong_times.length) / 10;
+  document.getElementById("ping").innerHTML = `ping: ${ping}ms`;
+});

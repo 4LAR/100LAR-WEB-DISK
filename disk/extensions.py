@@ -9,6 +9,7 @@ from pathlib import Path
 
 from disk.dict_json import *
 from disk.settings import *
+from disk.file import *
 
 from flask_socketio import SocketIO
 from flask import request
@@ -127,7 +128,7 @@ class Extensions():
             if (app['type'] == "label"):
                 pass
 
-            elif (app['type'] == "path"):
+            elif (app['type'] in ["path", "memory"]):
                 data[app['arg']] = {
                     "type": app['type']
                 }
@@ -158,6 +159,13 @@ class Extensions():
                     checked_data[el] = path
                 else:
                     return el, False
+
+            elif (self.apps[app_id]['layout_args_settings'][el]['type'] == 'memory'):
+                data_value_splited = data_value.split(":")
+                if (int(data_value_splited[1]) < 1):
+                    return el, False
+
+                checked_data[el] = convert_size_to_b(int(data_value_splited[1]), int(data_value_splited[0]))
 
             else:
                 if ((self.apps[app_id]['layout_args_settings'][el]['must_be_filled'] and len(data_value) > 0) or not (self.apps[app_id]['layout_args_settings'][el]['must_be_filled'])):
@@ -218,7 +226,7 @@ class Extensions():
         for method in self.apps[app_id]['executable_methods']:
             method_split = method.split("_")
             if (method_split[0] == 'io'):
-                self.socketio.on_event(method_split[1], lambda data, method=getattr(executable, method), user_id=int(user_id): self.socket_wrapper(data, method, user_id), namespace=app_namespace)
+                self.socketio.on_event(method_split[1], lambda data=None, method=getattr(executable, method), user_id=int(user_id): self.socket_wrapper(data, method, user_id), namespace=app_namespace)
 
         return True, None
 
