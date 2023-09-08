@@ -1,7 +1,7 @@
 from fastapi_login import LoginManager
+import socketio
 
 from config import Config
-
 config = Config("config.ini")
 
 for section in config.options:
