@@ -1,17 +1,58 @@
 import configparser
+import random
+import string
+
 import os
 
 def get_bool(str):
     return True if str.lower() == 'true' else False
 
+def random_string(size):
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(size))
+
 class Config:
-    def __init__(self, file_name):
+    def __init__(self, file_name, options=None):
         self.file_name = file_name
 
         #
-        self.options = {
-            
-        }
+        if (options):
+            self.options = options
+
+        else:
+            self.options = {
+                'FastAPI': {
+                    'IP': '0.0.0.0',
+                    'PORT': 80,
+                    'debug': False,
+                    'secret_key': random_string(4)
+                },
+                'Logs': {
+                    'path': 'logs/',
+                    'save_logs': True,
+                    'timedelta': 3
+                },
+                'History': {
+                    'length': 100,
+                    'use': True
+                },
+                'Base': {
+                    'path': '',
+                    'file_name': 'users'
+                },
+                'Extensions': {
+                    'use': True,
+                    'path': 'extensions'
+                },
+                'Preview': {
+                    'max_text_file_weight': 2048,
+                    'max_pics_width': 1280,
+                    'max_files_in_archive': 100
+                },
+                'Entry': {
+                    'type': "none",
+                    'source': ""
+                }
+            }
 
         self.read()
 
@@ -76,9 +117,3 @@ class Config:
     #
     def get_all(self):
         return self.options
-
-config = Config("config.ini")
-
-# if __name__ == "__main__":
-#     test = Config("test.ini")
-#     print(test.get("mysql"))
