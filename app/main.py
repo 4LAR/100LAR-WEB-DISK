@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from fastapi import *
 
 from globals import *
-from routers import *
+from modules import *
 
 app = FastAPI()
 
