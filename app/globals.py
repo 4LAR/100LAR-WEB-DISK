@@ -12,4 +12,4 @@ for section in config.options:
             value if value == str else "\"%s\"" % value
         ), globals())
 
-login_manager = LoginManager(FASTAPI_SECRET_KEY, token_url='/auth/token')
+login_manager = LoginManager(FASTAPI_SECRET_KEY, token_url='/auth/token', use_cookie=True)

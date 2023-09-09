@@ -24,7 +24,7 @@ class User(UserMixin):
         return make_secure_token(self.username , key=key)
 
 #
-class UserBase():
+class DataBase():
     def __init__(self, path='', file_name='users', key='secret_key'):
         #
 
@@ -126,7 +126,6 @@ class UserBase():
         self.users = {}
         self.users_id = {}
 
-        #i = 0
         for user_id in self.users_dict:
             self.users[user_id] = User(
                 id = user_id,
@@ -137,7 +136,6 @@ class UserBase():
                 path = self.users_dict[user_id]['path'],
                 key = user_id #self.key
             )
-            #i += 1
 
             self.users_id[self.users_dict[user_id]['username']] = user_id
 
