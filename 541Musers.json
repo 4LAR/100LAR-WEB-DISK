@@ -1,0 +1,39 @@
+{
+  "last_id": 0,
+  "templates": {
+    "root_template": {
+      "name": "root_template",
+      "path": "/",
+      "readonly": true,
+      "size": 0
+    }
+  },
+  "users": {
+    "0": {
+      "username": "admin",
+      "status": "admin",
+      "password": "12345678",
+      "panel": true,
+      "path": [
+        {
+          "type": "path",
+          "name": "disk",
+          "readonly": false,
+          "path": "/home/stolar/PROJECTS/100LAR-WEB-DISK/",
+          "size": 0
+        },
+        {
+          "type": "path",
+          "name": "root",
+          "readonly": true,
+          "path": "/",
+          "size": 0
+        },
+        {
+          "type": "template",
+          "name": "root_template"
+        }
+      ]
+    }
+  }
+}
