@@ -22,7 +22,7 @@ login_manager = LoginManager(
 )
 
 database = DataBase(
-    path        = FASTAPI_SECRET_KEY,
+    path        = BASE_PATH,
     file_name   = BASE_FILE_NAME,
-    key         = BASE_PATH
+    key         = FASTAPI_SECRET_KEY
 )
