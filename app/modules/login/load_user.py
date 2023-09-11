@@ -1,6 +1,6 @@
 from globals import *
 
-from fastapi import Depends
+from fastapi import Depends, Response
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
 
@@ -10,7 +10,7 @@ def load_user(name: str):  # could also be an asynchronous function
     return user
 
 
-def login(data: OAuth2PasswordRequestForm = Depends()):
+def login(response: Response, data: OAuth2PasswordRequestForm = Depends()):
     name = data.username
     password = data.password
 
@@ -23,6 +23,6 @@ def login(data: OAuth2PasswordRequestForm = Depends()):
     access_token = login_manager.create_access_token(
         data = dict(sub = name)
     )
-    # login_manager.set_cookie(response, token)
+    login_manager.set_cookie(response, access_token)
 
     return {'access_token': access_token, 'token_type': 'bearer'}
