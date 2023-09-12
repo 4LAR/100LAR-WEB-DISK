@@ -1,15 +1,16 @@
-from globals import *
-
 from fastapi import Depends, Response
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
+
+from globals import *
+from deco import try_decorator
 
 @login_manager.user_loader()
 def load_user(name: str):  # could also be an asynchronous function
     user = database.get_user_by_name(name)
     return user
 
-
+@try_decorator
 def login(response: Response, data: OAuth2PasswordRequestForm = Depends()):
     name = data.username
     password = data.password
