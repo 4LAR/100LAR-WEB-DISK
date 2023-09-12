@@ -5,12 +5,6 @@ import g4f
 
 import os
 import sys
-# eval(f"g4f.Provider.{service}")
-# services = [service for service in dir(g4f.Provider) if not "__" in service]
-# print(services)
-# print(dir(services[0]))
-# print(services[0].working)
-# print(dir(g4f.models))
 
 models_support = {
     "GPT3.5": "supports_gpt_35_turbo",
@@ -31,8 +25,7 @@ class app():
                     obj = eval(f"g4f.Provider.{service}")
                     if obj.working and (getattr(obj, models_support[kwargs['model']])):
                         self.services.append(obj)
-                        print(service)
-                        print(obj.working)
+
                 except:
                     pass
 
@@ -103,7 +96,6 @@ class app():
         ok = True
         for service in self.services:
             try:
-                print(service)
                 response = g4f.ChatCompletion.create(
                     model=self.config['model'],
                     # model=g4f.models.gpt_4,
@@ -116,6 +108,7 @@ class app():
                     frequency_penalty=self.config['frequency_penalty'],
                     stream=False
                 )
+
                 if (service != self.services[0]):
                     self.set_primary_service(service)
 
@@ -123,13 +116,13 @@ class app():
 
             except Exception as e:
                 ok = False
-                print("ERROR:", service, e)
+                # print("ERROR:", service, e)
 
         if not ok:
             pass
-        # print(response)
 
-        text = response#response.choices[0].message.content
+        #response.choices[0].message.content
+        text = response if response else "SERVICE ERROR"
         self.append_history(text, "assistant")
         self.socketio.emit("output", {"output": {
             "role": "assistant",
