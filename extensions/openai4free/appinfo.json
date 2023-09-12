@@ -1,0 +1,44 @@
+{
+  "type": "application",
+  "name": "openai (gpt4free)",
+  "status_required": [],
+  "cached": true,
+  "ico": "app.svg",
+  "html": "app.html",
+  "css": ["app.css"],
+  "script": ["app.js"],
+  "executable": "app.py",
+  "create_layout": [
+    {
+      "type": "row",
+      "text": "model:",
+      "elements": [
+        {
+          "type": "select",
+          "arg": "model",
+          "options": ["GPT3.5", "GPT4"],
+          "must_be_filled": true
+        }
+      ]
+    }, {
+      "type": "row",
+      "text": "System message:",
+      "elements": [
+        {
+          "type": "input",
+          "arg": "system_message",
+          "placeholder": "...",
+          "value": "",
+          "must_be_filled": false
+        }
+      ]
+    }
+  ],
+  "config": {
+    "temperature": 0.9,
+    "n_choices": 1,
+    "max_tokens": 1000,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.6
+  }
+}
