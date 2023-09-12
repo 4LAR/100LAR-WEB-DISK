@@ -11,7 +11,7 @@ def load_user(name: str):  # could also be an asynchronous function
     return user
 
 @try_decorator
-def login(response: Response, data: OAuth2PasswordRequestForm = Depends()):
+async def login(response: Response, data: OAuth2PasswordRequestForm = Depends()):
     name = data.username
     password = data.password
 
