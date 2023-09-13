@@ -106,7 +106,7 @@ function copy_file_buf(move=false) {
 
 function paste_files() {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/copy?path=${path}&dir=${copied_dir}&files=${JSON.stringify({"files": copied_files})}&to=${dir_str}&move=${move_files_bool}`);
+  xhr.open('POST', `/copy?path=${path}&dir=${copied_dir}&files=${JSON.stringify({"files": copied_files})}&to=${dir_str}&cut_bool=${move_files_bool}`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {

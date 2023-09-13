@@ -21,7 +21,7 @@ function get_files(onload_function=undefined) {
 
     // создаём запрос
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', `/files?path=${path}&dir=${dir_str}`);
+    xhr.open('GET', `/files?path=${path}&dir=${dir_str}`);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     // когда запрос выполнится, то вызовется эта функция
@@ -96,7 +96,7 @@ function get_files(onload_function=undefined) {
 // удаление файла
 function delete_file(path, dir_str, name) {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/delete?path=${path}&dir=${dir_str}&file=${name}`);
+  xhr.open('DELETE', `/delete?path=${path}&dir=${dir_str}&file=${name}`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -116,7 +116,7 @@ function delete_file(path, dir_str, name) {
 // удаление выделенных файлов
 function delete_files() {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', `/delete?path=${path}&dir=${dir_str}&files=${JSON.stringify({"files": list_checked_file})}`);
+  xhr.open('DELETE', `/delete?path=${path}&dir=${dir_str}&files=${JSON.stringify({"files": list_checked_file})}`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {

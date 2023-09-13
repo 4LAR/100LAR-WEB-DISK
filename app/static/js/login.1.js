@@ -12,26 +12,39 @@ function login() {
   var password = document.getElementById("password_input").value;
   var remember = document.getElementById("remember_chekcbox").checked;
 
-  xhr = new XMLHttpRequest();
-  xhr.open('POST', `/login?username=${username}&password=${password}&remember=${remember}`);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function () {
-    if (xhr.status !== 200) {
-      console.warn(xhr.responseText);
-    } else {
-      if (xhr.responseText.toString() == 'ERROR LOGIN'){
-        console.log('ERROR LOGIN');
-        closeModal('loading_login');
-        openModal('login_warning');
-
-
-      } else {
-        check_login();
-
-      }
-    }
+  var details = {
+    username: username,
+    password: password
   };
-  xhr.send(encodeURI());
+
+  var formBody = [];
+  for (var property in details) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+  }
+  formBody = formBody.join("&");
+
+  fetch(`/login`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+    body: formBody
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data == 'ERROR LOGIN'){
+      console.log('ERROR LOGIN');
+      closeModal('loading_login');
+      openModal('login_warning');
+
+    } else {
+      check_login();
+
+    }
+  })
+  .catch(error => {
+    console.error("Произошла ошибка:", error);
+  });
 }
 
 //
@@ -45,7 +58,7 @@ function login_enter(e) {
 //
 function check_login() {
   xhr = new XMLHttpRequest();
-  xhr.open('POST', '/info');
+  xhr.open('GET', '/info');
   xhr.onload = function () {
     if (xhr.status === 200 && xhr.responseText.toString() != 'ERROR LOGIN') {
       if (check_device()) {

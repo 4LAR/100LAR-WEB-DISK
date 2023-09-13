@@ -4,7 +4,7 @@ var info_json = {};
 //
 function get_info() {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/info');
+  xhr.open('GET', '/info');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
