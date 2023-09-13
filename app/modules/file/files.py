@@ -1,4 +1,5 @@
 from fastapi import Depends
+import magic
 
 from globals import *
 from utils import *

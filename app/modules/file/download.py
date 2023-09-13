@@ -1,6 +1,11 @@
 from fastapi import Depends
 from fastapi.responses import FileResponse, Response
 import copy
+import json
+import zipfile
+import rarfile
+import io
+
 
 from globals import *
 from utils import *
@@ -84,11 +89,11 @@ async def download(file: str = "", files: str = "", preview_flag: bool = False, 
         # переходим в начало архива
         zip_buffer.seek(0)
 
-        str_log = '%s download files (%s)' % (current_user.username, user_path + dir + '/' + str(files_list_log))
+        str_log = '%s download files (%s)' % (user['username'], user_path + dir + '/' + str(files_list_log))
         history.add(2, str_log)
         logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
         # отправляем архив
         return Response(content=zip_buffer.getvalue(),
             media_type='application/zip',
-            headers={'Content-Disposition': 'attachment;filename=%s.zip' % (current_user.username)})
+            headers={'Content-Disposition': 'attachment;filename=%s.zip' % (user['username'])})

@@ -5,6 +5,7 @@ from config import Config
 from base import DataBase
 from log import Logging
 from get_time import Time_now
+from history import History
 
 ################################################################################
 
@@ -35,6 +36,12 @@ login_manager = LoginManager(
     use_cookie=True,
     use_header=False
 )
+
+history = History(
+    length = int(HISTORY_LENGTH),
+    use_bool = HISTORY_USE
+)
+history.time = time_now
 
 database = DataBase(
     path        = BASE_PATH,

@@ -14,7 +14,7 @@ async def rename(file: str, new_file: str, path: int = 0, dir: str = "/", user =
 
     os.rename(user_path + dir + '/' + file, user_path + dir + '/' + new_file)
 
-    str_log = '%s rename file (%s to %s)' % (current_user.username, user_path + dir + '/' + file, user_path + dir + '/' + new_file)
+    str_log = '%s rename file (%s to %s)' % (user['username'], user_path + dir + '/' + file, user_path + dir + '/' + new_file)
     history.add(7, str_log)
     logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 

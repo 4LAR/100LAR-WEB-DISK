@@ -17,7 +17,7 @@ async def unpack(file: str, path: int = 0, dir: str = "/", user = Depends(login_
         size = sum([zinfo.file_size for zinfo in f.filelist])
 
         # проверяем есть ли свободное место
-        if check_size(current_user, path, size):
+        if check_size(user, path, size):
 
             # распаковка
             with zipfile.ZipFile(user_path + dir + '/' + file, 'r') as f:

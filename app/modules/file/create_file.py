@@ -6,7 +6,7 @@ from utils import *
 from deco import try_decorator
 
 @try_decorator
-def create_file(file: str, hello_data: str = "HELLO WORLD", path: int = 0, dir: str = "/", user = Depends(login_manager)):
+async def create_file(file: str, hello_data: str = "HELLO WORLD", path: int = 0, dir: str = "/", user = Depends(login_manager)):
     if len(file) < 1:
         return ERROR_NAME
 
@@ -20,12 +20,12 @@ def create_file(file: str, hello_data: str = "HELLO WORLD", path: int = 0, dir: 
         return ALREADY_EXISTS
 
     if not user['path'][int(path)]['readonly']:
-        if check_size(current_user, path, utf8len(hello_data)):
+        if check_size(user, path, utf8len(hello_data)):
             f = open(user_path + dir + '/' + file, 'w')
             f.write(hello_data)
             f.close()
 
-            str_log = '%s create file (%s)' % (current_user.username, user_path + dir + '/' + file)
+            str_log = '%s create file (%s)' % (user['username'], user_path + dir + '/' + file)
             history.add(5, str_log)
             logging.print(str_log, print_bool=False, comment='[HISTORY] ')
 
