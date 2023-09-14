@@ -1,5 +1,7 @@
 import os
 import math
+import random
+import string
 from globals import *
 
 def convert_size(size_bytes):
@@ -22,6 +24,13 @@ def get_size(start_path = '.'):
 # конвертирование [size_name] в байты
 def convert_size_to_b(size, name_i=0):
   return pow(1024, name_i) * size
+
+def get_bool(str):
+  return True if str.lower() == 'true' else False
+
+def random_string(size):
+  return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(size))
+
 
 ################################################################################
 

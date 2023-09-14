@@ -1,6 +1,7 @@
 from fastapi import Depends, Response
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
+from datetime import timedelta
 
 from globals import *
 from deco import try_decorator
@@ -22,7 +23,7 @@ async def login(response: Response, data: OAuth2PasswordRequestForm = Depends())
         raise InvalidCredentialsException
 
     access_token = login_manager.create_access_token(
-        data = dict(sub = name)
+        data = dict(sub = name), expires = timedelta(hours = 12)
     )
     login_manager.set_cookie(response, access_token)
 

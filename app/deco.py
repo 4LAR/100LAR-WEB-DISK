@@ -7,6 +7,7 @@ def try_decorator(func):
             return await func(*args, **kwargs)
 
         except Exception as e:
+            print("REQUEST ERROR", e)
             return {
                 "error": str(e),
                 "success": False

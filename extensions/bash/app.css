@@ -1,0 +1,44 @@
+#terminal {
+  position: fixed;
+  top: 26px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #000;
+}
+
+.xterm-viewport::-webkit-scrollbar {
+  background-color: #000;
+  width: 5px;
+}
+
+.xterm-viewport::-webkit-scrollbar-thumb {
+  background: #2F363D;
+  border-radius: 2px;
+}
+
+.terminal_info {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #000;
+  width: 100%;
+  height: 22px;
+  border-bottom: 2px dashed #FFFFFF;
+  font-feature-settings: "liga" 0;
+}
+
+.terminal_info #ping {
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: 2px;
+
+  font-family: courier-new, courier, monospace;
+  font-size: 15;
+  color: #FFFFFF;
+}
+
+.black_blank {
+  background-color: #000;
+}

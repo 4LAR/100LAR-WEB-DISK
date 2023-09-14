@@ -1,14 +1,7 @@
 import configparser
-import random
-import string
 
 import os
-
-def get_bool(str):
-    return True if str.lower() == 'true' else False
-
-def random_string(size):
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(size))
+from utils import *
 
 class Config:
     def __init__(self, file_name, options=None):

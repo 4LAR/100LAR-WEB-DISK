@@ -122,7 +122,7 @@ function append_app() {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      if (xhr.responseText.toString() === 'ok') {
+      if (xhr.responseText.toString() === 'OK') {
         close_create_apps_dialog();
         document.getElementById(`apps_main_div`).innerHTML = ``;
         get_apps();
@@ -160,7 +160,7 @@ function delete_app(app_id) {
 
 function get_my_apps() {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/get_my_apps');
+  xhr.open('GET', '/get_my_apps');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -188,7 +188,7 @@ function get_my_apps() {
 
 function get_apps() {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/get_apps');
+  xhr.open('GET', '/get_apps');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {

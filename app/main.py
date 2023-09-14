@@ -6,10 +6,11 @@ from fastapi import *
 from globals import *
 from modules import *
 
-app = FastAPI()
+app.mount("/ws", socket_app)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(render_router, prefix="")
 app.include_router(login_router, prefix="")
 app.include_router(file_router, prefix="")
+app.include_router(extensions_router, prefix="")

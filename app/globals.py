@@ -1,3 +1,4 @@
+from fastapi import FastAPI
 from fastapi_login import LoginManager
 import socketio
 
@@ -6,6 +7,14 @@ from base import DataBase
 from log import Logging
 from get_time import Time_now
 from history import History
+from extensions import Extensions
+
+################################################################################
+
+sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
+socket_app = socketio.ASGIApp(sio)
+
+app = FastAPI()
 
 ################################################################################
 
@@ -47,6 +56,13 @@ database = DataBase(
     path        = BASE_PATH,
     file_name   = BASE_FILE_NAME,
     key         = FASTAPI_SECRET_KEY
+)
+
+extensions = Extensions(
+    app = app,
+    userBase = database,
+    socketio = sio,
+    logging = logging
 )
 
 ################################################################################

@@ -2,21 +2,22 @@ from fastapi import Depends
 from fastapi.responses import FileResponse, Response
 import copy
 import json
+import magic
+from PIL import Image
 import zipfile
 import rarfile
 import io
-
 
 from globals import *
 from utils import *
 from deco import try_decorator
 
 @try_decorator
-async def download(file: str = "", files: str = "", preview_flag: bool = False, preview_type: str = "", path: int = 0, dir: str = "/", user = Depends(login_manager)):
+async def download(file: str = "", files: str = "", preview: bool = True, preview_type: str = "", path: int = 0, dir: str = "/", user = Depends(login_manager)):
     user_path = user['path'][int(path)]['path']
-    if preview_flag:
+    if preview:
         if preview_type == "text":
-            return read_file_with_len(user_path + dir + '/' + file, settings.options['Preview']['max_text_file_weight'])
+            return Response(read_file_with_len(user_path + dir + '/' + file, config.options['Preview']['max_text_file_weight']))
 
         elif preview_type == "archive":
             mime = magic.from_buffer(open(user_path + dir + '/' + file, "rb").read(2048), mime=True)
@@ -29,7 +30,7 @@ async def download(file: str = "", files: str = "", preview_flag: bool = False, 
                 archive = rarfile.RarFile(user_path + dir + '/' + file)
 
             archive_files = archive.namelist()
-            if len(archive_files) <= settings.options['Preview']['max_files_in_archive']:
+            if len(archive_files) <= config.options['Preview']['max_files_in_archive']:
                 return {"archive": archive_files}
 
             else:
@@ -38,28 +39,24 @@ async def download(file: str = "", files: str = "", preview_flag: bool = False, 
         elif preview_type == "image":
             image_type = file.split(".")[-1]
             if image_type.lower() in ["svg", "gif"]:
-                return FileResponse(path = user_path + dir + file, filename = file)
+                return FileResponse(path = user_path + dir + '/' + file, filename = file)
 
             im = Image.open(user_path + dir + '/' + file)
-            if im.size[0] > settings.options['Preview']['max_pics_width']:
+            if im.size[0] > config.options['Preview']['max_pics_width']:
                 im = im.resize((
-                    settings.options['Preview']['max_pics_width'],
-                    int((im.size[1] * settings.options['Preview']['max_pics_width'])/(im.size[0]))
+                    config.options['Preview']['max_pics_width'],
+                    int((im.size[1] * config.options['Preview']['max_pics_width'])/(im.size[0]))
                 ))
             im_io = io.BytesIO()
             im.save(im_io, "PNG")
             im_io.seek(0)
-            return Response(content = im_io, media_type = 'image/png')
+            return Response(content = im_io.getvalue(), media_type = 'image/png')
 
         else:
             return ERROR
 
     if len(file) > 0:
-        # str_log = '%s download file (%s)' % (user['username'], user_path + dir + '/' + file)
-        # history.add(2, str_log)
-        # logging.print(str_log, print_bool=False, comment='[HISTORY] ')
-
-        return FileResponse(path = user_path + dir + file, filename = file)
+        return FileResponse(path = user_path + dir + '/' + file, filename = file)
 
     else:
         files_list = json.loads(files)['files']

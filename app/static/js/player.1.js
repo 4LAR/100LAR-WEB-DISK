@@ -8,7 +8,7 @@ function load_pdf(url, name) {
 function load_archive(url, name) {
   clear_ul("preview_archive_ul");
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', url + `&preview=True&preview_type=archive`);
+  xhr.open('GET', url + `&preview=true&preview_type=archive`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -68,7 +68,7 @@ function load_archive(url, name) {
 /* TEXT */
 function load_text(url, name) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', url + `&preview=True&preview_type=text`);
+  xhr.open('GET', url + `&preview=true&preview_type=text`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -307,7 +307,7 @@ var image_fullscreen_bool = false;
 
 /* IMAGE */
 function load_image(url, name) {
-  url = url + `&preview=True&preview_type=image`;
+  url = url + `&preview=true&preview_type=image`;
   document.getElementById(image_id).src = url;
   image_name = name;
   preview_image_url = url;
